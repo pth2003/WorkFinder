@@ -1,0 +1,55 @@
+.step-section {
+    background-color: var(--gray-100);
+    padding: 9.6rem 0;
+}
+.stepper-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    margin-top: 30px;
+}
+
+.step {
+    text-align: center;
+    width: 20%;
+    position: relative;
+}
+
+.step .icon {
+    background-color: #fff;
+    border: 3px solid #007bff;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    color: #007bff;
+    margin: auto;
+}
+
+.step.active .icon {
+    background-color: #007bff;
+    color: white;
+}
+
+.step:not(:last-child)::after {
+    content: url(../icon/Arrows.svg); /* Biểu tượng mũi tên, có thể thay bằng hình ảnh */
+   
+    position: absolute;
+    font-size: 24px; /* Điều chỉnh kích thước */
+    color: #007bff; /* Màu mũi tên */
+    top: 0;
+    left: 80%;
+    transform: translateY(-50%);
+}
+.step:nth-child(even)::after {
+    transform:  scaleY(-1);
+    top: 10%    ;
+}
+.step p {
+    font-size: 1.4rem;
+    color: gray;
+}

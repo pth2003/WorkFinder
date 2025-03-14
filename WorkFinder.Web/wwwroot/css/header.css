@@ -1,0 +1,32 @@
+.navbar {
+    background-color: var(--gray-100);
+    line-height: 1;
+}
+.nav-link {
+    color: var(--gray-400);
+}
+.nav-link:hover,
+.nav-link:active{
+    color: #0A65CC;
+    
+}
+#navbarNav {
+    justify-content: space-between;
+}
+
+.phone {
+    color: var(--gray-600);
+    text-decoration: none;
+    
+}
+header {
+    padding: 1rem 0;
+}
+.btn {
+    padding: 1.2rem 2.4rem;
+    line-height: 2.4rem;
+    text-transform: none;
+}
+.header-login {
+    gap: 1.2rem;
+}

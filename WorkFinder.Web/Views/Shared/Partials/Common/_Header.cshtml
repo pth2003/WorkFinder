@@ -1,0 +1,70 @@
+<nav class="navbar navbar-expand-lg  ">
+    <div class="container">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ">
+                <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Find Job</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Employers</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Candidates</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Pricing Plans</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Customer Supports</a></li>
+            </ul>
+            <div class="header-right d-flex gap-3">
+                <div class="d-flex align-items-center gap-1">
+                    <img src="~/icon/PhoneCall.svg" alt=""/>
+                    <a href="#" class="phone">0867713501</a>
+                </div>
+                <select class="language">
+                    <option>English</option>
+                    <option>Vietnamese</option>
+                </select>
+            </div>
+        </div>
+        
+    </div>
+</nav>
+<header class="container d-flex justify-content-between align-items-center">
+    <div class="header-logo">
+        <img src="~/icon/Logo.png" alt="" />
+       
+    </div>
+    @* @await Component.InvokeAsync("Search")   *@
+    <div class="header-login d-flex  ">
+        <btn class="btn btn-outline-primary ">Sign In</btn>
+        <btn class="btn btn-primary">Post A Jobs</btn>
+    </div>
+</header>
+<style>
+    .navbar {
+        background-color: var(--gray-100);
+        line-height: 1;
+    }
+    .nav-link {
+        color: var(--gray-400);
+    }
+    .nav-link:hover,
+    .nav-link:active{
+        color: #0A65CC;
+
+    }
+    #navbarNav {
+        justify-content: space-between;
+    }
+
+    .phone {
+        color: var(--gray-600);
+        text-decoration: none;
+
+    }
+    header {
+        padding: 1rem 0;
+    }
+    .btn {
+        padding: 1.2rem 2.4rem;
+        line-height: 2.4rem;
+        text-transform: none;
+    }
+    .header-login {
+        gap: 1.2rem;
+    }
+</style>

@@ -1,0 +1,23 @@
+@model dynamic
+<style>
+    .expand {
+        font-size: 1.2rem;
+        color: var(--blue-500);
+        text-transform: uppercase;
+        border : 1px solid var(--gray-300);
+            display: flex;
+            align-items: center;
+        padding: 0 1.6rem;
+        border-radius: 0.5rem;
+        text-decoration: none;
+        height: 3.6rem;
+        font-weight: bold;
+        
+    }
+</style>
+<div class="section-header  d-flex justify-content-between my-5">
+    <h2 class="title">@Model.Title</h2>
+    <a href="#" class="  expand">
+        View More ->
+    </a>
+</div>
