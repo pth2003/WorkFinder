@@ -6,6 +6,6 @@
 @{ ViewData["Title"] = "Home"; }
 </head>
 <body>
-    @await Html.PartialAsync("Components/Home/Hero/Default")
+    @await Component.InvokeAsync("Hero")
 </body>
 </html>

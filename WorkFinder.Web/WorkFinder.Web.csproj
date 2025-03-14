@@ -27,11 +27,10 @@
       <Folder Include="Areas\Admin\Models\" />
       <Folder Include="Areas\Admin\Views\" />
       <Folder Include="Services\" />
-      <Folder Include="Views\Shared\Components\Home\Category\" />
-      <Folder Include="Views\Shared\Components\Home\FeaturedJob\" />
-      <Folder Include="Views\Shared\Components\Home\ListCard\" />
-      <Folder Include="Views\Shared\Components\Home\Search\" />
-      <Folder Include="Views\Shared\Components\Home\Step\" />
-      <Folder Include="Views\Shared\Components\Home\TopCompany\" />
+      <Folder Include="Views\Shared\Components\Category\" />
+      <Folder Include="Views\Shared\Components\FeaturedJob\" />
+      <Folder Include="Views\Shared\Components\ListCard\" />
+      <Folder Include="Views\Shared\Components\Step\" />
+      <Folder Include="Views\Shared\Components\TopCompany\" />
     </ItemGroup>
 </Project>

@@ -28,7 +28,8 @@
         <img src="~/icon/Logo.png" alt="" />
        
     </div>
-    @* @await Component.InvokeAsync("Search")   *@
+    @* @await Html.PartialAsync("Components/Home/Search/Default") *@
+    @await Component.InvokeAsync("Search")
     <div class="header-login d-flex  ">
         <btn class="btn btn-outline-primary ">Sign In</btn>
         <btn class="btn btn-primary">Post A Jobs</btn>

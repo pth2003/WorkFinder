@@ -334,3 +334,4 @@
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/2hp9oj9lzn-yzhan2joim.gz
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/gp2ms2y0zz-6ydne6ni3s.gz
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/oyedeh50dg-nohz51k08h.gz
+/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/WorkFinder.Web.sourcelink.json
