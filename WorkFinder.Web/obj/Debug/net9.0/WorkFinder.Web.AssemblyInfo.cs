@@ -10,10 +10,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap5")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("WorkFinder.Web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c427dbf8bb5bef8e1dcafa5f23b49c7f33e684a5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6076a250687cdc21abdd2f53e83f8b447f27b9d5")]
 [assembly: System.Reflection.AssemblyProductAttribute("WorkFinder.Web")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WorkFinder.Web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

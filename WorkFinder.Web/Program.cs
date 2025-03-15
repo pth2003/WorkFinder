@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using WorkFinder.Web.Areas.Auth.Services;
 using WorkFinder.Web.Data;
 using WorkFinder.Web.Models;
 using WorkFinder.Web.Repositories;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,17 +14,33 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<WorkFinderContext>(options =>
     options.UseNpgsql(
         builder.Configuration.GetConnectionString("DefaultConnection")));
-// Đăng ký Identity
-builder.Services.AddIdentity<ApplicationUser, IdentityRole<int>>(options =>
-    {
-        options.SignIn.RequireConfirmedAccount = true;
-    })
-    .AddEntityFrameworkStores<WorkFinderContext>()
-    .AddDefaultTokenProviders();
+
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 // Add specific repositories if needed
 builder.Services.AddScoped<IRepository<Resume>, Repository<Resume>>();
 builder.Services.AddScoped<IRepository<SavedJob>, Repository<SavedJob>>();
+// Đăng ký Identity
+// Add authentication services
+builder.Services.AddIdentity<ApplicationUser, IdentityRole<int>>(options =>
+    {
+        options.Password.RequiredLength = 8;
+        options.Password.RequireDigit = true;
+        options.Password.RequireNonAlphanumeric = true;
+        options.Password.RequireUppercase = true;
+    })
+    .AddEntityFrameworkStores<WorkFinderContext>()
+    .AddDefaultTokenProviders();
+
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddHttpContextAccessor();
+
+// Configure cookie authentication
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Auth/Login";
+    options.LogoutPath = "/Auth/Logout";
+    options.AccessDeniedPath = "/Auth/AccessDenied";
+});
 var app = builder.Build();
 
 
@@ -49,11 +67,19 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();
+// Thêm route riêng cho Auth area
+app.MapControllerRoute(
+    name: "auth",
+    pattern: "Auth/{action=Login}",
+    defaults: new { area = "Auth", controller = "Auth" });
 
+// Giữ lại các route hiện có
+app.MapControllerRoute(
+    name: "areas",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 app.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
-
 
 app.Run();
