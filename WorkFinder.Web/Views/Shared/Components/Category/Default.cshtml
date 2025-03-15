@@ -1,0 +1,15 @@
+
+<div class="container my-5">
+    <h2 class="fw-bold">Most Popular Vacancies</h2>
+    <div class="row g-4 mt-3">
+        @foreach (var category in Model)
+        {
+            <div class="col-md-3">
+                <a href="#" class="text-decoration-none @(category.IsHighlighted ? "text-primary fw-bold" : "text-dark fw-semibold")">
+                    @category.Name
+                </a>
+                <p class="text-muted">@category.Jobs.ToString("N0") Open Positions</p>
+            </div>
+        }
+    </div>
+</div>

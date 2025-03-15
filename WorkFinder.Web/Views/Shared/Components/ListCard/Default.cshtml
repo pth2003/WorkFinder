@@ -1,0 +1,12 @@
+@model IEnumerable<WorkFinder.Web.Models.ViewModels.CategoryCardViewModel>
+<div class="container my-5">
+    @await Html.PartialAsync("Partials/Common/_SectionHeader", new {Title  = "Popular Category"})
+    <div class="row">
+            @foreach(var category in Model)
+            {
+                <div class="col-md-3 my-3">
+                    @await Html.PartialAsync("Partials/Common/_CardItem", category)
+                </div>
+            }
+        </div>
+</div>

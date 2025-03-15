@@ -27,10 +27,5 @@
       <Folder Include="Areas\Admin\Models\" />
       <Folder Include="Areas\Admin\Views\" />
       <Folder Include="Services\" />
-      <Folder Include="Views\Shared\Components\Category\" />
-      <Folder Include="Views\Shared\Components\FeaturedJob\" />
-      <Folder Include="Views\Shared\Components\ListCard\" />
-      <Folder Include="Views\Shared\Components\Step\" />
-      <Folder Include="Views\Shared\Components\TopCompany\" />
     </ItemGroup>
 </Project>

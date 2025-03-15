@@ -1,0 +1,12 @@
+@model IEnumerable<WorkFinder.Web.Models.ViewModels.JobCardViewModel>
+<div class="container my-5">
+    @await Html.PartialAsync("Partials/Common/_SectionHeader", new {Title = "Featured Job"})
+    <div class="row">
+        @foreach (var job in Model)
+        {
+            <div class="col-12">
+                @await Html.PartialAsync("Partials/Common/_JobItem", job)
+            </div>
+        }
+    </div>
+</div>

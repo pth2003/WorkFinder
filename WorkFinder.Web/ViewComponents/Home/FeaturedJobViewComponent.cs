@@ -1,126 +1,36 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using WorkFinder.Web.Data;
 using WorkFinder.Web.Models;
+using WorkFinder.Web.Models.ViewModels;
 
 namespace WorkFinder.Web.ViewComponents.Home;
 
 public class FeaturedJobViewComponent : ViewComponent
 {
+    private readonly WorkFinderContext _context;
+    public  FeaturedJobViewComponent(WorkFinderContext context)
+    {
+        _context = context;
+    }
     public async Task<IViewComponentResult> InvokeAsync()
     {
-        // Mock dữ liệu giả lập
-        // var jobs = new List<Job>
-        // {
-        //     new Job
-        //     {
-        //         Id = 1,
-        //         Title = "Senior UX Designer",
-        //         Description = "Design user experience for web applications.",
-        //         Salary = 35000m,
-        //         Location = "Australia",
-        //         CompanyId = 1,
-        //         CategoryId = 1,
-        //         PostedDate = DateTime.Now.AddDays(-2),
-        //         Status = "open",
-        //         Company = new Company
-        //         {
-        //             Id = 1,
-        //             Name = "Upwork",
-        //             LogoUrl = "https://img.logo.dev/apple.com?token=pk_JNtYBCy6RyOkevRWc-7ghw"
-        //         }
-        //     },
-        //     new Job
-        //     {
-        //         Id = 2,
-        //         Title = "Software Engineer",
-        //         Description = "Develop software solutions.",
-        //         Salary = 55000m,
-        //         Location = "China",
-        //         CompanyId = 2,
-        //         CategoryId = 2,
-        //         PostedDate = DateTime.Now.AddDays(-3),
-        //         Status = "open",
-        //         Company = new Company
-        //         {
-        //             Id = 2,
-        //             Name = "Apple",
-        //             LogoUrl = "https://img.logo.dev/nvidia.com?token=pk_JNtYBCy6RyOkevRWc-7ghw"
-        //         }
-        //     },
-        //     new Job
-        //     {
-        //         Id = 3,
-        //         Title = "Junior Graphic Designer",
-        //         Description = "Create visual designs.",
-        //         Salary = 60000m,
-        //         Location = "Canada",
-        //         CompanyId = 3,
-        //         CategoryId = 3,
-        //         PostedDate = DateTime.Now.AddDays(-1),
-        //         Status = "open",
-        //         Company = new Company
-        //         {
-        //             Id = 3,
-        //             Name = "Figma",
-        //             LogoUrl = "https://img.logo.dev/google.com?token=pk_JNtYBCy6RyOkevRWc-7ghw"
-        //         }
-        //     },
-        //     new Job
-        //     {
-        //         Id = 1,
-        //         Title = "Senior UX Designer",
-        //         Description = "Design user experience for web applications.",
-        //         Salary = 35000m,
-        //         Location = "Australia",
-        //         CompanyId = 1,
-        //         CategoryId = 1,
-        //         PostedDate = DateTime.Now.AddDays(-2),
-        //         Status = "open",
-        //         Company = new Company
-        //         {
-        //             Id = 1,
-        //             Name = "Upwork",
-        //             LogoUrl = "https://img.logo.dev/apple.com?token=pk_JNtYBCy6RyOkevRWc-7ghw"
-        //         }
-        //     },
-        //     new Job
-        //     {
-        //         Id = 2,
-        //         Title = "Software Engineer",
-        //         Description = "Develop software solutions.",
-        //         Salary = 55000m,
-        //         Location = "China",
-        //         CompanyId = 2,
-        //         CategoryId = 2,
-        //         PostedDate = DateTime.Now.AddDays(-3),
-        //         Status = "open",
-        //         Company = new Company
-        //         {
-        //             Id = 2,
-        //             Name = "Apple",
-        //             LogoUrl = "https://img.logo.dev/nvidia.com?token=pk_JNtYBCy6RyOkevRWc-7ghw"
-        //         }
-        //     },
-        //     new Job
-        //     {
-        //         Id = 3,
-        //         Title = "Junior Graphic Designer",
-        //         Description = "Create visual designs.",
-        //         Salary = 60000m,
-        //         Location = "Canada",
-        //         CompanyId = 3,
-        //         CategoryId = 3,
-        //         PostedDate = DateTime.Now.AddDays(-1),
-        //         Status = "open",
-        //         Company = new Company
-        //         {
-        //             Id = 3,
-        //             Name = "Figma",
-        //             LogoUrl = "https://img.logo.dev/google.com?token=pk_JNtYBCy6RyOkevRWc-7ghw"
-        //         }
-        //     }
-        // };
-
-        return View();
-    
+        var jobs = await _context.Jobs
+            .Include(j => j.Company)
+            .Take(8)
+            .Select(j => new JobCardViewModel
+            {
+                Title = j.Title,
+                CompanyName = j.Company.Name,
+                Logo = j.Company.Logo ?? "/images/default-company.png",
+                Location = j.Location,
+                JobType = j.JobType,
+                SalaryMin = j.SalaryMin,
+                SalaryMax = j.SalaryMax,
+                ExpiryDate = j.ExpiryDate
+            })
+            .ToListAsync();
+            
+        return View(jobs);
     }
 }

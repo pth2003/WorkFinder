@@ -1,2 +1,26 @@
+@model WorkFinder.Web.Models.Company
+<div class="d-flex">
+    <img src="@Model.Logo" alt="@Model.Name Logo" class="company-logo" />
+    <div class="company-info">
+        <h3>@Model.Name</h3>
+        <p class="location"><i class="fas fa-map-marker-alt"></i> @Model.Location </p>
+    </div>
 
+</div>
+<style>
 
+    .company-info h3 {
+        margin: 0;
+        font-size: 16px;
+        color: #333;
+    }
+    .location {
+        font-size: 14px;
+        color: #666;
+        margin-top: 5px;
+    }
+
+    .location i {
+        margin-right: 5px;
+    }
+</style>
