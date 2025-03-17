@@ -17,8 +17,10 @@ builder.Services.AddDbContext<WorkFinderContext>(options =>
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 // Add specific repositories if needed
-builder.Services.AddScoped<IRepository<Resume>, Repository<Resume>>();
-builder.Services.AddScoped<IRepository<SavedJob>, Repository<SavedJob>>();
+builder.Services.AddScoped<IJobRepository, JobRepository>();
+
+// builder.Services.AddScoped<IRepository<Resume>, Repository<Resume>>();
+// builder.Services.AddScoped<IRepository<SavedJob>, Repository<SavedJob>>();
 // Đăng ký Identity
 // Add authentication services
 builder.Services.AddIdentity<ApplicationUser, IdentityRole<int>>(options =>

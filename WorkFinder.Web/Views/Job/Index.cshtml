@@ -1,0 +1,280 @@
+@{
+    ViewData["Title"] = "Find Job";
+}
+
+<div class="job-listing-container">
+    <!-- Header Section -->
+    <div class="job-header">
+        <div class="container">
+            <div class="d-flex justify-content-between">
+                <h1>Find Job</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item active">Find job</li>
+                    </ol>
+                </nav>
+            </div>
+            <!-- Search Section -->
+            <div class="search-section">
+                <div class="container">
+                    <div class="search-box">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="search-input">
+                                    <i class="fas fa-search"></i>
+                                    <input type="text" placeholder="Job tittle, Keyword...">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="search-input">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <input type="text" placeholder="Location">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="search-input">
+                                    <i class="fa-solid fa-layer-group"></i>
+                                    <select class="form-select">
+                                        <option selected>Select Category</option>
+                                        <option>Design</option>
+                                        <option>Development</option>
+                                        <option>Marketing</option>
+                                        <option>Engineering</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3 d-flex">
+                                <div class="dropdown me-2">
+                                    <button class="btn btn-light dropdown-toggle" type="button" id="advanceFilter"
+                                        data-bs-toggle="dropdown">
+                                        Advance Filter
+                                    </button>
+                                </div>
+                                <button class="btn btn-primary find-btn">Find Job</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+    <!-- Job Listing Section -->
+    <div class="job-listing container mt-4">
+        <div class="d-flex justify-content-between mb-4">
+            <div class="dropdown">
+                <!-- Filter Tags -->
+                <div class="filter-tags container mt-4">
+                    <div class="d-flex">
+                        <div class="filter-tag">
+                            Design <i class="fas fa-times"></i>
+                        </div>
+                        <div class="filter-tag">
+                            New York <i class="fas fa-times"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex gap-3">
+                <button class="btn btn-light dropdown-toggle" type="button" id="sortDropdown" data-bs-toggle="dropdown">
+                    Latest
+                </button>
+                <div class="dropdown me-3">
+                    <button class="btn btn-light dropdown-toggle" type="button" id="perPageDropdown"
+                        data-bs-toggle="dropdown">
+                        12 per page
+                    </button>
+                </div>
+                <div class="view-options">
+                    <button class="btn btn-light active"><i class="fas fa-th"></i></button>
+                    <button class="btn btn-light"><i class="fas fa-list"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Job Cards -->
+
+    </div>
+</div>
+<style>
+    /* Job Listing Styles */
+    .job-header {
+        background-color: #f8f9fa;
+        padding: 30px 0;
+        margin-bottom: 30px;
+    }
+
+    .job-header h1 {
+        font-size: 28px;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+
+    .breadcrumb {
+        background: transparent;
+        padding: 0;
+        margin: 0;
+    }
+
+    .search-section {
+        margin-bottom: 30px;
+    }
+
+    .search-box {
+        background-color: #fff;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .search-input {
+        position: relative;
+
+        font-size: 1.4rem;
+        width: 100%;
+        height: auto;
+    }
+
+    .search-input i {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--blue-300);
+    }
+
+    .search-input input,
+    .search-input select {
+        width: 100%;
+        padding: 12px 15px 12px 40px;
+        border: 1px solid #e0e0e0;
+        border-radius: 5px;
+        font-size: 1.4rem;
+    }
+
+    .find-btn {
+        flex: 1;
+
+
+        border-radius: 5px;
+        height: 50px;
+        /* hoặc đặt chiều cao cụ thể giống với các nút khác */
+    }
+
+    .filter-tag {
+        display: inline-block;
+        background-color: #f8f9fa;
+        padding: 5px 15px;
+        border-radius: 30px;
+        margin-right: 10px;
+        font-size: 14px;
+    }
+
+    .filter-tag i {
+        margin-left: 5px;
+        cursor: pointer;
+    }
+
+    .job-card {
+        background-color: #fff;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+        height: 100%;
+        transition: all 0.3s ease;
+    }
+
+    .job-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .job-card.highlighted {
+        border: 1px solid #0d6efd;
+    }
+
+    .company-info {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    .company-logo {
+        width: 50px;
+        height: 50px;
+        border-radius: 8px;
+        overflow: hidden;
+        margin-right: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f8f9fa;
+    }
+
+    .company-logo img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    .location {
+        color: #6c757d;
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+
+    .job-title {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 15px;
+    }
+
+    .job-meta {
+        display: flex;
+        justify-content: space-between;
+        color: #6c757d;
+        font-size: 14px;
+    }
+
+    .pagination-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    .pagination .page-item.active .page-link {
+        background-color: #0d6efd;
+        border-color: #0d6efd;
+    }
+
+    .pagination .page-link {
+        color: #0d6efd;
+        border-radius: 50%;
+        margin: 0 5px;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .view-options .btn {
+        padding: 8px 12px;
+    }
+
+    .view-options .btn.active {
+        background-color: #0d6efd;
+        color: white;
+    }
+</style>
+
+@section Scripts {
+    <script>
+        // Log dữ liệu từ ViewBag để kiểm tra trong Console
+        console.log("Jobs Debug Data:", @Html.Raw(Json.Serialize(ViewBag.JobsDebug)));
+    </script>
+}

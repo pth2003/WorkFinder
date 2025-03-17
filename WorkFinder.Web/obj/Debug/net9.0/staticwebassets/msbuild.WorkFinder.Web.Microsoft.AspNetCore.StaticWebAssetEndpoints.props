@@ -12,17 +12,17 @@
       <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"ufhunsn2ql"},{"Name":"integrity","Value":"sha256-NvV9N4yRxQCNQZEjqyOOq1MI\u002BCBnJK6wpwwWkFguGVI="},{"Name":"label","Value":"_content/WorkFinder.Web/css/footer.css"}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"342"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022NvV9N4yRxQCNQZEjqyOOq1MI\u002BCBnJK6wpwwWkFguGVI=\u0022"},{"Name":"Last-Modified","Value":"Tue, 11 Mar 2025 09:27:23 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/WorkFinder.Web/css/header.86j2om3q92.css">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\header.css'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"86j2om3q92"},{"Name":"integrity","Value":"sha256-kK3DoldFIRJmynjoN5gc4ZFsQ2xjfV2nljZvRuw3Xe4="},{"Name":"label","Value":"_content/WorkFinder.Web/css/header.css"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"822"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022kK3DoldFIRJmynjoN5gc4ZFsQ2xjfV2nljZvRuw3Xe4=\u0022"},{"Name":"Last-Modified","Value":"Mon, 17 Mar 2025 17:17:13 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/WorkFinder.Web/css/header.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\header.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-9QiTDbwZuVtfKvL27ZBXA\u002Bvou8kPrJtSUmDW7zJ9vWk="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"452"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u00229QiTDbwZuVtfKvL27ZBXA\u002Bvou8kPrJtSUmDW7zJ9vWk=\u0022"},{"Name":"Last-Modified","Value":"Wed, 05 Mar 2025 05:07:22 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/WorkFinder.Web/css/header.d6td09v2yq.css">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\header.css'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"d6td09v2yq"},{"Name":"integrity","Value":"sha256-9QiTDbwZuVtfKvL27ZBXA\u002Bvou8kPrJtSUmDW7zJ9vWk="},{"Name":"label","Value":"_content/WorkFinder.Web/css/header.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"452"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u00229QiTDbwZuVtfKvL27ZBXA\u002Bvou8kPrJtSUmDW7zJ9vWk=\u0022"},{"Name":"Last-Modified","Value":"Wed, 05 Mar 2025 05:07:22 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-kK3DoldFIRJmynjoN5gc4ZFsQ2xjfV2nljZvRuw3Xe4="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"822"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022kK3DoldFIRJmynjoN5gc4ZFsQ2xjfV2nljZvRuw3Xe4=\u0022"},{"Name":"Last-Modified","Value":"Mon, 17 Mar 2025 17:17:13 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/WorkFinder.Web/css/hero.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\hero.css'))</AssetFile>

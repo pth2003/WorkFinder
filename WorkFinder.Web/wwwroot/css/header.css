@@ -6,9 +6,9 @@
     color: var(--gray-400);
 }
 .nav-link:hover,
-.nav-link:active{
+.nav-link.active {
     color: #0A65CC;
-    
+    font-weight: 500;
 }
 #navbarNav {
     justify-content: space-between;
@@ -29,4 +29,26 @@ header {
 }
 .header-login {
     gap: 1.2rem;
+}
+.user-profile {
+    cursor: pointer;
+}
+
+.avatar-container {
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 2px solid #f0f0f0;
+}
+
+.avatar-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.dropdown-menu {
+    min-width: 200px;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 }

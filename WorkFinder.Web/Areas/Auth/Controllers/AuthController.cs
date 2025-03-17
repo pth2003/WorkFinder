@@ -10,7 +10,7 @@ public class AuthController : Controller
 
     public AuthController(IAuthService authService)
     {
-        _authService  = authService;
+        _authService = authService;
     }
     // register page
     [HttpGet]
@@ -32,12 +32,12 @@ public class AuthController : Controller
         if (succeeded)
         {
             // Automatically log in the user after registration
-            var loginResult = await _authService.LoginAsync(new LoginViewModel 
-            { 
-                Email = model.Email, 
-                Password = model.Password 
+            var loginResult = await _authService.LoginAsync(new LoginViewModel
+            {
+                Email = model.Email,
+                Password = model.Password
             });
-        
+
             if (loginResult.succeeded)
             {
                 return LocalRedirect(returnUrl ?? "/");
@@ -48,16 +48,16 @@ public class AuthController : Controller
         {
             ModelState.AddModelError(string.Empty, error);
         }
-    
+
         return View(model);
     }
-    
-    
+
+
     // login page
     [HttpGet]
     public IActionResult Login(string? returnUrl = null)
     {
-        
+
         ViewData["ReturnUrl"] = returnUrl;
         return View();
     }
@@ -72,8 +72,7 @@ public class AuthController : Controller
         var (succeeded, errors) = await _authService.LoginAsync(model);
         if (succeeded)
         {
-            // bool isLogged = User.Identity?.IsAuthenticated ?? false;
-            // Console.WriteLine($"Login status: {isLogged}");
+
             return LocalRedirect(returnUrl ?? "/");
         }
         foreach (var error in errors)
@@ -81,5 +80,15 @@ public class AuthController : Controller
             ModelState.AddModelError(string.Empty, error);
         }
         return View(model);
+
+    }
+
+    // logout action
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Logout()
+    {
+        await _authService.LogoutAsync();
+        return RedirectToAction("Index", "Home", new { area = "" });
     }
 }
