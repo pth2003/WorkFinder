@@ -1,3 +1,4 @@
+@model WorkFinder.Web.Areas.Auth.Models.LoginViewModel
 @{
     ViewData["Title"] = "Login";
 }
@@ -10,31 +11,36 @@
             </div>
             <div class="w-75 mx-auto mt-5 ">
                 <h2 class="mb-4">Sign in</h2>
-                <p class="text-muted mb-4">Don't have account? <a href="#" class="text-primary">Create Account</a></p>
+                <p class="text-muted mb-4">Don't have account? <a href="/Auth/Register" class="text-primary">Create Account</a></p>
 
-                <form >
-                    <div class="mb-3">
-                        <input type="email" class="form-control" placeholder="Email address" required>
-                    </div>
-                    <div class="mb-3 position-relative">
-                        <input type="password" class="form-control" placeholder="Password" required>
-                        <span class="position-absolute top-50 end-0 translate-middle-y me-3">
-                            <i class="far fa-eye"></i>
-                        </span>
-                    </div>
-
-                    <div class="checkbox-container">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="rememberMe">
-                            <label class="form-check-label" for="rememberMe">Remember Me</label>
-                        </div>
-                        <a href="#" class="text-primary">Forgot password</a>
-                    </div>
-
-                    <button type="submit" class="login-button">
-                        Sign In <i class="fas fa-arrow-right ms-2"></i>
-                    </button>
-                </form>
+             <form method="post" asp-controller="Auth" asp-action="Login" asp-route-returnUrl="@ViewData["ReturnUrl"]">
+                 <div class="mb-3">
+                     <input asp-for="Email" class="form-control" placeholder="Email address">
+                     <span asp-validation-for="Email" class="text-danger"></span>
+                 </div>
+                 
+                 <div class="mb-3 position-relative">
+                     <input asp-for="Password" class="form-control" placeholder="Password">
+                     <span class="position-absolute top-50 end-0 translate-middle-y me-3">
+                         <i class="far fa-eye"></i>
+                     </span>
+                     <span asp-validation-for="Password" class="text-danger"></span>
+                 </div>
+             
+                 <div class="checkbox-container">
+                     <div class="form-check">
+                         <input asp-for="RememberMe" class="form-check-input">
+                         <label asp-for="RememberMe" class="form-check-label">Remember Me</label>
+                     </div>
+                     <a href="#" class="text-primary">Forgot password</a>
+                 </div>
+                 
+                 <div asp-validation-summary="All" class="text-danger"></div>
+             
+                 <button type="submit" class="login-button">
+                     Sign In <i class="fas fa-arrow-right ms-2"></i>
+                 </button>
+             </form>
 
                 <div class="text-center my-3">or</div>
 
@@ -194,3 +200,24 @@
         padding: 10px;
     }
 </style>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const togglePassword = document.querySelector('.far.fa-eye');
+    const passwordInput = document.querySelector('input[type="password"]');
+
+    togglePassword.addEventListener('click', function() {
+        // Toggle password visibility
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        
+        // Toggle eye icon
+        this.classList.toggle('fa-eye');
+        this.classList.toggle('fa-eye-slash');
+    });
+});
+</script>

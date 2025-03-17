@@ -8574,7 +8574,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 13 Mar 2025 19:53:27 GMT"
+          "Value": "Sun, 16 Mar 2025 12:50:53 GMT"
         },
         {
           "Name": "Vary",
@@ -8623,7 +8623,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 13 Mar 2025 19:53:27 GMT"
+          "Value": "Sun, 16 Mar 2025 12:50:53 GMT"
         }
       ],
       "EndpointProperties": [
@@ -8672,7 +8672,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 13 Mar 2025 19:53:27 GMT"
+          "Value": "Sun, 16 Mar 2025 12:50:53 GMT"
         },
         {
           "Name": "Vary",
@@ -8735,7 +8735,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 13 Mar 2025 19:53:27 GMT"
+          "Value": "Sun, 16 Mar 2025 12:50:53 GMT"
         },
         {
           "Name": "Vary",
@@ -8776,7 +8776,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 13 Mar 2025 19:53:27 GMT"
+          "Value": "Sun, 16 Mar 2025 12:50:53 GMT"
         }
       ],
       "EndpointProperties": [
@@ -8817,7 +8817,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 13 Mar 2025 19:53:27 GMT"
+          "Value": "Sun, 16 Mar 2025 12:50:53 GMT"
         },
         {
           "Name": "Vary",
@@ -14088,6 +14088,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-VVIY/p+hzZEC3osGkiQo+AmdMadFV2eRKmYhnZ29B9Q="
+        }
+      ]
+    },
+    {
+      "Route": "img/bg-auth.png",
+      "AssetFile": "img/bg-auth.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "263408"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+hZriBlk3Ux0OdRe9iI3CJvvvdSui4F5qKcwcVScTQg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 15 Mar 2025 19:25:21 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-+hZriBlk3Ux0OdRe9iI3CJvvvdSui4F5qKcwcVScTQg="
+        }
+      ]
+    },
+    {
+      "Route": "img/bg-auth.ubpnn4bai3.png",
+      "AssetFile": "img/bg-auth.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "263408"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+hZriBlk3Ux0OdRe9iI3CJvvvdSui4F5qKcwcVScTQg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 15 Mar 2025 19:25:21 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ubpnn4bai3"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-+hZriBlk3Ux0OdRe9iI3CJvvvdSui4F5qKcwcVScTQg="
+        },
+        {
+          "Name": "label",
+          "Value": "img/bg-auth.png"
         }
       ]
     },

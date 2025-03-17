@@ -93,6 +93,10 @@
       "PackagePath": "staticwebassets/img/Illustration.png"
     },
     {
+      "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/img/bg-auth.png",
+      "PackagePath": "staticwebassets/img/bg-auth.png"
+    },
+    {
       "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/js/site.js",
       "PackagePath": "staticwebassets/js/site.js"
     },

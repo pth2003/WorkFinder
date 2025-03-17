@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "o7iGE5QGiALLepSKal4nrPuybcgl/2MD4h8tza7ZyYc=",
+  "Hash": "e+KeqABfwZtf/qLOsGJBF0tnBnBWqQZRcd/EW+GDaAA=",
   "Source": "WorkFinder.Web",
   "BasePath": "_content/WorkFinder.Web",
   "Mode": "Default",
@@ -4761,6 +4761,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/icon/users-duotone 1.png"
+    },
+    {
+      "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/img/bg-auth.png",
+      "SourceId": "WorkFinder.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/",
+      "BasePath": "_content/WorkFinder.Web",
+      "RelativePath": "img/bg-auth#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "ubpnn4bai3",
+      "Integrity": "+hZriBlk3Ux0OdRe9iI3CJvvvdSui4F5qKcwcVScTQg=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/img/bg-auth.png"
     },
     {
       "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/img/Illustration.png",
@@ -19846,6 +19867,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-F1wMlgb/juW08DFUssW6Pm9EBKfjXXRiSK0F5FgXxJU="
+        }
+      ]
+    },
+    {
+      "Route": "img/bg-auth.png",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/img/bg-auth.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "263408"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+hZriBlk3Ux0OdRe9iI3CJvvvdSui4F5qKcwcVScTQg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 15 Mar 2025 19:25:21 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-+hZriBlk3Ux0OdRe9iI3CJvvvdSui4F5qKcwcVScTQg="
+        }
+      ]
+    },
+    {
+      "Route": "img/bg-auth.ubpnn4bai3.png",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/img/bg-auth.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "263408"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+hZriBlk3Ux0OdRe9iI3CJvvvdSui4F5qKcwcVScTQg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 15 Mar 2025 19:25:21 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ubpnn4bai3"
+        },
+        {
+          "Name": "label",
+          "Value": "img/bg-auth.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-+hZriBlk3Ux0OdRe9iI3CJvvvdSui4F5qKcwcVScTQg="
         }
       ]
     },
@@ -40175,7 +40278,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 13 Mar 2025 19:53:27 GMT"
+          "Value": "Sun, 16 Mar 2025 12:50:53 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -40236,7 +40339,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 13 Mar 2025 19:53:27 GMT"
+          "Value": "Sun, 16 Mar 2025 12:50:53 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -40281,7 +40384,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 13 Mar 2025 19:53:27 GMT"
+          "Value": "Sun, 16 Mar 2025 12:50:53 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -40336,7 +40439,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 13 Mar 2025 19:53:27 GMT"
+          "Value": "Sun, 16 Mar 2025 12:50:53 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -40397,7 +40500,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 13 Mar 2025 19:53:27 GMT"
+          "Value": "Sun, 16 Mar 2025 12:50:53 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -40442,7 +40545,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 13 Mar 2025 19:53:27 GMT"
+          "Value": "Sun, 16 Mar 2025 12:50:53 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -40497,7 +40600,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 13 Mar 2025 19:53:27 GMT"
+          "Value": "Sun, 16 Mar 2025 12:50:53 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -40550,7 +40653,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 13 Mar 2025 19:53:27 GMT"
+          "Value": "Sun, 16 Mar 2025 12:50:53 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -40587,7 +40690,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 13 Mar 2025 19:53:27 GMT"
+          "Value": "Sun, 16 Mar 2025 12:50:53 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -40634,7 +40737,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 13 Mar 2025 19:53:27 GMT"
+          "Value": "Sun, 16 Mar 2025 12:50:53 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -40687,7 +40790,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 13 Mar 2025 19:53:27 GMT"
+          "Value": "Sun, 16 Mar 2025 12:50:53 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -40724,7 +40827,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 13 Mar 2025 19:53:27 GMT"
+          "Value": "Sun, 16 Mar 2025 12:50:53 GMT"
         },
         {
           "Name": "Cache-Control",

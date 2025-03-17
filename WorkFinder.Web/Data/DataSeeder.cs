@@ -10,19 +10,23 @@ public static class DataSeeder
     public static async Task SeedData(WorkFinderContext context, UserManager<ApplicationUser> userManager)
     {
         // Create default user first
-        if (!userManager.Users.Any())
-        {
-            var user = new ApplicationUser
-            {
-                UserName = "admin@workfinder.com",
-                Email = "admin@workfinder.com",
-                EmailConfirmed = true,
-                FirstName = "Admin",
-                LastName = "User"
-            };
-
-            await userManager.CreateAsync(user, "Admin@123");
-        }
+     if (!userManager.Users.Any())
+     {
+         var user = new ApplicationUser
+         {
+             UserName = "admin@workfinder.com",
+             Email = "admin@workfinder.com",
+             EmailConfirmed = true,
+             FirstName = "Admin",
+             LastName = "User"
+         };
+     
+         var result = await userManager.CreateAsync(user, "Admin@123456!");
+         if (!result.Succeeded)
+         {
+             throw new Exception($"Failed to create admin user: {string.Join(", ", result.Errors.Select(e => e.Description))}");
+         }
+     }
 
         // Seed Categories
         if (!context.Categories.Any())
