@@ -17,7 +17,7 @@ public class FeaturedJobViewComponent : ViewComponent
     {
         var jobs = await _context.Jobs
             .Include(j => j.Company)
-            .Take(8)
+            .Take(4)
             .Select(j => new JobCardViewModel
             {
                 Title = j.Title,

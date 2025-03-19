@@ -1,0 +1,360 @@
+@model WorkFinder.Web.Models.ViewModels.AdvancedFilterViewModel
+
+<!-- Modal Advanced Filter -->
+<div class="modal fade" id="advancedFilterModal" tabindex="-1" aria-labelledby="advancedFilterModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="advancedFilterModalLabel">Advanced Filter</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <!-- Experience Column -->
+                    <div class="col-md">
+                        <h5 class="filter-title">Experience</h5>
+                        <div class="filter-options">
+                            @foreach (var exp in Model.ExperienceLevels)
+                            {
+                                <div class="form-check custom-radio">
+                                    @if (Model.SelectedExperienceLevel == exp.Value)
+                                    {
+                                        <input class="form-check-input" type="radio" name="experienceLevel" id="exp-@exp.Value"
+                                            value="@exp.Value" checked>
+                                    }
+                                    else
+                                    {
+                                        <input class="form-check-input" type="radio" name="experienceLevel" id="exp-@exp.Value"
+                                            value="@exp.Value">
+                                    }
+                                    <label class="form-check-label" for="exp-@exp.Value">@exp.Label</label>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Salary Column -->
+                    <div class="col-md">
+                        <h5 class="filter-title">Salary</h5>
+                        <div class="filter-options">
+                            @foreach (var salary in Model.SalaryRanges)
+                            {
+                                <div class="form-check custom-radio">
+                                    @if (Model.SelectedMinSalary == salary.Min && (Model.SelectedMaxSalary == salary.Max ||
+                                                                    (salary.Max == null && Model.SelectedMaxSalary == null)))
+                                    {
+                                        <input class="form-check-input" type="radio" name="salary" id="salary-@salary.Min"
+                                            value="@salary.Min-@(salary.Max?.ToString() ?? "")" checked>
+                                    }
+                                    else
+                                    {
+                                        <input class="form-check-input" type="radio" name="salary" id="salary-@salary.Min"
+                                            value="@salary.Min-@(salary.Max?.ToString() ?? "")">
+                                    }
+                                    <label class="form-check-label" for="salary-@salary.Min">@salary.DisplayText</label>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Job Type Column -->
+                    <div class="col-md">
+                        <h5 class="filter-title">Job Type</h5>
+                        <div class="filter-options">
+                            <div class="form-check custom-checkbox">
+                                <input class="form-check-input" type="checkbox" name="jobTypeAll" id="jobtype-all"
+                                    value="All">
+                                <label class="form-check-label" for="jobtype-all">All</label>
+                            </div>
+                            @foreach (var jobType in Model.JobTypes.Where(j => j != "All"))
+                            {
+                                string jobTypeValue = jobType.Replace(" ", "");
+                                <div class="form-check custom-checkbox">
+                                    @if (Model.SelectedJobType == jobTypeValue)
+                                    {
+                                        <input class="form-check-input" type="checkbox" name="jobType"
+                                            id="jobtype-@jobTypeValue" value="@jobTypeValue" checked>
+                                    }
+                                    else
+                                    {
+                                        <input class="form-check-input" type="checkbox" name="jobType"
+                                            id="jobtype-@jobTypeValue" value="@jobTypeValue">
+                                    }
+                                    <label class="form-check-label" for="jobtype-@jobTypeValue">@jobType</label>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Post Date Column -->
+                    <div class="col-md">
+                        <h5 class="filter-title">Post Date</h5>
+                        <div class="filter-options">
+                            <div class="form-check custom-radio">
+                                @if (!Model.SelectedPostedAfter.HasValue)
+                                {
+                                    <input class="form-check-input" type="radio" name="postedAfter" id="post-any" value=""
+                                        checked>
+                                }
+                                else
+                                {
+                                    <input class="form-check-input" type="radio" name="postedAfter" id="post-any" value="">
+                                }
+                                <label class="form-check-label" for="post-any">Any Time</label>
+                            </div>
+
+                            @{
+                                bool isLastDay = Model.SelectedPostedAfter.HasValue && (DateTime.Now -
+                                Model.SelectedPostedAfter.Value).TotalDays <= 1;
+                                bool isLastWeek = Model.SelectedPostedAfter.HasValue && (DateTime.Now -
+                                Model.SelectedPostedAfter.Value).TotalDays <= 7;
+                                bool isLastMonth = Model.SelectedPostedAfter.HasValue && (DateTime.Now -
+                                Model.SelectedPostedAfter.Value).TotalDays <= 30;
+                            }
+
+                            <div class="form-check custom-radio">
+                                @if (isLastDay)
+                                {
+                                    <input class="form-check-input" type="radio" name="postedAfter" id="post-24h" value="1"
+                                        checked>
+                                }
+                                else
+                                {
+                                    <input class="form-check-input" type="radio" name="postedAfter" id="post-24h" value="1">
+                                }
+                                <label class="form-check-label" for="post-24h">Last 24 hours</label>
+                            </div>
+
+                            <div class="form-check custom-radio">
+                                @if (isLastWeek)
+                                {
+                                    <input class="form-check-input" type="radio" name="postedAfter" id="post-7d" value="7"
+                                        checked>
+                                }
+                                else
+                                {
+                                    <input class="form-check-input" type="radio" name="postedAfter" id="post-7d" value="7">
+                                }
+                                <label class="form-check-label" for="post-7d">Last 7 days</label>
+                            </div>
+
+                            <div class="form-check custom-radio">
+                                @if (isLastMonth)
+                                {
+                                    <input class="form-check-input" type="radio" name="postedAfter" id="post-30d" value="30"
+                                        checked>
+                                }
+                                else
+                                {
+                                    <input class="form-check-input" type="radio" name="postedAfter" id="post-30d"
+                                        value="30">
+                                }
+                                <label class="form-check-label" for="post-30d">Last 30 days</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Job Level Column -->
+                    <div class="col-md">
+                        <h5 class="filter-title">Job Level</h5>
+                        <div class="filter-options">
+                            @foreach (var jobLevel in Model.JobLevels)
+                            {
+                                string jobLevelValue = jobLevel.Replace(" ", "");
+                                <div class="form-check custom-radio">
+                                    @if (Model.SelectedJobLevel == jobLevelValue)
+                                    {
+                                        <input class="form-check-input" type="radio" name="jobLevel" id="level-@jobLevelValue"
+                                            value="@jobLevelValue" checked>
+                                    }
+                                    else
+                                    {
+                                        <input class="form-check-input" type="radio" name="jobLevel" id="level-@jobLevelValue"
+                                            value="@jobLevelValue">
+                                    }
+                                    <label class="form-check-label" for="level-@jobLevelValue">@jobLevel</label>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-link" id="clearFilters">Clear All</button>
+                <button type="button" class="btn btn-primary px-4 apply-filter-btn" id="applyAdvancedFilter">Apply
+                    Filter</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // All checkbox handling
+        const allTypeCheckbox = document.getElementById('jobtype-all');
+        const jobTypeCheckboxes = document.querySelectorAll('input[name="jobType"]');
+
+        if (allTypeCheckbox) {
+            allTypeCheckbox.addEventListener('change', function () {
+                jobTypeCheckboxes.forEach(cb => {
+                    cb.checked = this.checked;
+                    cb.disabled = this.checked;
+                });
+            });
+        }
+
+        // Apply advanced filter button click handler
+        document.getElementById('applyAdvancedFilter').addEventListener('click', function () {
+            // Get values and set to hidden fields
+
+            // Experience Level
+            const selectedExp = document.querySelector('input[name="experienceLevel"]:checked');
+            document.getElementById('experienceLevel').value = selectedExp ? selectedExp.value : '';
+
+            // Salary Range
+            const selectedSalary = document.querySelector('input[name="salary"]:checked');
+            if (selectedSalary) {
+                const salaryRange = selectedSalary.value.split('-');
+                document.getElementById('minSalary').value = salaryRange[0] || '';
+                document.getElementById('maxSalary').value = salaryRange[1] || '';
+            } else {
+                document.getElementById('minSalary').value = '';
+                document.getElementById('maxSalary').value = '';
+            }
+
+            // Job Type
+            let selectedJobTypes = [];
+            if (allTypeCheckbox && allTypeCheckbox.checked) {
+                document.getElementById('jobType').value = 'All';
+            } else {
+                jobTypeCheckboxes.forEach(cb => {
+                    if (cb.checked) {
+                        selectedJobTypes.push(cb.value);
+                    }
+                });
+                document.getElementById('jobType').value = selectedJobTypes.join(',');
+            }
+
+            // Job Level
+            const selectedLevel = document.querySelector('input[name="jobLevel"]:checked');
+            document.getElementById('jobLevel').value = selectedLevel ? selectedLevel.value : '';
+
+            // Posted After
+            const selectedPostedAfter = document.querySelector('input[name="postedAfter"]:checked');
+            if (selectedPostedAfter && selectedPostedAfter.value) {
+                const date = new Date();
+                date.setDate(date.getDate() - parseInt(selectedPostedAfter.value));
+                document.getElementById('postedAfter').value = date.toISOString().split('T')[0];
+            } else {
+                document.getElementById('postedAfter').value = '';
+            }
+
+            // Submit the form
+            document.getElementById('jobFilterForm').submit();
+
+            // Close the modal
+            var modal = bootstrap.Modal.getInstance(document.getElementById('advancedFilterModal'));
+            if (modal) {
+                modal.hide();
+            }
+        });
+
+        // Clear filters
+        document.getElementById('clearFilters').addEventListener('click', function () {
+            // Clear radio buttons
+            document.querySelectorAll('input[type="radio"]').forEach(input => {
+                input.checked = false;
+            });
+
+            // Clear checkboxes
+            document.querySelectorAll('input[type="checkbox"]').forEach(input => {
+                input.checked = false;
+                input.disabled = false;
+            });
+        });
+    });
+</script>
+
+<style>
+    /* Custom Styling to match the image */
+    .modal-xl {
+        max-width: 1200px;
+    }
+
+    .filter-title {
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: #333;
+        font-size: 18px;
+    }
+
+    .filter-options {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    /* Larger checkbox and radio styling */
+    .custom-checkbox .form-check-input,
+    .custom-radio .form-check-input {
+        width: 20px;
+        height: 20px;
+        margin-top: 3px;
+        border: 2px solid #ddd;
+    }
+
+    .custom-radio .form-check-input {
+        border-radius: 50%;
+    }
+
+    .form-check-label {
+        font-size: 15px;
+        color: #333;
+        padding-left: 5px;
+    }
+
+    .form-check-input:checked {
+        background-color: #3763EB;
+        border-color: #3763EB;
+    }
+
+    /* Active state styling */
+    .form-check-input:focus {
+        box-shadow: 0 0 0 0.25rem rgba(55, 99, 235, 0.25);
+    }
+
+    /* Modal styling */
+    .modal-body {
+        padding: 30px;
+    }
+
+    .modal-footer {
+        padding: 20px;
+        border-top: 1px solid #eee;
+    }
+
+    /* Apply filter button */
+    .apply-filter-btn {
+        background-color: #3763EB;
+        border-color: #3763EB;
+        padding: 10px 30px;
+        font-size: 16px;
+    }
+
+    .apply-filter-btn:hover {
+        background-color: #2950cc;
+        border-color: #2950cc;
+    }
+
+    /* Clear all button */
+    #clearFilters {
+        color: #666;
+        text-decoration: none;
+    }
+
+    #clearFilters:hover {
+        color: #333;
+        text-decoration: underline;
+    }
+</style>

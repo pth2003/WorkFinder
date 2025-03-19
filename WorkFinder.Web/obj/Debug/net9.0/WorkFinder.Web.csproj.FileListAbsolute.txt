@@ -1,3 +1,13 @@
+/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/WorkFinder.Web.csproj.AssemblyReference.cache
+/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/WorkFinder.Web.GeneratedMSBuildEditorConfig.editorconfig
+/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/WorkFinder.Web.AssemblyInfoInputs.cache
+/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/WorkFinder.Web.AssemblyInfo.cs
+/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/WorkFinder.Web.csproj.CoreCompileInputs.cache
+/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/WorkFinder.Web.MvcApplicationPartsAssemblyInfo.cs
+/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/WorkFinder.Web.MvcApplicationPartsAssemblyInfo.cache
+/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/WorkFinder.Web.RazorAssemblyInfo.cache
+/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/WorkFinder.Web.RazorAssemblyInfo.cs
+/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/WorkFinder.Web.sourcelink.json
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/bin/Debug/net9.0/appsettings.Development.json
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/bin/Debug/net9.0/appsettings.json
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/bin/Debug/net9.0/WorkFinder.Web.staticwebassets.runtime.json
@@ -233,16 +243,6 @@
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/bin/Debug/net9.0/zh-Hans/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/bin/Debug/net9.0/zh-Hant/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/bin/Debug/net9.0/runtimes/win/lib/net8.0/System.Diagnostics.EventLog.Messages.dll
-/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/WorkFinder.Web.csproj.AssemblyReference.cache
-/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/WorkFinder.Web.GeneratedMSBuildEditorConfig.editorconfig
-/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/WorkFinder.Web.AssemblyInfoInputs.cache
-/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/WorkFinder.Web.AssemblyInfo.cs
-/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/WorkFinder.Web.csproj.CoreCompileInputs.cache
-/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/WorkFinder.Web.MvcApplicationPartsAssemblyInfo.cs
-/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/WorkFinder.Web.MvcApplicationPartsAssemblyInfo.cache
-/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/WorkFinder.Web.RazorAssemblyInfo.cache
-/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/WorkFinder.Web.RazorAssemblyInfo.cs
-/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/WorkFinder.Web.sourcelink.json
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/scopedcss/Views/Shared/_Layout.cshtml.rz.scp.css
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/scopedcss/bundle/WorkFinder.Web.styles.css
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/scopedcss/projectbundle/WorkFinder.Web.bundle.scp.css
@@ -309,6 +309,7 @@
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/v0zgfp0y55-87fc7y1x7t.gz
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/yfc7ypekbg-mlv21k5csn.gz
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/xc55rblq0w-ufhunsn2ql.gz
+/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/npjfevgezn-86j2om3q92.gz
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/dc92lb7ngb-duxl33j8eb.gz
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/i1or4hkeem-50obzwsi93.gz
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/crcvv1k8kg-qcw1q6w9fv.gz
@@ -400,4 +401,3 @@
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/WorkFinder.Web.pdb
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/WorkFinder.Web.genruntimeconfig.cache
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/ref/WorkFinder.Web.dll
-/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/npjfevgezn-86j2om3q92.gz

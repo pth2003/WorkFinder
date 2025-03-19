@@ -18,7 +18,7 @@ builder.Services.AddDbContext<WorkFinderContext>(options =>
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 // Add specific repositories if needed
 builder.Services.AddScoped<IJobRepository, JobRepository>();
-
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 // builder.Services.AddScoped<IRepository<Resume>, Repository<Resume>>();
 // builder.Services.AddScoped<IRepository<SavedJob>, Repository<SavedJob>>();
 // Đăng ký Identity
@@ -46,13 +46,13 @@ builder.Services.ConfigureApplicationCookie(options =>
 var app = builder.Build();
 
 
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
-    var context = services.GetRequiredService<WorkFinderContext>();
-    var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
-    await DataSeeder.SeedData(context, userManager);
-}
+// using (var scope = app.Services.CreateScope())
+// {
+//     var services = scope.ServiceProvider;
+//     var context = services.GetRequiredService<WorkFinderContext>();
+//     var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+//     await DataSeeder.SeedData(context, userManager);
+// }
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

@@ -74,36 +74,36 @@ namespace WorkFinder.Web.Repositories
         }
 
         public async Task<(IEnumerable<Job> Jobs, int TotalCount)> GetJobsPagedAsync(
-            string keyword,
-            string location,
-            int? categoryId,
-            JobType? jobType,
-            ExperienceLevel? experienceLevel,
-            decimal? minSalary,
-            decimal? maxSalary,
-            int page,
-            int pageSize)
+        string keyword = "",
+        string location = "",
+        int page = 1,
+        int pageSize = 12)
         {
             var query = _context.Jobs.AsQueryable();
 
-            // Apply filters
-            query = ApplyFilters(query, keyword, location, categoryId, jobType, experienceLevel, minSalary, maxSalary);
+            // Áp dụng bộ lọc
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                query = query.Where(j => j.Title.Contains(keyword) || j.Description.Contains(keyword));
+            }
 
-            // Count total results
+            if (!string.IsNullOrEmpty(location))
+            {
+                query = query.Where(j => j.Location.Contains(location));
+            }
+
+            // Đếm tổng số kết quả
             int totalCount = await query.CountAsync();
 
-            // Apply pagination
+            // Áp dụng phân trang và lấy dữ liệu
             var jobs = await query
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .Include(j => j.Company)
-                .Include(j => j.Categories)
-                    .ThenInclude(jc => jc.Category)
                 .ToListAsync();
 
             return (jobs, totalCount);
         }
-
         public async Task<IEnumerable<Job>> GetSavedJobsByUserAsync(int userId)
         {
             return await _context.Jobs
@@ -122,6 +122,108 @@ namespace WorkFinder.Web.Repositories
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<Job>> GetJobsByAdvancedFilterAsync(
+            string keyword,
+            string location,
+            int? categoryId,
+            JobType? jobType,
+            ExperienceLevel? experienceLevel,
+            decimal? minSalary,
+            decimal? maxSalary,
+            string jobLevel = null,
+            DateTime? postedAfter = null,
+            int? page = null,
+            int? pageSize = null)
+        {
+            var query = _context.Jobs.AsQueryable();
+
+            // Apply basic filters
+            query = ApplyFilters(query, keyword, location, categoryId, jobType, experienceLevel, minSalary, maxSalary);
+
+            // Filter by job level if provided
+            if (!string.IsNullOrEmpty(jobLevel))
+            {
+                // Assuming job level corresponds to experience level enum values
+                if (Enum.TryParse<ExperienceLevel>(jobLevel.Replace(" ", ""), out var jobLevelEnum))
+                {
+                    query = query.Where(j => j.ExperienceLevel == jobLevelEnum);
+                }
+            }
+
+            // Filter by posting date
+            if (postedAfter.HasValue)
+            {
+                query = query.Where(j => j.CreatedAt >= postedAfter.Value);
+            }
+
+            // Add sorting by newest jobs first
+            query = query.OrderByDescending(j => j.CreatedAt);
+
+            // Apply pagination if specified
+            if (page.HasValue && pageSize.HasValue)
+            {
+                query = query.Skip((page.Value - 1) * pageSize.Value).Take(pageSize.Value);
+            }
+
+            return await query
+                .Include(j => j.Company)
+                .Include(j => j.Categories)
+                    .ThenInclude(jc => jc.Category)
+                .ToListAsync();
+        }
+        // Phân trang và lọc theo các tiêu chí
+        public async Task<(IEnumerable<Job> Jobs, int TotalCount)> GetJobsAdvancedPagedAsync(
+            string keyword = "",
+            string location = "",
+            int? categoryId = null,
+            JobType? jobType = null,
+            ExperienceLevel? experienceLevel = null,
+            decimal? minSalary = null,
+            decimal? maxSalary = null,
+            ExperienceLevel? jobLevelEnum = null,
+            DateTime? postedAfter = null,
+            int page = 1,
+            int pageSize = 12)
+        {
+            var query = _context.Jobs.AsQueryable();
+
+            // Apply all filters
+            query = ApplyFilters(query, keyword, location, categoryId, jobType, experienceLevel, minSalary, maxSalary);
+
+            // Filter by job level if provided
+            if (jobLevelEnum.HasValue)
+            {
+                // if (Enum.TryParse<ExperienceLevel>(jobLevel.Replace(" ", ""), out var jobLevelEnum))
+                // {
+                //     query = query.Where(j => j.ExperienceLevel == jobLevelEnum);
+                // }
+                query = query.Where(j => j.ExperienceLevel == jobLevelEnum.Value);
+            }
+
+            // Filter by posting date
+            if (postedAfter.HasValue)
+            {
+                DateTime utcPostedAfter = DateTime.SpecifyKind(postedAfter.Value, DateTimeKind.Utc);
+                query = query.Where(j => j.CreatedAt >= utcPostedAfter);
+            }
+
+            // Đếm tổng số kết quả
+            int totalCount = await query.CountAsync();
+
+            // Add sorting by newest jobs first
+            query = query.OrderByDescending(j => j.CreatedAt);
+
+            // Áp dụng phân trang và lấy dữ liệu
+            var jobs = await query
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .Include(j => j.Company)
+                .Include(j => j.Categories)
+                    .ThenInclude(jc => jc.Category)
+                .ToListAsync();
+
+            return (jobs, totalCount);
+        }
         // Helper method to apply filters
         private IQueryable<Job> ApplyFilters(
             IQueryable<Job> query,
@@ -139,17 +241,19 @@ namespace WorkFinder.Web.Repositories
             // Filter by keyword
             if (!string.IsNullOrEmpty(keyword))
             {
+                string pattern = $"{keyword}";
+
                 query = query.Where(j =>
-                    j.Title.Contains(keyword) ||
-                    j.Description.Contains(keyword) ||
-                    j.Requirements.Contains(keyword) ||
-                    j.Company.Name.Contains(keyword));
+                    EF.Functions.Like(j.Title, pattern) ||
+                    EF.Functions.Like(j.Description, pattern) ||
+                    EF.Functions.Like(j.Requirements, pattern) ||
+                    EF.Functions.Like(j.Company.Name, pattern));
             }
 
             // Filter by location
             if (!string.IsNullOrEmpty(location))
             {
-                query = query.Where(j => j.Location.Contains(location));
+                query = query.Where(j => EF.Functions.Like(j.Location, $"%{location}%"));
             }
 
             // Filter by category
@@ -161,13 +265,16 @@ namespace WorkFinder.Web.Repositories
             // Filter by job type
             if (jobType.HasValue)
             {
-                query = query.Where(j => j.JobType == jobType.Value);
+                string jobTypeString = ((int)jobType.Value).ToString();
+                query = query.Where(j => EF.Functions.Like(j.JobType.ToString(), jobTypeString));
+
             }
 
             // Filter by experience level
             if (experienceLevel.HasValue)
             {
-                query = query.Where(j => j.ExperienceLevel == experienceLevel.Value);
+                string experienceLevelString = ((int)experienceLevel.Value).ToString();
+                query = query.Where(j => EF.Functions.Like(j.ExperienceLevel.ToString(), experienceLevelString));
             }
 
             // Filter by salary range
