@@ -1,0 +1,584 @@
+@model WorkFinder.Web.Models.ViewModels.JobDetailViewModel
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger mt-3">
+        <i class="fas fa-exclamation-circle me-2"></i>
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success mt-3">
+        <i class="fas fa-check-circle me-2"></i>
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+
+<div class="job-detail-page">
+    <!-- Header with breadcrumb -->
+    <div class="job-detail-header">
+        <div class="container">
+            <div class="d-flex justify-content-between">
+                <h2>Job Details</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/Job">Find job</a></li>
+                        <li class="breadcrumb-item active">@Model.Title</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Left column - Main job details -->
+            <div class="col-lg-8">
+                <!-- Job Header Card -->
+                <div class="job-header-card card mb-4">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="company-logo me-4">
+                                @if (!string.IsNullOrEmpty(Model.CompanyLogo))
+                                {
+                                    <img src="@Model.CompanyLogo" alt="@Model.CompanyName" class="img-fluid rounded">
+                                }
+                                else
+                                {
+                                    <img src="/images/default-company.png" alt="@Model.CompanyName" class="img-fluid rounded">
+                                }
+                            </div>
+                            <div class="job-header-info">
+                                <h1 class="job-title">@Model.Title</h1>
+                                <div class="company-name">
+                                    <span>@Model.CompanyName</span>
+                                    @if (Model.CompanyIsVerified)
+                                    {
+                                        <span class="verified-badge ms-2"><i class="fas fa-check-circle"></i> Verified</span>
+                                    }
+                                </div>
+                                <div class="job-meta mt-2">
+                                    <span class="job-location me-3"><i class="fas fa-map-marker-alt me-1"></i> @Model.Location</span>
+                                    <span class="job-type me-3"><i class="fas fa-briefcase me-1"></i> @Model.JobType</span>
+                                    <span class="job-posted me-3"><i class="far fa-calendar-alt me-1"></i> Posted @((DateTime.Now - Model.PostedDate).Days) days ago</span>
+                                    <span class="job-expires"><i class="fas fa-clock me-1"></i> @Model.DaysRemaining days remaining</span>
+                                </div>
+                                @if(!User.Identity.IsAuthenticated) {
+                                    <div class="alert alert-info mt-3">
+        <i class="fas fa-info-circle me-2"></i>
+        You need to <a href="/Auth/Auth/Login?returnUrl=@Context.Request.Path">login</a> or 
+        <a href="/Auth/Auth/Register?returnUrl=@Context.Request.Path">register</a> to apply for this job.
+    </div>
+                                }
+                                else {
+<div class="action-buttons mt-3">
+                                    <button class="btn btn-primary apply-btn" data-bs-toggle="modal" data-bs-target="#applyJobModal">Apply Now <i class="fas fa-arrow-right ms-1"></i></button>
+                                    <button class="btn btn-outline-secondary ms-2"><i class="far fa-bookmark"></i> Save</button>
+                                </div>
+                                }
+                            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Job Overview -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h4 class="card-title">Job Overview</h4>
+                        <div class="row mt-4">
+                            <div class="col-md-6">
+                                <div class="overview-item d-flex mb-3">
+                                    <div class="icon-box me-3">
+                                        <i class="fas fa-calendar-day"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-1">Job Posted:</h6>
+                                        <p class="text-muted">@Model.PostedDate.ToString("dd MMM, yyyy")</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="overview-item d-flex mb-3">
+                                    <div class="icon-box me-3">
+                                        <i class="fas fa-calendar-times"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-1">Job Expire In:</h6>
+                                        <p class="text-muted">@Model.ExpiryDate.ToString("dd MMM, yyyy")</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="overview-item d-flex mb-3">
+                                    <div class="icon-box me-3">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-1">Education:</h6>
+                                        <p class="text-muted">Graduation</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="overview-item d-flex mb-3">
+                                    <div class="icon-box me-3">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-1">Location:</h6>
+                                        <p class="text-muted">@Model.Location</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="overview-item d-flex mb-3">
+                                    <div class="icon-box me-3">
+                                        <i class="fas fa-dollar-sign"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-1">Salary:</h6>
+                                        <p class="text-muted">@Model.SalaryRange</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="overview-item d-flex mb-3">
+                                    <div class="icon-box me-3">
+                                        <i class="fas fa-briefcase"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-1">Job Type:</h6>
+                                        <p class="text-muted">@Model.JobType</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="overview-item d-flex mb-3">
+                                    <div class="icon-box me-3">
+                                        <i class="fas fa-user-tie"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-1">Experience:</h6>
+                                        <p class="text-muted">@Model.ExperienceLevelName</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Job Description -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h4 class="card-title">Job Description</h4>
+                        <div class="job-description mt-3">
+                            @Html.Raw(Model.Description)
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Responsibilities -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h4 class="card-title">Responsibilities</h4>
+                        <div class="responsibilities mt-3">
+                            <ul class="job-list">
+                                @foreach (var line in Model.Requirements.Split("\n"))
+                                {
+                                    <li><i class="fas fa-check-circle text-primary me-2"></i> @line</li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Benefits -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h4 class="card-title">Benefits</h4>
+                        <div class="benefits mt-3">
+                            <ul class="job-list">
+                                @foreach (var line in Model.Benefits.Split("\n"))
+                                {
+                                    <li><i class="fas fa-check-circle text-primary me-2"></i> @line</li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Share This Job -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h4 class="card-title">Share this job</h4>
+                        <div class="social-share mt-3">
+                            <a href="#" class="btn btn-outline-primary me-2"><i class="fab fa-facebook-f"></i> Facebook</a>
+                            <a href="#" class="btn btn-outline-info me-2"><i class="fab fa-twitter"></i> Twitter</a>
+                            <a href="#" class="btn btn-outline-danger me-2"><i class="fab fa-pinterest"></i> Pinterest</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right column - Company info and related jobs -->
+            <div class="col-lg-4">
+                <!-- Company Information -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h4 class="card-title">Company Information</h4>
+                        <div class="company-info mt-3">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="company-logo me-3">
+                                    @if (!string.IsNullOrEmpty(Model.CompanyLogo))
+                                    {
+                                        <img src="@Model.CompanyLogo" alt="@Model.CompanyName" class="img-fluid rounded" style="width: 60px; height: 60px; object-fit: cover;">
+                                    }
+                                    else
+                                    {
+                                        <img src="/images/default-company.png" alt="@Model.CompanyName" class="img-fluid rounded" style="width: 60px; height: 60px; object-fit: cover;">
+                                    }
+                                </div>
+                                <div>
+                                    <h5 class="mb-0">@Model.CompanyName</h5>
+                                    <p class="text-muted mb-0">@Model.CompanyIndustry</p>
+                                </div>
+                            </div>
+                            <p class="company-description">@Model.CompanyDescription</p>
+                            <div class="company-details">
+                                <div class="d-flex align-items-center mb-2">
+                                    <div class="icon-box me-2">
+                                        <i class="fas fa-globe"></i>
+                                    </div>
+                                    <div>
+                                        <a href="@Model.CompanyWebsite" target="_blank">@Model.CompanyWebsite</a>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <div class="icon-box me-2">
+                                        <i class="fas fa-phone"></i>
+                                    </div>
+                                    <div>
+                                        <a href="tel:@Model.Phone">@Model.Phone</a>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <div class="icon-box me-2">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <div>
+                                        <a href="mailto:@Model.Email">@Model.Email</a>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <div class="icon-box me-2">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </div>
+                                    <div>
+                                        <p class="mb-0">@Model.CompanyLocation</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <div class="icon-box me-2">
+                                        <i class="fas fa-users"></i>
+                                    </div>
+                                    <div>
+                                        <p class="mb-0">@Model.CompanyEmployeeCount Employees</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#" class="btn btn-outline-primary mt-3 w-100">View Company Profile</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Related Jobs -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h4 class="card-title">Related Jobs</h4>
+                        <div class="related-jobs mt-3">
+                            @foreach (var job in Model.RelatedJobs)
+                            {
+                                <div class="related-job-item mb-3">
+                                    <div class="d-flex">
+                                        <div class="company-logo me-3">
+                                            @if (!string.IsNullOrEmpty(job.Logo))
+                                            {
+                                                <img src="@job.Logo" alt="@job.CompanyName" class="img-fluid rounded" style="width: 40px; height: 40px; object-fit: cover;">
+                                            }
+                                            else
+                                            {
+                                                <img src="/images/default-company.png" alt="@job.CompanyName" class="img-fluid rounded" style="width: 40px; height: 40px; object-fit: cover;">
+                                            }
+                                        </div>
+                                        <div>
+                                            <h6 class="mb-1"><a href="/Job/@job.Id">@job.Title</a></h6>
+                                            <div class="job-meta">
+                                                <span class="company-name">@job.CompanyName</span>
+                                                <div class="d-flex mt-1">
+                                                    <span class="location me-3"><i class="fas fa-map-marker-alt me-1"></i> @job.Location</span>
+                                                    <span class="job-type"><i class="fas fa-briefcase me-1"></i> @job.JobType</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr />
+                            }
+                            <a href="/Job" class="btn btn-outline-primary w-100 mt-2">View All Jobs</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Apply Job -->
+<div class="modal fade" id="applyJobModal" tabindex="-1" aria-labelledby="applyJobModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="applyJobModalLabel">Apply for @Model.Title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="applyJobForm" method="post" action="/Job/Apply/@Model.Id" enctype="multipart/form-data">
+          <div class="mb-3">
+            <label for="coverLetter" class="form-label">Cover Letter</label>
+            <textarea class="form-control" id="coverLetter" name="coverLetter" rows="5" required></textarea>
+          </div>
+          
+          <!-- Resume Options -->
+          <div class="mb-3">
+            <h6 class="fw-bold mb-3">Resume</h6>
+            
+            @if (Model.UserResume != null && !string.IsNullOrEmpty(Model.UserResume.FileUrl))
+            {
+              <div class="mb-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="useExistingResume" id="useExistingResume" value="true" checked>
+                  <label class="form-check-label" for="useExistingResume">
+                    Use existing resume
+                  </label>
+                </div>
+                <div class="ms-4 mt-2">
+                  <div class="d-flex align-items-center">
+                    <i class="far fa-file-pdf me-2 text-danger"></i>
+                    <span>Your Resume</span>
+                    <a href="@Model.UserResume.FileUrl" target="_blank" class="btn btn-sm btn-outline-primary ms-2">
+                      <i class="fas fa-eye"></i> View
+                    </a>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="useExistingResume" id="uploadNewResume" value="false">
+                <label class="form-check-label" for="uploadNewResume">
+                  Upload new resume
+                </label>
+              </div>
+              <div id="resumeUploadContainer" class="ms-4 mt-2 d-none">
+                <input class="form-control" type="file" id="resumeFile" name="resumeFile" accept=".pdf,.doc,.docx">
+              </div>
+            }
+            else
+            {
+              <input type="hidden" name="useExistingResume" value="false">
+              <div class="mb-3">
+                <label for="resumeFile" class="form-label">Upload Resume (PDF, DOC, DOCX)</label>
+                <input class="form-control" type="file" id="resumeFile" name="resumeFile" accept=".pdf,.doc,.docx" required>
+              </div>
+            }
+          </div>
+          
+          <div class="d-grid">
+            <button type="submit" class="btn btn-primary">Submit Application</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Hiển thị/ẩn upload form khi chọn radio
+  const radioExisting = document.getElementById('useExistingResume');
+  const radioNew = document.getElementById('uploadNewResume');
+  const uploadContainer = document.getElementById('resumeUploadContainer');
+  const resumeFileInput = document.getElementById('resumeFile');
+  
+  if (radioExisting && radioNew) {
+    radioExisting.addEventListener('change', function() {
+      if (this.checked) {
+        uploadContainer.classList.add('d-none');
+        resumeFileInput.removeAttribute('required');
+      }
+    });
+    
+    radioNew.addEventListener('change', function() {
+      if (this.checked) {
+        uploadContainer.classList.remove('d-none');
+        resumeFileInput.setAttribute('required', 'required');
+      }
+    });
+  }
+});
+</script>
+</div>
+
+<style>
+    .job-detail-page {
+        font-family: 'Inter', sans-serif;
+    }
+
+    .job-detail-header {
+        background-color: #f8f9fa;
+        padding: 20px 0;
+        margin-bottom: 30px;
+    }
+
+    .job-header-card {
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .company-logo img {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+    .job-title {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+    .job-description {
+        font-size: 16px;
+    }
+    .company-name {
+        font-size: 16px;
+        color: #555;
+    }
+
+    .verified-badge {
+        color: #3763EB;
+        font-size: 14px;
+    }
+
+    .job-meta {
+        color: #666;
+        font-size: 14px;
+    }
+
+    .apply-btn {
+        background-color: #3763EB;
+        border-color: #3763EB;
+        padding: 10px 20px;
+    }
+
+    .apply-btn:hover {
+        background-color: #2950cc;
+        border-color: #2950cc;
+    }
+
+    .card {
+        border-radius: 8px;
+        margin-bottom: 25px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        border: none;
+    }
+
+    .card-title {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .overview-item .icon-box {
+        width: 40px;
+        height: 40px;
+        background-color: #f2f7ff;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #3763EB;
+    }
+    .overview-item .icon-box i {
+        font-size: 1.6rem ;
+    }
+
+    .overview-item h6 {
+        font-size: 14px;
+        margin-bottom: 5px;
+        font-weight: 600;
+    }
+
+    .overview-item p {
+        font-size: 13px;
+        margin-bottom: 0;
+    }
+
+    .job-list {
+        list-style: none;
+        padding-left: 0;
+    }
+
+    .job-list li {
+        margin-bottom: 10px;
+        font-size: 15px;
+    }
+
+    .social-share .btn {
+        border-radius: 4px;
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    .company-details .icon-box {
+        color: #3763EB;
+        width: 20px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .company-details p, .company-details a {
+        font-size: 14px;
+        color: #666;
+    }
+
+    .company-details a:hover {
+        color: #3763EB;
+        text-decoration: none;
+    }
+
+    .related-job-item h6 {
+        font-size: 15px;
+        font-weight: 600;
+    }
+
+    .related-job-item .job-meta {
+        font-size: 13px;
+    }
+
+    .related-job-item a {
+        color: #333;
+        text-decoration: none;
+    }
+
+    .related-job-item a:hover {
+        color: #3763EB;
+    }
+</style>

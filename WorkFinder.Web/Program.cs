@@ -19,6 +19,7 @@ builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 // Add specific repositories if needed
 builder.Services.AddScoped<IJobRepository, JobRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IResumeRepository, ResumeRepository>();
 // builder.Services.AddScoped<IRepository<Resume>, Repository<Resume>>();
 // builder.Services.AddScoped<IRepository<SavedJob>, Repository<SavedJob>>();
 // Đăng ký Identity
@@ -74,7 +75,6 @@ app.MapControllerRoute(
     name: "auth",
     pattern: "Auth/{action=Login}",
     defaults: new { area = "Auth", controller = "Auth" });
-
 // Giữ lại các route hiện có
 app.MapControllerRoute(
     name: "areas",

@@ -341,6 +341,26 @@
       "PackagePath": "staticwebassets/lib/jquery/dist/jquery.slim.min.map"
     },
     {
+      "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/resumes/28977a92-f5a4-432c-b54c-a0eb24a6208e_Hieu Phan Trung_intern.pdf",
+      "PackagePath": "staticwebassets/uploads/resumes/28977a92-f5a4-432c-b54c-a0eb24a6208e_Hieu Phan Trung_intern.pdf"
+    },
+    {
+      "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/resumes/4b15a34e-a890-475e-9101-7ee0ba12d94b_Hieu Phan Trung_intern.pdf",
+      "PackagePath": "staticwebassets/uploads/resumes/4b15a34e-a890-475e-9101-7ee0ba12d94b_Hieu Phan Trung_intern.pdf"
+    },
+    {
+      "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/resumes/4babb222-2a6d-4b88-9a0f-adf84450932a_Hieu Phan Trung_intern.pdf",
+      "PackagePath": "staticwebassets/uploads/resumes/4babb222-2a6d-4b88-9a0f-adf84450932a_Hieu Phan Trung_intern.pdf"
+    },
+    {
+      "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/resumes/ba43fd37-d7d8-4c94-b112-84e6a8d37ba3_Hieu Phan Trung_intern.pdf",
+      "PackagePath": "staticwebassets/uploads/resumes/ba43fd37-d7d8-4c94-b112-84e6a8d37ba3_Hieu Phan Trung_intern.pdf"
+    },
+    {
+      "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/resumes/cb4672f0-636b-42b8-a8ab-79cbf7cb019b_Hieu Phan Trung_intern.pdf",
+      "PackagePath": "staticwebassets/uploads/resumes/cb4672f0-636b-42b8-a8ab-79cbf7cb019b_Hieu Phan Trung_intern.pdf"
+    },
+    {
       "Id": "obj/Debug/net9.0/staticwebassets/msbuild.WorkFinder.Web.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
     },

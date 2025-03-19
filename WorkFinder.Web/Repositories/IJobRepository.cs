@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WorkFinder.Web.Models;
 using WorkFinder.Web.Models.Enums;
-using Microsoft.EntityFrameworkCore;
+
 
 namespace WorkFinder.Web.Repositories
 {
@@ -49,5 +49,8 @@ namespace WorkFinder.Web.Repositories
             DateTime? postedAfter = null,
             int page = 1,
             int pageSize = 12);
+        Task<IEnumerable<Job>> GetRelatedJobsAsync(int companyId);
+        Task<bool> HasUserAppliedToJobAsync(int jobId, int userId);
+        Task<JobApplication> AddJobApplicationAsync(JobApplication jobApplication);
     }
 }

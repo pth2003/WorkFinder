@@ -43,8 +43,8 @@
                     aria-expanded="false">
                     <span class="me-2">Xin chào, @User.Identity.Name</span>
                     <div class="avatar-container">
-                        <img src="@(ViewData["UserAvatar"] ?? "/images/default-avatar.png")" alt="User Avatar"
-                            class="rounded-circle" width="40" height="40">
+                        <img src="@(User.Claims.FirstOrDefault(c => c.Type == "ProfilePicture")?.Value ?? "/images/default-avatar.png")"
+                            alt="User Avatar" class="rounded-circle" width="40" height="40">
                     </div>
                 </div>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
@@ -67,7 +67,7 @@
             <btn class="btn btn-outline-primary"><a class="nav-link" href="/Auth/Login">Sign In</a></btn>
             <btn class="btn btn-primary">Post A Jobs</btn>
         }
-        </div>
+    </div>
 </header>
 <style>
     .navbar {

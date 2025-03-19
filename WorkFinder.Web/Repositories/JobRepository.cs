@@ -224,6 +224,32 @@ namespace WorkFinder.Web.Repositories
 
             return (jobs, totalCount);
         }
+
+        public async Task<IEnumerable<Job>> GetRelatedJobsAsync(int companyId)
+        {
+            return await _context.Jobs
+                .Where(j => j.CompanyId == companyId && j.IsActive)
+                .Include(j => j.Company)
+                .ToListAsync();
+        }
+
+        // Kiểm tra xem người dùng đã ứng tuyển vào công việc này chưa
+        // jobId: ID của công việc cần kiểm tra
+        // userId: ID của người dùng cần kiểm tra
+        // Trả về true nếu người dùng đã ứng tuyển, false nếu chưa
+        public async Task<bool> HasUserAppliedToJobAsync(int jobId, int userId)
+        {
+            return await _context.JobApplications
+                .AnyAsync(a => a.JobId == jobId && a.ApplicantId == userId);
+        }
+
+        public async Task<JobApplication> AddJobApplicationAsync(JobApplication jobApplication)
+        {
+            await _context.JobApplications.AddAsync(jobApplication);
+            await _context.SaveChangesAsync();
+            return jobApplication;
+        }
+
         // Helper method to apply filters
         private IQueryable<Job> ApplyFilters(
             IQueryable<Job> query,

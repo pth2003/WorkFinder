@@ -34,7 +34,7 @@ public class AuthService : IAuthService
         var result = await _userManager.CreateAsync(user, model.Password);
         return (result.Succeeded, result.Errors.Select(e => e.Description).ToArray());
     }
-    
+
     public async Task<(bool succeeded, string[] errors)> LoginAsync(LoginViewModel model)
     {
         var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
@@ -48,6 +48,9 @@ public class AuthService : IAuthService
 
     public async Task<ApplicationUser?> GetCurrentUserAsync()
     {
-        return await _userManager.GetUserAsync(_httpContextAccessor.HttpContext?.User);
+        var user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext?.User);
+
+
+        return user;
     }
 }

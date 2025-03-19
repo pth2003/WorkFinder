@@ -8574,7 +8574,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 19 Mar 2025 09:19:57 GMT"
+          "Value": "Wed, 19 Mar 2025 16:46:11 GMT"
         },
         {
           "Name": "Vary",
@@ -8623,7 +8623,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 19 Mar 2025 09:19:57 GMT"
+          "Value": "Wed, 19 Mar 2025 16:46:11 GMT"
         }
       ],
       "EndpointProperties": [
@@ -8672,7 +8672,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 19 Mar 2025 09:19:57 GMT"
+          "Value": "Wed, 19 Mar 2025 16:46:11 GMT"
         },
         {
           "Name": "Vary",
@@ -8735,7 +8735,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 19 Mar 2025 09:19:57 GMT"
+          "Value": "Wed, 19 Mar 2025 16:46:11 GMT"
         },
         {
           "Name": "Vary",
@@ -8776,7 +8776,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 19 Mar 2025 09:19:57 GMT"
+          "Value": "Wed, 19 Mar 2025 16:46:11 GMT"
         }
       ],
       "EndpointProperties": [
@@ -8817,7 +8817,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 19 Mar 2025 09:19:57 GMT"
+          "Value": "Wed, 19 Mar 2025 16:46:11 GMT"
         },
         {
           "Name": "Vary",
@@ -32132,6 +32132,416 @@
         {
           "Name": "label",
           "Value": "lib/jquery/dist/jquery.slim.min.js.gz"
+        }
+      ]
+    },
+    {
+      "Route": "uploads/resumes/28977a92-f5a4-432c-b54c-a0eb24a6208e_Hieu Phan Trung_intern.pdf",
+      "AssetFile": "uploads/resumes/28977a92-f5a4-432c-b54c-a0eb24a6208e_Hieu Phan Trung_intern.pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "21940"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 19 Mar 2025 17:11:56 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/resumes/28977a92-f5a4-432c-b54c-a0eb24a6208e_Hieu Phan Trung_intern.yq05mbroap.pdf",
+      "AssetFile": "uploads/resumes/28977a92-f5a4-432c-b54c-a0eb24a6208e_Hieu Phan Trung_intern.pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "21940"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 19 Mar 2025 17:11:56 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "yq05mbroap"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ="
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/resumes/28977a92-f5a4-432c-b54c-a0eb24a6208e_Hieu Phan Trung_intern.pdf"
+        }
+      ]
+    },
+    {
+      "Route": "uploads/resumes/4b15a34e-a890-475e-9101-7ee0ba12d94b_Hieu Phan Trung_intern.pdf",
+      "AssetFile": "uploads/resumes/4b15a34e-a890-475e-9101-7ee0ba12d94b_Hieu Phan Trung_intern.pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "21940"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 19 Mar 2025 17:11:54 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/resumes/4b15a34e-a890-475e-9101-7ee0ba12d94b_Hieu Phan Trung_intern.yq05mbroap.pdf",
+      "AssetFile": "uploads/resumes/4b15a34e-a890-475e-9101-7ee0ba12d94b_Hieu Phan Trung_intern.pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "21940"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 19 Mar 2025 17:11:54 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "yq05mbroap"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ="
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/resumes/4b15a34e-a890-475e-9101-7ee0ba12d94b_Hieu Phan Trung_intern.pdf"
+        }
+      ]
+    },
+    {
+      "Route": "uploads/resumes/4babb222-2a6d-4b88-9a0f-adf84450932a_Hieu Phan Trung_intern.pdf",
+      "AssetFile": "uploads/resumes/4babb222-2a6d-4b88-9a0f-adf84450932a_Hieu Phan Trung_intern.pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "21940"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 19 Mar 2025 17:11:58 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/resumes/4babb222-2a6d-4b88-9a0f-adf84450932a_Hieu Phan Trung_intern.yq05mbroap.pdf",
+      "AssetFile": "uploads/resumes/4babb222-2a6d-4b88-9a0f-adf84450932a_Hieu Phan Trung_intern.pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "21940"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 19 Mar 2025 17:11:58 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "yq05mbroap"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ="
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/resumes/4babb222-2a6d-4b88-9a0f-adf84450932a_Hieu Phan Trung_intern.pdf"
+        }
+      ]
+    },
+    {
+      "Route": "uploads/resumes/ba43fd37-d7d8-4c94-b112-84e6a8d37ba3_Hieu Phan Trung_intern.pdf",
+      "AssetFile": "uploads/resumes/ba43fd37-d7d8-4c94-b112-84e6a8d37ba3_Hieu Phan Trung_intern.pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "21940"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 19 Mar 2025 17:12:02 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/resumes/ba43fd37-d7d8-4c94-b112-84e6a8d37ba3_Hieu Phan Trung_intern.yq05mbroap.pdf",
+      "AssetFile": "uploads/resumes/ba43fd37-d7d8-4c94-b112-84e6a8d37ba3_Hieu Phan Trung_intern.pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "21940"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 19 Mar 2025 17:12:02 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "yq05mbroap"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ="
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/resumes/ba43fd37-d7d8-4c94-b112-84e6a8d37ba3_Hieu Phan Trung_intern.pdf"
+        }
+      ]
+    },
+    {
+      "Route": "uploads/resumes/cb4672f0-636b-42b8-a8ab-79cbf7cb019b_Hieu Phan Trung_intern.pdf",
+      "AssetFile": "uploads/resumes/cb4672f0-636b-42b8-a8ab-79cbf7cb019b_Hieu Phan Trung_intern.pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "21940"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 19 Mar 2025 17:12:00 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/resumes/cb4672f0-636b-42b8-a8ab-79cbf7cb019b_Hieu Phan Trung_intern.yq05mbroap.pdf",
+      "AssetFile": "uploads/resumes/cb4672f0-636b-42b8-a8ab-79cbf7cb019b_Hieu Phan Trung_intern.pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "21940"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 19 Mar 2025 17:12:00 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "yq05mbroap"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ="
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/resumes/cb4672f0-636b-42b8-a8ab-79cbf7cb019b_Hieu Phan Trung_intern.pdf"
         }
       ]
     }
