@@ -1,0 +1,307 @@
+@model WorkFinder.Web.Models.ViewModels.CompanyIndexViewModel
+@{
+    ViewData["Title"] = "Companies";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/company.css" asp-append-version="true" />
+}
+<div class="company-listing-container">
+    <div class="company-header">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <h3>Companies</h3>
+                <div class="breadcrumb">
+                    <a href="/">Home </a>
+                    <span>/</span>
+                    <span>Companies</span>
+                </div>
+            </div>
+            <!-- Search section -->
+            <div class="search-section">
+                <div class="container">
+                    <form id="companyFilterForm" onsubmit="return false;">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="search-input">
+                                    <i class="fas fa-search"></i>
+                                    <input type="text" name="keyword" id="keyword-input" value="@Model.SearchKeyword"
+                                        placeholder="Company name, keyword...">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="search-input">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <input type="text" name="location" id="location-input" value="@Model.LocationFilter"
+                                        placeholder="Location">
+                                </div>
+                            </div>
+                            <div class="col-md-4 d-flex gap-3">
+                                <div class="search-input">
+                                    <i class="fa-solid fa-layer-group"></i>
+                                    <select class="form-select" name="industry" id="industry-select">
+                                        <option value="">All Industries</option>
+                                        @foreach (var industry in Model.PopularIndustries)
+                                        {
+                                            if (Model.IndustryFilter == industry)
+                                            {
+                                                <option value="@industry" selected>@industry</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@industry">@industry</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                                <button type="button" id="search-btn" class="btn btn-primary find-btn">Search</button>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Company listing section -->
+    <div class="company-listing container mt-4">
+        <!-- Sorting and view options -->
+        <div class="d-flex justify-content-end mb-4 gap-3">
+            <div class="dropdown">
+                <button class="btn btn-light dropdown-toggle" type="button" id="sortDropdown" data-bs-toggle="dropdown">
+                    @Model.SortBy
+                </button>
+                <div class="dropdown-menu" aria-labelledby="sortDropdown">
+                    <a class="dropdown-item sort-option" data-sort="Latest" href="javascript:void(0)">Latest</a>
+                    <a class="dropdown-item sort-option" data-sort="Name" href="javascript:void(0)">Name</a>
+                    <a class="dropdown-item sort-option" data-sort="JobCount" href="javascript:void(0)">Most Jobs</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-light dropdown-toggle" type="button" id="perPageDropdown"
+                    data-bs-toggle="dropdown">
+                    @Model.PageSize per page
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item page-size-option" data-size="12" href="javascript:void(0)">12 per
+                            page</a></li>
+                    <li><a class="dropdown-item page-size-option" data-size="24" href="javascript:void(0)">24 per
+                            page</a></li>
+                    <li><a class="dropdown-item page-size-option" data-size="48" href="javascript:void(0)">48 per
+                            page</a></li>
+                </ul>
+            </div>
+            <div class="view-options">
+                <button id="grid-view-btn" class="btn btn-light active" data-view="grid"><i
+                        class="fas fa-th"></i></button>
+                <button id="list-view-btn" class="btn btn-light" data-view="list"><i class="fas fa-list"></i></button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 filter">
+                <div class="advanced-filter-container">
+                    <h4 class="filter-heading">Advanced Filters</h4>
+                    <hr>
+                    <form id="advancedFilterForm" onsubmit="return false;">
+                        <!-- Verified Companies Only -->
+                        <div class="filter-section">
+                            <h5 class="filter-section-title">Company Status</h5>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="isVerified" name="isVerified"
+                                    value="true" @(Model.IsVerifiedFilter == true ? "checked" : "")>
+                                <label class="form-check-label" for="isVerified">
+                                    Verified Companies Only
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Industry Filter -->
+                        <div class="filter-section">
+                            <h5 class="filter-section-title">Popular Industries</h5>
+                            <div class="industry-tags">
+                                @foreach (var industry in Model.PopularIndustries)
+                                {
+                                    <div class="industry-tag @(Model.IndustryFilter == industry ? "active" : "")"
+                                        data-industry="@industry">
+                                        @industry
+                                    </div>
+                                }
+                            </div>
+                        </div>
+
+                        <!-- Location Filter -->
+                        <div class="filter-section">
+                            <h5 class="filter-section-title">Popular Locations</h5>
+                            <div class="location-tags">
+                                @foreach (var location in Model.PopularLocations)
+                                {
+                                    <div class="location-tag @(Model.LocationFilter == location ? "active" : "")"
+                                        data-location="@location">
+                                        @location
+                                    </div>
+                                }
+                            </div>
+                        </div>
+
+                        <!-- Apply Filters Button -->
+                        <div class="filter-actions">
+                            <button type="button" id="apply-filters-btn" class="btn btn-primary w-100">Apply
+                                Filters</button>
+                            <button type="button" id="reset-filters-btn"
+                                class="btn btn-outline-secondary w-100 mt-2">Reset Filters</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <!-- Company list container - sẽ được thay thế bằng AJAX response -->
+                <div id="company-list-container">
+                    @await Html.PartialAsync("Partials/Company/_CompanyList", Model)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        let currentPage = @Model.CurrentPage;
+        let pageSize = @Model.PageSize;
+        let sortBy = "@Model.SortBy";
+        let viewMode = "grid";
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // View switching
+            const gridViewBtn = document.getElementById('grid-view-btn');
+            const listViewBtn = document.getElementById('list-view-btn');
+
+            gridViewBtn.addEventListener('click', function () {
+                viewMode = "grid";
+                gridViewBtn.classList.add('active');
+                listViewBtn.classList.remove('active');
+                loadCompanies(currentPage);
+            });
+
+            listViewBtn.addEventListener('click', function () {
+                viewMode = "list";
+                listViewBtn.classList.add('active');
+                gridViewBtn.classList.remove('active');
+                loadCompanies(currentPage);
+            });
+
+            // Industry tag click
+            document.querySelectorAll('.industry-tag').forEach(tag => {
+                tag.addEventListener('click', function () {
+                    const industry = this.dataset.industry;
+                    document.querySelectorAll('.industry-tag').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    document.getElementById('industry-select').value = industry;
+                });
+            });
+
+            // Location tag click
+            document.querySelectorAll('.location-tag').forEach(tag => {
+                tag.addEventListener('click', function () {
+                    const location = this.dataset.location;
+                    document.querySelectorAll('.location-tag').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    document.getElementById('location-input').value = location;
+                });
+            });
+
+            // Sort option click
+            document.querySelectorAll('.sort-option').forEach(option => {
+                option.addEventListener('click', function () {
+                    sortBy = this.dataset.sort;
+                    document.getElementById('sortDropdown').textContent = sortBy;
+                    loadCompanies(1);
+                });
+            });
+
+            // Page size option click
+            document.querySelectorAll('.page-size-option').forEach(option => {
+                option.addEventListener('click', function () {
+                    pageSize = parseInt(this.dataset.size);
+                    document.getElementById('perPageDropdown').textContent = pageSize + ' per page';
+                    loadCompanies(1);
+                });
+            });
+
+            // Search button click
+            document.getElementById('search-btn').addEventListener('click', function () {
+                loadCompanies(1);
+            });
+
+            // Apply filters button click
+            document.getElementById('apply-filters-btn').addEventListener('click', function () {
+                loadCompanies(1);
+            });
+
+            // Reset filters button click
+            document.getElementById('reset-filters-btn').addEventListener('click', function () {
+                document.getElementById('keyword-input').value = '';
+                document.getElementById('location-input').value = '';
+                document.getElementById('industry-select').value = '';
+                document.getElementById('isVerified').checked = false;
+                document.querySelectorAll('.industry-tag').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.location-tag').forEach(t => t.classList.remove('active'));
+                loadCompanies(1);
+            });
+        });
+
+        // Hàm load companies bằng AJAX
+        function loadCompanies(page) {
+            currentPage = page;
+
+            // Lấy giá trị từ form
+            const keyword = document.getElementById('keyword-input').value;
+            const location = document.getElementById('location-input').value;
+            const industry = document.getElementById('industry-select').value;
+            const isVerified = document.getElementById('isVerified').checked ? true : null;
+
+            // Tạo URL cho request
+            let url = `/Company/FilterCompanies?page=${page}&pageSize=${pageSize}&sortBy=${sortBy}&viewMode=${viewMode}`;
+            if (keyword) url += `&keyword=${encodeURIComponent(keyword)}`;
+            if (location) url += `&location=${encodeURIComponent(location)}`;
+            if (industry) url += `&industry=${encodeURIComponent(industry)}`;
+            if (isVerified) url += `&isVerified=${isVerified}`;
+
+            // Cập nhật URL trình duyệt để có thể bookmark hoặc refresh
+            updateBrowserUrl(keyword, location, industry, isVerified, page, pageSize, sortBy);
+
+            // Hiển thị loading indicator
+            document.getElementById('company-list-container').innerHTML = '<div class="text-center py-5"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>';
+
+            // Gửi AJAX request
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    document.getElementById('company-list-container').innerHTML = html;
+                })
+                .catch(error => {
+                    console.error('Error loading companies:', error);
+                    document.getElementById('company-list-container').innerHTML = '<div class="alert alert-danger">Error loading companies. Please try again.</div>';
+                });
+        }
+
+        // Cập nhật URL trình duyệt
+        function updateBrowserUrl(keyword, location, industry, isVerified, page, pageSize, sortBy) {
+            let url = `/Company/Index?page=${page}&pageSize=${pageSize}&sortBy=${sortBy}`;
+            if (keyword) url += `&keyword=${encodeURIComponent(keyword)}`;
+            if (location) url += `&location=${encodeURIComponent(location)}`;
+            if (industry) url += `&industry=${encodeURIComponent(industry)}`;
+            if (isVerified) url += `&isVerified=${isVerified}`;
+
+            history.pushState(null, '', url);
+        }
+
+        // Expose functions to window for use in Partial View
+        window.loadCompanies = loadCompanies;
+    </script>
+}

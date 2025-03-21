@@ -1,25 +1,122 @@
 ﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>@ViewData["Title"] - WorkFinder.Web</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - WorkFinder</title>
     <script type="importmap"></script>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
-    <link rel="stylesheet" href="~/WorkFinder.Web.styles.css" asp-append-version="true"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/sticky-header.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/WorkFinder.Web.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    @await RenderSectionAsync("Styles", required: false)
 </head>
+
 <body>
-    @Html.Partial("Partials/Common/_Header")
+    <div class="header-wrapper">
+        @Html.Partial("Partials/Common/_Header")
+    </div>
+    <div class="header-spacer"></div>
     <div>
         @RenderBody()
     </div>
     @Html.Partial("Partials/Common/_Footer")
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="~/js/site.js" asp-append-version="true"></script>
-@await RenderSectionAsync("Scripts", required: false)
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        // Xử lý sticky header
+        document.addEventListener('DOMContentLoaded', function () {
+            const headerWrapper = document.querySelector('.header-wrapper');
+            const headerTopBar = document.getElementById('header-top-bar');
+            const mainHeader = document.getElementById('main-header');
+            const headerSpacer = document.querySelector('.header-spacer');
+            let headerHeight = headerWrapper.offsetHeight;
+            let lastScrollTop = 0;
+            let isHeaderHidden = false;
+            const scrollThreshold = 5; // Threshold để phát hiện scroll đáng kể
+
+            // Cập nhật chiều cao header
+            function updateHeaderHeight() {
+                if (!headerWrapper.classList.contains('sticky-header')) {
+                    headerHeight = headerWrapper.offsetHeight;
+                }
+            }
+
+            // Gọi lần đầu để đặt giá trị ban đầu
+            updateHeaderHeight();
+
+            function handleScroll() {
+                let scrollTop = window.scrollY || document.documentElement.scrollTop;
+                let scrollDelta = scrollTop - lastScrollTop;
+
+                // Khi scroll xuống quá headerHeight
+                if (scrollTop > headerHeight) {
+                    // Nếu chưa sticky, thì thêm class sticky
+                    if (!headerWrapper.classList.contains('sticky-header')) {
+                        headerWrapper.classList.add('sticky-header');
+                        mainHeader.classList.add('sticky');
+                        headerTopBar.classList.add('sticky-hidden');
+                        headerSpacer.classList.add('active');
+                        headerSpacer.style.height = headerHeight + 'px';
+                    }
+
+                    // Ẩn header khi scroll xuống và hiện khi scroll lên
+                    if (Math.abs(scrollDelta) > scrollThreshold) { // Chỉ thực hiện khi scroll đáng kể
+                        if (scrollDelta > 0 && !isHeaderHidden) { // Scroll xuống
+                            headerWrapper.style.transform = 'translateY(-100%)';
+                            isHeaderHidden = true;
+                        } else if (scrollDelta < 0 && isHeaderHidden) { // Scroll lên
+                            headerWrapper.style.transform = 'translateY(0)';
+                            isHeaderHidden = false;
+                        }
+                    }
+                } else {
+                    // Nếu scroll lên đầu trang, xóa sticky
+                    headerWrapper.classList.remove('sticky-header');
+                    mainHeader.classList.remove('sticky');
+                    headerTopBar.classList.remove('sticky-hidden');
+                    headerSpacer.classList.remove('active');
+                    headerSpacer.style.height = '0px';
+                    headerWrapper.style.transform = 'translateY(0)';
+                    isHeaderHidden = false;
+                }
+
+                lastScrollTop = scrollTop;
+            }
+
+            // Lắng nghe sự kiện scroll với debounce để tăng hiệu suất
+            let scrollTimeout;
+            window.addEventListener('scroll', function () {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(handleScroll, 10);
+            });
+
+            // Lắng nghe sự kiện resize để cập nhật chiều cao header
+            let resizeTimeout;
+            window.addEventListener('resize', function () {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(function () {
+                    updateHeaderHeight();
+                    // Cập nhật chiều cao spacer nếu header đang ở chế độ sticky
+                    if (headerWrapper.classList.contains('sticky-header')) {
+                        headerSpacer.style.height = headerHeight + 'px';
+                    }
+                }, 100);
+            });
+
+            // Xử lý khi load trang nếu không ở đầu trang
+            if (window.scrollY > 0) {
+                handleScroll();
+            }
+        });
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
+
 </html>

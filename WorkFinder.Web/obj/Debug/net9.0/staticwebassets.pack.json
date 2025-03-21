@@ -5,6 +5,14 @@
       "PackagePath": "staticwebassets/WorkFinder.Web.9h8o3lycsa.bundle.scp.css"
     },
     {
+      "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/company-details.css",
+      "PackagePath": "staticwebassets/css/company-details.css"
+    },
+    {
+      "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/company.css",
+      "PackagePath": "staticwebassets/css/company.css"
+    },
+    {
       "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/footer.css",
       "PackagePath": "staticwebassets/css/footer.css"
     },
@@ -23,6 +31,10 @@
     {
       "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/step.css",
       "PackagePath": "staticwebassets/css/step.css"
+    },
+    {
+      "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/sticky-header.css",
+      "PackagePath": "staticwebassets/css/sticky-header.css"
     },
     {
       "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/favicon.ico",
@@ -95,6 +107,10 @@
     {
       "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/img/bg-auth.png",
       "PackagePath": "staticwebassets/img/bg-auth.png"
+    },
+    {
+      "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/img/company-bg.png",
+      "PackagePath": "staticwebassets/img/company-bg.png"
     },
     {
       "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/js/site.js",

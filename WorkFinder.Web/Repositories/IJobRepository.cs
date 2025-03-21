@@ -52,5 +52,16 @@ namespace WorkFinder.Web.Repositories
         Task<IEnumerable<Job>> GetRelatedJobsAsync(int companyId);
         Task<bool> HasUserAppliedToJobAsync(int jobId, int userId);
         Task<JobApplication> AddJobApplicationAsync(JobApplication jobApplication);
+
+        // Phương thức mới để lấy số lượng công việc đang hoạt động của một công ty
+        Task<int> GetActiveJobCountByCompanyIdAsync(int companyId);
+
+        // Task<(IEnumerable<Job> Jobs, int TotalCount)> GetJobsPagedAsync(
+        //     string keyword = "",
+        // string location = "",
+        // int page = 1,
+        // int pageSize = 12);
+
+        Task<IEnumerable<Job>> GetJobsByCompanyIdAsync(int companyId, int limit);
     }
 }

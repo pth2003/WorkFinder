@@ -1,0 +1,304 @@
+@model WorkFinder.Web.Models.Company
+@using WorkFinder.Web.Models.Enums
+
+@{
+    ViewData["Title"] = $"{Model.Name} - Company Details";
+}
+
+<div class="company-details-container">
+    <!-- Company Header Section with Background -->
+    <div class="company-header" style="background-image: url('/img/company-bg.png')">
+        <div class="container">
+            <div class="breadcrumb-nav">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/Company">Find Employers</a></li>
+                        <li class="breadcrumb-item active">@Model.Name</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- Company Info Card -->
+    <div class="container mt-n5">
+        <div class="company-info-card">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="d-flex align-items-center">
+                        <div class="company-logo me-4">
+                            @if (!string.IsNullOrEmpty(Model.Logo))
+                            {
+                                <img src="@Model.Logo" alt="@Model.Name Logo" class="img-fluid rounded">
+                            }
+                            else
+                            {
+                                <img src="/images/default-company.png" alt="@Model.Name Logo" class="img-fluid rounded">
+                            }
+                        </div>
+                        <div class="company-basic-info">
+                            <h1 class="company-name">@Model.Name</h1>
+                            <p class="industry-tag">@Model.Industry</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 text-end">
+                    <a href="/Job?companyId=@Model.Id" class="btn btn-primary open-position-btn">
+                        View Open Position <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Company Details Content -->
+    <div class="container my-5">
+        <div class="row">
+            <!-- Left Column - Company Description & Details -->
+            <div class="col-lg-8">
+                <!-- Description Section -->
+                <div class="content-section">
+                    <h2 class="section-title">Description</h2>
+                    <div class="section-content">
+                        <p>@Html.Raw(Model.Description)</p>
+                    </div>
+                </div>
+
+                <!-- Company Benefits Section -->
+                <div class="content-section">
+                    <h2 class="section-title">Company Benefits</h2>
+                    <div class="section-content">
+                        <ul class="benefits-list">
+                            <li><i class="fas fa-check-circle text-primary me-2"></i> Competitive salary and bonuses
+                            </li>
+                            <li><i class="fas fa-check-circle text-primary me-2"></i> Flexible working hours and remote
+                                work options</li>
+                            <li><i class="fas fa-check-circle text-primary me-2"></i> Health insurance and wellness
+                                programs</li>
+                            <li><i class="fas fa-check-circle text-primary me-2"></i> Professional development
+                                opportunities</li>
+                            <li><i class="fas fa-check-circle text-primary me-2"></i> Modern, collaborative work
+                                environment</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Company Vision Section -->
+                <div class="content-section">
+                    <h2 class="section-title">Company Vision</h2>
+                    <div class="section-content">
+                        <p>Our vision is to create innovative solutions that transform how businesses operate and
+                            connect with their customers. We strive to build technology that makes a positive impact on
+                            society while fostering a culture of creativity, collaboration, and continuous learning.</p>
+                    </div>
+                </div>
+
+                <!-- Social Sharing Section -->
+                <div class="content-section">
+                    <div class="d-flex align-items-center">
+                        <span class="me-3">Share profile:</span>
+                        <div class="social-share-buttons">
+                            <a href="#" class="btn btn-outline-primary btn-sm me-2"><i
+                                    class="fab fa-facebook-f me-1"></i> Facebook</a>
+                            <a href="#" class="btn btn-outline-info btn-sm me-2"><i class="fab fa-twitter me-1"></i>
+                                Twitter</a>
+                            <a href="#" class="btn btn-outline-danger btn-sm"><i class="fab fa-pinterest-p me-1"></i>
+                                Pinterest</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column - Company Information Cards -->
+            <div class="col-lg-4">
+                <!-- Company Info Card -->
+                <div class="info-card mb-4">
+                    <div class="row g-4">
+                        <div class="col-6">
+                            <div class="info-item">
+                                <div class="info-icon">
+                                    <i class="far fa-calendar-alt"></i>
+                                </div>
+                                <h5 class="info-title">FOUNDED IN</h5>
+                                <p class="info-value">@Model.CreatedAt.Year</p>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="info-item">
+                                <div class="info-icon">
+                                    <i class="far fa-building"></i>
+                                </div>
+                                <h5 class="info-title">ORGANIZATION TYPE</h5>
+                                <p class="info-value">@(Model.IsVerified ? "Verified Company" : "Private Company")</p>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="info-item">
+                                <div class="info-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <h5 class="info-title">COMPANY SIZE</h5>
+                                <p class="info-value">@Model.EmployeeCount Employees</p>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="info-item">
+                                <div class="info-icon">
+                                    <i class="fas fa-briefcase"></i>
+                                </div>
+                                <h5 class="info-title">INDUSTRY TYPE</h5>
+                                <p class="info-value">@Model.Industry</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Information Card -->
+                <div class="info-card">
+                    <h3 class="card-title">Contact Information</h3>
+                    <div class="contact-info-list">
+                        <div class="contact-item">
+                            <div class="icon">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <div class="info">
+                                <h5>WEBSITE</h5>
+                                <p><a href="@Model.Website" target="_blank">@Model.Website</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="info">
+                                <h5>LOCATION</h5>
+                                <p>@Model.Location</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Follow Us Section -->
+                <div class="info-card mt-4">
+                    <h3 class="card-title">Follow us on:</h3>
+                    <div class="social-media-links">
+                        <a href="#" class="social-btn facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-btn twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-btn instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-btn youtube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Company Jobs and Related Companies Section -->
+<div class="container my-5">
+    <div class="row">
+        <!-- Recent Jobs Section -->
+        <div class="col-lg-8">
+            <div class="content-section">
+                <h2 class="section-title">Open Positions</h2>
+                <div class="section-content">
+                    @if (ViewBag.CompanyJobs != null &&
+                                        ((IEnumerable<WorkFinder.Web.Models.Job>)ViewBag.CompanyJobs).Any())
+                    {
+                        <div class="job-listings">
+                            @foreach (var job in (IEnumerable<WorkFinder.Web.Models.Job>)ViewBag.CompanyJobs)
+                            {
+                                <div class="job-card">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <div class="job-info">
+                                            <h3 class="job-title">
+                                                <a href="/Job/@job.Id">@job.Title</a>
+                                            </h3>
+                                            <div class="job-meta">
+                                                <span class="me-3"><i
+                                                        class="fas fa-map-marker-alt text-primary me-2"></i>@job.Location</span>
+                                                <span class="me-3"><i
+                                                        class="fas fa-briefcase text-primary me-2"></i>@(job.Categories.FirstOrDefault()?.Category?.Name ?? "General")</span>
+                                                <span><i class="fas fa-calendar-alt text-primary me-2"></i>Posted
+                                                    @((DateTime.Now - job.CreatedAt).Days) days ago</span>
+                                            </div>
+                                            <div class="job-tags mt-2">
+                                                <span class="badge bg-light text-dark">@job.JobType</span>
+                                                @if (job.ExperienceLevel == ExperienceLevel.Senior)
+                                                {
+                                                    <span class="badge bg-warning">Featured</span>
+                                                }
+                                                @if (job.ExpiryDate < DateTime.Now.AddDays(7))
+                                                {
+                                                    <span class="badge bg-danger">Urgent</span>
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="job-action">
+                                            <a href="/Job/@job.Id" class="btn btn-outline-primary">Apply Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <div class="text-center mt-4">
+                            <a href="/Job?companyId=@Model.Id" class="btn btn-primary">View All Jobs</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text-center py-4">
+                            <p>No open positions available at the moment.</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Related Companies Section -->
+        <div class="col-lg-4">
+            <div class="info-card">
+                <h3 class="card-title">Similar Companies</h3>
+                <div class="similar-companies">
+                    @if (ViewBag.RelatedCompanies != null &&
+                                        ((IEnumerable<WorkFinder.Web.Models.Company>)ViewBag.RelatedCompanies).Any())
+                    {
+                        @foreach (var company in (IEnumerable<WorkFinder.Web.Models.Company>)ViewBag.RelatedCompanies)
+                        {
+                            <div class="similar-company-item">
+                                <div class="d-flex align-items-center">
+                                    <div class="company-thumb me-3">
+                                        @if (!string.IsNullOrEmpty(company.Logo))
+                                        {
+                                            <img src="@company.Logo" alt="@company.Name" class="img-fluid">
+                                        }
+                                        else
+                                        {
+                                            <img src="/images/default-company.png" alt="@company.Name" class="img-fluid">
+                                        }
+                                    </div>
+                                    <div class="company-info">
+                                        <h5><a href="/Company/@company.Id">@company.Name</a></h5>
+                                        <p class="mb-0">@company.Location</p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <p>No similar companies found.</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/company-details.css" asp-append-version="true" />
+}
+
+@section Scripts {
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+}

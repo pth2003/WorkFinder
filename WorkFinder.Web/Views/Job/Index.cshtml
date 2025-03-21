@@ -18,81 +18,82 @@
             </div>
             <!-- Search Section -->
             <div class="search-section">
-    <div class="container">
-        <form id="jobFilterForm" method="get" action="@Url.Action("Index", "Job")">
-            <div class="search-box">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="search-input">
-                            <i class="fas fa-search"></i>
-                            <input type="text" name="keyword" value="@ViewBag.Keyword" placeholder="Job tittle, Keyword...">
+                <div class="container">
+                    <form id="jobFilterForm" method="get" action="@Url.Action("Index", "Job")">
+                        <div class="search-box">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="search-input">
+                                        <i class="fas fa-search"></i>
+                                        <input type="text" name="keyword" value="@ViewBag.Keyword"
+                                            placeholder="Job tittle, Keyword...">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="search-input">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <input type="text" name="location" value="@ViewBag.Location"
+                                            placeholder="Location">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="search-input">
+                                        <i class="fa-solid fa-layer-group"></i>
+                                        <select class="form-select" name="categoryId">
+                                            <option value="">Select Category</option>
+                                            @if (ViewBag.Categories != null)
+                                            {
+                                                @foreach (var category in ViewBag.Categories)
+                                                {
+                                                    if (ViewBag.CategoryId != null && ViewBag.CategoryId.ToString() ==
+                                                    category.Id.ToString())
+                                                    {
+                                                        <option value="@category.Id" selected>@category.Name</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@category.Id">@category.Name</option>
+                                                    }
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 d-flex">
+                                    <div class="dropdown me-2">
+                                        <button class="btn btn-light dropdown-toggle" type="button"
+                                            id="advanceFilterBtn" data-bs-toggle="modal"
+                                            data-bs-target="#advancedFilterModal">
+                                            Advance Filter <i class="fas fa-sliders-h ms-2"></i>
+                                        </button>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary find-btn">Find Job</button>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="search-input">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <input type="text" name="location" value="@ViewBag.Location" placeholder="Location">
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="search-input">
-                            <i class="fa-solid fa-layer-group"></i>
-                            <select class="form-select" name="categoryId">
-                                <option value="">Select Category</option>
-                                @if (ViewBag.Categories != null)
-                                {
-                                    @foreach (var category in ViewBag.Categories)
-                                    {
-                                        if (ViewBag.CategoryId != null && ViewBag.CategoryId.ToString() == category.Id.ToString())
-                                        {
-                                            <option value="@category.Id" selected>@category.Name</option>
-                                        }
-                                        else
-                                        {
-                                            <option value="@category.Id">@category.Name</option>
-                                        }
-                                    }
-                                }
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-3 d-flex">
-                        <div class="dropdown me-2">
-                            <button class="btn btn-light dropdown-toggle" type="button" id="advanceFilterBtn" data-bs-toggle="modal" data-bs-target="#advancedFilterModal">
-    Advance Filter <i class="fas fa-sliders-h ms-2"></i>
-</button>
-                        </div>
-                        <button type="submit" class="btn btn-primary find-btn">Find Job</button>
-                    </div>
+
+                        <!-- Hidden fields for advanced filter options -->
+                        <input type="hidden" id="jobType" name="jobType" value="@ViewBag.JobType">
+                        <input type="hidden" id="experienceLevel" name="experienceLevel"
+                            value="@ViewBag.ExperienceLevel">
+                        <input type="hidden" id="minSalary" name="minSalary" value="@ViewBag.MinSalary">
+                        <input type="hidden" id="maxSalary" name="maxSalary" value="@ViewBag.MaxSalary">
+                        <input type="hidden" id="jobLevel" name="jobLevel" value="@ViewBag.JobLevel">
+                        <input type="hidden" id="postedAfter" name="postedAfter" value="@ViewBag.PostedAfter">
+                    </form>
+                    @await Component.InvokeAsync("AdvancedFilter", new {
+                    jobType = ViewBag.JobType,
+                                        experienceLevel = ViewBag.ExperienceLevel,
+                                        minSalary = ViewBag.MinSalary,
+                                        maxSalary = ViewBag.MaxSalary,
+                                        jobLevel = ViewBag.JobLevel,
+                                        postedAfter = ViewBag.PostedAfter
+                                        })
                 </div>
             </div>
-            
-            <!-- Hidden fields for advanced filter options -->
-            <input type="hidden" id="jobType" name="jobType" value="@ViewBag.JobType">
-            <input type="hidden" id="experienceLevel" name="experienceLevel" value="@ViewBag.ExperienceLevel">
-            <input type="hidden" id="minSalary" name="minSalary" value="@ViewBag.MinSalary">
-            <input type="hidden" id="maxSalary" name="maxSalary" value="@ViewBag.MaxSalary">
-            <input type="hidden" id="jobLevel" name="jobLevel" value="@ViewBag.JobLevel">
-            <input type="hidden" id="postedAfter" name="postedAfter" value="@ViewBag.PostedAfter">
-        </form>
-        @await Component.InvokeAsync("AdvancedFilter", new { 
-            jobType = ViewBag.JobType, 
-            experienceLevel = ViewBag.ExperienceLevel,
-            minSalary = ViewBag.MinSalary,
-            maxSalary = ViewBag.MaxSalary,
-            jobLevel = ViewBag.JobLevel,
-            postedAfter = ViewBag.PostedAfter
-        })
-    </div>
-</div>
 
         </div>
     </div>
-
-
-
-
-
     <!-- Job Listing Section -->
     <div class="job-listing container mt-4">
         <div class="d-flex justify-content-between mb-4">
@@ -175,7 +176,8 @@
                             </h4>
                             <div class="job-meta d-flex justify-content-between">
                                 <span class="me-2 badge bg-light text-dark">@job.JobType</span>
-                                <span class="badge bg-light text-dark">$@(Math.Floor(job.SalaryMin/1000))K-@(Math.Floor(job.SalaryMax/1000))K/month</span>
+                                <span
+                                    class="badge bg-light text-dark">$@(Math.Floor(job.SalaryMin/1000))K-@(Math.Floor(job.SalaryMax/1000))K/month</span>
                             </div>
                         </div>
                     </div>
@@ -388,12 +390,12 @@
     .job-title {
         font-size: 18px;
         font-weight: 600;
-       
+
     }
 
     .job-meta {
         display: flex;
-        @* justify-content: space-between; *@
+
         color: #6c757d;
         font-size: 14px;
     }

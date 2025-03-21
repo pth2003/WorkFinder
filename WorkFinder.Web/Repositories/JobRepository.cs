@@ -228,8 +228,8 @@ namespace WorkFinder.Web.Repositories
         public async Task<IEnumerable<Job>> GetRelatedJobsAsync(int companyId)
         {
             return await _context.Jobs
-                .Where(j => j.CompanyId == companyId && j.IsActive)
                 .Include(j => j.Company)
+                .Where(j => j.CompanyId == companyId && j.IsActive && j.ExpiryDate > DateTime.UtcNow)
                 .ToListAsync();
         }
 
@@ -240,7 +240,7 @@ namespace WorkFinder.Web.Repositories
         public async Task<bool> HasUserAppliedToJobAsync(int jobId, int userId)
         {
             return await _context.JobApplications
-                .AnyAsync(a => a.JobId == jobId && a.ApplicantId == userId);
+                .AnyAsync(j => j.JobId == jobId && j.ApplicantId == userId);
         }
 
         public async Task<JobApplication> AddJobApplicationAsync(JobApplication jobApplication)
@@ -248,6 +248,24 @@ namespace WorkFinder.Web.Repositories
             await _context.JobApplications.AddAsync(jobApplication);
             await _context.SaveChangesAsync();
             return jobApplication;
+        }
+
+        public async Task<int> GetActiveJobCountByCompanyIdAsync(int companyId)
+        {
+            return await _context.Jobs
+                .CountAsync(j => j.CompanyId == companyId && j.IsActive && j.ExpiryDate > DateTime.UtcNow);
+        }
+
+        public async Task<IEnumerable<Job>> GetJobsByCompanyIdAsync(int companyId, int limit)
+        {
+            return await _context.Jobs
+                .Where(j => j.CompanyId == companyId && j.IsActive && j.ExpiryDate > DateTime.UtcNow)
+                .OrderByDescending(j => j.CreatedAt)
+                .Take(limit)
+                .Include(j => j.Categories)
+                    .ThenInclude(jc => jc.Category)
+                .Include(j => j.Company)
+                .ToListAsync();
         }
 
         // Helper method to apply filters

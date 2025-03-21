@@ -1,17 +1,29 @@
-@model WorkFinder.Web.Models.Company
-<div class="d-flex">
+<div class="d-flex gap-3 company-card-header">
     <img src="@Model.Logo" alt="@Model.Name Logo" class="company-logo" />
     <div class="company-info">
-        <h3>@Model.Name</h3>
-        <p class="location"><i class="fas fa-map-marker-alt"></i> @Model.Location </p>
+        <a href="@Url.Action("Details", "Company", new { id = Model.Id })" class="company-name">@Model.Name</a>
+        <p class="location"><i class="fas fa-map-marker-alt"></i> @(string.IsNullOrEmpty(Model.Location) ||
+            Model.Location.ToLower() == "unknown" ? "Remote" : Model.Location)</ p >
     </div>
-
 </div>
 <style>
-    .company-info h3 {
+    .company-card-header {
+        padding: 1.5rem;
+
+    }
+
+    .company-logo {
+        width: 50px;
+        height: 50px;
+        object-fit: contain;
+    }
+
+    .company-info .company-name {
         margin: 0;
-        font-size: 16px;
+        font-size: 18px;
         color: #333;
+        font-weight: bold;
+        text-decoration: none;
     }
 
     .location {
