@@ -2,8 +2,9 @@
 <div id="header-top-bar" class="header-top-bar">
     <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ">
+
+            <div class="collapse navbar-collapse" id="topNavbarContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item"><a
                             class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Home" && ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")"
                             href="/">Home</a></li>
@@ -14,11 +15,9 @@
                             class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Company" && ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")"
                             href="/Company">Companies</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Employers</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Candidates</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Pricing Plans</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Customer Supports</a></li>
                 </ul>
-                <div class="header-right d-flex gap-3">
+                <div class="header-right d-flex gap-3 d-none d-lg-flex">
                     <div class="d-flex align-items-center gap-1">
                         <img src="~/icon/PhoneCall.svg" alt="" />
                         <a href="#" class="phone">0867713501</a>
@@ -35,20 +34,20 @@
 <header id="main-header" class="main-header">
     <div class="container d-flex justify-content-between align-items-center">
         <div class="header-left d-flex align-items-center">
-            <div class="header-logo me-4">
-                <img src="~/icon/Logo.png" alt="" />
+            <div class="header-logo me-4 d-none d-lg-block">
+                <img src="~/icon/Logo.png" alt="logo" />
             </div>
-            <div class="search-wrapper">
+            <div class="search-wrapper d-none d-md-block">
                 @await Component.InvokeAsync("Search")
             </div>
         </div>
-        <div class="header-login d-flex">
+        <div class="header-login d-flex align-items-center">
             @if (User?.Identity?.IsAuthenticated == true)
             {
                 <div class="user-profile dropdown">
                     <div class="d-flex align-items-center dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        <span class="me-2 user-greeting">Xin chào, @User.Identity.Name</span>
+                        <span class="me-2 user-greeting d-none d-lg-inline">Xin chào, @User.Identity.Name</span>
                         <div class="avatar-container">
                             <img src="@(User.Claims.FirstOrDefault(c => c.Type == "ProfilePicture")?.Value ?? "/images/default-avatar.png")"
                                 alt="User Avatar" class="rounded-circle" width="40" height="40">
@@ -71,12 +70,73 @@
             }
             else
             {
-                <btn class="btn btn-outline-primary"><a class="nav-link" href="/Auth/Login">Sign In</a></btn>
-                <btn class="btn btn-primary">Post A Jobs</btn>
+                <div class="d-none d-lg-flex">
+                    <btn class="btn btn-outline-primary me-2"><a class="nav-link" href="/Auth/Login">Sign In</a></btn>
+                    <btn class="btn btn-primary">Post A Jobs</btn>
+                </div>
+                <div class="d-lg-none">
+                    <a href="/Auth/Login" class="btn btn-sm btn-outline-primary me-2">Sign In</a>
+                </div>
             }
+
+            <!-- Mobile menu toggle button -->
+            <div class="mobile-menu-toggle d-lg-none ms-3">
+                <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu"
+                    aria-controls="sidebarMenu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
         </div>
     </div>
 </header>
+
+<!-- Offcanvas Mobile Menu -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="sidebarMenuLabel">Menu</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body p-0">
+        <div class="px-3 py-2 mb-3 bg-light">
+            @if (User?.Identity?.IsAuthenticated == true)
+            {
+                <div class="d-flex align-items-center py-2">
+                    <div class="flex-shrink-0">
+                        <img src="@(User.Claims.FirstOrDefault(c => c.Type == "ProfilePicture")?.Value ?? "/images/default-avatar.png")"
+                            alt="User Avatar" class="rounded-circle" width="40" height="40">
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                        <p class="mb-0 fs-5 fw-semibold">@User.Identity.Name</p>
+                    </div>
+                </div>
+            }
+        </div>
+        <ul class="navbar-nav mobile-menu">
+            <li class="nav-item"><a
+                    class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Home" && ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")"
+                    href="/">Home</a></li>
+            <li class="nav-item"><a
+                    class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Job" && ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")"
+                    href="/Job">Find Job</a></li>
+            <li class="nav-item"><a
+                    class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Company" && ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")"
+                    href="/Company">Companies</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Employers</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Customer Supports</a></li>
+            <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-phone-alt me-2"></i>0867713501</a></li>
+            @if (!User?.Identity?.IsAuthenticated == true)
+            {
+                <li class="nav-item mt-4 px-3">
+                    <a href="/Auth/Login" class="btn btn-primary w-100">Sign In</a>
+                </li>
+                <li class="nav-item mt-2 px-3">
+                    <a href="#" class="btn btn-outline-primary w-100">Post A Jobs</a>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+
 <style>
     .navbar {
         background-color: var(--gray-100);
@@ -88,11 +148,12 @@
     }
 
     .nav-link:hover,
-    .nav-link:active {
+    .nav-link:active,
+    .nav-link.active {
         color: #0A65CC;
     }
 
-    #navbarNav {
+    #topNavbarContent {
         justify-content: space-between;
     }
 
@@ -125,4 +186,57 @@
         flex: 1;
         max-width: 500px;
     }
-</style>
+
+    .mobile-menu-toggle .btn {
+        padding: 0.5rem;
+        border: none;
+        font-size: 1.8rem;
+        color: var(--gray-700);
+    }
+
+    /* Offcanvas Menu Styles */
+    .offcanvas {
+        width: 280px;
+        border-right: 1px solid #e9ecef;
+    }
+
+    .offcanvas-title {
+        font-size: 2rem;
+        font-weight: 600;
+        color: var(--gray-800);
+    }
+
+    .mobile-menu .nav-link {
+        padding: 1.2rem 1.5rem;
+        font-size: 1.6rem;
+        border-bottom: 1px solid #f5f5f5;
+        transition: all 0.2s ease;
+    }
+
+    .mobile-menu .nav-link:hover,
+    .mobile-menu .nav-link.active {
+        background-color: rgba(10, 101, 204, 0.08);
+        color: #0A65CC;
+        font-weight: 500;
+    }
+
+    @@media(max - width: 992px) {
+            .main-header .container {
+                padding-top: 1rem;
+                padding-bottom: 1rem;
+            }
+
+            .btn {
+                padding: 0.8rem 1.6rem;
+                line-height: 2rem;
+            }
+        }
+
+        @@media(max - width: 576px) {
+                .btn-sm {
+                    padding: 0.6rem 1.2rem;
+                    line-height: 1.8rem;
+                    font-size: 1.4rem;
+                }
+            }
+        </style>

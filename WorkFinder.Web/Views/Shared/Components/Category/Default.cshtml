@@ -1,15 +1,101 @@
+<link rel="stylesheet" href="~/css/category.css">
 
-<div class="container my-5">
-    <h2 class="fw-bold">Most Popular Vacancies</h2>
-    <div class="row g-4 mt-3">
-        @foreach (var category in Model)
-        {
-            <div class="col-md-3">
-                <a href="#" class="text-decoration-none @(category.IsHighlighted ? "text-primary fw-bold" : "text-dark fw-semibold")">
-                    @category.Name
-                </a>
-                <p class="text-muted">@category.Jobs.ToString("N0") Open Positions</p>
+<section class="popular-category-section">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="section-title">Popular category</h2>
+            <a href="@Url.Action("Index", "Job")" class="view-more-link">View All <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <div class="row g-3">
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+                <div class="category-item">
+                    <div class="category-icon bg-light-blue">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <div class="category-content">
+                        <h3 class="category-name">Graphics & Design</h3>
+                        <p class="open-positions">873 open positions</p>
+                    </div>
+                </div>
             </div>
-        }
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+                <div class="category-item">
+                    <div class="category-icon bg-light-green">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="category-content">
+                        <h3 class="category-name">Code & Programming</h3>
+                        <p class="open-positions">768 open positions</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+                <div class="category-item">
+                    <div class="category-icon bg-light-purple">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <div class="category-content">
+                        <h3 class="category-name">Digital Marketing</h3>
+                        <p class="open-positions">567 open positions</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+                <div class="category-item">
+                    <div class="category-icon bg-light-orange">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="category-content">
+                        <h3 class="category-name">Video & Animation</h3>
+                        <p class="open-positions">473 open positions</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+                <div class="category-item">
+                    <div class="category-icon bg-light-red">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <div class="category-content">
+                        <h3 class="category-name">Music & Audio</h3>
+                        <p class="open-positions">645 open positions</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+                <div class="category-item">
+                    <div class="category-icon bg-light-yellow">
+                        <i class="fas fa-landmark"></i>
+                    </div>
+                    <div class="category-content">
+                        <h3 class="category-name">Account & Finance</h3>
+                        <p class="open-positions">382 open positions</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+                <div class="category-item">
+                    <div class="category-icon bg-light-teal">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <div class="category-content">
+                        <h3 class="category-name">Health & Care</h3>
+                        <p class="open-positions">584 open positions</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+                <div class="category-item">
+                    <div class="category-icon bg-light-cyan">
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                    <div class="category-content">
+                        <h3 class="category-name">Data & Science</h3>
+                        <p class="open-positions">364 open positions</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+</section>

@@ -50,6 +50,7 @@ namespace WorkFinder.Web.Controllers
                 decimal? maxSalary = null,
                 string jobLevel = null,
                 DateTime? postedAfter = null,
+                int? companyId = null,
                 int page = 1,
                 int pageSize = 12)
         {
@@ -85,9 +86,34 @@ namespace WorkFinder.Web.Controllers
                 // Chuyển đổi thành UTC trước khi truy vấn
                 postedAfter = DateTime.SpecifyKind(postedAfter.Value, DateTimeKind.Utc);
             }
-            var (jobs, totalCount) = await _jobRepository.GetJobsAdvancedPagedAsync(
-                keyword, location, categoryId, jobTypeEnum, experienceLevelEnum,
-                minSalary, maxSalary, jobLevelEnum, postedAfter, page, pageSize);
+
+            // Declare variables to store results
+            IEnumerable<Job> jobs;
+            int totalCount;
+
+            if (companyId.HasValue)
+            {
+                // If companyId is provided, get jobs for that company
+                var companyJobs = await _jobRepository.GetJobsByCompanyAsync(companyId.Value);
+                jobs = companyJobs;
+                totalCount = companyJobs.Count();
+
+                // Set ViewBag data for company filter
+                var company = await _jobRepository.GetCompanyByIdAsync(companyId.Value);
+                if (company != null)
+                {
+                    ViewBag.CompanyName = company.Name;
+                    ViewBag.CompanyLogo = company.Logo;
+                }
+                ViewBag.CompanyId = companyId.Value;
+            }
+            else
+            {
+                // Otherwise use the advanced filter
+                (jobs, totalCount) = await _jobRepository.GetJobsAdvancedPagedAsync(
+                    keyword, location, categoryId, jobTypeEnum, experienceLevelEnum,
+                    minSalary, maxSalary, jobLevelEnum, postedAfter, page, pageSize);
+            }
 
             // Chuyển đổi sang DTO
             var jobDtos = jobs.Select(j => new JobDto
@@ -131,8 +157,6 @@ namespace WorkFinder.Web.Controllers
             ViewBag.JobLevel = jobLevel;
             ViewBag.PostedAfter = postedAfter;
 
-
-
             return View(jobDtos);
         }
 
@@ -143,10 +167,6 @@ namespace WorkFinder.Web.Controllers
             var job = await _jobRepository.GetJobWithDetailsAsync(id);
             if (job == null)
                 return NotFound();
-
-            // Log authentication status
-            Console.WriteLine($"DEBUG: User.Identity.IsAuthenticated={User.Identity.IsAuthenticated}");
-
             var relatedJobs = await _jobRepository.GetRelatedJobsAsync(job.CompanyId);
             var relatedJobDtos = relatedJobs.Where(j => j.Id != id).Take(3).Select(j => new JobDto
             {
@@ -172,15 +192,9 @@ namespace WorkFinder.Web.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 var user = await _authService.GetCurrentUserAsync();
-
-                // Set debug info
-                ViewBag.CurrentUserId = user?.Id;
-                ViewBag.CurrentUserEmail = user?.Email;
-
                 if (user != null)
                 {
                     userResume = await _resumeRepository.GetResumeByUserIdAsync(user.Id);
-
                 }
             }
 
@@ -242,11 +256,6 @@ namespace WorkFinder.Web.Controllers
 
             // Lấy thông tin user hiện tại
             var user = await _authService.GetCurrentUserAsync();
-
-            // Set debug info
-            ViewBag.CurrentUserId = user?.Id;
-            ViewBag.CurrentUserEmail = user?.Email;
-
             if (user == null)
             {
                 TempData["ErrorMessage"] = "Unable to identify user. Please try again.";
@@ -255,7 +264,7 @@ namespace WorkFinder.Web.Controllers
 
             int applicantId = user.Id;
 
-            // Kiểm tra xem user đã apply job này chưa
+            // Kiểm tra xem user đã apply job này chưa bằng repository
             bool hasApplied = await _jobRepository.HasUserAppliedToJobAsync(id, applicantId);
             if (hasApplied)
             {
@@ -287,7 +296,10 @@ namespace WorkFinder.Web.Controllers
                     return RedirectToAction(nameof(Details), new { id });
                 }
 
-                // Generate unique filename
+                // Tạo tên file duy nhất bằng cách kết hợp GUID với tên file gốc
+                // Điều này ngăn chặn xung đột tên file khi nhiều người dùng tải lên file có cùng tên
+                // GUID đảm bảo mỗi file tải lên có tên duy nhất, ngay cả khi tên file gốc giống nhau
+                // Ví dụ: "a1b2c3d4-5678-90ab-cdef-1234567890ab_resume.pdf"
                 var fileName = $"{Guid.NewGuid()}_{Path.GetFileName(model.ResumeFile.FileName)}";
                 var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "resumes");
 
@@ -351,6 +363,138 @@ namespace WorkFinder.Web.Controllers
             // Success message and redirect
             TempData["SuccessMessage"] = "Your application has been submitted successfully!";
             return RedirectToAction(nameof(Details), new { id });
+        }
+
+
+        // get job by company id
+        [HttpGet("company/{id}")]
+        public async Task<IActionResult> CompanyJobs(int id)
+        {
+            var jobs = await _jobRepository.GetJobsByCompanyAsync(id);
+            var jobDtos = jobs.Select(j => new JobDto
+            {
+                Id = j.Id,
+                Title = j.Title,
+                Description = j.Description,
+                Location = j.Location,
+                SalaryMin = j.SalaryMin,
+                SalaryMax = j.SalaryMax,
+                JobType = j.JobType.ToString(),
+                ExperienceLevelName = j.ExperienceLevel.ToString(),
+                ExpiryDate = j.ExpiryDate,
+                IsActive = j.IsActive
+            }).ToList();
+            return View(jobDtos);
+        }
+
+        // AJAX endpoint for job filtering
+        [HttpGet("JobList")]
+        public async Task<IActionResult> JobList(
+            string keyword = "",
+            string location = "",
+            int? categoryId = null,
+            string jobType = null,
+            string experienceLevel = null,
+            decimal? minSalary = null,
+            decimal? maxSalary = null,
+            string jobLevel = null,
+            DateTime? postedAfter = null,
+            int? companyId = null,
+            int page = 1,
+            int pageSize = 12)
+        {
+            // Convert strings to enums if available
+            JobType? jobTypeEnum = null;
+            if (!string.IsNullOrEmpty(jobType) && Enum.TryParse<JobType>(jobType.Replace(" ", ""), out var parsedJobType))
+            {
+                jobTypeEnum = parsedJobType;
+            }
+
+            ExperienceLevel? experienceLevelEnum = null;
+            if (!string.IsNullOrEmpty(experienceLevel))
+            {
+                var firstWord = experienceLevel.Split(' ')[0];
+                if (Enum.TryParse<ExperienceLevel>(firstWord, out var parsedExpLevel))
+                {
+                    experienceLevelEnum = parsedExpLevel;
+                }
+            }
+
+            ExperienceLevel? jobLevelEnum = null;
+            if (!string.IsNullOrEmpty(jobLevel))
+            {
+                var firstWord = jobLevel.Split(' ')[0];
+                if (Enum.TryParse<ExperienceLevel>(firstWord, out var parsedJobLevel))
+                {
+                    jobLevelEnum = parsedJobLevel;
+                }
+            }
+
+            // Set DateTime to UTC if provided
+            if (postedAfter.HasValue)
+            {
+                postedAfter = DateTime.SpecifyKind(postedAfter.Value, DateTimeKind.Utc);
+            }
+
+            // Declare variables to store results
+            IEnumerable<Job> jobs;
+            int totalCount;
+
+            if (companyId.HasValue)
+            {
+                // If companyId is provided, get jobs for that company
+                var companyJobs = await _jobRepository.GetJobsByCompanyAsync(companyId.Value);
+                jobs = companyJobs;
+                totalCount = companyJobs.Count();
+
+                // Set ViewBag data for company filter
+                var company = await _jobRepository.GetCompanyByIdAsync(companyId.Value);
+                if (company != null)
+                {
+                    ViewBag.CompanyName = company.Name;
+                    ViewBag.CompanyLogo = company.Logo;
+                }
+                ViewBag.CompanyId = companyId.Value;
+            }
+            else
+            {
+                // Otherwise use the advanced filter
+                (jobs, totalCount) = await _jobRepository.GetJobsAdvancedPagedAsync(
+                    keyword, location, categoryId, jobTypeEnum, experienceLevelEnum,
+                    minSalary, maxSalary, jobLevelEnum, postedAfter, page, pageSize);
+            }
+
+            // Convert to DTOs
+            var jobDtos = jobs.Select(j => new JobDto
+            {
+                Id = j.Id,
+                Title = j.Title,
+                Description = j.Description,
+                Requirements = j.Requirements,
+                Benefits = j.Benefits,
+                Location = j.Location,
+                SalaryMin = j.SalaryMin,
+                SalaryMax = j.SalaryMax,
+                JobType = j.JobType.ToString(),
+                ExperienceLevelName = j.ExperienceLevel.ToString(),
+                ExpiryDate = j.ExpiryDate,
+                IsActive = j.IsActive,
+                CompanyId = j.CompanyId,
+                CompanyName = j.Company?.Name,
+                Logo = j.Company?.Logo
+            }).ToList();
+
+            // Calculate pagination info
+            var totalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
+
+            // Set ViewBag properties for the partial view
+            ViewBag.CurrentPage = page;
+            ViewBag.PageSize = pageSize;
+            ViewBag.TotalPages = totalPages;
+            ViewBag.TotalJobs = totalCount;
+
+            // Return partial view
+            return PartialView("_JobListPartial", jobDtos);
         }
     }
 }

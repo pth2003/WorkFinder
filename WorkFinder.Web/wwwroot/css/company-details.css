@@ -1,6 +1,13 @@
 /* Company Details Page Styles */
 
-/* Header Section */
+/* Header Container - Full Width */
+.company-header-container {
+    position: relative;
+    width: 100%;
+    margin-bottom: 120px; /* Space for absolute card + extra margin */
+}
+
+/* Company Header - Full Width Background */
 .company-header {
     position: relative;
     background-size: cover;
@@ -10,6 +17,7 @@
     display: flex;
     align-items: flex-end;
     padding-bottom: 30px;
+    width: 100%; /* Full width background */
 }
 
 .company-header::before {
@@ -45,17 +53,72 @@
     color: #fff;
 }
 
-/* Company Info Card */
+/* Company Info Card - Container Width */
 .company-info-card {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     padding: 25px;
-    position: relative;
+    position: absolute;
     z-index: 2;
-    margin-bottom: 30px;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 540px; /* Match container width at small breakpoint */
 }
 
+/* Match Bootstrap 4 container widths */
+@media (min-width: 768px) {
+    .company-info-card {
+        max-width: 720px;
+    }
+}
+
+@media (min-width: 992px) {
+    .company-info-card {
+        max-width: 960px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .company-info-card {
+        max-width: 1140px;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+    .company-header {
+        height: 180px; /* Reduce height on smaller screens */
+    }
+
+    .company-header-container {
+        margin-bottom: 150px; /* Increased space for absolute card on mobile */
+    }
+}
+
+@media (max-width: 575px) {
+    .company-header {
+        display: none; /* Hide background on very small screens */
+    }
+
+    .company-header-container {
+        margin-bottom: 15px; /* Reduce margin when header is hidden */
+    }
+
+    .company-info-card {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        transform: none;
+        margin: 0 auto;
+        width: 100%;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+}
+
+/* Company logo styles */
 .company-logo {
     width: 120px;
     height: 120px;
@@ -290,36 +353,6 @@
 
 .social-share-buttons a {
     margin-bottom: 5px;
-}
-
-/* Responsive Adjustments */
-@media (max-width: 767px) {
-    .company-header {
-        height: 200px;
-    }
-    
-    .company-logo {
-        width: 80px;
-        height: 80px;
-    }
-    
-    .company-name {
-        font-size: 20px;
-    }
-    
-    .info-item {
-        margin-bottom: 15px;
-    }
-    
-    .open-position-btn {
-        display: block;
-        width: 100%;
-        margin-top: 15px;
-    }
-    
-    .company-basic-info {
-        margin-top: 15px;
-    }
 }
 
 /* Job Listings */

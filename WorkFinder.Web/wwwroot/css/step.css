@@ -1,55 +1,80 @@
 .step-section {
-    background-color: var(--gray-100);
-    padding: 9.6rem 0;
-}
-.stepper-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    margin-top: 30px;
+    padding: 6rem 0;
+    background: #fff;
 }
 
-.step {
+.step-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 3rem 2rem;
     text-align: center;
-    width: 20%;
-    position: relative;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    height: 100%;
 }
 
-.step .icon {
-    background-color: #fff;
-    border: 3px solid #007bff;
+.step-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.step-card.active {
+    border-bottom: 3px solid var(--blue-500);
+}
+
+.step-icon {
+    width: 6rem;
+    height: 6rem;
+    background-color: var(--blue-100);
     border-radius: 50%;
-    width: 60px;
-    height: 60px;
     display: flex;
-    justify-content: center;
     align-items: center;
-    font-size: 24px;
-    color: #007bff;
-    margin: auto;
+    justify-content: center;
+    margin: 0 auto 2rem;
+    color: var(--blue-600);
 }
 
-.step.active .icon {
-    background-color: #007bff;
-    color: white;
+.step-icon i {
+    font-size: 2.5rem;
 }
 
-.step:not(:last-child)::after {
-    content: url(../icon/Arrows.svg); /* Biểu tượng mũi tên, có thể thay bằng hình ảnh */
-   
-    position: absolute;
-    font-size: 24px; /* Điều chỉnh kích thước */
-    color: #007bff; /* Màu mũi tên */
-    top: 0;
-    left: 80%;
-    transform: translateY(-50%);
+.step-title {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: #333;
 }
-.step:nth-child(even)::after {
-    transform:  scaleY(-1);
-    top: 10%    ;
-}
-.step p {
+
+.step-description {
     font-size: 1.4rem;
-    color: gray;
+    color: #666;
+    margin-bottom: 0;
+}
+
+/* Responsive styles */
+@media (max-width: 992px) {
+    .step-section {
+        padding: 4rem 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .step-card {
+        margin-bottom: 2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .step-icon {
+        width: 5rem;
+        height: 5rem;
+    }
+    
+    .step-icon i {
+        font-size: 2rem;
+    }
+    
+    .step-title {
+        font-size: 1.8rem;
+    }
 }

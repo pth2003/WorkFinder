@@ -30,10 +30,8 @@ namespace WorkFinder.Web.Repositories
         // Phương thức lấy các địa điểm phổ biến
         Task<List<string>> GetPopularLocationsAsync(int count);
 
-        // Task<IEnumerable<string>> GetPopularIndustriesAsync(int count);
-
-        // Task<IEnumerable<string>> GetPopularLocationsAsync(int count);
-
         Task<IEnumerable<Company>> GetCompaniesByIndustryAsync(string industry, int limit, int excludeCompanyId = 0);
+
+
     }
 }

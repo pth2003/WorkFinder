@@ -5,12 +5,24 @@
       "PackagePath": "staticwebassets/WorkFinder.Web.9h8o3lycsa.bundle.scp.css"
     },
     {
+      "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/bootstrap-container-override.css",
+      "PackagePath": "staticwebassets/css/bootstrap-container-override.css"
+    },
+    {
+      "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/category.css",
+      "PackagePath": "staticwebassets/css/category.css"
+    },
+    {
       "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/company-details.css",
       "PackagePath": "staticwebassets/css/company-details.css"
     },
     {
       "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/company.css",
       "PackagePath": "staticwebassets/css/company.css"
+    },
+    {
+      "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/featured-job.css",
+      "PackagePath": "staticwebassets/css/featured-job.css"
     },
     {
       "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/footer.css",
@@ -35,6 +47,10 @@
     {
       "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/sticky-header.css",
       "PackagePath": "staticwebassets/css/sticky-header.css"
+    },
+    {
+      "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/top-company.css",
+      "PackagePath": "staticwebassets/css/top-company.css"
     },
     {
       "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/favicon.ico",
@@ -115,6 +131,10 @@
     {
       "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/js/site.js",
       "PackagePath": "staticwebassets/js/site.js"
+    },
+    {
+      "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/js/utils.js",
+      "PackagePath": "staticwebassets/js/utils.js"
     },
     {
       "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/lib/bootstrap/LICENSE",

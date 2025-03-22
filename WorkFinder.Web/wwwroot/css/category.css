@@ -1,0 +1,393 @@
+.category-section {
+    padding: 4rem 0;
+    background-color: #f8f9fa;
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #333;
+    position: relative;
+}
+
+.section-title:after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background-color: #4154f1;
+    margin: 12px auto 0;
+}
+
+.category-card {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 1.5rem;
+    height: 100%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.category-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: #4154f1;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+    transition: all 0.3s ease;
+}
+
+.category-card:hover .category-icon {
+    background-color: #2a36a0;
+    transform: scale(1.05);
+}
+
+.category-icon i {
+    font-size: 28px;
+}
+
+.category-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.category-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.category-link {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.category-link:hover {
+    color: #4154f1;
+}
+
+.category-jobs {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-top: auto;
+}
+
+.view-all-btn {
+    padding: 0.5rem 1.5rem;
+    font-weight: 500;
+    border-width: 2px;
+    transition: all 0.3s ease;
+}
+
+.view-all-btn:hover {
+    background-color: #4154f1;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .category-section {
+        padding: 3rem 0;
+    }
+    
+    .section-title {
+        font-size: 1.75rem;
+    }
+    
+    .category-icon {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .category-icon i {
+        font-size: 24px;
+    }
+    
+    .category-title {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .category-section {
+        padding: 2.5rem 0;
+    }
+}
+
+.popular-category-section {
+    padding: 3rem 0;
+}
+
+.section-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 0;
+}
+
+.view-more-link {
+    font-size: 14px;
+    font-weight: 600;
+    color: #4154f1;
+    text-decoration: none;
+}
+
+.category-item {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1.25rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.category-item:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.category-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    background-color: rgba(65, 84, 241, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+}
+
+.category-icon i {
+    font-size: 20px;
+    color: #4154f1;
+}
+
+.category-content {
+    flex: 1;
+}
+
+.category-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.open-positions {
+    font-size: 14px;
+    color: #6c757d;
+    margin-bottom: 0;
+}
+
+@media (max-width: 992px) {
+    .section-title {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    .category-item {
+        padding: 1rem;
+    }
+    
+    .category-name {
+        font-size: 15px;
+    }
+    
+    .open-positions {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 576px) {
+    .category-icon {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .category-icon i {
+        font-size: 18px;
+    }
+}
+
+/* Add these background colors for category icons */
+.bg-light-blue {
+    background-color: #e8f1ff;
+    color: #0A65CC;
+}
+
+.bg-light-green {
+    background-color: #e6f8e6;
+    color: #2e7d32;
+}
+
+.bg-light-purple {
+    background-color: #f3e6ff;
+    color: #6a1b9a;
+}
+
+.bg-light-orange {
+    background-color: #fff2e6;
+    color: #e65100;
+}
+
+.bg-light-red {
+    background-color: #ffebee;
+    color: #b71c1c;
+}
+
+.bg-light-yellow {
+    background-color: #fff8e1;
+    color: #ff8f00;
+}
+
+.bg-light-teal {
+    background-color: #e0f2f1;
+    color: #00695c;
+}
+
+.bg-light-cyan {
+    background-color: #e0f7fa;
+    color: #006064;
+}
+
+.popular-category-section {
+    padding: 6rem 0;
+}
+
+.section-title {
+    font-size: 2.8rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0;
+}
+
+.view-more-link {
+    color: var(--blue-500);
+    font-size: 1.6rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.view-more-link:hover {
+    color: var(--blue-700);
+}
+
+.view-more-link i {
+    font-size: 1.4rem;
+    margin-left: 0.5rem;
+}
+
+.category-item {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 2.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.category-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.category-icon {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1.5rem;
+    flex-shrink: 0;
+}
+
+.category-icon i {
+    font-size: 2.2rem;
+}
+
+.category-content {
+    flex-grow: 1;
+}
+
+.category-name {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.open-positions {
+    font-size: 1.4rem;
+    color: #666;
+    margin-bottom: 0;
+}
+
+/* Responsive styles */
+@media (max-width: 992px) {
+    .popular-category-section {
+        padding: 4rem 0;
+    }
+    
+    .category-item {
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 2.4rem;
+    }
+    
+    .category-icon {
+        width: 4.5rem;
+        height: 4.5rem;
+    }
+    
+    .category-icon i {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .popular-category-section {
+        padding: 3rem 0;
+    }
+    
+    .category-item {
+        padding: 1.5rem;
+    }
+    
+    .category-icon {
+        width: 4rem;
+        height: 4rem;
+    }
+    
+    .category-name {
+        font-size: 1.4rem;
+    }
+    
+    .open-positions {
+        font-size: 1.2rem;
+    }
+} 

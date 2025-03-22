@@ -1,120 +1,109 @@
 <link rel="stylesheet" href="~/css/hero.css">
 <section class="hero">
     <div class="container">
-        <div class="row d-flex  align-items-center">
-            <div class="col-lg-6 ">
-                <h2 class="hero-title">
-                    Find a job that suits <br/>
+        <div class="row d-flex align-items-center">
+            <div class="col-lg-6 col-md-7">
+                <h1 class="hero-title">
+                    Find a job that suits <br />
                     your interest & skills.
-                </h2>
-                <span class="hero-subtitle ">
-                    Aliquam vitae turpis in diam convallis finibus in at risus. Nullam <br/> 
-                    in scelerisque leo, eget sollicitudin velit bestibulum.
-                </span>
-                <div class="search-bar  ">
-                    <div class="bg-white shadow-sm  d-flex align-items-center   ">
+                </h1>
+                <p class="hero-subtitle">
+                    A higher level of job search service that helps you find the right job at the right
+                    company for the right salary.
+                </p>
+                <form id="heroSearchForm" action="@Url.Action("Index", "Job")" method="get" class="search-bar">
+                    <div class="search-container shadow-sm">
                         <!-- Ô tìm kiếm từ khóa -->
-                        <div class="input-group-cs  ">
-                            <span class="input-group-text bg-white border-0 ">
+                        <div class="search-input-group">
+                            <span class="search-icon">
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </span>
-                            <input type="text" class="form-control border-0 " placeholder="Job title, Keyword..." />
+                            <input type="text" name="keyword" class="search-input"
+                                placeholder="Job title, keywords..." />
                         </div>
 
                         <!-- Phân cách -->
-                        <span class="mx-3 text-muted">|</span>
+                        <span class="search-divider d-none d-md-block">|</span>
 
                         <!-- Ô tìm kiếm địa điểm -->
-                        <div class="input-group-cs ">
-                            <span class="input-group-text bg-white border-0">
+                        <div class="search-input-group">
+                            <span class="search-icon">
                                 <i class="fa-solid fa-location-dot"></i>
                             </span>
-                            <input type="text" class="form-control border-0 " placeholder="Your Location" />
+                            <input type="text" name="location" class="search-input" placeholder="Location" />
                         </div>
 
                         <!-- Nút tìm kiếm -->
-                        <button class="btn btn-primary my-2">Find Job</button>
+                        <button type="submit" class="btn btn-primary search-button">
+                            <span class="d-none d-md-inline">Search</span>
+                            <i class="fas fa-search d-inline d-md-none"></i>
+                        </button>
                     </div>
-                    <div class="text-muted mt-3 ">
-                        Suggestion: Designer, Programing, Digital Marketing
+                    <div class="search-suggestions mt-2">
+                        Suggestions: <a href="@Url.Action("Index", "Job", new { keyword = "Designer" })">Designer</a>,
+                        <a href="@Url.Action("Index", "Job", new { keyword = "Developer" })">Developer</a>,
+                        <a href="@Url.Action("Index", "Job", new { keyword = "Web Design" })">Web Design</a>
                     </div>
-                </div>
-
+                </form>
             </div>
-            <div class="col-lg-5 offset-lg-1">
-                <img src="~/img/Illustration.png" alt="hero" class="hero-img">
+            <div class="col-lg-5 col-md-5 offset-lg-1 d-none d-md-block">
+                <img src="~/img/Illustration.png" alt="hero" class="hero-img img-fluid">
             </div>
-          
         </div>
-        <div class="row mt-5">
-            <div class="col-lg-3">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="card-body">
-                            <div class="media d-flex">
-                                <div class="align-self-center icon-item">
-                                    <img src="~/icon/briefcase-duotone 1.png" alt="icon">
-                                </div>
-                                <div class="media-body text-right">
-                                    <h3>1,75,324</h3>
-                                    <span>Live Jobs</span>
-                                </div>
-                            </div>
+
+        <div class="row mt-5 stats-row">
+            <div class="col-lg-3 col-md-6 col-sm-6 mb-4 mb-lg-0">
+                <div class="stats-card">
+                    <div class="stats-card-content">
+                        <div class="stats-icon">
+                            <img src="~/icon/briefcase-duotone 1.png" alt="icon">
+                        </div>
+                        <div class="stats-info">
+                            <h3>1,76,324</h3>
+                            <span>Jobs</span>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="card-body">
-                            <div class="media d-flex">
-                                <div class="align-self-center icon-item">
-                                    <img src="~/icon/briefcase-duotone 1.png" alt="icon">
-                                </div>
-                                <div class="media-body text-right">
-                                    <h3>1,75,324</h3>
-                                    <span>Live Jobs</span>
-                                </div>
-                            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 mb-4 mb-lg-0">
+                <div class="stats-card">
+                    <div class="stats-card-content">
+                        <div class="stats-icon">
+                            <img src="~/icon/briefcase-duotone 1.png" alt="icon">
+                        </div>
+                        <div class="stats-info">
+                            <h3>97,354</h3>
+                            <span>New jobs</span>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="card-body">
-                            <div class="media d-flex">
-                                <div class="align-self-center icon-item">
-                                    <img src="~/icon/buildings-duotone 1.png" alt="icon">
-                                </div>
-                                <div class="media-body text-right">
-                                    <h3>1,75,324</h3>
-                                    <span>Candidates</span>
-                                </div>
-                            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 mb-4 mb-lg-0">
+                <div class="stats-card">
+                    <div class="stats-card-content">
+                        <div class="stats-icon">
+                            <img src="~/icon/buildings-duotone 1.png" alt="icon">
+                        </div>
+                        <div class="stats-info">
+                            <h3>56,47754</h3>
+                            <span>Companies</span>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="card-body">
-                            <div class="media d-flex">
-                                <div class="align-self-center icon-item">
-                                    <img src="~/icon/users-duotone 1.png" alt="icon">
-                                </div>
-                                <div class="media-body text-right">
-                                    <h3>1,75,324</h3>
-                                    <span>New Jobs</span>
-                                </div>
-                            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 mb-4 mb-lg-0">
+                <div class="stats-card">
+                    <div class="stats-card-content">
+                        <div class="stats-icon">
+                            <img src="~/icon/users-duotone 1.png" alt="icon">
+                        </div>
+                        <div class="stats-info">
+                            <h3>7,532</h3>
+                            <span>Candidates</span>
                         </div>
                     </div>
                 </div>
             </div>
-            </div>
+        </div>
     </div>
 </section>

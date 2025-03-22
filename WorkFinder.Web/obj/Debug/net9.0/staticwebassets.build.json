@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "VTfy5nEZ7GJOEMXmNqV9CgH+LjejbBcQt5FMS7Ieg+k=",
+  "Hash": "tCcviuISCk/pDz43IvUwIIn0uF4QLTqKLtKV0n2jk68=",
   "Source": "WorkFinder.Web",
   "BasePath": "_content/WorkFinder.Web",
   "Mode": "Default",
@@ -1529,6 +1529,27 @@
       "OriginalItemSpec": "/Users/hieupt/.nuget/packages/microsoft.aspnetcore.identity.ui/9.0.3/staticwebassets/V5/lib/jquery-validation/dist/jquery.validate.min.js"
     },
     {
+      "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/3265v5oncb-6moud2o9ak.gz",
+      "SourceId": "WorkFinder.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/",
+      "BasePath": "_content/WorkFinder.Web",
+      "RelativePath": "js/utils#[.{fingerprint=6moud2o9ak}]?.js.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/js/utils.js",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "u82rktwt78",
+      "Integrity": "4lOBZvbXukOUv+5cTJf1RWS4Aj5K22JkVHgXe9mLEio=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/js/utils.js"
+    },
+    {
       "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/32ay0fjd1c-sw8kbue69q.gz",
       "SourceId": "WorkFinder.Web",
       "SourceType": "Discovered",
@@ -1821,6 +1842,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css"
+    },
+    {
+      "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/6cvtt9wo3g-fsdh5ue7jq.gz",
+      "SourceId": "WorkFinder.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/",
+      "BasePath": "_content/WorkFinder.Web",
+      "RelativePath": "css/category#[.{fingerprint=fsdh5ue7jq}]?.css.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/category.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "61pks49wt2",
+      "Integrity": "RohUZkHrmDSVRzm+5N9JpTsX/SOfDSvSB9rJDDmX4aE=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/category.css"
     },
     {
       "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/6qr30wt54b-v0zj4ognzu.gz",
@@ -2306,12 +2348,12 @@
       "OriginalItemSpec": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/icon/image 1.svg"
     },
     {
-      "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/crcvv1k8kg-qcw1q6w9fv.gz",
+      "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/crcvv1k8kg-ap5m9sfg0h.gz",
       "SourceId": "WorkFinder.Web",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/",
       "BasePath": "_content/WorkFinder.Web",
-      "RelativePath": "css/step#[.{fingerprint=qcw1q6w9fv}]?.css.gz",
+      "RelativePath": "css/step#[.{fingerprint=ap5m9sfg0h}]?.css.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -2320,8 +2362,8 @@
       "RelatedAsset": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/step.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "lvm0pykaxx",
-      "Integrity": "0bSLR5IooOM9G3nx/PXcPlYUW2FTfmSSadi5/Wk1WvQ=",
+      "Fingerprint": "065js6b3s2",
+      "Integrity": "6ITvb0KcZ75t3zM2VL4lj2DFdMLDrTCtXSZB9Fg3WdI=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/step.css"
@@ -2369,12 +2411,12 @@
       "OriginalItemSpec": "/Users/hieupt/.nuget/packages/microsoft.aspnetcore.identity.ui/9.0.3/staticwebassets/V5/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css"
     },
     {
-      "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/dc92lb7ngb-duxl33j8eb.gz",
+      "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/dc92lb7ngb-ykpw3k2aew.gz",
       "SourceId": "WorkFinder.Web",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/",
       "BasePath": "_content/WorkFinder.Web",
-      "RelativePath": "css/hero#[.{fingerprint=duxl33j8eb}]?.css.gz",
+      "RelativePath": "css/hero#[.{fingerprint=ykpw3k2aew}]?.css.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -2383,8 +2425,8 @@
       "RelatedAsset": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/hero.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "ybm6lcjliq",
-      "Integrity": "cvRN5xOBChv0Xtf5MpHaxahXCZOY4Bs0V9ImF5NeH6g=",
+      "Fingerprint": "ibn5ys3hjz",
+      "Integrity": "TscT8fanySEfji9MSdV4OT6IOFBciBsq0Tlf1GnrgxU=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/hero.css"
@@ -2474,12 +2516,12 @@
       "OriginalItemSpec": "/Users/hieupt/.nuget/packages/microsoft.aspnetcore.identity.ui/9.0.3/staticwebassets/V5/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css"
     },
     {
-      "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/ely8ow1dzq-3nk3ytr6vd.gz",
+      "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/ely8ow1dzq-x499kjc8ih.gz",
       "SourceId": "WorkFinder.Web",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/",
       "BasePath": "_content/WorkFinder.Web",
-      "RelativePath": "css/sticky-header#[.{fingerprint=3nk3ytr6vd}]?.css.gz",
+      "RelativePath": "css/sticky-header#[.{fingerprint=x499kjc8ih}]?.css.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -2488,8 +2530,8 @@
       "RelatedAsset": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/sticky-header.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "3mus8o609l",
-      "Integrity": "Ba73hZf4K0jFGVKDhJpvJfVqS1tdMVxA8doGrAMtla8=",
+      "Fingerprint": "0jgtp1bd5c",
+      "Integrity": "7EWku4IirnsCee7LPFGI5jIQsKCy1bX2VgZYjtauTsk=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/sticky-header.css"
@@ -2514,6 +2556,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/es4im42h7p-e5onelikqi.gz",
+      "SourceId": "WorkFinder.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/",
+      "BasePath": "_content/WorkFinder.Web",
+      "RelativePath": "css/bootstrap-container-override#[.{fingerprint=e5onelikqi}]?.css.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/bootstrap-container-override.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "0vp3nzcm7a",
+      "Integrity": "VDc+a4mPhML79cRchf1W347Qk9nbwDNC3P0alQyrhzQ=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/bootstrap-container-override.css"
     },
     {
       "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/f6n5k7ajwp-fvhpjtyr6v.gz",
@@ -2747,12 +2810,12 @@
       "OriginalItemSpec": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css.map"
     },
     {
-      "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/i1or4hkeem-50obzwsi93.gz",
+      "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/i1or4hkeem-fwp0nnet9u.gz",
       "SourceId": "WorkFinder.Web",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/",
       "BasePath": "_content/WorkFinder.Web",
-      "RelativePath": "css/site#[.{fingerprint=50obzwsi93}]?.css.gz",
+      "RelativePath": "css/site#[.{fingerprint=fwp0nnet9u}]?.css.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -2761,8 +2824,8 @@
       "RelatedAsset": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/site.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "bz2skriijk",
-      "Integrity": "6YHJvXB0cwaDvBO5/wyTEZ7wyfZF6Cxa6c3cdm7MkxA=",
+      "Fingerprint": "vrbu4rf9zg",
+      "Integrity": "G5fQHOKuvrtYMRtecn0i7oPq84SBgAcSSNPPEP8Y8K0=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/site.css"
@@ -2915,6 +2978,27 @@
       "OriginalItemSpec": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/lib/jquery/dist/jquery.slim.min.map"
     },
     {
+      "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/jur64tdre6-9kdguhv1lc.gz",
+      "SourceId": "WorkFinder.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/",
+      "BasePath": "_content/WorkFinder.Web",
+      "RelativePath": "css/top-company#[.{fingerprint=9kdguhv1lc}]?.css.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/top-company.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "kjbk3hvv2w",
+      "Integrity": "cO7us4uS2p8ThG/PzuJm+Y1IO7tikLQTj4JYEYUpGms=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/top-company.css"
+    },
+    {
       "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/k8b25g0zwc-b7pk76d08c.gz",
       "SourceId": "Microsoft.AspNetCore.Identity.UI",
       "SourceType": "Package",
@@ -2978,12 +3062,12 @@
       "OriginalItemSpec": "/Users/hieupt/.nuget/packages/microsoft.aspnetcore.identity.ui/9.0.3/staticwebassets/V5/lib/bootstrap/dist/css/bootstrap.rtl.css"
     },
     {
-      "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/l654nposfe-jga6175g4k.gz",
+      "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/l654nposfe-8yvi8v85nk.gz",
       "SourceId": "WorkFinder.Web",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/",
       "BasePath": "_content/WorkFinder.Web",
-      "RelativePath": "css/company-details#[.{fingerprint=jga6175g4k}]?.css.gz",
+      "RelativePath": "css/company-details#[.{fingerprint=8yvi8v85nk}]?.css.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -2992,8 +3076,8 @@
       "RelatedAsset": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/company-details.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "wngs7ili32",
-      "Integrity": "XAI/juHCQc0ZLnlX4z8Fz3pje9PDWtO0kOorYQkHyOA=",
+      "Fingerprint": "sqankn5gq6",
+      "Integrity": "JDa39Bw1j/svVhOo8Mmcnrf8mLnpzICKSSuBndYD3vg=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/company-details.css"
@@ -3102,6 +3186,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css"
+    },
+    {
+      "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/myhhsew2z5-r1gkjxrmgr.gz",
+      "SourceId": "WorkFinder.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/",
+      "BasePath": "_content/WorkFinder.Web",
+      "RelativePath": "css/featured-job#[.{fingerprint=r1gkjxrmgr}]?.css.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/featured-job.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "ntnt9isdof",
+      "Integrity": "JbHx+X2n07eyOjIDwxW+hbXMP/q4CLJo/jXiqqijbBA=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/featured-job.css"
     },
     {
       "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/mypdno023w-6cfz1n2cew.gz",
@@ -4385,6 +4490,48 @@
       "OriginalItemSpec": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/scopedcss/projectbundle/WorkFinder.Web.bundle.scp.css"
     },
     {
+      "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/bootstrap-container-override.css",
+      "SourceId": "WorkFinder.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/",
+      "BasePath": "_content/WorkFinder.Web",
+      "RelativePath": "css/bootstrap-container-override#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "e5onelikqi",
+      "Integrity": "/sNK6j4JyY+E3/HhWEgAaIAqQhOEtYRSnpwHvt2uArs=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/css/bootstrap-container-override.css"
+    },
+    {
+      "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/category.css",
+      "SourceId": "WorkFinder.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/",
+      "BasePath": "_content/WorkFinder.Web",
+      "RelativePath": "css/category#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "fsdh5ue7jq",
+      "Integrity": "8aKiGeldBBPTpMwKy7sCZdc/l6Vnu/W1MQiF6bwEHAU=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/css/category.css"
+    },
+    {
       "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/company-details.css",
       "SourceId": "WorkFinder.Web",
       "SourceType": "Discovered",
@@ -4399,8 +4546,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "jga6175g4k",
-      "Integrity": "jRjEHmqB3WeLFnPfCh/2nlEJOWSPXRXgGvXcrl5lYEk=",
+      "Fingerprint": "8yvi8v85nk",
+      "Integrity": "wOmEPbcy09DHU58i1V4Ltts5sckd/N0iN+FQgj3vGt0=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/css/company-details.css"
@@ -4425,6 +4572,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/css/company.css"
+    },
+    {
+      "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/featured-job.css",
+      "SourceId": "WorkFinder.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/",
+      "BasePath": "_content/WorkFinder.Web",
+      "RelativePath": "css/featured-job#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "r1gkjxrmgr",
+      "Integrity": "P9XQAu2EZL8exsHGtQC/UxdLOdk25XPcci8smWCxIOM=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/css/featured-job.css"
     },
     {
       "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/footer.css",
@@ -4483,8 +4651,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "duxl33j8eb",
-      "Integrity": "a2KZNQt1TuKBeZ7l0URUXa2gD5Z9HKmwOKFnDoFojVY=",
+      "Fingerprint": "ykpw3k2aew",
+      "Integrity": "fmNMadcnftDFJPBnTigXgbZA+biAzqK0fhMYE/eC8gI=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/css/hero.css"
@@ -4504,8 +4672,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "50obzwsi93",
-      "Integrity": "RRH57NUmxRdMBEPhv1YclIj3TIAFbOfDWvf5+yQT1fg=",
+      "Fingerprint": "fwp0nnet9u",
+      "Integrity": "4SnMpC1X3/jVWR4xct+EBohuOrPfGKUcofWotdorXgA=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/css/site.css"
@@ -4525,8 +4693,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "qcw1q6w9fv",
-      "Integrity": "9jPnI0+Z1xDavy98VfcjSTrCm9LC5j/ipU3V5ySYAMY=",
+      "Fingerprint": "ap5m9sfg0h",
+      "Integrity": "Xk9aZ4fAM5xSQOBPia4XJtyDU9AX5383mW7CpO7WHsk=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/css/step.css"
@@ -4546,11 +4714,32 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "3nk3ytr6vd",
-      "Integrity": "P7H9vt/Mw4s4/ScSxXWhpVa0JykgpiKjIUUbzmRlMJo=",
+      "Fingerprint": "x499kjc8ih",
+      "Integrity": "f+mBLzxXqLCHvUKH2ufMTNQL+JD/OFed9pq8EomD1II=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/css/sticky-header.css"
+    },
+    {
+      "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/top-company.css",
+      "SourceId": "WorkFinder.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/",
+      "BasePath": "_content/WorkFinder.Web",
+      "RelativePath": "css/top-company#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "9kdguhv1lc",
+      "Integrity": "qZpHgIt5pPwaLRjd8Rji5Cn3bmC/PKr8eEDgeLyWuFI=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/css/top-company.css"
     },
     {
       "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/favicon.ico",
@@ -4971,6 +5160,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/js/site.js"
+    },
+    {
+      "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/js/utils.js",
+      "SourceId": "WorkFinder.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/",
+      "BasePath": "_content/WorkFinder.Web",
+      "RelativePath": "js/utils#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "6moud2o9ak",
+      "Integrity": "4vJzpX881LbftzlRUr2G08+KAZN5M/QW9CVXLrApl30=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/js/utils.js"
     },
     {
       "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css",
@@ -6340,13 +6550,13 @@
   ],
   "Endpoints": [
     {
-      "Route": "css/company-details.css",
-      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/l654nposfe-jga6175g4k.gz",
+      "Route": "css/bootstrap-container-override.css",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/es4im42h7p-e5onelikqi.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000613496933"
+          "Quality": "0.001984126984"
         }
       ],
       "ResponseHeaders": [
@@ -6356,15 +6566,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1629"
+          "Value": "503"
         },
         {
           "Name": "ETag",
-          "Value": "\"XAI/juHCQc0ZLnlX4z8Fz3pje9PDWtO0kOorYQkHyOA=\""
+          "Value": "\"VDc+a4mPhML79cRchf1W347Qk9nbwDNC3P0alQyrhzQ=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 21 Mar 2025 17:21:03 GMT"
+          "Value": "Sat, 22 Mar 2025 13:17:19 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6384,18 +6594,622 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"jRjEHmqB3WeLFnPfCh/2nlEJOWSPXRXgGvXcrl5lYEk=\""
+          "Value": "W/\"/sNK6j4JyY+E3/HhWEgAaIAqQhOEtYRSnpwHvt2uArs=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-jRjEHmqB3WeLFnPfCh/2nlEJOWSPXRXgGvXcrl5lYEk="
+          "Value": "sha256-/sNK6j4JyY+E3/HhWEgAaIAqQhOEtYRSnpwHvt2uArs="
         }
       ]
     },
     {
-      "Route": "css/company-details.css",
+      "Route": "css/bootstrap-container-override.css",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/bootstrap-container-override.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2903"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"/sNK6j4JyY+E3/HhWEgAaIAqQhOEtYRSnpwHvt2uArs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 22 Mar 2025 13:17:19 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-/sNK6j4JyY+E3/HhWEgAaIAqQhOEtYRSnpwHvt2uArs="
+        }
+      ]
+    },
+    {
+      "Route": "css/bootstrap-container-override.css.gz",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/es4im42h7p-e5onelikqi.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "503"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"VDc+a4mPhML79cRchf1W347Qk9nbwDNC3P0alQyrhzQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 22 Mar 2025 13:17:19 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-VDc+a4mPhML79cRchf1W347Qk9nbwDNC3P0alQyrhzQ="
+        }
+      ]
+    },
+    {
+      "Route": "css/bootstrap-container-override.e5onelikqi.css",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/es4im42h7p-e5onelikqi.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001984126984"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "503"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"VDc+a4mPhML79cRchf1W347Qk9nbwDNC3P0alQyrhzQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 22 Mar 2025 13:17:19 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"/sNK6j4JyY+E3/HhWEgAaIAqQhOEtYRSnpwHvt2uArs=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "e5onelikqi"
+        },
+        {
+          "Name": "label",
+          "Value": "css/bootstrap-container-override.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-/sNK6j4JyY+E3/HhWEgAaIAqQhOEtYRSnpwHvt2uArs="
+        }
+      ]
+    },
+    {
+      "Route": "css/bootstrap-container-override.e5onelikqi.css",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/bootstrap-container-override.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2903"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"/sNK6j4JyY+E3/HhWEgAaIAqQhOEtYRSnpwHvt2uArs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 22 Mar 2025 13:17:19 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "e5onelikqi"
+        },
+        {
+          "Name": "label",
+          "Value": "css/bootstrap-container-override.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-/sNK6j4JyY+E3/HhWEgAaIAqQhOEtYRSnpwHvt2uArs="
+        }
+      ]
+    },
+    {
+      "Route": "css/bootstrap-container-override.e5onelikqi.css.gz",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/es4im42h7p-e5onelikqi.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "503"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"VDc+a4mPhML79cRchf1W347Qk9nbwDNC3P0alQyrhzQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 22 Mar 2025 13:17:19 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "e5onelikqi"
+        },
+        {
+          "Name": "label",
+          "Value": "css/bootstrap-container-override.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-VDc+a4mPhML79cRchf1W347Qk9nbwDNC3P0alQyrhzQ="
+        }
+      ]
+    },
+    {
+      "Route": "css/category.css",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/6cvtt9wo3g-fsdh5ue7jq.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000754147813"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1325"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"RohUZkHrmDSVRzm+5N9JpTsX/SOfDSvSB9rJDDmX4aE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 22 Mar 2025 18:08:05 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"8aKiGeldBBPTpMwKy7sCZdc/l6Vnu/W1MQiF6bwEHAU=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-8aKiGeldBBPTpMwKy7sCZdc/l6Vnu/W1MQiF6bwEHAU="
+        }
+      ]
+    },
+    {
+      "Route": "css/category.css",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/category.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6323"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"8aKiGeldBBPTpMwKy7sCZdc/l6Vnu/W1MQiF6bwEHAU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 22 Mar 2025 18:08:05 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-8aKiGeldBBPTpMwKy7sCZdc/l6Vnu/W1MQiF6bwEHAU="
+        }
+      ]
+    },
+    {
+      "Route": "css/category.css.gz",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/6cvtt9wo3g-fsdh5ue7jq.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1325"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"RohUZkHrmDSVRzm+5N9JpTsX/SOfDSvSB9rJDDmX4aE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 22 Mar 2025 18:08:05 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-RohUZkHrmDSVRzm+5N9JpTsX/SOfDSvSB9rJDDmX4aE="
+        }
+      ]
+    },
+    {
+      "Route": "css/category.fsdh5ue7jq.css",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/6cvtt9wo3g-fsdh5ue7jq.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000754147813"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1325"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"RohUZkHrmDSVRzm+5N9JpTsX/SOfDSvSB9rJDDmX4aE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 22 Mar 2025 18:08:05 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"8aKiGeldBBPTpMwKy7sCZdc/l6Vnu/W1MQiF6bwEHAU=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "fsdh5ue7jq"
+        },
+        {
+          "Name": "label",
+          "Value": "css/category.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-8aKiGeldBBPTpMwKy7sCZdc/l6Vnu/W1MQiF6bwEHAU="
+        }
+      ]
+    },
+    {
+      "Route": "css/category.fsdh5ue7jq.css",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/category.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6323"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"8aKiGeldBBPTpMwKy7sCZdc/l6Vnu/W1MQiF6bwEHAU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 22 Mar 2025 18:08:05 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "fsdh5ue7jq"
+        },
+        {
+          "Name": "label",
+          "Value": "css/category.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-8aKiGeldBBPTpMwKy7sCZdc/l6Vnu/W1MQiF6bwEHAU="
+        }
+      ]
+    },
+    {
+      "Route": "css/category.fsdh5ue7jq.css.gz",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/6cvtt9wo3g-fsdh5ue7jq.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1325"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"RohUZkHrmDSVRzm+5N9JpTsX/SOfDSvSB9rJDDmX4aE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 22 Mar 2025 18:08:05 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "fsdh5ue7jq"
+        },
+        {
+          "Name": "label",
+          "Value": "css/category.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-RohUZkHrmDSVRzm+5N9JpTsX/SOfDSvSB9rJDDmX4aE="
+        }
+      ]
+    },
+    {
+      "Route": "css/company-details.8yvi8v85nk.css",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/l654nposfe-8yvi8v85nk.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000526870390"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1897"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"JDa39Bw1j/svVhOo8Mmcnrf8mLnpzICKSSuBndYD3vg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 22 Mar 2025 13:28:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"wOmEPbcy09DHU58i1V4Ltts5sckd/N0iN+FQgj3vGt0=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "8yvi8v85nk"
+        },
+        {
+          "Name": "label",
+          "Value": "css/company-details.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-wOmEPbcy09DHU58i1V4Ltts5sckd/N0iN+FQgj3vGt0="
+        }
+      ]
+    },
+    {
+      "Route": "css/company-details.8yvi8v85nk.css",
       "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/company-details.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -6405,7 +7219,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "6971"
+          "Value": "7958"
         },
         {
           "Name": "Content-Type",
@@ -6413,121 +7227,21 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"jRjEHmqB3WeLFnPfCh/2nlEJOWSPXRXgGvXcrl5lYEk=\""
+          "Value": "\"wOmEPbcy09DHU58i1V4Ltts5sckd/N0iN+FQgj3vGt0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 21 Mar 2025 17:21:03 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-jRjEHmqB3WeLFnPfCh/2nlEJOWSPXRXgGvXcrl5lYEk="
-        }
-      ]
-    },
-    {
-      "Route": "css/company-details.css.gz",
-      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/l654nposfe-jga6175g4k.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "1629"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"XAI/juHCQc0ZLnlX4z8Fz3pje9PDWtO0kOorYQkHyOA=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Fri, 21 Mar 2025 17:21:03 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-XAI/juHCQc0ZLnlX4z8Fz3pje9PDWtO0kOorYQkHyOA="
-        }
-      ]
-    },
-    {
-      "Route": "css/company-details.jga6175g4k.css",
-      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/l654nposfe-jga6175g4k.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000613496933"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "1629"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"XAI/juHCQc0ZLnlX4z8Fz3pje9PDWtO0kOorYQkHyOA=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Fri, 21 Mar 2025 17:21:03 GMT"
+          "Value": "Sat, 22 Mar 2025 13:28:54 GMT"
         },
         {
           "Name": "Cache-Control",
           "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"jRjEHmqB3WeLFnPfCh/2nlEJOWSPXRXgGvXcrl5lYEk=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "jga6175g4k"
+          "Value": "8yvi8v85nk"
         },
         {
           "Name": "label",
@@ -6535,13 +7249,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-jRjEHmqB3WeLFnPfCh/2nlEJOWSPXRXgGvXcrl5lYEk="
+          "Value": "sha256-wOmEPbcy09DHU58i1V4Ltts5sckd/N0iN+FQgj3vGt0="
         }
       ]
     },
     {
-      "Route": "css/company-details.jga6175g4k.css",
-      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/company-details.css",
+      "Route": "css/company-details.8yvi8v85nk.css.gz",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/l654nposfe-8yvi8v85nk.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6550,7 +7264,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "6971"
+          "Value": "1897"
         },
         {
           "Name": "Content-Type",
@@ -6558,56 +7272,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"jRjEHmqB3WeLFnPfCh/2nlEJOWSPXRXgGvXcrl5lYEk=\""
+          "Value": "\"JDa39Bw1j/svVhOo8Mmcnrf8mLnpzICKSSuBndYD3vg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 21 Mar 2025 17:21:03 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "jga6175g4k"
-        },
-        {
-          "Name": "label",
-          "Value": "css/company-details.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-jRjEHmqB3WeLFnPfCh/2nlEJOWSPXRXgGvXcrl5lYEk="
-        }
-      ]
-    },
-    {
-      "Route": "css/company-details.jga6175g4k.css.gz",
-      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/l654nposfe-jga6175g4k.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "1629"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"XAI/juHCQc0ZLnlX4z8Fz3pje9PDWtO0kOorYQkHyOA=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Fri, 21 Mar 2025 17:21:03 GMT"
+          "Value": "Sat, 22 Mar 2025 13:28:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6625,7 +7294,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "jga6175g4k"
+          "Value": "8yvi8v85nk"
         },
         {
           "Name": "label",
@@ -6633,7 +7302,144 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-XAI/juHCQc0ZLnlX4z8Fz3pje9PDWtO0kOorYQkHyOA="
+          "Value": "sha256-JDa39Bw1j/svVhOo8Mmcnrf8mLnpzICKSSuBndYD3vg="
+        }
+      ]
+    },
+    {
+      "Route": "css/company-details.css",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/l654nposfe-8yvi8v85nk.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000526870390"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1897"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"JDa39Bw1j/svVhOo8Mmcnrf8mLnpzICKSSuBndYD3vg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 22 Mar 2025 13:28:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"wOmEPbcy09DHU58i1V4Ltts5sckd/N0iN+FQgj3vGt0=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-wOmEPbcy09DHU58i1V4Ltts5sckd/N0iN+FQgj3vGt0="
+        }
+      ]
+    },
+    {
+      "Route": "css/company-details.css",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/company-details.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "7958"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"wOmEPbcy09DHU58i1V4Ltts5sckd/N0iN+FQgj3vGt0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 22 Mar 2025 13:28:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-wOmEPbcy09DHU58i1V4Ltts5sckd/N0iN+FQgj3vGt0="
+        }
+      ]
+    },
+    {
+      "Route": "css/company-details.css.gz",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/l654nposfe-8yvi8v85nk.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1897"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"JDa39Bw1j/svVhOo8Mmcnrf8mLnpzICKSSuBndYD3vg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 22 Mar 2025 13:28:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-JDa39Bw1j/svVhOo8Mmcnrf8mLnpzICKSSuBndYD3vg="
         }
       ]
     },
@@ -6932,6 +7738,304 @@
         {
           "Name": "integrity",
           "Value": "sha256-+4/tB1y9Avi+lq0Q+T4fo+H399N8hsoOhkUJPBk24E0="
+        }
+      ]
+    },
+    {
+      "Route": "css/featured-job.css",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/myhhsew2z5-r1gkjxrmgr.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001197604790"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "834"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"JbHx+X2n07eyOjIDwxW+hbXMP/q4CLJo/jXiqqijbBA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 22 Mar 2025 18:10:19 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"P9XQAu2EZL8exsHGtQC/UxdLOdk25XPcci8smWCxIOM=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-P9XQAu2EZL8exsHGtQC/UxdLOdk25XPcci8smWCxIOM="
+        }
+      ]
+    },
+    {
+      "Route": "css/featured-job.css",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/featured-job.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2906"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"P9XQAu2EZL8exsHGtQC/UxdLOdk25XPcci8smWCxIOM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 22 Mar 2025 18:10:19 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-P9XQAu2EZL8exsHGtQC/UxdLOdk25XPcci8smWCxIOM="
+        }
+      ]
+    },
+    {
+      "Route": "css/featured-job.css.gz",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/myhhsew2z5-r1gkjxrmgr.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "834"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"JbHx+X2n07eyOjIDwxW+hbXMP/q4CLJo/jXiqqijbBA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 22 Mar 2025 18:10:19 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-JbHx+X2n07eyOjIDwxW+hbXMP/q4CLJo/jXiqqijbBA="
+        }
+      ]
+    },
+    {
+      "Route": "css/featured-job.r1gkjxrmgr.css",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/myhhsew2z5-r1gkjxrmgr.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001197604790"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "834"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"JbHx+X2n07eyOjIDwxW+hbXMP/q4CLJo/jXiqqijbBA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 22 Mar 2025 18:10:19 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"P9XQAu2EZL8exsHGtQC/UxdLOdk25XPcci8smWCxIOM=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "r1gkjxrmgr"
+        },
+        {
+          "Name": "label",
+          "Value": "css/featured-job.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-P9XQAu2EZL8exsHGtQC/UxdLOdk25XPcci8smWCxIOM="
+        }
+      ]
+    },
+    {
+      "Route": "css/featured-job.r1gkjxrmgr.css",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/featured-job.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2906"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"P9XQAu2EZL8exsHGtQC/UxdLOdk25XPcci8smWCxIOM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 22 Mar 2025 18:10:19 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "r1gkjxrmgr"
+        },
+        {
+          "Name": "label",
+          "Value": "css/featured-job.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-P9XQAu2EZL8exsHGtQC/UxdLOdk25XPcci8smWCxIOM="
+        }
+      ]
+    },
+    {
+      "Route": "css/featured-job.r1gkjxrmgr.css.gz",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/myhhsew2z5-r1gkjxrmgr.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "834"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"JbHx+X2n07eyOjIDwxW+hbXMP/q4CLJo/jXiqqijbBA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 22 Mar 2025 18:10:19 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "r1gkjxrmgr"
+        },
+        {
+          "Name": "label",
+          "Value": "css/featured-job.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-JbHx+X2n07eyOjIDwxW+hbXMP/q4CLJo/jXiqqijbBA="
         }
       ]
     },
@@ -7533,12 +8637,12 @@
     },
     {
       "Route": "css/hero.css",
-      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/dc92lb7ngb-duxl33j8eb.gz",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/dc92lb7ngb-ykpw3k2aew.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.003496503497"
+          "Quality": "0.001021450460"
         }
       ],
       "ResponseHeaders": [
@@ -7548,15 +8652,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "285"
+          "Value": "978"
         },
         {
           "Name": "ETag",
-          "Value": "\"cvRN5xOBChv0Xtf5MpHaxahXCZOY4Bs0V9ImF5NeH6g=\""
+          "Value": "\"TscT8fanySEfji9MSdV4OT6IOFBciBsq0Tlf1GnrgxU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 06 Mar 2025 02:51:54 GMT"
+          "Value": "Sat, 22 Mar 2025 17:43:08 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -7576,13 +8680,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"a2KZNQt1TuKBeZ7l0URUXa2gD5Z9HKmwOKFnDoFojVY=\""
+          "Value": "W/\"fmNMadcnftDFJPBnTigXgbZA+biAzqK0fhMYE/eC8gI=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-a2KZNQt1TuKBeZ7l0URUXa2gD5Z9HKmwOKFnDoFojVY="
+          "Value": "sha256-fmNMadcnftDFJPBnTigXgbZA+biAzqK0fhMYE/eC8gI="
         }
       ]
     },
@@ -7597,7 +8701,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "534"
+          "Value": "3549"
         },
         {
           "Name": "Content-Type",
@@ -7605,11 +8709,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"a2KZNQt1TuKBeZ7l0URUXa2gD5Z9HKmwOKFnDoFojVY=\""
+          "Value": "\"fmNMadcnftDFJPBnTigXgbZA+biAzqK0fhMYE/eC8gI=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 06 Mar 2025 02:51:54 GMT"
+          "Value": "Sat, 22 Mar 2025 17:43:08 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -7619,13 +8723,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-a2KZNQt1TuKBeZ7l0URUXa2gD5Z9HKmwOKFnDoFojVY="
+          "Value": "sha256-fmNMadcnftDFJPBnTigXgbZA+biAzqK0fhMYE/eC8gI="
         }
       ]
     },
     {
       "Route": "css/hero.css.gz",
-      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/dc92lb7ngb-duxl33j8eb.gz",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/dc92lb7ngb-ykpw3k2aew.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -7634,7 +8738,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "285"
+          "Value": "978"
         },
         {
           "Name": "Content-Type",
@@ -7642,11 +8746,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"cvRN5xOBChv0Xtf5MpHaxahXCZOY4Bs0V9ImF5NeH6g=\""
+          "Value": "\"TscT8fanySEfji9MSdV4OT6IOFBciBsq0Tlf1GnrgxU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 06 Mar 2025 02:51:54 GMT"
+          "Value": "Sat, 22 Mar 2025 17:43:08 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -7664,18 +8768,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-cvRN5xOBChv0Xtf5MpHaxahXCZOY4Bs0V9ImF5NeH6g="
+          "Value": "sha256-TscT8fanySEfji9MSdV4OT6IOFBciBsq0Tlf1GnrgxU="
         }
       ]
     },
     {
-      "Route": "css/hero.duxl33j8eb.css",
-      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/dc92lb7ngb-duxl33j8eb.gz",
+      "Route": "css/hero.ykpw3k2aew.css",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/dc92lb7ngb-ykpw3k2aew.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.003496503497"
+          "Quality": "0.001021450460"
         }
       ],
       "ResponseHeaders": [
@@ -7685,15 +8789,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "285"
+          "Value": "978"
         },
         {
           "Name": "ETag",
-          "Value": "\"cvRN5xOBChv0Xtf5MpHaxahXCZOY4Bs0V9ImF5NeH6g=\""
+          "Value": "\"TscT8fanySEfji9MSdV4OT6IOFBciBsq0Tlf1GnrgxU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 06 Mar 2025 02:51:54 GMT"
+          "Value": "Sat, 22 Mar 2025 17:43:08 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -7713,13 +8817,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"a2KZNQt1TuKBeZ7l0URUXa2gD5Z9HKmwOKFnDoFojVY=\""
+          "Value": "W/\"fmNMadcnftDFJPBnTigXgbZA+biAzqK0fhMYE/eC8gI=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "duxl33j8eb"
+          "Value": "ykpw3k2aew"
         },
         {
           "Name": "label",
@@ -7727,12 +8831,12 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-a2KZNQt1TuKBeZ7l0URUXa2gD5Z9HKmwOKFnDoFojVY="
+          "Value": "sha256-fmNMadcnftDFJPBnTigXgbZA+biAzqK0fhMYE/eC8gI="
         }
       ]
     },
     {
-      "Route": "css/hero.duxl33j8eb.css",
+      "Route": "css/hero.ykpw3k2aew.css",
       "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/hero.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -7742,7 +8846,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "534"
+          "Value": "3549"
         },
         {
           "Name": "Content-Type",
@@ -7750,11 +8854,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"a2KZNQt1TuKBeZ7l0URUXa2gD5Z9HKmwOKFnDoFojVY=\""
+          "Value": "\"fmNMadcnftDFJPBnTigXgbZA+biAzqK0fhMYE/eC8gI=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 06 Mar 2025 02:51:54 GMT"
+          "Value": "Sat, 22 Mar 2025 17:43:08 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -7764,7 +8868,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "duxl33j8eb"
+          "Value": "ykpw3k2aew"
         },
         {
           "Name": "label",
@@ -7772,13 +8876,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-a2KZNQt1TuKBeZ7l0URUXa2gD5Z9HKmwOKFnDoFojVY="
+          "Value": "sha256-fmNMadcnftDFJPBnTigXgbZA+biAzqK0fhMYE/eC8gI="
         }
       ]
     },
     {
-      "Route": "css/hero.duxl33j8eb.css.gz",
-      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/dc92lb7ngb-duxl33j8eb.gz",
+      "Route": "css/hero.ykpw3k2aew.css.gz",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/dc92lb7ngb-ykpw3k2aew.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -7787,7 +8891,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "285"
+          "Value": "978"
         },
         {
           "Name": "Content-Type",
@@ -7795,11 +8899,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"cvRN5xOBChv0Xtf5MpHaxahXCZOY4Bs0V9ImF5NeH6g=\""
+          "Value": "\"TscT8fanySEfji9MSdV4OT6IOFBciBsq0Tlf1GnrgxU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 06 Mar 2025 02:51:54 GMT"
+          "Value": "Sat, 22 Mar 2025 17:43:08 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -7817,7 +8921,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "duxl33j8eb"
+          "Value": "ykpw3k2aew"
         },
         {
           "Name": "label",
@@ -7825,168 +8929,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-cvRN5xOBChv0Xtf5MpHaxahXCZOY4Bs0V9ImF5NeH6g="
-        }
-      ]
-    },
-    {
-      "Route": "css/site.50obzwsi93.css",
-      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/i1or4hkeem-50obzwsi93.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.001104972376"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "904"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"6YHJvXB0cwaDvBO5/wyTEZ7wyfZF6Cxa6c3cdm7MkxA=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 13 Mar 2025 20:25:09 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"RRH57NUmxRdMBEPhv1YclIj3TIAFbOfDWvf5+yQT1fg=\""
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "50obzwsi93"
-        },
-        {
-          "Name": "label",
-          "Value": "css/site.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-RRH57NUmxRdMBEPhv1YclIj3TIAFbOfDWvf5+yQT1fg="
-        }
-      ]
-    },
-    {
-      "Route": "css/site.50obzwsi93.css",
-      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/site.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "2541"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"RRH57NUmxRdMBEPhv1YclIj3TIAFbOfDWvf5+yQT1fg=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 13 Mar 2025 20:25:09 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "50obzwsi93"
-        },
-        {
-          "Name": "label",
-          "Value": "css/site.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-RRH57NUmxRdMBEPhv1YclIj3TIAFbOfDWvf5+yQT1fg="
-        }
-      ]
-    },
-    {
-      "Route": "css/site.50obzwsi93.css.gz",
-      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/i1or4hkeem-50obzwsi93.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "904"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"6YHJvXB0cwaDvBO5/wyTEZ7wyfZF6Cxa6c3cdm7MkxA=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 13 Mar 2025 20:25:09 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "50obzwsi93"
-        },
-        {
-          "Name": "label",
-          "Value": "css/site.css.gz"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-6YHJvXB0cwaDvBO5/wyTEZ7wyfZF6Cxa6c3cdm7MkxA="
+          "Value": "sha256-TscT8fanySEfji9MSdV4OT6IOFBciBsq0Tlf1GnrgxU="
         }
       ]
     },
@@ -8029,12 +8972,12 @@
     },
     {
       "Route": "css/site.css",
-      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/i1or4hkeem-50obzwsi93.gz",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/i1or4hkeem-fwp0nnet9u.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.001104972376"
+          "Quality": "0.000611246944"
         }
       ],
       "ResponseHeaders": [
@@ -8044,15 +8987,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "904"
+          "Value": "1635"
         },
         {
           "Name": "ETag",
-          "Value": "\"6YHJvXB0cwaDvBO5/wyTEZ7wyfZF6Cxa6c3cdm7MkxA=\""
+          "Value": "\"G5fQHOKuvrtYMRtecn0i7oPq84SBgAcSSNPPEP8Y8K0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 13 Mar 2025 20:25:09 GMT"
+          "Value": "Sat, 22 Mar 2025 18:06:22 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8072,13 +9015,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"RRH57NUmxRdMBEPhv1YclIj3TIAFbOfDWvf5+yQT1fg=\""
+          "Value": "W/\"4SnMpC1X3/jVWR4xct+EBohuOrPfGKUcofWotdorXgA=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-RRH57NUmxRdMBEPhv1YclIj3TIAFbOfDWvf5+yQT1fg="
+          "Value": "sha256-4SnMpC1X3/jVWR4xct+EBohuOrPfGKUcofWotdorXgA="
         }
       ]
     },
@@ -8093,7 +9036,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2541"
+          "Value": "5422"
         },
         {
           "Name": "Content-Type",
@@ -8101,11 +9044,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"RRH57NUmxRdMBEPhv1YclIj3TIAFbOfDWvf5+yQT1fg=\""
+          "Value": "\"4SnMpC1X3/jVWR4xct+EBohuOrPfGKUcofWotdorXgA=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 13 Mar 2025 20:25:09 GMT"
+          "Value": "Sat, 22 Mar 2025 18:06:22 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8115,13 +9058,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-RRH57NUmxRdMBEPhv1YclIj3TIAFbOfDWvf5+yQT1fg="
+          "Value": "sha256-4SnMpC1X3/jVWR4xct+EBohuOrPfGKUcofWotdorXgA="
         }
       ]
     },
     {
       "Route": "css/site.css.gz",
-      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/i1or4hkeem-50obzwsi93.gz",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/i1or4hkeem-fwp0nnet9u.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -8130,7 +9073,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "904"
+          "Value": "1635"
         },
         {
           "Name": "Content-Type",
@@ -8138,11 +9081,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"6YHJvXB0cwaDvBO5/wyTEZ7wyfZF6Cxa6c3cdm7MkxA=\""
+          "Value": "\"G5fQHOKuvrtYMRtecn0i7oPq84SBgAcSSNPPEP8Y8K0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 13 Mar 2025 20:25:09 GMT"
+          "Value": "Sat, 22 Mar 2025 18:06:22 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8160,18 +9103,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-6YHJvXB0cwaDvBO5/wyTEZ7wyfZF6Cxa6c3cdm7MkxA="
+          "Value": "sha256-G5fQHOKuvrtYMRtecn0i7oPq84SBgAcSSNPPEP8Y8K0="
         }
       ]
     },
     {
-      "Route": "css/step.css",
-      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/crcvv1k8kg-qcw1q6w9fv.gz",
+      "Route": "css/site.fwp0nnet9u.css",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/i1or4hkeem-fwp0nnet9u.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.001811594203"
+          "Quality": "0.000611246944"
         }
       ],
       "ResponseHeaders": [
@@ -8181,19 +9124,19 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "551"
+          "Value": "1635"
         },
         {
           "Name": "ETag",
-          "Value": "\"0bSLR5IooOM9G3nx/PXcPlYUW2FTfmSSadi5/Wk1WvQ=\""
+          "Value": "\"G5fQHOKuvrtYMRtecn0i7oPq84SBgAcSSNPPEP8Y8K0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 06 Mar 2025 09:12:51 GMT"
+          "Value": "Sat, 22 Mar 2025 18:06:22 GMT"
         },
         {
           "Name": "Cache-Control",
-          "Value": "no-cache"
+          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Encoding",
@@ -8209,18 +9152,187 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"9jPnI0+Z1xDavy98VfcjSTrCm9LC5j/ipU3V5ySYAMY=\""
+          "Value": "W/\"4SnMpC1X3/jVWR4xct+EBohuOrPfGKUcofWotdorXgA=\""
         }
       ],
       "EndpointProperties": [
         {
+          "Name": "fingerprint",
+          "Value": "fwp0nnet9u"
+        },
+        {
+          "Name": "label",
+          "Value": "css/site.css"
+        },
+        {
           "Name": "integrity",
-          "Value": "sha256-9jPnI0+Z1xDavy98VfcjSTrCm9LC5j/ipU3V5ySYAMY="
+          "Value": "sha256-4SnMpC1X3/jVWR4xct+EBohuOrPfGKUcofWotdorXgA="
         }
       ]
     },
     {
-      "Route": "css/step.css",
+      "Route": "css/site.fwp0nnet9u.css",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/site.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5422"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"4SnMpC1X3/jVWR4xct+EBohuOrPfGKUcofWotdorXgA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 22 Mar 2025 18:06:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "fwp0nnet9u"
+        },
+        {
+          "Name": "label",
+          "Value": "css/site.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-4SnMpC1X3/jVWR4xct+EBohuOrPfGKUcofWotdorXgA="
+        }
+      ]
+    },
+    {
+      "Route": "css/site.fwp0nnet9u.css.gz",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/i1or4hkeem-fwp0nnet9u.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1635"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"G5fQHOKuvrtYMRtecn0i7oPq84SBgAcSSNPPEP8Y8K0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 22 Mar 2025 18:06:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "fwp0nnet9u"
+        },
+        {
+          "Name": "label",
+          "Value": "css/site.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-G5fQHOKuvrtYMRtecn0i7oPq84SBgAcSSNPPEP8Y8K0="
+        }
+      ]
+    },
+    {
+      "Route": "css/step.ap5m9sfg0h.css",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/crcvv1k8kg-ap5m9sfg0h.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001968503937"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "507"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"6ITvb0KcZ75t3zM2VL4lj2DFdMLDrTCtXSZB9Fg3WdI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 22 Mar 2025 18:07:23 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"Xk9aZ4fAM5xSQOBPia4XJtyDU9AX5383mW7CpO7WHsk=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ap5m9sfg0h"
+        },
+        {
+          "Name": "label",
+          "Value": "css/step.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Xk9aZ4fAM5xSQOBPia4XJtyDU9AX5383mW7CpO7WHsk="
+        }
+      ]
+    },
+    {
+      "Route": "css/step.ap5m9sfg0h.css",
       "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/step.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -8230,7 +9342,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1102"
+          "Value": "1308"
         },
         {
           "Name": "Content-Type",
@@ -8238,121 +9350,21 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"9jPnI0+Z1xDavy98VfcjSTrCm9LC5j/ipU3V5ySYAMY=\""
+          "Value": "\"Xk9aZ4fAM5xSQOBPia4XJtyDU9AX5383mW7CpO7WHsk=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 06 Mar 2025 09:12:51 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-9jPnI0+Z1xDavy98VfcjSTrCm9LC5j/ipU3V5ySYAMY="
-        }
-      ]
-    },
-    {
-      "Route": "css/step.css.gz",
-      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/crcvv1k8kg-qcw1q6w9fv.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "551"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"0bSLR5IooOM9G3nx/PXcPlYUW2FTfmSSadi5/Wk1WvQ=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 06 Mar 2025 09:12:51 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-0bSLR5IooOM9G3nx/PXcPlYUW2FTfmSSadi5/Wk1WvQ="
-        }
-      ]
-    },
-    {
-      "Route": "css/step.qcw1q6w9fv.css",
-      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/crcvv1k8kg-qcw1q6w9fv.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.001811594203"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "551"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"0bSLR5IooOM9G3nx/PXcPlYUW2FTfmSSadi5/Wk1WvQ=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 06 Mar 2025 09:12:51 GMT"
+          "Value": "Sat, 22 Mar 2025 18:07:23 GMT"
         },
         {
           "Name": "Cache-Control",
           "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"9jPnI0+Z1xDavy98VfcjSTrCm9LC5j/ipU3V5ySYAMY=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "qcw1q6w9fv"
+          "Value": "ap5m9sfg0h"
         },
         {
           "Name": "label",
@@ -8360,13 +9372,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-9jPnI0+Z1xDavy98VfcjSTrCm9LC5j/ipU3V5ySYAMY="
+          "Value": "sha256-Xk9aZ4fAM5xSQOBPia4XJtyDU9AX5383mW7CpO7WHsk="
         }
       ]
     },
     {
-      "Route": "css/step.qcw1q6w9fv.css",
-      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/step.css",
+      "Route": "css/step.ap5m9sfg0h.css.gz",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/crcvv1k8kg-ap5m9sfg0h.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -8375,7 +9387,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1102"
+          "Value": "507"
         },
         {
           "Name": "Content-Type",
@@ -8383,56 +9395,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"9jPnI0+Z1xDavy98VfcjSTrCm9LC5j/ipU3V5ySYAMY=\""
+          "Value": "\"6ITvb0KcZ75t3zM2VL4lj2DFdMLDrTCtXSZB9Fg3WdI=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 06 Mar 2025 09:12:51 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "qcw1q6w9fv"
-        },
-        {
-          "Name": "label",
-          "Value": "css/step.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-9jPnI0+Z1xDavy98VfcjSTrCm9LC5j/ipU3V5ySYAMY="
-        }
-      ]
-    },
-    {
-      "Route": "css/step.qcw1q6w9fv.css.gz",
-      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/crcvv1k8kg-qcw1q6w9fv.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "551"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"0bSLR5IooOM9G3nx/PXcPlYUW2FTfmSSadi5/Wk1WvQ=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 06 Mar 2025 09:12:51 GMT"
+          "Value": "Sat, 22 Mar 2025 18:07:23 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8450,7 +9417,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "qcw1q6w9fv"
+          "Value": "ap5m9sfg0h"
         },
         {
           "Name": "label",
@@ -8458,18 +9425,18 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-0bSLR5IooOM9G3nx/PXcPlYUW2FTfmSSadi5/Wk1WvQ="
+          "Value": "sha256-6ITvb0KcZ75t3zM2VL4lj2DFdMLDrTCtXSZB9Fg3WdI="
         }
       ]
     },
     {
-      "Route": "css/sticky-header.3nk3ytr6vd.css",
-      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/ely8ow1dzq-3nk3ytr6vd.gz",
+      "Route": "css/step.css",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/crcvv1k8kg-ap5m9sfg0h.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.001253132832"
+          "Quality": "0.001968503937"
         }
       ],
       "ResponseHeaders": [
@@ -8479,19 +9446,19 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "797"
+          "Value": "507"
         },
         {
           "Name": "ETag",
-          "Value": "\"Ba73hZf4K0jFGVKDhJpvJfVqS1tdMVxA8doGrAMtla8=\""
+          "Value": "\"6ITvb0KcZ75t3zM2VL4lj2DFdMLDrTCtXSZB9Fg3WdI=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 21 Mar 2025 16:59:40 GMT"
+          "Value": "Sat, 22 Mar 2025 18:07:23 GMT"
         },
         {
           "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
+          "Value": "no-cache"
         },
         {
           "Name": "Content-Encoding",
@@ -8507,26 +9474,155 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"P7H9vt/Mw4s4/ScSxXWhpVa0JykgpiKjIUUbzmRlMJo=\""
+          "Value": "W/\"Xk9aZ4fAM5xSQOBPia4XJtyDU9AX5383mW7CpO7WHsk=\""
         }
       ],
       "EndpointProperties": [
         {
-          "Name": "fingerprint",
-          "Value": "3nk3ytr6vd"
-        },
-        {
-          "Name": "label",
-          "Value": "css/sticky-header.css"
-        },
-        {
           "Name": "integrity",
-          "Value": "sha256-P7H9vt/Mw4s4/ScSxXWhpVa0JykgpiKjIUUbzmRlMJo="
+          "Value": "sha256-Xk9aZ4fAM5xSQOBPia4XJtyDU9AX5383mW7CpO7WHsk="
         }
       ]
     },
     {
-      "Route": "css/sticky-header.3nk3ytr6vd.css",
+      "Route": "css/step.css",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/step.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1308"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Xk9aZ4fAM5xSQOBPia4XJtyDU9AX5383mW7CpO7WHsk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 22 Mar 2025 18:07:23 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Xk9aZ4fAM5xSQOBPia4XJtyDU9AX5383mW7CpO7WHsk="
+        }
+      ]
+    },
+    {
+      "Route": "css/step.css.gz",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/crcvv1k8kg-ap5m9sfg0h.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "507"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"6ITvb0KcZ75t3zM2VL4lj2DFdMLDrTCtXSZB9Fg3WdI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 22 Mar 2025 18:07:23 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-6ITvb0KcZ75t3zM2VL4lj2DFdMLDrTCtXSZB9Fg3WdI="
+        }
+      ]
+    },
+    {
+      "Route": "css/sticky-header.css",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/ely8ow1dzq-x499kjc8ih.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001083423619"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "922"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"7EWku4IirnsCee7LPFGI5jIQsKCy1bX2VgZYjtauTsk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 22 Mar 2025 18:21:39 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"f+mBLzxXqLCHvUKH2ufMTNQL+JD/OFed9pq8EomD1II=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-f+mBLzxXqLCHvUKH2ufMTNQL+JD/OFed9pq8EomD1II="
+        }
+      ]
+    },
+    {
+      "Route": "css/sticky-header.css",
       "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/sticky-header.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -8536,7 +9632,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2481"
+          "Value": "3035"
         },
         {
           "Name": "Content-Type",
@@ -8544,11 +9640,156 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"P7H9vt/Mw4s4/ScSxXWhpVa0JykgpiKjIUUbzmRlMJo=\""
+          "Value": "\"f+mBLzxXqLCHvUKH2ufMTNQL+JD/OFed9pq8EomD1II=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 21 Mar 2025 16:59:40 GMT"
+          "Value": "Sat, 22 Mar 2025 18:21:39 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-f+mBLzxXqLCHvUKH2ufMTNQL+JD/OFed9pq8EomD1II="
+        }
+      ]
+    },
+    {
+      "Route": "css/sticky-header.css.gz",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/ely8ow1dzq-x499kjc8ih.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "922"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"7EWku4IirnsCee7LPFGI5jIQsKCy1bX2VgZYjtauTsk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 22 Mar 2025 18:21:39 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-7EWku4IirnsCee7LPFGI5jIQsKCy1bX2VgZYjtauTsk="
+        }
+      ]
+    },
+    {
+      "Route": "css/sticky-header.x499kjc8ih.css",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/ely8ow1dzq-x499kjc8ih.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001083423619"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "922"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"7EWku4IirnsCee7LPFGI5jIQsKCy1bX2VgZYjtauTsk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 22 Mar 2025 18:21:39 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"f+mBLzxXqLCHvUKH2ufMTNQL+JD/OFed9pq8EomD1II=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "x499kjc8ih"
+        },
+        {
+          "Name": "label",
+          "Value": "css/sticky-header.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-f+mBLzxXqLCHvUKH2ufMTNQL+JD/OFed9pq8EomD1II="
+        }
+      ]
+    },
+    {
+      "Route": "css/sticky-header.x499kjc8ih.css",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/sticky-header.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3035"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"f+mBLzxXqLCHvUKH2ufMTNQL+JD/OFed9pq8EomD1II=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 22 Mar 2025 18:21:39 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8558,7 +9799,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "3nk3ytr6vd"
+          "Value": "x499kjc8ih"
         },
         {
           "Name": "label",
@@ -8566,13 +9807,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-P7H9vt/Mw4s4/ScSxXWhpVa0JykgpiKjIUUbzmRlMJo="
+          "Value": "sha256-f+mBLzxXqLCHvUKH2ufMTNQL+JD/OFed9pq8EomD1II="
         }
       ]
     },
     {
-      "Route": "css/sticky-header.3nk3ytr6vd.css.gz",
-      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/ely8ow1dzq-3nk3ytr6vd.gz",
+      "Route": "css/sticky-header.x499kjc8ih.css.gz",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/ely8ow1dzq-x499kjc8ih.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -8581,7 +9822,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "797"
+          "Value": "922"
         },
         {
           "Name": "Content-Type",
@@ -8589,11 +9830,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Ba73hZf4K0jFGVKDhJpvJfVqS1tdMVxA8doGrAMtla8=\""
+          "Value": "\"7EWku4IirnsCee7LPFGI5jIQsKCy1bX2VgZYjtauTsk=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 21 Mar 2025 16:59:40 GMT"
+          "Value": "Sat, 22 Mar 2025 18:21:39 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8611,7 +9852,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "3nk3ytr6vd"
+          "Value": "x499kjc8ih"
         },
         {
           "Name": "label",
@@ -8619,18 +9860,18 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-Ba73hZf4K0jFGVKDhJpvJfVqS1tdMVxA8doGrAMtla8="
+          "Value": "sha256-7EWku4IirnsCee7LPFGI5jIQsKCy1bX2VgZYjtauTsk="
         }
       ]
     },
     {
-      "Route": "css/sticky-header.css",
-      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/ely8ow1dzq-3nk3ytr6vd.gz",
+      "Route": "css/top-company.9kdguhv1lc.css",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/jur64tdre6-9kdguhv1lc.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.001253132832"
+          "Quality": "0.001402524544"
         }
       ],
       "ResponseHeaders": [
@@ -8640,15 +9881,176 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "797"
+          "Value": "712"
         },
         {
           "Name": "ETag",
-          "Value": "\"Ba73hZf4K0jFGVKDhJpvJfVqS1tdMVxA8doGrAMtla8=\""
+          "Value": "\"cO7us4uS2p8ThG/PzuJm+Y1IO7tikLQTj4JYEYUpGms=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 21 Mar 2025 16:59:40 GMT"
+          "Value": "Sat, 22 Mar 2025 18:10:19 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"qZpHgIt5pPwaLRjd8Rji5Cn3bmC/PKr8eEDgeLyWuFI=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "9kdguhv1lc"
+        },
+        {
+          "Name": "label",
+          "Value": "css/top-company.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-qZpHgIt5pPwaLRjd8Rji5Cn3bmC/PKr8eEDgeLyWuFI="
+        }
+      ]
+    },
+    {
+      "Route": "css/top-company.9kdguhv1lc.css",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/top-company.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2248"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"qZpHgIt5pPwaLRjd8Rji5Cn3bmC/PKr8eEDgeLyWuFI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 22 Mar 2025 18:10:19 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "9kdguhv1lc"
+        },
+        {
+          "Name": "label",
+          "Value": "css/top-company.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-qZpHgIt5pPwaLRjd8Rji5Cn3bmC/PKr8eEDgeLyWuFI="
+        }
+      ]
+    },
+    {
+      "Route": "css/top-company.9kdguhv1lc.css.gz",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/jur64tdre6-9kdguhv1lc.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "712"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"cO7us4uS2p8ThG/PzuJm+Y1IO7tikLQTj4JYEYUpGms=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 22 Mar 2025 18:10:19 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "9kdguhv1lc"
+        },
+        {
+          "Name": "label",
+          "Value": "css/top-company.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-cO7us4uS2p8ThG/PzuJm+Y1IO7tikLQTj4JYEYUpGms="
+        }
+      ]
+    },
+    {
+      "Route": "css/top-company.css",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/jur64tdre6-9kdguhv1lc.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001402524544"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "712"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"cO7us4uS2p8ThG/PzuJm+Y1IO7tikLQTj4JYEYUpGms=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 22 Mar 2025 18:10:19 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8668,19 +10070,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"P7H9vt/Mw4s4/ScSxXWhpVa0JykgpiKjIUUbzmRlMJo=\""
+          "Value": "W/\"qZpHgIt5pPwaLRjd8Rji5Cn3bmC/PKr8eEDgeLyWuFI=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-P7H9vt/Mw4s4/ScSxXWhpVa0JykgpiKjIUUbzmRlMJo="
+          "Value": "sha256-qZpHgIt5pPwaLRjd8Rji5Cn3bmC/PKr8eEDgeLyWuFI="
         }
       ]
     },
     {
-      "Route": "css/sticky-header.css",
-      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/sticky-header.css",
+      "Route": "css/top-company.css",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/top-company.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -8689,7 +10091,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2481"
+          "Value": "2248"
         },
         {
           "Name": "Content-Type",
@@ -8697,11 +10099,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"P7H9vt/Mw4s4/ScSxXWhpVa0JykgpiKjIUUbzmRlMJo=\""
+          "Value": "\"qZpHgIt5pPwaLRjd8Rji5Cn3bmC/PKr8eEDgeLyWuFI=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 21 Mar 2025 16:59:40 GMT"
+          "Value": "Sat, 22 Mar 2025 18:10:19 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8711,13 +10113,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-P7H9vt/Mw4s4/ScSxXWhpVa0JykgpiKjIUUbzmRlMJo="
+          "Value": "sha256-qZpHgIt5pPwaLRjd8Rji5Cn3bmC/PKr8eEDgeLyWuFI="
         }
       ]
     },
     {
-      "Route": "css/sticky-header.css.gz",
-      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/ely8ow1dzq-3nk3ytr6vd.gz",
+      "Route": "css/top-company.css.gz",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/jur64tdre6-9kdguhv1lc.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -8726,7 +10128,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "797"
+          "Value": "712"
         },
         {
           "Name": "Content-Type",
@@ -8734,11 +10136,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Ba73hZf4K0jFGVKDhJpvJfVqS1tdMVxA8doGrAMtla8=\""
+          "Value": "\"cO7us4uS2p8ThG/PzuJm+Y1IO7tikLQTj4JYEYUpGms=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 21 Mar 2025 16:59:40 GMT"
+          "Value": "Sat, 22 Mar 2025 18:10:19 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8756,7 +10158,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-Ba73hZf4K0jFGVKDhJpvJfVqS1tdMVxA8doGrAMtla8="
+          "Value": "sha256-cO7us4uS2p8ThG/PzuJm+Y1IO7tikLQTj4JYEYUpGms="
         }
       ]
     },
@@ -21594,6 +22996,304 @@
         {
           "Name": "integrity",
           "Value": "sha256-AXztSpoe10GTxIpe7DqcvjAoPi8BndznaaLKrv6dOdI="
+        }
+      ]
+    },
+    {
+      "Route": "js/utils.6moud2o9ak.js",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/3265v5oncb-6moud2o9ak.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.002380952381"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "419"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"4lOBZvbXukOUv+5cTJf1RWS4Aj5K22JkVHgXe9mLEio=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 22 Mar 2025 17:15:23 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"4vJzpX881LbftzlRUr2G08+KAZN5M/QW9CVXLrApl30=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "6moud2o9ak"
+        },
+        {
+          "Name": "label",
+          "Value": "js/utils.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-4vJzpX881LbftzlRUr2G08+KAZN5M/QW9CVXLrApl30="
+        }
+      ]
+    },
+    {
+      "Route": "js/utils.6moud2o9ak.js",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/js/utils.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "879"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"4vJzpX881LbftzlRUr2G08+KAZN5M/QW9CVXLrApl30=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 22 Mar 2025 17:15:23 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "6moud2o9ak"
+        },
+        {
+          "Name": "label",
+          "Value": "js/utils.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-4vJzpX881LbftzlRUr2G08+KAZN5M/QW9CVXLrApl30="
+        }
+      ]
+    },
+    {
+      "Route": "js/utils.6moud2o9ak.js.gz",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/3265v5oncb-6moud2o9ak.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "419"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"4lOBZvbXukOUv+5cTJf1RWS4Aj5K22JkVHgXe9mLEio=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 22 Mar 2025 17:15:23 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "6moud2o9ak"
+        },
+        {
+          "Name": "label",
+          "Value": "js/utils.js.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-4lOBZvbXukOUv+5cTJf1RWS4Aj5K22JkVHgXe9mLEio="
+        }
+      ]
+    },
+    {
+      "Route": "js/utils.js",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/3265v5oncb-6moud2o9ak.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.002380952381"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "419"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"4lOBZvbXukOUv+5cTJf1RWS4Aj5K22JkVHgXe9mLEio=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 22 Mar 2025 17:15:23 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"4vJzpX881LbftzlRUr2G08+KAZN5M/QW9CVXLrApl30=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-4vJzpX881LbftzlRUr2G08+KAZN5M/QW9CVXLrApl30="
+        }
+      ]
+    },
+    {
+      "Route": "js/utils.js",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/js/utils.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "879"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"4vJzpX881LbftzlRUr2G08+KAZN5M/QW9CVXLrApl30=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 22 Mar 2025 17:15:23 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-4vJzpX881LbftzlRUr2G08+KAZN5M/QW9CVXLrApl30="
+        }
+      ]
+    },
+    {
+      "Route": "js/utils.js.gz",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/3265v5oncb-6moud2o9ak.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "419"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"4lOBZvbXukOUv+5cTJf1RWS4Aj5K22JkVHgXe9mLEio=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 22 Mar 2025 17:15:23 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-4lOBZvbXukOUv+5cTJf1RWS4Aj5K22JkVHgXe9mLEio="
         }
       ]
     },

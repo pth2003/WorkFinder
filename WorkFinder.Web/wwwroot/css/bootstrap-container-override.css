@@ -1,0 +1,186 @@
+/* 
+ * Bootstrap Container Override
+ * Custom CSS to make Bootstrap 5 containers match Bootstrap 4 container widths
+ * Based on the table:
+ * 
+ * Extra small (<576px): 100%
+ * Small (≥576px): 540px
+ * Medium (≥768px): 720px
+ * Large (≥992px): 960px
+ * Extra large (≥1200px): 1140px
+ */
+
+/* Default container */
+.container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* Small devices (≥576px) */
+@media (min-width: 576px) {
+  .container {
+    max-width: 540px;
+  }
+}
+
+/* Medium devices (≥768px) */
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+}
+
+/* Large devices (≥992px) */
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+/* Extra large devices (≥1200px) */
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+}
+
+/* Override Bootstrap 5 container-sm */
+.container-sm {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 576px) {
+  .container-sm {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container-sm {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container-sm {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container-sm {
+    max-width: 1140px;
+  }
+}
+
+/* Override Bootstrap 5 container-md */
+.container-md {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 768px) {
+  .container-md {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container-md {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container-md {
+    max-width: 1140px;
+  }
+}
+
+/* Override Bootstrap 5 container-lg */
+.container-lg {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 992px) {
+  .container-lg {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container-lg {
+    max-width: 1140px;
+  }
+}
+
+/* Override Bootstrap 5 container-xl */
+.container-xl {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 1200px) {
+  .container-xl {
+    max-width: 1140px;
+  }
+}
+
+/* Override Bootstrap 5 container-xxl */
+.container-xxl {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 576px) {
+  .container-xxl {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container-xxl {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container-xxl {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container-xxl {
+    max-width: 1140px;
+  }
+}
+
+/* Override Bootstrap 5 container-fluid */
+.container-fluid {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+} 

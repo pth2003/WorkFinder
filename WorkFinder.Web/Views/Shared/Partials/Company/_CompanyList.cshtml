@@ -9,7 +9,7 @@
             <div class="col-md-4">
                 <div class="company-card d-flex flex-column justify-content-between">
                     @await Html.PartialAsync("Partials/Common/_CardItemHeader", company)
-                    <a href="#" class="open-position-btn">@company.OpenJobsCount Open Position</a>
+                    <a href="/Job?companyId=@company.Id" class="open-position-btn">@company.OpenJobsCount Open Position</a>
                 </div>
             </div>
         }

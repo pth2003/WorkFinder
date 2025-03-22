@@ -2,16 +2,130 @@
 
 <!DOCTYPE html>
 <html>
+
 <head>
-@{ ViewData["Title"] = "Home"; }
+    @{
+        ViewData["Title"] = "Home";
+    }
 </head>
+
 <body>
     @await Component.InvokeAsync("Hero")
-    @await Component.InvokeAsync("Category")
     @await Component.InvokeAsync("Step")
-    @await Component.InvokeAsync("ListCard")
-    <hr/>
+    @await Component.InvokeAsync("Category")
     @await Component.InvokeAsync("FeaturedJob")
     @await Component.InvokeAsync("TopCompany")
+    <section class="testimonial-section">
+        <div class="container">
+            <h2 class="text-center mb-5">Clients Testimonial</h2>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="testimonial-card">
+                                            <div class="rating">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <p class="testimonial-text">"Their service was outstanding. They helped me
+                                                find the perfect job that matched my skills and interests."</p>
+                                            <div class="testimonial-author d-flex align-items-center">
+                                                <img src="~/img/avatar1.png" alt="User" class="rounded-circle me-3">
+                                                <div>
+                                                    <h5 class="mb-0">Kevin Pham</h5>
+                                                    <p class="mb-0 text-muted">UI/UX Designer</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="testimonial-card">
+                                            <div class="rating">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <p class="testimonial-text">"Very impressed with how quickly they connected
+                                                me with employers. Would recommend to anyone searching for a new
+                                                position."</p>
+                                            <div class="testimonial-author d-flex align-items-center">
+                                                <img src="~/img/avatar2.png" alt="User" class="rounded-circle me-3">
+                                                <div>
+                                                    <h5 class="mb-0">Rachel Prichett</h5>
+                                                    <p class="mb-0 text-muted">Web Developer</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="testimonial-card">
+                                            <div class="rating">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <p class="testimonial-text">"Great platform with a wide variety of job
+                                                listings. The user interface is intuitive and the application process is
+                                                streamlined."</p>
+                                            <div class="testimonial-author d-flex align-items-center">
+                                                <img src="~/img/avatar3.png" alt="User" class="rounded-circle me-3">
+                                                <div>
+                                                    <h5 class="mb-0">John Triplett</h5>
+                                                    <p class="mb-0 text-muted">Product Manager</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="cta-section py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <div class="cta-card bg-light p-4 rounded">
+                        <h3 class="mb-3">Become a Candidate</h3>
+                        <p class="mb-4">Create your profile and get noticed by top employers. Apply to jobs with just a
+                            few clicks.</p>
+                        <button class="btn btn-outline-primary">Register Now</button>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="cta-card bg-primary text-white p-4 rounded">
+                        <h3 class="mb-3">Become an Employer</h3>
+                        <p class="mb-4">Post jobs and find the perfect candidates for your positions with our advanced
+                            search tools.</p>
+                        <button class="btn btn-light">Register Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
+
 </html>

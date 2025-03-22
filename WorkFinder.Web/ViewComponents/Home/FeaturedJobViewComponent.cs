@@ -3,34 +3,37 @@ using Microsoft.EntityFrameworkCore;
 using WorkFinder.Web.Data;
 using WorkFinder.Web.Models;
 using WorkFinder.Web.Models.ViewModels;
+using WorkFinder.Web.Repositories;
 
 namespace WorkFinder.Web.ViewComponents.Home;
 
 public class FeaturedJobViewComponent : ViewComponent
 {
-    private readonly WorkFinderContext _context;
-    public  FeaturedJobViewComponent(WorkFinderContext context)
+    private readonly IJobRepository _jobRepository;
+
+    public FeaturedJobViewComponent(IJobRepository jobRepository)
     {
-        _context = context;
+        _jobRepository = jobRepository;
     }
+
     public async Task<IViewComponentResult> InvokeAsync()
     {
-        var jobs = await _context.Jobs
-            .Include(j => j.Company)
-            .Take(4)
-            .Select(j => new JobCardViewModel
-            {
-                Title = j.Title,
-                CompanyName = j.Company.Name,
-                Logo = j.Company.Logo ?? "/images/default-company.png",
-                Location = j.Location,
-                JobType = j.JobType,
-                SalaryMin = j.SalaryMin,
-                SalaryMax = j.SalaryMax,
-                ExpiryDate = j.ExpiryDate
-            })
-            .ToListAsync();
-            
-        return View(jobs);
+        var featuredJobs = await _jobRepository.GetFeaturedJobsAsync(6);
+
+        var jobsViewModel = featuredJobs.Select(j => new JobCardViewModel
+        {
+            Id = j.Id,
+            Title = j.Title,
+            CompanyName = j.Company?.Name ?? "Unknown Company",
+            Logo = j.Company?.Logo ?? "/img/default-company.png",
+            Location = j.Location,
+            JobType = j.JobType,
+            SalaryMin = j.SalaryMin,
+            SalaryMax = j.SalaryMax,
+            ExpiryDate = j.ExpiryDate,
+            CompanyId = j.CompanyId
+        }).ToList();
+
+        return View(jobsViewModel);
     }
 }

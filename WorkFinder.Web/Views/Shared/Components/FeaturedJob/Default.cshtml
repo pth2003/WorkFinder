@@ -1,12 +1,121 @@
 @model IEnumerable<WorkFinder.Web.Models.ViewModels.JobCardViewModel>
-<div class="container my-5">
-    @await Html.PartialAsync("Partials/Common/_SectionHeader", new {Title = "Featured Job"})
-    <div class="row">
-        @foreach (var job in Model)
-        {
-            <div class="col-12">
-                @await Html.PartialAsync("Partials/Common/_JobItem", job)
+<link rel="stylesheet" href="~/css/featured-job.css">
+
+<section class="featured-job-section">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="section-title">Featured job</h2>
+            <a href="@Url.Action("Index", "Job")" class="view-more-link">View All <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <div class="featured-job-list">
+            <div class="featured-job-item">
+                <div class="job-logo">
+                    <img src="~/img/company-logo-1.png" alt="Google">
+                </div>
+                <div class="job-content">
+                    <div class="job-title-row">
+                        <h3 class="job-title">Senior UX Designer</h3>
+                        <a href="#" class="job-apply-btn">Apply Now</a>
+                    </div>
+                    <div class="job-company">
+                        <span class="company-name">Google</span>
+                        <span class="location"><i class="fas fa-map-marker-alt"></i> California</span>
+                        <span class="job-type">Full-time</span>
+                    </div>
+                    <div class="job-salary"><i class="fas fa-money-bill-wave"></i> $5000-$8000</div>
+                </div>
             </div>
-        }
+
+            <div class="featured-job-item">
+                <div class="job-logo">
+                    <img src="~/img/company-logo-2.png" alt="Facebook">
+                </div>
+                <div class="job-content">
+                    <div class="job-title-row">
+                        <h3 class="job-title">Software Engineer</h3>
+                        <a href="#" class="job-apply-btn">Apply Now</a>
+                    </div>
+                    <div class="job-company">
+                        <span class="company-name">Facebook</span>
+                        <span class="location"><i class="fas fa-map-marker-alt"></i> New York</span>
+                        <span class="job-type">Full-time</span>
+                    </div>
+                    <div class="job-salary"><i class="fas fa-money-bill-wave"></i> $7000-$9000</div>
+                </div>
+            </div>
+
+            <div class="featured-job-item">
+                <div class="job-logo">
+                    <img src="~/img/company-logo-3.png" alt="Dribbble">
+                </div>
+                <div class="job-content">
+                    <div class="job-title-row">
+                        <h3 class="job-title">Senior Graphic Designer</h3>
+                        <a href="#" class="job-apply-btn">Apply Now</a>
+                    </div>
+                    <div class="job-company">
+                        <span class="company-name">Dribbble</span>
+                        <span class="location"><i class="fas fa-map-marker-alt"></i> San Francisco</span>
+                        <span class="job-type">Full-time</span>
+                    </div>
+                    <div class="job-salary"><i class="fas fa-money-bill-wave"></i> $4500-$6000</div>
+                </div>
+            </div>
+
+            <div class="featured-job-item">
+                <div class="job-logo">
+                    <img src="~/img/company-logo-4.png" alt="Shopify">
+                </div>
+                <div class="job-content">
+                    <div class="job-title-row">
+                        <h3 class="job-title">Product Designer</h3>
+                        <a href="#" class="job-apply-btn">Apply Now</a>
+                    </div>
+                    <div class="job-company">
+                        <span class="company-name">Shopify</span>
+                        <span class="location"><i class="fas fa-map-marker-alt"></i> Toronto</span>
+                        <span class="job-type">Full-time</span>
+                    </div>
+                    <div class="job-salary"><i class="fas fa-money-bill-wave"></i> $5500-$7000</div>
+                </div>
+            </div>
+
+            <div class="featured-job-item">
+                <div class="job-logo">
+                    <img src="~/img/company-logo-5.png" alt="Mailchimp">
+                </div>
+                <div class="job-content">
+                    <div class="job-title-row">
+                        <h3 class="job-title">Marketing Officer</h3>
+                        <a href="#" class="job-apply-btn">Apply Now</a>
+                    </div>
+                    <div class="job-company">
+                        <span class="company-name">Mailchimp</span>
+                        <span class="location"><i class="fas fa-map-marker-alt"></i> Atlanta</span>
+                        <span class="job-type">Full-time</span>
+                    </div>
+                    <div class="job-salary"><i class="fas fa-money-bill-wave"></i> $4000-$6000</div>
+                </div>
+            </div>
+
+            <div class="featured-job-item">
+                <div class="job-logo">
+                    <img src="~/img/company-logo-6.png" alt="Webflow">
+                </div>
+                <div class="job-content">
+                    <div class="job-title-row">
+                        <h3 class="job-title">Interaction Designer</h3>
+                        <a href="#" class="job-apply-btn">Apply Now</a>
+                    </div>
+                    <div class="job-company">
+                        <span class="company-name">Webflow</span>
+                        <span class="location"><i class="fas fa-map-marker-alt"></i> Remote</span>
+                        <span class="job-type">Full-time</span>
+                    </div>
+                    <div class="job-salary"><i class="fas fa-money-bill-wave"></i> $5000-$7500</div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+</section>

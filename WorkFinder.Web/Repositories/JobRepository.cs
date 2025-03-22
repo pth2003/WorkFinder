@@ -26,6 +26,11 @@ namespace WorkFinder.Web.Repositories
                 .ToListAsync();
         }
 
+        /// <summary>
+        /// Phương thức mới để lấy công việc theo công ty
+        /// </summary>
+        /// <param name="companyId"></param>
+        /// <returns></returns>
         public async Task<IEnumerable<Job>> GetJobsByCompanyAsync(int companyId)
         {
             return await _context.Jobs
@@ -34,6 +39,11 @@ namespace WorkFinder.Web.Repositories
                 .ToListAsync();
         }
 
+        /// <summary>
+        /// Phương thức mới để lấy công việc theo danh mục
+        /// </summary>
+        /// <param name="categoryId"></param>
+        /// <returns></returns>
         public async Task<IEnumerable<Job>> GetJobsByCategoryAsync(int categoryId)
         {
             return await _context.Jobs
@@ -41,7 +51,13 @@ namespace WorkFinder.Web.Repositories
                 .Include(j => j.Company)
                 .ToListAsync();
         }
-
+        /// <summary>
+        /// Phương thức mới để lấy công việc theo các tiêu chí cơ bản
+        /// </summary>
+        /// <param name="keyword"></param>
+        /// <param name="location"></param>
+        /// <param name="categoryId"></param>
+        /// <param name="jobType"></param>      
         public async Task<IEnumerable<Job>> GetJobsByFilterAsync(
             string keyword,
             string location,
@@ -62,7 +78,11 @@ namespace WorkFinder.Web.Repositories
                     .ThenInclude(jc => jc.Category)
                 .ToListAsync();
         }
-
+        /// <summary>
+        /// Phương thức mới để lấy chi tiết công việc
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<Job> GetJobWithDetailsAsync(int id)
         {
             return await _context.Jobs
@@ -72,7 +92,14 @@ namespace WorkFinder.Web.Repositories
                     .ThenInclude(jc => jc.Category)
                 .FirstOrDefaultAsync();
         }
-
+        /// <summary>
+        /// Phương thức mới để lấy công việc phân trang cơ bản
+        /// </summary>
+        /// <param name="keyword"></param>
+        /// <param name="location"></param>
+        /// <param name="page"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
         public async Task<(IEnumerable<Job> Jobs, int TotalCount)> GetJobsPagedAsync(
         string keyword = "",
         string location = "",
@@ -117,6 +144,19 @@ namespace WorkFinder.Web.Repositories
             return await _context.Jobs
                 .Where(j => j.IsActive && j.ExpiryDate > DateTime.UtcNow)
                 .OrderByDescending(j => j.CreatedAt)
+                .Take(count)
+                .Include(j => j.Company)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Job>> GetFeaturedJobsAsync(int count)
+        {
+            return await _context.Jobs
+                .Where(j => j.IsActive && j.ExpiryDate > DateTime.UtcNow)
+                // Trong thực tế, có thể thêm tiêu chí khác để xác định job nổi bật
+                // Ví dụ: có nhiều lượt xem, được đánh dấu là featured, lương cao, v.v.
+                .OrderByDescending(j => j.SalaryMax)
+                .ThenByDescending(j => j.CreatedAt)
                 .Take(count)
                 .Include(j => j.Company)
                 .ToListAsync();
@@ -266,6 +306,12 @@ namespace WorkFinder.Web.Repositories
                     .ThenInclude(jc => jc.Category)
                 .Include(j => j.Company)
                 .ToListAsync();
+        }
+
+        // Get company by ID
+        public async Task<Company> GetCompanyByIdAsync(int companyId)
+        {
+            return await _context.Companies.FindAsync(companyId);
         }
 
         // Helper method to apply filters
