@@ -33,6 +33,7 @@
 
 .featured-job-item {
     display: flex;
+    align-items: center;
     background-color: #fff;
     border-radius: 10px;
     padding: 2rem;
@@ -83,6 +84,11 @@
     font-weight: 600;
     color: #333;
     margin: 0;
+    cursor: pointer;
+}
+.job-title a {
+    text-decoration: none;
+    color: #000;
 }
 
 .job-apply-btn {
@@ -108,10 +114,12 @@
     margin-bottom: 1rem;
     font-size: 1.4rem;
     color: #666;
+    align-items: center;
 }
 
-.company-name {
+.job-company .company-name {
     font-weight: 500;
+    margin-bottom: 0;
 }
 
 .location i, .job-salary i {
@@ -130,6 +138,15 @@
 .job-salary {
     font-size: 1.4rem;
     color: #666;
+}
+
+.job-action .save-job {
+    font-size: 1.4rem;
+    color: var(--blue-500);
+    background-color: var(--blue-100);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-weight: 500;
 }
 
 /* Responsive Styles */

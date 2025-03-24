@@ -1,46 +1,276 @@
 @model WorkFinder.Web.Areas.Auth.Models.LoginViewModel
 @{
     ViewData["Title"] = "Login";
+    Layout = null;
 }
 
-<div class="">
-    <div class="row m-0">
-        <div class="col-md-6 login-form">
-            <div class="logo">
-                <img src="~/icon/Logo.png" alt="" />
-            </div>
-            <div class="w-75 mx-auto mt-5 ">
-                <h2 class="mb-4">Sign in</h2>
-                <p class="text-muted mb-4">Don't have account? <a href="/Auth/Register" class="text-primary">Create Account</a></p>
+<!DOCTYPE html>
+<html lang="en">
 
-             <form method="post" asp-controller="Auth" asp-action="Login" asp-route-returnUrl="@ViewData["ReturnUrl"]">
-                 <div class="mb-3">
-                     <input asp-for="Email" class="form-control" placeholder="Email address">
-                     <span asp-validation-for="Email" class="text-danger"></span>
-                 </div>
-                 
-                 <div class="mb-3 position-relative">
-                     <input asp-for="Password" class="form-control" placeholder="Password">
-                     <span class="position-absolute top-50 end-0 translate-middle-y me-3">
-                         <i class="far fa-eye"></i>
-                     </span>
-                     <span asp-validation-for="Password" class="text-danger"></span>
-                 </div>
-             
-                 <div class="checkbox-container">
-                     <div class="form-check">
-                         <input asp-for="RememberMe" class="form-check-input">
-                         <label asp-for="RememberMe" class="form-check-label">Remember Me</label>
-                     </div>
-                     <a href="#" class="text-primary">Forgot password</a>
-                 </div>
-                 
-                 <div asp-validation-summary="All" class="text-danger"></div>
-             
-                 <button type="submit" class="login-button">
-                     Sign In <i class="fas fa-arrow-right ms-2"></i>
-                 </button>
-             </form>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - WorkFinder</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-size: 62.5%;
+        }
+
+        .main-container {
+            display: flex;
+            height: 100vh;
+        }
+
+        .logo-container {
+            position: absolute;
+            top: 20px;
+            left: 40px;
+            z-index: 10;
+        }
+
+        .logo-img {
+            height: 40px;
+        }
+
+        .login-column {
+            width: 50%;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: #fff;
+            font-size: 1.4rem;
+        }
+
+        .login-form-container {
+            width: 75%;
+            max-width: 450px;
+            margin: 0 auto;
+        }
+
+        .right-column {
+            width: 50%;
+            position: relative;
+            @* background-color: #131B2C; *@
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .checkerboard {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("@Url.Content("~/img/bg-auth.png")");
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+        }
+
+        .stats-container {
+            position: relative;
+            z-index: 2;
+            @* padding: 60px; *@
+            color:white;
+            width: 75%;
+            margin-left: 12.5%;
+            margin-bottom: 10%;
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 15px;
+        }
+
+        .icon-container {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            margin-bottom: 10px;
+            font-size: 2.2rem;
+        }
+
+        .right-column .stat-box h3 {
+            font-size: 2.2rem;
+            margin-bottom: 0.2rem;
+            font-weight: 600;
+        }
+
+        .stat-box p {
+            margin: 0;
+            font-size: 1.4rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .form-control {
+            border-radius: 5px;
+            padding: 10px 15px;
+            font-size: 1.6rem;
+            height: auto;
+            border: 1px solid #ced4da;
+        }
+
+        .login-button {
+            background-color: #0d6efd;
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 12px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-size: 1.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-login {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            gap: 10px;
+        }
+
+        .social-button {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            text-align: center;
+            background-color: white;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .facebook-login {
+            color: #3b5998;
+        }
+
+        .google-login {
+            color: #db4437;
+        }
+
+        .checkbox-container {
+            display: flex;
+            justify-content: space-between;
+            margin: 15px 0;
+            font-size: 1.4rem;
+        }
+
+        .form-check-input {
+            margin-top: 0.3em;
+        }
+
+        h2 {
+            font-size: 3.2rem;
+            font-weight: 600;
+        }
+
+        .text-muted {
+            font-size: 1.6rem;
+        }
+
+        .right-column h3 {
+            font-size: 2.8rem;
+            font-weight: 600;
+            margin-bottom: 3rem;
+            @* margin-left: 3rem; *@
+        }
+
+        @@media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            .login-column {
+                width: 100%;
+                @* height: 100%; *@
+                overflow-y: auto;
+            }
+
+            .right-column {
+                display: none;
+            }
+
+            .login-form-container {
+                width: 85%;
+                margin: 20px auto;
+            }
+            .social-login{
+                flex-direction: column;
+            }
+
+            .logo-container {
+                position: relative;
+                display: flex;
+                justify-content: center;
+                left: 0;
+                margin-top: 20px;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="logo-container">
+        <a href="/">
+            <img src="~/icon/Logo.png" alt="MyJob" class="logo-img" />
+        </a>
+    </div>
+
+    <div class="main-container">
+        <div class="login-column">
+            <div class="login-form-container">
+                <h2 class="mb-4">Sign in</h2>
+                <p class="text-muted mb-4">Don't have account? <a href="/Auth/Register" class="text-primary link-offset-2 link-underline link-underline-opacity-0">Create
+                        Account</a></p>
+
+                <form method="post" asp-controller="Auth" asp-action="Login"
+                    asp-route-returnUrl="@ViewData["ReturnUrl"]">
+                    <div class="mb-3">
+                        <input asp-for="Email" class="form-control" placeholder="Email address">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3 position-relative">
+                        <input asp-for="Password" class="form-control" placeholder="Password">
+                        <span class="position-absolute top-50 end-0 translate-middle-y me-3">
+                            <i class="far fa-eye"></i>
+                        </span>
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="checkbox-container">
+                        <div class="form-check">
+                            <input asp-for="RememberMe" class="form-check-input">
+                            <label asp-for="RememberMe" class="form-check-label">Remember Me</label>
+                        </div>
+                        <a href="#" class="text-primary link-offset-2 link-underline link-underline-opacity-0">Forgot password</a>
+                    </div>
+
+                    <div asp-validation-summary="All" class="text-danger"></div>
+
+                    <button type="submit" class="login-button">
+                        Sign In <i class="fas fa-arrow-right ms-2"></i>
+                    </button>
+                </form>
 
                 <div class="text-center my-3">or</div>
 
@@ -55,12 +285,11 @@
             </div>
         </div>
 
-        <div class="col-md-6 right-panel">
-            <div class="overlay"></div>
-            <div class="content">
-                <h3 class="mb-2">Over 1,75,324 candidates waiting for good employees.</h3>
-
-                <div class="row ">
+        <div class="right-column">
+            <div class="checkerboard"></div>
+            <div class="stats-container">
+                <h3>Over 1,75,324 candidates <br/> waiting for good employees.</h3>
+                <div class="row">
                     <div class="col-md-4 stat-box">
                         <div class="icon-container">
                             <i class="fas fa-briefcase"></i>
@@ -86,138 +315,26 @@
             </div>
         </div>
     </div>
-</div>
 
-<style>
-    
-   .login-form {
-       background-color: #ffffff;
-       border-radius: 5px;
-       padding: 2rem;
-       font-size: 1.6rem;
-       min-height: 100vh;
-       overflow-y: auto;
-   }
-    .form-control {
-        border-radius: 5px;
-        padding: 10px;
-        font-size: 1.6rem;
-    }
- .right-panel {
-     min-height: 100vh;
-     display: flex;
-     flex-direction: column;
-     justify-content: end;
-     position: relative;
-     color: #fff;
-     overflow-y: auto;
- }
-    .right-panel .overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-image: url("@Url.Content("~/img/bg-auth.png")");
-        background-repeat: no-repeat;
-        background-size: cover;
-        
-        z-index: 0;
-    }
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const togglePassword = document.querySelector('.far.fa-eye');
+            const passwordInput = document.querySelector('input[type="password"]');
 
-    .right-panel .content {
-        position: relative;
-        bottom: 0;
-        z-index: 1;
-        padding: 30px;
-    }
+            togglePassword.addEventListener('click', function () {
+                // Toggle password visibility
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
 
-    
+                // Toggle eye icon
+                this.classList.toggle('fa-eye');
+                this.classList.toggle('fa-eye-slash');
+            });
+        });
+    </script>
+    @* @await RenderSectionAsync("Scripts", required: false) *@
+</body>
 
-    .stat-box {
-        text-align: center;
-        padding: 20px;
-        color: white;
-    }
-
-    .login-button {
-        background-color: #0d6efd;
-        color: white;
-        border: none;
-        width: 100%;
-        padding: 10px;
-        border-radius: 5px;
-        margin-top: 10px;
-    }
-
-    .social-login {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 20px;
-    }
-
-    .social-button {
-        flex: 1;
-        padding: 10px;
-        border: 1px solid #dee2e6;
-        border-radius: 5px;
-        text-align: center;
-        margin: 0 5px;
-        background-color: white;
-    }
-
-    .facebook-login {
-        color: #3b5998;
-    }
-
-    .google-login {
-        color: #db4437;
-    }
-
-    .checkbox-container {
-        display: flex;
-        justify-content: space-between;
-        margin: 15px 0;
-    }
-
-    /*.logo {*/
-    /*    color: #0d6efd;*/
-    /*    margin-bottom: 30px;*/
-    /*    font-weight: bold;*/
-    /*    font-size: 24px;*/
-    /*    text-align: center;*/
-    /*}*/
-
-    /*.logo i {*/
-    /*    margin-right: 10px;*/
-    /*}*/
-
-    .icon-container i {
-        font-size: 24px;
-        margin-bottom: 10px;
-        background-color: #dfe0e1;
-        border-radius: 10px;
-        padding: 10px;
-    }
-</style>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    
-}
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const togglePassword = document.querySelector('.far.fa-eye');
-    const passwordInput = document.querySelector('input[type="password"]');
-
-    togglePassword.addEventListener('click', function() {
-        // Toggle password visibility
-        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-        passwordInput.setAttribute('type', type);
-        
-        // Toggle eye icon
-        this.classList.toggle('fa-eye');
-        this.classList.toggle('fa-eye-slash');
-    });
-});
-</script>
+</html>

@@ -10,103 +10,22 @@
                     class="fas fa-arrow-right"></i></a>
         </div>
 
-        <div class="row">
-            <div class="col-md-6 col-lg-3">
-                <div class="company-card">
-                    <div class="card-header">
-                        <img src="~/img/company-logo-1.png" alt="Google" class="company-logo">
-                    </div>
-                    <div class="card-body">
-                        <h3 class="company-name">Google</h3>
-                        <p class="company-location"><i class="fas fa-map-marker-alt"></i> New York, USA</p>
-                        <a href="#" class="open-position-btn">Open Positions</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="company-card">
-                    <div class="card-header">
-                        <img src="~/img/company-logo-2.png" alt="Dropbox" class="company-logo">
-                    </div>
-                    <div class="card-body">
-                        <h3 class="company-name">Dropbox</h3>
-                        <p class="company-location"><i class="fas fa-map-marker-alt"></i> San Francisco, USA</p>
-                        <a href="#" class="open-position-btn">Open Positions</a>
+        <div class="row g-4">
+            @foreach (var company in Model)
+            {
+                <div class="col-md-6 col-lg-3">
+                    <div class="company-card">
+                        <div class="card-header">
+                            <img src="@company.Logo" alt="@company.Name" class="company-logo">
+                        </div>
+                        <div class="card-body">
+                            <h3 class="company-name">@company.Name</h3>
+                            <p class="company-location"><i class="fas fa-map-marker-alt"></i> @(company.Location == "Unknown" ? "Remote" : company.Location)</p>
+                            <a href="#" class="open-position-btn">Open Positions</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="company-card">
-                    <div class="card-header">
-                        <img src="~/img/company-logo-3.png" alt="Slack" class="company-logo">
-                    </div>
-                    <div class="card-body">
-                        <h3 class="company-name">Slack</h3>
-                        <p class="company-location"><i class="fas fa-map-marker-alt"></i> Boston, USA</p>
-                        <a href="#" class="open-position-btn">Open Positions</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="company-card">
-                    <div class="card-header">
-                        <img src="~/img/company-logo-4.png" alt="Shopify" class="company-logo">
-                    </div>
-                    <div class="card-body">
-                        <h3 class="company-name">Shopify</h3>
-                        <p class="company-location"><i class="fas fa-map-marker-alt"></i> Toronto, Canada</p>
-                        <a href="#" class="open-position-btn">Open Positions</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="company-card">
-                    <div class="card-header">
-                        <img src="~/img/company-logo-5.png" alt="Spotify" class="company-logo">
-                    </div>
-                    <div class="card-body">
-                        <h3 class="company-name">Spotify</h3>
-                        <p class="company-location"><i class="fas fa-map-marker-alt"></i> Stockholm, Sweden</p>
-                        <a href="#" class="open-position-btn">Open Positions</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="company-card">
-                    <div class="card-header">
-                        <img src="~/img/company-logo-6.png" alt="Figma" class="company-logo">
-                    </div>
-                    <div class="card-body">
-                        <h3 class="company-name">Figma</h3>
-                        <p class="company-location"><i class="fas fa-map-marker-alt"></i> San Francisco, USA</p>
-                        <a href="#" class="open-position-btn">Open Positions</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="company-card">
-                    <div class="card-header">
-                        <img src="~/img/company-logo-7.png" alt="Twitter" class="company-logo">
-                    </div>
-                    <div class="card-body">
-                        <h3 class="company-name">Twitter</h3>
-                        <p class="company-location"><i class="fas fa-map-marker-alt"></i> San Francisco, USA</p>
-                        <a href="#" class="open-position-btn">Open Positions</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="company-card">
-                    <div class="card-header">
-                        <img src="~/img/company-logo-8.png" alt="Netflix" class="company-logo">
-                    </div>
-                    <div class="card-body">
-                        <h3 class="company-name">Netflix</h3>
-                        <p class="company-location"><i class="fas fa-map-marker-alt"></i> Los Angeles, USA</p>
-                        <a href="#" class="open-position-btn">Open Positions</a>
-                    </div>
-                </div>
-            </div>
+            }
         </div>
     </div>
 </section>

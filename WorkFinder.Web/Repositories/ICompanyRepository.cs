@@ -32,6 +32,6 @@ namespace WorkFinder.Web.Repositories
 
         Task<IEnumerable<Company>> GetCompaniesByIndustryAsync(string industry, int limit, int excludeCompanyId = 0);
 
-
+        Task<IEnumerable<Company>> GetTopCompaniesAsync(int limit);
     }
 }

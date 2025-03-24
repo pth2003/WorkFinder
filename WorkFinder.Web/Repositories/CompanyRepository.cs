@@ -118,5 +118,14 @@ namespace WorkFinder.Web.Repositories
                 .Take(limit)
                 .ToListAsync();
         }
+
+        public async Task<IEnumerable<Company>> GetTopCompaniesAsync(int limit)
+        {
+            return await _context.Companies
+                .OrderByDescending(c => c.IsVerified)
+                .Take(limit)
+                .ToListAsync();
+        }
+
     }
 }

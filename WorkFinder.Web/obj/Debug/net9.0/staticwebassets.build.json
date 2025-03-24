@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "tCcviuISCk/pDz43IvUwIIn0uF4QLTqKLtKV0n2jk68=",
+  "Hash": "UXRBuCzduNI5q7ZlqeScIVcEi3h6yPZaEKuV45UOPHA=",
   "Source": "WorkFinder.Web",
   "BasePath": "_content/WorkFinder.Web",
   "Mode": "Default",
@@ -2978,12 +2978,12 @@
       "OriginalItemSpec": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/lib/jquery/dist/jquery.slim.min.map"
     },
     {
-      "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/jur64tdre6-9kdguhv1lc.gz",
+      "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/jur64tdre6-gnopta5har.gz",
       "SourceId": "WorkFinder.Web",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/",
       "BasePath": "_content/WorkFinder.Web",
-      "RelativePath": "css/top-company#[.{fingerprint=9kdguhv1lc}]?.css.gz",
+      "RelativePath": "css/top-company#[.{fingerprint=gnopta5har}]?.css.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -2992,8 +2992,8 @@
       "RelatedAsset": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/top-company.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "kjbk3hvv2w",
-      "Integrity": "cO7us4uS2p8ThG/PzuJm+Y1IO7tikLQTj4JYEYUpGms=",
+      "Fingerprint": "17kysqwdb7",
+      "Integrity": "Q+GiyeGgf6jzBt0HE3vySzk4JAQSSW2aVMhmHhlygb4=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/top-company.css"
@@ -3188,12 +3188,12 @@
       "OriginalItemSpec": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css"
     },
     {
-      "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/myhhsew2z5-r1gkjxrmgr.gz",
+      "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/myhhsew2z5-8i5gtug8ls.gz",
       "SourceId": "WorkFinder.Web",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/",
       "BasePath": "_content/WorkFinder.Web",
-      "RelativePath": "css/featured-job#[.{fingerprint=r1gkjxrmgr}]?.css.gz",
+      "RelativePath": "css/featured-job#[.{fingerprint=8i5gtug8ls}]?.css.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -3202,8 +3202,8 @@
       "RelatedAsset": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/featured-job.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "ntnt9isdof",
-      "Integrity": "JbHx+X2n07eyOjIDwxW+hbXMP/q4CLJo/jXiqqijbBA=",
+      "Fingerprint": "bkqzgozw58",
+      "Integrity": "OxHfbiEgyOFOk8UXX3ql7QBSRSwCMHw2kEhD3R7D0cU=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/featured-job.css"
@@ -4588,8 +4588,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "r1gkjxrmgr",
-      "Integrity": "P9XQAu2EZL8exsHGtQC/UxdLOdk25XPcci8smWCxIOM=",
+      "Fingerprint": "8i5gtug8ls",
+      "Integrity": "IAtmpi9uCjOsqW0OQOOZK+cptPB3FbGsLtj01MQbVr0=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/css/featured-job.css"
@@ -4735,8 +4735,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "9kdguhv1lc",
-      "Integrity": "qZpHgIt5pPwaLRjd8Rji5Cn3bmC/PKr8eEDgeLyWuFI=",
+      "Fingerprint": "gnopta5har",
+      "Integrity": "9IHIKrvOcKr2EnPAY21x9rm6aloP+uLjuPNi9f+NK8I=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/css/top-company.css"
@@ -7742,13 +7742,13 @@
       ]
     },
     {
-      "Route": "css/featured-job.css",
-      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/myhhsew2z5-r1gkjxrmgr.gz",
+      "Route": "css/featured-job.8i5gtug8ls.css",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/myhhsew2z5-8i5gtug8ls.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.001197604790"
+          "Quality": "0.001123595506"
         }
       ],
       "ResponseHeaders": [
@@ -7758,19 +7758,19 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "834"
+          "Value": "889"
         },
         {
           "Name": "ETag",
-          "Value": "\"JbHx+X2n07eyOjIDwxW+hbXMP/q4CLJo/jXiqqijbBA=\""
+          "Value": "\"OxHfbiEgyOFOk8UXX3ql7QBSRSwCMHw2kEhD3R7D0cU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 22 Mar 2025 18:10:19 GMT"
+          "Value": "Mon, 24 Mar 2025 03:25:30 GMT"
         },
         {
           "Name": "Cache-Control",
-          "Value": "no-cache"
+          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Encoding",
@@ -7786,18 +7786,26 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"P9XQAu2EZL8exsHGtQC/UxdLOdk25XPcci8smWCxIOM=\""
+          "Value": "W/\"IAtmpi9uCjOsqW0OQOOZK+cptPB3FbGsLtj01MQbVr0=\""
         }
       ],
       "EndpointProperties": [
         {
+          "Name": "fingerprint",
+          "Value": "8i5gtug8ls"
+        },
+        {
+          "Name": "label",
+          "Value": "css/featured-job.css"
+        },
+        {
           "Name": "integrity",
-          "Value": "sha256-P9XQAu2EZL8exsHGtQC/UxdLOdk25XPcci8smWCxIOM="
+          "Value": "sha256-IAtmpi9uCjOsqW0OQOOZK+cptPB3FbGsLtj01MQbVr0="
         }
       ]
     },
     {
-      "Route": "css/featured-job.css",
+      "Route": "css/featured-job.8i5gtug8ls.css",
       "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/featured-job.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -7807,7 +7815,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2906"
+          "Value": "3262"
         },
         {
           "Name": "Content-Type",
@@ -7815,121 +7823,21 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"P9XQAu2EZL8exsHGtQC/UxdLOdk25XPcci8smWCxIOM=\""
+          "Value": "\"IAtmpi9uCjOsqW0OQOOZK+cptPB3FbGsLtj01MQbVr0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 22 Mar 2025 18:10:19 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-P9XQAu2EZL8exsHGtQC/UxdLOdk25XPcci8smWCxIOM="
-        }
-      ]
-    },
-    {
-      "Route": "css/featured-job.css.gz",
-      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/myhhsew2z5-r1gkjxrmgr.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "834"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"JbHx+X2n07eyOjIDwxW+hbXMP/q4CLJo/jXiqqijbBA=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sat, 22 Mar 2025 18:10:19 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-JbHx+X2n07eyOjIDwxW+hbXMP/q4CLJo/jXiqqijbBA="
-        }
-      ]
-    },
-    {
-      "Route": "css/featured-job.r1gkjxrmgr.css",
-      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/myhhsew2z5-r1gkjxrmgr.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.001197604790"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "834"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"JbHx+X2n07eyOjIDwxW+hbXMP/q4CLJo/jXiqqijbBA=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sat, 22 Mar 2025 18:10:19 GMT"
+          "Value": "Mon, 24 Mar 2025 03:25:30 GMT"
         },
         {
           "Name": "Cache-Control",
           "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"P9XQAu2EZL8exsHGtQC/UxdLOdk25XPcci8smWCxIOM=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "r1gkjxrmgr"
+          "Value": "8i5gtug8ls"
         },
         {
           "Name": "label",
@@ -7937,13 +7845,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-P9XQAu2EZL8exsHGtQC/UxdLOdk25XPcci8smWCxIOM="
+          "Value": "sha256-IAtmpi9uCjOsqW0OQOOZK+cptPB3FbGsLtj01MQbVr0="
         }
       ]
     },
     {
-      "Route": "css/featured-job.r1gkjxrmgr.css",
-      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/featured-job.css",
+      "Route": "css/featured-job.8i5gtug8ls.css.gz",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/myhhsew2z5-8i5gtug8ls.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -7952,7 +7860,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2906"
+          "Value": "889"
         },
         {
           "Name": "Content-Type",
@@ -7960,56 +7868,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"P9XQAu2EZL8exsHGtQC/UxdLOdk25XPcci8smWCxIOM=\""
+          "Value": "\"OxHfbiEgyOFOk8UXX3ql7QBSRSwCMHw2kEhD3R7D0cU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 22 Mar 2025 18:10:19 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "r1gkjxrmgr"
-        },
-        {
-          "Name": "label",
-          "Value": "css/featured-job.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-P9XQAu2EZL8exsHGtQC/UxdLOdk25XPcci8smWCxIOM="
-        }
-      ]
-    },
-    {
-      "Route": "css/featured-job.r1gkjxrmgr.css.gz",
-      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/myhhsew2z5-r1gkjxrmgr.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "834"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"JbHx+X2n07eyOjIDwxW+hbXMP/q4CLJo/jXiqqijbBA=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sat, 22 Mar 2025 18:10:19 GMT"
+          "Value": "Mon, 24 Mar 2025 03:25:30 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8027,7 +7890,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "r1gkjxrmgr"
+          "Value": "8i5gtug8ls"
         },
         {
           "Name": "label",
@@ -8035,7 +7898,144 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-JbHx+X2n07eyOjIDwxW+hbXMP/q4CLJo/jXiqqijbBA="
+          "Value": "sha256-OxHfbiEgyOFOk8UXX3ql7QBSRSwCMHw2kEhD3R7D0cU="
+        }
+      ]
+    },
+    {
+      "Route": "css/featured-job.css",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/myhhsew2z5-8i5gtug8ls.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001123595506"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "889"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"OxHfbiEgyOFOk8UXX3ql7QBSRSwCMHw2kEhD3R7D0cU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 24 Mar 2025 03:25:30 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"IAtmpi9uCjOsqW0OQOOZK+cptPB3FbGsLtj01MQbVr0=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-IAtmpi9uCjOsqW0OQOOZK+cptPB3FbGsLtj01MQbVr0="
+        }
+      ]
+    },
+    {
+      "Route": "css/featured-job.css",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/featured-job.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3262"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"IAtmpi9uCjOsqW0OQOOZK+cptPB3FbGsLtj01MQbVr0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 24 Mar 2025 03:25:30 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-IAtmpi9uCjOsqW0OQOOZK+cptPB3FbGsLtj01MQbVr0="
+        }
+      ]
+    },
+    {
+      "Route": "css/featured-job.css.gz",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/myhhsew2z5-8i5gtug8ls.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "889"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"OxHfbiEgyOFOk8UXX3ql7QBSRSwCMHw2kEhD3R7D0cU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 24 Mar 2025 03:25:30 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-OxHfbiEgyOFOk8UXX3ql7QBSRSwCMHw2kEhD3R7D0cU="
         }
       ]
     },
@@ -9865,13 +9865,13 @@
       ]
     },
     {
-      "Route": "css/top-company.9kdguhv1lc.css",
-      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/jur64tdre6-9kdguhv1lc.gz",
+      "Route": "css/top-company.css",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/jur64tdre6-gnopta5har.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.001402524544"
+          "Quality": "0.001295336788"
         }
       ],
       "ResponseHeaders": [
@@ -9881,19 +9881,19 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "712"
+          "Value": "771"
         },
         {
           "Name": "ETag",
-          "Value": "\"cO7us4uS2p8ThG/PzuJm+Y1IO7tikLQTj4JYEYUpGms=\""
+          "Value": "\"Q+GiyeGgf6jzBt0HE3vySzk4JAQSSW2aVMhmHhlygb4=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 22 Mar 2025 18:10:19 GMT"
+          "Value": "Mon, 24 Mar 2025 03:44:35 GMT"
         },
         {
           "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
+          "Value": "no-cache"
         },
         {
           "Name": "Content-Encoding",
@@ -9909,26 +9909,18 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"qZpHgIt5pPwaLRjd8Rji5Cn3bmC/PKr8eEDgeLyWuFI=\""
+          "Value": "W/\"9IHIKrvOcKr2EnPAY21x9rm6aloP+uLjuPNi9f+NK8I=\""
         }
       ],
       "EndpointProperties": [
         {
-          "Name": "fingerprint",
-          "Value": "9kdguhv1lc"
-        },
-        {
-          "Name": "label",
-          "Value": "css/top-company.css"
-        },
-        {
           "Name": "integrity",
-          "Value": "sha256-qZpHgIt5pPwaLRjd8Rji5Cn3bmC/PKr8eEDgeLyWuFI="
+          "Value": "sha256-9IHIKrvOcKr2EnPAY21x9rm6aloP+uLjuPNi9f+NK8I="
         }
       ]
     },
     {
-      "Route": "css/top-company.9kdguhv1lc.css",
+      "Route": "css/top-company.css",
       "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/top-company.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -9938,7 +9930,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2248"
+          "Value": "2489"
         },
         {
           "Name": "Content-Type",
@@ -9946,11 +9938,156 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"qZpHgIt5pPwaLRjd8Rji5Cn3bmC/PKr8eEDgeLyWuFI=\""
+          "Value": "\"9IHIKrvOcKr2EnPAY21x9rm6aloP+uLjuPNi9f+NK8I=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 22 Mar 2025 18:10:19 GMT"
+          "Value": "Mon, 24 Mar 2025 03:44:35 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-9IHIKrvOcKr2EnPAY21x9rm6aloP+uLjuPNi9f+NK8I="
+        }
+      ]
+    },
+    {
+      "Route": "css/top-company.css.gz",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/jur64tdre6-gnopta5har.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "771"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Q+GiyeGgf6jzBt0HE3vySzk4JAQSSW2aVMhmHhlygb4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 24 Mar 2025 03:44:35 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Q+GiyeGgf6jzBt0HE3vySzk4JAQSSW2aVMhmHhlygb4="
+        }
+      ]
+    },
+    {
+      "Route": "css/top-company.gnopta5har.css",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/jur64tdre6-gnopta5har.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001295336788"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "771"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Q+GiyeGgf6jzBt0HE3vySzk4JAQSSW2aVMhmHhlygb4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 24 Mar 2025 03:44:35 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"9IHIKrvOcKr2EnPAY21x9rm6aloP+uLjuPNi9f+NK8I=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "gnopta5har"
+        },
+        {
+          "Name": "label",
+          "Value": "css/top-company.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-9IHIKrvOcKr2EnPAY21x9rm6aloP+uLjuPNi9f+NK8I="
+        }
+      ]
+    },
+    {
+      "Route": "css/top-company.gnopta5har.css",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/top-company.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2489"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9IHIKrvOcKr2EnPAY21x9rm6aloP+uLjuPNi9f+NK8I=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 24 Mar 2025 03:44:35 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -9960,7 +10097,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "9kdguhv1lc"
+          "Value": "gnopta5har"
         },
         {
           "Name": "label",
@@ -9968,13 +10105,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-qZpHgIt5pPwaLRjd8Rji5Cn3bmC/PKr8eEDgeLyWuFI="
+          "Value": "sha256-9IHIKrvOcKr2EnPAY21x9rm6aloP+uLjuPNi9f+NK8I="
         }
       ]
     },
     {
-      "Route": "css/top-company.9kdguhv1lc.css.gz",
-      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/jur64tdre6-9kdguhv1lc.gz",
+      "Route": "css/top-company.gnopta5har.css.gz",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/jur64tdre6-gnopta5har.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -9983,7 +10120,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "712"
+          "Value": "771"
         },
         {
           "Name": "Content-Type",
@@ -9991,11 +10128,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"cO7us4uS2p8ThG/PzuJm+Y1IO7tikLQTj4JYEYUpGms=\""
+          "Value": "\"Q+GiyeGgf6jzBt0HE3vySzk4JAQSSW2aVMhmHhlygb4=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 22 Mar 2025 18:10:19 GMT"
+          "Value": "Mon, 24 Mar 2025 03:44:35 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -10013,7 +10150,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "9kdguhv1lc"
+          "Value": "gnopta5har"
         },
         {
           "Name": "label",
@@ -10021,144 +10158,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-cO7us4uS2p8ThG/PzuJm+Y1IO7tikLQTj4JYEYUpGms="
-        }
-      ]
-    },
-    {
-      "Route": "css/top-company.css",
-      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/jur64tdre6-9kdguhv1lc.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.001402524544"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "712"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"cO7us4uS2p8ThG/PzuJm+Y1IO7tikLQTj4JYEYUpGms=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sat, 22 Mar 2025 18:10:19 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"qZpHgIt5pPwaLRjd8Rji5Cn3bmC/PKr8eEDgeLyWuFI=\""
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-qZpHgIt5pPwaLRjd8Rji5Cn3bmC/PKr8eEDgeLyWuFI="
-        }
-      ]
-    },
-    {
-      "Route": "css/top-company.css",
-      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/top-company.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "2248"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"qZpHgIt5pPwaLRjd8Rji5Cn3bmC/PKr8eEDgeLyWuFI=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sat, 22 Mar 2025 18:10:19 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-qZpHgIt5pPwaLRjd8Rji5Cn3bmC/PKr8eEDgeLyWuFI="
-        }
-      ]
-    },
-    {
-      "Route": "css/top-company.css.gz",
-      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/jur64tdre6-9kdguhv1lc.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "712"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"cO7us4uS2p8ThG/PzuJm+Y1IO7tikLQTj4JYEYUpGms=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sat, 22 Mar 2025 18:10:19 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-cO7us4uS2p8ThG/PzuJm+Y1IO7tikLQTj4JYEYUpGms="
+          "Value": "sha256-Q+GiyeGgf6jzBt0HE3vySzk4JAQSSW2aVMhmHhlygb4="
         }
       ]
     },

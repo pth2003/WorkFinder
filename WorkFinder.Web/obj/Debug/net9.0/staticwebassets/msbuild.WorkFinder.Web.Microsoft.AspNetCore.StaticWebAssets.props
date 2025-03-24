@@ -84,8 +84,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>r1gkjxrmgr</Fingerprint>
-      <Integrity>P9XQAu2EZL8exsHGtQC/UxdLOdk25XPcci8smWCxIOM=</Integrity>
+      <Fingerprint>8i5gtug8ls</Fingerprint>
+      <Integrity>IAtmpi9uCjOsqW0OQOOZK+cptPB3FbGsLtj01MQbVr0=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\featured-job.css'))</OriginalItemSpec>
@@ -210,8 +210,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>9kdguhv1lc</Fingerprint>
-      <Integrity>qZpHgIt5pPwaLRjd8Rji5Cn3bmC/PKr8eEDgeLyWuFI=</Integrity>
+      <Fingerprint>gnopta5har</Fingerprint>
+      <Integrity>9IHIKrvOcKr2EnPAY21x9rm6aloP+uLjuPNi9f+NK8I=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\top-company.css'))</OriginalItemSpec>
