@@ -28,5 +28,9 @@
       <Folder Include="Areas\Admin\Models\" />
       <Folder Include="Areas\Admin\Views\" />
       <Folder Include="Areas\Auth\Data\" />
+      <Folder Include="Areas\Employer\Controllers\" />
+      <Folder Include="Areas\Employer\Data\" />
+      <Folder Include="Areas\Employer\Models\" />
+      <Folder Include="Areas\Employer\Views\" />
     </ItemGroup>
 </Project>

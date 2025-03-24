@@ -12,7 +12,7 @@ public class Repository<T> : IRepository<T> where T : BaseEntity
         _context = context;
         _dbSet = context.Set<T>();
     }
-    
+
     public async Task<IEnumerable<T>> GetAllAsync()
     {
         return await _dbSet.ToListAsync();

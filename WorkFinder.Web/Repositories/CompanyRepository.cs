@@ -127,5 +127,9 @@ namespace WorkFinder.Web.Repositories
                 .ToListAsync();
         }
 
+        public async Task<Company> GetByOwnerIdAsync(int ownerId)
+        {
+            return await _context.Companies.FirstOrDefaultAsync(c => c.OwnerId == ownerId);
+        }
     }
 }

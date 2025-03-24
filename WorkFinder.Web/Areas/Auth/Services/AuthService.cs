@@ -21,7 +21,7 @@ public class AuthService : IAuthService
         _httpContextAccessor = httpContextAccessor;
     }
 
-    public async Task<(bool succeeded, string[] errors)> RegisterAsync(RegisterViewModel model)
+    public async Task<IdentityResult> RegisterAsync(RegisterViewModel model)
     {
         var user = new ApplicationUser
         {
@@ -32,7 +32,12 @@ public class AuthService : IAuthService
         };
 
         var result = await _userManager.CreateAsync(user, model.Password);
-        return (result.Succeeded, result.Errors.Select(e => e.Description).ToArray());
+        if (result.Succeeded)
+        {
+            await _userManager.AddToRoleAsync(user, model.Role);
+            await _signInManager.SignInAsync(user, isPersistent: false);
+        }
+        return result;
     }
 
     public async Task<(bool succeeded, string[] errors)> LoginAsync(LoginViewModel model)

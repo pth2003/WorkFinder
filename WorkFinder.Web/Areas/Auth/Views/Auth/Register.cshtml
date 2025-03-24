@@ -256,7 +256,7 @@
                                 <button class="form-select form-select-lg text-start" type="button" id="userTypeDropdown"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     Employers
-                                    <i class="fas fa-chevron-down float-end mt-1"></i>
+
                                 </button>
                                 <ul class="dropdown-menu w-100" aria-labelledby="userTypeDropdown">
                                     <li><a class="dropdown-item" href="#" data-value="Employer">Employers</a></li>
@@ -292,7 +292,7 @@
                         </div>
 
                         <div class="mb-4 position-relative">
-                            <input type="password" class="form-control" asp-for="ConfirmPassword"
+                            <input type="password" class="form-control" asp-for="ConfirmPassword" id="inputConfirmPassword"
                                 placeholder="Confirm Password" required>
                             <span class="position-absolute top-50 end-0 translate-middle-y me-3" style="cursor: pointer;">
                                 <i class="fas fa-eye" id="toggleConfirmPassword"></i>
@@ -370,18 +370,20 @@
             document.addEventListener('DOMContentLoaded', function () {
                 // Password visibility toggle
                 const togglePassword = document.getElementById('togglePassword');
-                const password = document.querySelector('input[asp-for="Password"]');
+
+                const password = document.querySelector('input[type="password"]');
 
                 togglePassword.addEventListener('click', function () {
                     const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
                     password.setAttribute('type', type);
                     this.classList.toggle('fa-eye');
                     this.classList.toggle('fa-eye-slash');
+
                 });
 
                 // Confirm Password visibility toggle
                 const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
-                const confirmPassword = document.querySelector('input[asp-for="ConfirmPassword"]');
+                const confirmPassword = document.getElementById('inputConfirmPassword');
 
                 toggleConfirmPassword.addEventListener('click', function () {
                     const type = confirmPassword.getAttribute('type') === 'password' ? 'text' : 'password';

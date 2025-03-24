@@ -1,0 +1,286 @@
+@model WorkFinder.Web.Areas.Employer.Models.CompanySetupBasicViewModel
+@{
+    ViewData["Title"] = "Company Setup - Basic Information";
+    Layout = "_SetupLayout";
+}
+
+<div class="my-5">
+    <div class="row">
+        <div class="col-md-12 mb-4">
+            <h2 class="mb-4 text-center">Account Setup (Employer)</h2>
+        </div>
+    </div>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle me-2"></i> @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-circle me-2"></i> @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <partial name="_SetupStepperPartial" model="1" />
+
+    <form asp-action="SetupBasic" asp-controller="Company" asp-area="Employer" method="post"
+        enctype="multipart/form-data">
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <!-- Hidden fields for saved paths -->
+        <input type="hidden" asp-for="LogoPath" id="hidden-logo-path" />
+        <input type="hidden" asp-for="BannerPath" id="hidden-banner-path" />
+
+        <div class="card mb-4">
+            <div class="card-header bg-light">
+                <h5 class="mb-0">Logo & Banner Image</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Upload Logo</label>
+                            <div class="upload-container border rounded p-3 text-center">
+                                <div id="logo-preview" class="preview-container mb-3">
+                                    @if (!string.IsNullOrEmpty(Model.LogoPath))
+                                    {
+                                        <img src="@Model.LogoPath" class="preview-image" />
+                                    }
+                                    else
+                                    {
+                                        <i class="fas fa-cloud-upload-alt fa-3x text-muted"></i>
+                                    }
+                                </div>
+                                <div>
+                                    <p class="mb-1">Browse photo or drop here</p>
+                                    <small class="text-muted d-block">A photo larger than 400 pixels works best. Max
+                                        photo size 5 MB.</small>
+                                </div>
+                                <input type="file" asp-for="Logo" class="form-control d-none" id="logo-input"
+                                    accept="image/*" />
+                                <button type="button" class="btn btn-outline-primary mt-3" id="select-logo-btn">Select
+                                    File</button>
+                            </div>
+                            <div>
+                                <span asp-validation-for="Logo" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Banner Image</label>
+                            <div class="upload-container border rounded p-3 text-center">
+                                <div id="banner-preview" class="preview-container mb-3">
+                                    @if (!string.IsNullOrEmpty(Model.BannerPath))
+                                    {
+                                        <img src="@Model.BannerPath" class="preview-image" />
+                                    }
+                                    else
+                                    {
+                                        <i class="fas fa-cloud-upload-alt fa-3x text-muted"></i>
+                                    }
+                                </div>
+                                <div>
+                                    <p class="mb-1">Browse photo or drop here</p>
+                                    <small class="text-muted d-block">Banner image optimal dimension 1920x400.
+                                        Supported
+                                        format JPEG, PNG. Max photo size 5 MB.</small>
+                                </div>
+                                <input type="file" asp-for="Banner" class="form-control d-none" id="banner-input"
+                                    accept="image/*" />
+                                <button type="button" class="btn btn-outline-primary mt-3" id="select-banner-btn">Select
+                                    File</button>
+                            </div>
+                            <div>
+                                <span asp-validation-for="Banner" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header bg-light">
+                <h5 class="mb-0">Company Information</h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label">Company name</label>
+                    <input asp-for="Name" class="form-control" placeholder="Enter your company name" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Description" class="form-label">About Us</label>
+                    <div class="rich-text-editor border rounded">
+                        <div class="editor-toolbar border-bottom p-2">
+                            <button type="button" class="btn btn-sm btn-light" title="Bold"><i
+                                    class="fas fa-bold"></i></button>
+                            <button type="button" class="btn btn-sm btn-light" title="Italic"><i
+                                    class="fas fa-italic"></i></button>
+                            <button type="button" class="btn btn-sm btn-light" title="Underline"><i
+                                    class="fas fa-underline"></i></button>
+                            <button type="button" class="btn btn-sm btn-light" title="Strikethrough"><i
+                                    class="fas fa-strikethrough"></i></button>
+                            <button type="button" class="btn btn-sm btn-light" title="Link"><i
+                                    class="fas fa-link"></i></button>
+                            <button type="button" class="btn btn-sm btn-light" title="Bullet List"><i
+                                    class="fas fa-list-ul"></i></button>
+                            <button type="button" class="btn btn-sm btn-light" title="Numbered List"><i
+                                    class="fas fa-list-ol"></i></button>
+                        </div>
+                        <textarea asp-for="Description" rows="6" class="form-control border-0"
+                            placeholder="Write down about your company here. Let the candidate know who we are..."></textarea>
+                    </div>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-end mt-4">
+            <button type="submit" class="btn btn-primary px-4">
+                Save & Next <i class="fas fa-arrow-right ms-2"></i>
+            </button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function () {
+            // Logo upload handling
+            $('#select-logo-btn').click(function () {
+                $('#logo-input').click();
+            });
+
+            $('#logo-input').change(function () {
+                if (this.files && this.files[0]) {
+                    var reader = new FileReader();
+                    var file = this.files[0];
+
+                    // Kiểm tra kích thước file (max 5MB)
+                    if (file.size > 5 * 1024 * 1024) {
+                        alert("File size is too large! Maximum size is 5MB.");
+                        this.value = "";
+                        return;
+                    }
+
+                    reader.onload = function (e) {
+                        $('#logo-preview').html('<img src="' + e.target.result + '" class="preview-image" />');
+                    }
+
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Banner upload handling
+            $('#select-banner-btn').click(function () {
+                $('#banner-input').click();
+            });
+
+            $('#banner-input').change(function () {
+                if (this.files && this.files[0]) {
+                    var reader = new FileReader();
+                    var file = this.files[0];
+
+                    // Kiểm tra kích thước file (max 5MB)
+                    if (file.size > 5 * 1024 * 1024) {
+                        alert("File size is too large! Maximum size is 5MB.");
+                        this.value = "";
+                        return;
+                    }
+
+                    reader.onload = function (e) {
+                        $('#banner-preview').html('<img src="' + e.target.result + '" class="preview-image" />');
+                    }
+
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Drag and drop for logo
+            $('.upload-container').on('dragover', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                $(this).addClass('border-primary');
+            });
+
+            $('.upload-container').on('dragleave', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                $(this).removeClass('border-primary');
+            });
+
+            // Handle drop for logo
+            $('#logo-preview').closest('.upload-container').on('drop', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                $(this).removeClass('border-primary');
+
+                if (e.originalEvent.dataTransfer.files && e.originalEvent.dataTransfer.files[0]) {
+                    var file = e.originalEvent.dataTransfer.files[0];
+
+                    // Kiểm tra kích thước file (max 5MB)
+                    if (file.size > 5 * 1024 * 1024) {
+                        alert("File size is too large! Maximum size is 5MB.");
+                        return;
+                    }
+
+                    $('#logo-input')[0].files = e.originalEvent.dataTransfer.files;
+
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#logo-preview').html('<img src="' + e.target.result + '" class="preview-image" />');
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Handle drop for banner
+            $('#banner-preview').closest('.upload-container').on('drop', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                $(this).removeClass('border-primary');
+
+                if (e.originalEvent.dataTransfer.files && e.originalEvent.dataTransfer.files[0]) {
+                    var file = e.originalEvent.dataTransfer.files[0];
+
+                    // Kiểm tra kích thước file (max 5MB)
+                    if (file.size > 5 * 1024 * 1024) {
+                        alert("File size is too large! Maximum size is 5MB.");
+                        return;
+                    }
+
+                    $('#banner-input')[0].files = e.originalEvent.dataTransfer.files;
+
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#banner-preview').html('<img src="' + e.target.result + '" class="preview-image" />');
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Gắn sự kiện submit form để kiểm tra
+            $('form').on('submit', function (e) {
+                console.log("Form submitting...");
+                // Đảm bảo các trường ẩn đã có giá trị từ các đường dẫn hiện tại
+                if ($('#logo-preview img').length > 0 && !$('#hidden-logo-path').val()) {
+                    $('#hidden-logo-path').val($('#logo-preview img').attr('src'));
+                }
+
+                if ($('#banner-preview img').length > 0 && !$('#hidden-banner-path').val()) {
+                    $('#hidden-banner-path').val($('#banner-preview img').attr('src'));
+                }
+            });
+        });
+    </script>
+}

@@ -12,7 +12,7 @@ using WorkFinder.Web.Data;
 namespace WorkFinder.Web.Migrations
 {
     [DbContext(typeof(WorkFinderContext))]
-    [Migration("20250313200038_InitialCreate")]
+    [Migration("20250324090313_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -283,6 +283,13 @@ namespace WorkFinder.Web.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Banner")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -290,8 +297,15 @@ namespace WorkFinder.Web.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<int>("EmployeeCount")
                         .HasColumnType("integer");
+
+                    b.Property<DateTime?>("FoundedDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Industry")
                         .IsRequired()
@@ -319,8 +333,16 @@ namespace WorkFinder.Web.Migrations
                     b.Property<int>("OwnerId")
                         .HasColumnType("integer");
 
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Vision")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("Website")
                         .IsRequired()
@@ -328,6 +350,8 @@ namespace WorkFinder.Web.Migrations
                         .HasColumnType("character varying(255)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
 
                     b.HasIndex("OwnerId")
                         .IsUnique();
@@ -551,6 +575,38 @@ namespace WorkFinder.Web.Migrations
                     b.ToTable("saved_jobs", "public");
                 });
 
+            modelBuilder.Entity("WorkFinder.Web.Models.SocialLink", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CompanyId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Platform")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompanyId");
+
+                    b.ToTable("SocialLink", "public");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<int>", null)
@@ -604,11 +660,19 @@ namespace WorkFinder.Web.Migrations
 
             modelBuilder.Entity("WorkFinder.Web.Models.Company", b =>
                 {
+                    b.HasOne("WorkFinder.Web.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("WorkFinder.Web.Models.ApplicationUser", "Owner")
                         .WithOne("Company")
                         .HasForeignKey("WorkFinder.Web.Models.Company", "OwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Category");
 
                     b.Navigation("Owner");
                 });
@@ -692,6 +756,17 @@ namespace WorkFinder.Web.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("WorkFinder.Web.Models.SocialLink", b =>
+                {
+                    b.HasOne("WorkFinder.Web.Models.Company", "Company")
+                        .WithMany("SocialLinks")
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Company");
+                });
+
             modelBuilder.Entity("WorkFinder.Web.Models.ApplicationUser", b =>
                 {
                     b.Navigation("Company");
@@ -711,6 +786,8 @@ namespace WorkFinder.Web.Migrations
             modelBuilder.Entity("WorkFinder.Web.Models.Company", b =>
                 {
                     b.Navigation("Jobs");
+
+                    b.Navigation("SocialLinks");
                 });
 
             modelBuilder.Entity("WorkFinder.Web.Models.Job", b =>

@@ -206,10 +206,16 @@ namespace WorkFinder.Web.Migrations
                     Name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
                     Logo = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
-                    Website = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
-                    Location = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    EmployeeCount = table.Column<int>(type: "integer", nullable: false),
+                    Banner = table.Column<string>(type: "text", nullable: false),
+                    CategoryId = table.Column<int>(type: "integer", nullable: false),
                     Industry = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    EmployeeCount = table.Column<int>(type: "integer", nullable: false),
+                    FoundedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    Website = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
+                    Vision = table.Column<string>(type: "text", nullable: false),
+                    Location = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    Phone = table.Column<string>(type: "text", nullable: false),
+                    Email = table.Column<string>(type: "text", nullable: false),
                     IsVerified = table.Column<bool>(type: "boolean", nullable: false),
                     OwnerId = table.Column<int>(type: "integer", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -218,6 +224,13 @@ namespace WorkFinder.Web.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_companies", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_companies_categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalSchema: "public",
+                        principalTable: "categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_companies_users_OwnerId",
                         column: x => x.OwnerId,
@@ -284,6 +297,31 @@ namespace WorkFinder.Web.Migrations
                     table.PrimaryKey("PK_jobs", x => x.Id);
                     table.ForeignKey(
                         name: "FK_jobs_companies_CompanyId",
+                        column: x => x.CompanyId,
+                        principalSchema: "public",
+                        principalTable: "companies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SocialLink",
+                schema: "public",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    CompanyId = table.Column<int>(type: "integer", nullable: false),
+                    Platform = table.Column<string>(type: "text", nullable: false),
+                    Url = table.Column<string>(type: "text", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SocialLink", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SocialLink_companies_CompanyId",
                         column: x => x.CompanyId,
                         principalSchema: "public",
                         principalTable: "companies",
@@ -419,6 +457,12 @@ namespace WorkFinder.Web.Migrations
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_companies_CategoryId",
+                schema: "public",
+                table: "companies",
+                column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_companies_OwnerId",
                 schema: "public",
                 table: "companies",
@@ -467,6 +511,12 @@ namespace WorkFinder.Web.Migrations
                 schema: "public",
                 table: "saved_jobs",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SocialLink_CompanyId",
+                schema: "public",
+                table: "SocialLink",
+                column: "CompanyId");
 
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",
@@ -522,11 +572,11 @@ namespace WorkFinder.Web.Migrations
                 schema: "public");
 
             migrationBuilder.DropTable(
-                name: "AspNetRoles",
+                name: "SocialLink",
                 schema: "public");
 
             migrationBuilder.DropTable(
-                name: "categories",
+                name: "AspNetRoles",
                 schema: "public");
 
             migrationBuilder.DropTable(
@@ -535,6 +585,10 @@ namespace WorkFinder.Web.Migrations
 
             migrationBuilder.DropTable(
                 name: "companies",
+                schema: "public");
+
+            migrationBuilder.DropTable(
+                name: "categories",
                 schema: "public");
 
             migrationBuilder.DropTable(

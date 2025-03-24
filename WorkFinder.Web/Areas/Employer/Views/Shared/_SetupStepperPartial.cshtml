@@ -1,0 +1,39 @@
+@model int
+
+<div class="row mb-5">
+    <div class="col-md-12">
+        <div class="d-flex justify-content-center align-items-center">
+            <div class="text-center mx-2 mx-md-4">
+                <div class="setup-step-icon @(Model >= 1 ? "active" : "")">
+                    <i class="fas fa-building"></i>
+                </div>
+                <div class="setup-step-label @(Model >= 1 ? "active" : "")">Company Info</div>
+            </div>
+            <div class="setup-progress-line"></div>
+            <div class="text-center mx-2 mx-md-4">
+                <div class="setup-step-icon @(Model >= 2 ? "active" : "")">
+                    <i class="fas fa-info-circle"></i>
+                </div>
+                <div class="setup-step-label @(Model >= 2 ? "active" : "")">Founding Info</div>
+            </div>
+            <div class="setup-progress-line"></div>
+            <div class="text-center mx-2 mx-md-4">
+                <div class="setup-step-icon @(Model >= 3 ? "active" : "")">
+                    <i class="fas fa-share-alt"></i>
+                </div>
+                <div class="setup-step-label @(Model >= 3 ? "active" : "")">Social Media Profile</div>
+            </div>
+            <div class="setup-progress-line"></div>
+            <div class="text-center mx-2 mx-md-4">
+                <div class="setup-step-icon @(Model >= 4 ? "active" : "")">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="setup-step-label @(Model >= 4 ? "active" : "")">Contact</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="progress mb-4">
+    <div class="progress-bar bg-primary" role="progressbar" style="width: @(Model * 25)%" aria-valuenow="@(Model * 25)" aria-valuemin="0" aria-valuemax="100"></div>
+</div> 

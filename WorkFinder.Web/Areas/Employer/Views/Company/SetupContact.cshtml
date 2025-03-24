@@ -1,0 +1,112 @@
+@model WorkFinder.Web.Areas.Employer.Models.CompanySetupContactViewModel
+@{
+    ViewData["Title"] = "Company Setup - Contact Information";
+    Layout = "_SetupLayout";
+}
+
+<div class="my-5">
+    <div class="row">
+        <div class="col-md-12 mb-4">
+            <h2 class="mb-4 text-center">Account Setup (Employer)</h2>
+        </div>
+    </div>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="fas fa-check-circle me-2"></i> @TempData["SuccessMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="fas fa-exclamation-circle me-2"></i> @TempData["ErrorMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+    }
+
+    <partial name="_SetupStepperPartial" model="4" />
+
+    <form asp-action="SetupContact" asp-controller="Company" asp-area="Employer" method="post">
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <div class="card mb-4">
+            <div class="card-header bg-light">
+                <h5 class="mb-0">Contact Information</h5>
+            </div>
+            <div class="card-body">
+                <p class="text-muted mb-4">
+                    This information will be displayed on your company profile and job listings. 
+                    Job seekers will use these contact details to reach your company.
+                </p>
+
+                <div class="mb-3">
+                    <label asp-for="Location" class="form-label">Location</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                        <input asp-for="Location" class="form-control" placeholder="Enter your company location" />
+                    </div>
+                    <span asp-validation-for="Location" class="text-danger"></span>
+                    <small class="text-muted">Example: 123 Business Street, City, Country, 12345</small>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Phone" class="form-label">Phone Number</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                        <input asp-for="Phone" class="form-control" placeholder="Enter your company phone number" />
+                    </div>
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                    <small class="text-muted">Example: +1 (123) 456-7890</small>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label">Email Address</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                        <input asp-for="Email" class="form-control" placeholder="Enter your company email address" />
+                    </div>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                    <small class="text-muted">Example: info@yourcompany.com</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header bg-light">
+                <h5 class="mb-0">Complete Setup</h5>
+            </div>
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-check-circle text-success fa-2x me-3"></i>
+                    <div>
+                        <h6 class="mb-1">You're almost done!</h6>
+                        <p class="mb-0 text-muted">
+                            By completing this final step, your company profile will be created and you can start posting jobs.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between mt-4">
+            <a asp-action="SetupSocial" asp-controller="Company" asp-area="Employer" class="btn btn-outline-secondary px-4">
+                <i class="fas fa-arrow-left me-2"></i> Previous
+            </a>
+            <button type="submit" class="btn btn-primary px-4">
+                Complete Setup <i class="fas fa-check-circle ms-2"></i>
+            </button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+        <script>
+            $(document).ready(function () {
+                // Có thể thêm xử lý JavaScript nếu cần
+            });
+        </script>
+}

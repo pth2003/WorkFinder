@@ -1,0 +1,244 @@
+@model WorkFinder.Web.Areas.Employer.Models.CompanySetupSocialViewModel
+@{
+    ViewData["Title"] = "Company Setup - Social Media Profile";
+    Layout = "_SetupLayout";
+}
+
+<div class="my-5">
+    <div class="row">
+        <div class="col-md-12 mb-4">
+            <h2 class="mb-4 text-center">Account Setup (Employer)</h2>
+        </div>
+    </div>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="fas fa-check-circle me-2"></i> @TempData["SuccessMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="fas fa-exclamation-circle me-2"></i> @TempData["ErrorMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+    }
+
+    <partial name="_SetupStepperPartial" model="3" />
+
+    <form asp-action="SetupSocial" asp-controller="Company" asp-area="Employer" method="post" id="social-form">
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <div class="card mb-4">
+            <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Social Media Profiles</h5>
+                <button type="button" class="btn btn-sm btn-primary" id="add-social-link">
+                    <i class="fas fa-plus"></i> Add Profile
+                </button>
+            </div>
+            <div class="card-body">
+                <p class="text-muted mb-4">
+                    Connect your company's social media profiles to enhance your presence.
+                    Adding social media links helps job seekers learn more about your company culture.
+                </p>
+
+                <div id="social-links-container">
+                    @if (Model.SocialLinks != null && Model.SocialLinks.Any())
+                    {
+                            for (var i = 0; i < Model.SocialLinks.Count; i++)
+                            {
+                                    <div class="social-link-item mb-3 border rounded p-3 position-relative">
+                                        <button type="button" class="btn btn-sm btn-light position-absolute end-0 top-0 m-2 remove-social-link">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                        <input type="hidden" asp-for="SocialLinks[i].Id" />
+                                        <div class="row">
+                                            <div class="col-md-4 mb-2 mb-md-0">
+                                                <label asp-for="SocialLinks[i].Platform" class="form-label">Platform</label>
+                                                <select asp-for="SocialLinks[i].Platform" class="form-select platform-select">
+                                                    <option value="">Select platform</option>
+                                                    <option value="Facebook">Facebook</option>
+                                                    <option value="Twitter">Twitter</option>
+                                                    <option value="LinkedIn">LinkedIn</option>
+                                                    <option value="Instagram">Instagram</option>
+                                                    <option value="YouTube">YouTube</option>
+                                                    <option value="GitHub">GitHub</option>
+                                                    <option value="TikTok">TikTok</option>
+                                                    <option value="Pinterest">Pinterest</option>
+                                                    <option value="Other">Other</option>
+                                                </select>
+                                                <span asp-validation-for="SocialLinks[i].Platform" class="text-danger"></span>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <label asp-for="SocialLinks[i].Url" class="form-label">URL</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text platform-icon"><i class="fas fa-link"></i></span>
+                                                    <input asp-for="SocialLinks[i].Url" class="form-control" placeholder="https://" />
+                                                </div>
+                                                <span asp-validation-for="SocialLinks[i].Url" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                            }
+                    }
+                </div>
+
+                @if (Model.SocialLinks == null || !Model.SocialLinks.Any())
+                {
+                        <div class="text-center py-4" id="no-links-message">
+                            <i class="fas fa-share-alt fa-3x text-muted mb-3"></i>
+                            <p class="text-muted">No social media profiles added yet. Click "Add Profile" to get started.</p>
+                        </div>
+                }
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between mt-4">
+            <a asp-action="SetupOrganization" asp-controller="Company" asp-area="Employer" class="btn btn-outline-secondary px-4">
+                <i class="fas fa-arrow-left me-2"></i> Previous
+            </a>
+            <button type="submit" class="btn btn-primary px-4">
+                Save & Next <i class="fas fa-arrow-right ms-2"></i>
+            </button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+        <script>
+            $(document).ready(function () {
+                // Ẩn thông báo "No links" nếu có links
+                updateNoLinksMessage();
+
+                // Cập nhật icon tương ứng với platform
+                updatePlatformIcons();
+
+                // Thêm sự kiện khi chọn platform
+                $(document).on('change', '.platform-select', function() {
+                    updatePlatformIcons();
+                });
+
+                // Thêm mới một social link
+                $('#add-social-link').click(function () {
+                    var index = $('.social-link-item').length;
+                    var template = `
+                        <div class="social-link-item mb-3 border rounded p-3 position-relative">
+                            <button type="button" class="btn btn-sm btn-light position-absolute end-0 top-0 m-2 remove-social-link">
+                                <i class="fas fa-times"></i>
+                            </button>
+                            <input type="hidden" name="SocialLinks[${index}].Id" value="" />
+                            <div class="row">
+                                <div class="col-md-4 mb-2 mb-md-0">
+                                    <label class="form-label">Platform</label>
+                                    <select class="form-select platform-select" name="SocialLinks[${index}].Platform">
+                                        <option value="">Select platform</option>
+                                        <option value="Facebook">Facebook</option>
+                                        <option value="Twitter">Twitter</option>
+                                        <option value="LinkedIn">LinkedIn</option>
+                                        <option value="Instagram">Instagram</option>
+                                        <option value="YouTube">YouTube</option>
+                                        <option value="GitHub">GitHub</option>
+                                        <option value="TikTok">TikTok</option>
+                                        <option value="Pinterest">Pinterest</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                    <span class="text-danger field-validation-valid" data-valmsg-for="SocialLinks[${index}].Platform" data-valmsg-replace="true"></span>
+                                </div>
+                                <div class="col-md-8">
+                                    <label class="form-label">URL</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text platform-icon"><i class="fas fa-link"></i></span>
+                                        <input class="form-control" name="SocialLinks[${index}].Url" placeholder="https://" />
+                                    </div>
+                                    <span class="text-danger field-validation-valid" data-valmsg-for="SocialLinks[${index}].Url" data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    $('#social-links-container').append(template);
+                    updateNoLinksMessage();
+                
+                    // Reattach validation to new elements
+                    $('#social-form').data('validator', null);
+                    $.validator.unobtrusive.parse('#social-form');
+                });
+
+                // Xóa một social link
+                $(document).on('click', '.remove-social-link', function () {
+                    $(this).closest('.social-link-item').remove();
+                    updateNoLinksMessage();
+                    reindexSocialLinks();
+                });
+
+                function updateNoLinksMessage() {
+                    if ($('.social-link-item').length > 0) {
+                        $('#no-links-message').hide();
+                    } else {
+                        $('#no-links-message').show();
+                    }
+                }
+
+                function reindexSocialLinks() {
+                    // Cập nhật lại các index trong name attribute
+                    $('.social-link-item').each(function (index) {
+                        $(this).find('input, select').each(function () {
+                            var name = $(this).attr('name');
+                            if (name) {
+                                var newName = name.replace(/\[\d+\]/, '[' + index + ']');
+                                $(this).attr('name', newName);
+                            }
+                        });
+
+                        $(this).find('.field-validation-valid').each(function() {
+                            var forAttr = $(this).attr('data-valmsg-for');
+                            if (forAttr) {
+                                var newFor = forAttr.replace(/\[\d+\]/, '[' + index + ']');
+                                $(this).attr('data-valmsg-for', newFor);
+                            }
+                        });
+                    });
+                }
+
+                function updatePlatformIcons() {
+                    $('.platform-select').each(function() {
+                        var platform = $(this).val();
+                        var iconElement = $(this).closest('.row').find('.platform-icon i');
+                    
+                        // Cập nhật icon dựa trên platform
+                        switch(platform) {
+                            case 'Facebook':
+                                iconElement.attr('class', 'fab fa-facebook');
+                                break;
+                            case 'Twitter':
+                                iconElement.attr('class', 'fab fa-twitter');
+                                break;
+                            case 'LinkedIn':
+                                iconElement.attr('class', 'fab fa-linkedin');
+                                break;
+                            case 'Instagram':
+                                iconElement.attr('class', 'fab fa-instagram');
+                                break;
+                            case 'YouTube':
+                                iconElement.attr('class', 'fab fa-youtube');
+                                break;
+                            case 'GitHub':
+                                iconElement.attr('class', 'fab fa-github');
+                                break;
+                            case 'TikTok':
+                                iconElement.attr('class', 'fab fa-tiktok');
+                                break;
+                            case 'Pinterest':
+                                iconElement.attr('class', 'fab fa-pinterest');
+                                break;
+                            default:
+                                iconElement.attr('class', 'fas fa-link');
+                        }
+                    });
+                }
+            });
+        </script>
+}

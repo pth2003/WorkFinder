@@ -48,6 +48,42 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXMvQXV0aC9fVmlld1N0YXJ0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Company/SetupBasic.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvRW1wbG95ZXIvVmlld3MvQ29tcGFueS9TZXR1cEJhc2ljLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Company/SetupContact.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvRW1wbG95ZXIvVmlld3MvQ29tcGFueS9TZXR1cENvbnRhY3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Company/SetupOrganization.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvRW1wbG95ZXIvVmlld3MvQ29tcGFueS9TZXR1cE9yZ2FuaXphdGlvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Company/SetupSocial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvRW1wbG95ZXIvVmlld3MvQ29tcGFueS9TZXR1cFNvY2lhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Shared/_SetupLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvRW1wbG95ZXIvVmlld3MvU2hhcmVkL19TZXR1cExheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Shared/_SetupStepperPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvRW1wbG95ZXIvVmlld3MvU2hhcmVkL19TZXR1cFN0ZXBwZXJQYXJ0aWFsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Shared/_SetupStylesPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvRW1wbG95ZXIvVmlld3MvU2hhcmVkL19TZXR1cFN0eWxlc1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Employer/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvRW1wbG95ZXIvVmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Employer/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvRW1wbG95ZXIvVmlld3MvX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Views/Company/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ29tcGFueS9EZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

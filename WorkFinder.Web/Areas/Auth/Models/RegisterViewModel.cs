@@ -1,13 +1,13 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-
+using WorkFinder.Web.Models;
 namespace WorkFinder.Web.Areas.Auth.Models;
 
 public class RegisterViewModel
 {
     [Required]
     [DisplayName("Register as")]
-    public string Role { get; set; } = string.Empty;
+    public string Role { get; set; } = UserRoles.JobSeeker;
     [Required]
     [EmailAddress]
     public string Email { get; set; } = string.Empty;
@@ -26,7 +26,7 @@ public class RegisterViewModel
     [Compare("Password", ErrorMessage = "Passwords do not match")]
     [DisplayName("Confirm Password")]
     public string ConfirmPassword { get; set; } = string.Empty;
-    
+
     [Required]
     [DisplayName("Terms of Service")]
     public bool AgreeTerms { get; set; }

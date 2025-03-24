@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using WorkFinder.Web.Areas.Auth.Models;
 using WorkFinder.Web.Areas.Auth.Services;
+using WorkFinder.Web.Models;
 
 namespace WorkFinder.Web.Areas.Auth.Controllers;
 [Area("Auth")]
@@ -28,9 +29,16 @@ public class AuthController : Controller
             return View(model);
         }
 
-        var (succeeded, errors) = await _authService.RegisterAsync(model);
-        if (succeeded)
+        var result = await _authService.RegisterAsync(model);
+        if (result.Succeeded)
         {
+
+            if (model.Role == UserRoles.Employer)
+            {
+                return RedirectToAction("SetupBasic", "Company", new { area = "Employer" });
+            }
+            // return RedirectToAction("Index", "Home");
+
             // Automatically log in the user after registration
             var loginResult = await _authService.LoginAsync(new LoginViewModel
             {
@@ -42,11 +50,16 @@ public class AuthController : Controller
             {
                 return LocalRedirect(returnUrl ?? "/");
             }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Login failed");
+                return View(model);
+            }
         }
 
-        foreach (var error in errors)
+        foreach (var error in result.Errors)
         {
-            ModelState.AddModelError(string.Empty, error);
+            ModelState.AddModelError(string.Empty, error.Description);
         }
 
         return View(model);
