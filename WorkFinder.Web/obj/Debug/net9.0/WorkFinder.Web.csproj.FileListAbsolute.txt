@@ -309,7 +309,6 @@
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/v0zgfp0y55-87fc7y1x7t.gz
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/yfc7ypekbg-mlv21k5csn.gz
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/xc55rblq0w-ufhunsn2ql.gz
-/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/34xu3t8x3r-61n19gt1b8.gz
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/349wg6nvct-9bbw35csid.gz
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/32ay0fjd1c-sw8kbue69q.gz
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/co3t201f08-13p4k30vz4.gz
@@ -409,3 +408,5 @@
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/myhhsew2z5-8i5gtug8ls.gz
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/jur64tdre6-gnopta5har.gz
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/npjfevgezn-r2xl516g6z.gz
+/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/ynjrzpcwxc-sw8kbue69q.gz
+/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/tdy2q30xu8-aqwqjbwtwp.gz

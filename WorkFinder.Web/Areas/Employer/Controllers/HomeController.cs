@@ -44,62 +44,19 @@ namespace WorkFinder.Web.Areas.Employer.Controllers
 
             // Lấy dữ liệu cho dashboard
             var openJobs = await _jobRepository.GetActiveJobCountByCompanyIdAsync(company.Id);
-            var savedCandidates = 2517; // Giả lập dữ liệu hoặc lấy từ repository
-
-            // Tạo dữ liệu giả cho demo
-            var recentJobs = new List<RecentJobViewModel>
+            var savedCandidates = await _jobRepository.GetTotalApplicationsByCompanyIdAsync(company.Id);
+            var listRecentJobs = await _jobRepository.GetRecentJobsByCompanyIdAsync(company.Id, 5);
+            var recentJobs = listRecentJobs.Select(j => new RecentJobViewModel
             {
-                new RecentJobViewModel
-                {
-                    Id = 1,
-                    Title = "UI/UX Designer",
-                    JobType = "Full Time",
-                    IsActive = true,
-                    DaysRemaining = 27,
-                    ApplicationCount = 798,
-                    ExpirationDate = DateTime.Now.AddDays(27).ToString("MMM d, yyyy")
-                },
-                new RecentJobViewModel
-                {
-                    Id = 2,
-                    Title = "Senior UX Designer",
-                    JobType = "Internship",
-                    IsActive = true,
-                    DaysRemaining = 8,
-                    ApplicationCount = 185,
-                    ExpirationDate = DateTime.Now.AddDays(8).ToString("MMM d, yyyy")
-                },
-                new RecentJobViewModel
-                {
-                    Id = 3,
-                    Title = "Technical Support Specialist",
-                    JobType = "Part Time",
-                    IsActive = true,
-                    DaysRemaining = 4,
-                    ApplicationCount = 556,
-                    ExpirationDate = DateTime.Now.AddDays(4).ToString("MMM d, yyyy")
-                },
-                new RecentJobViewModel
-                {
-                    Id = 4,
-                    Title = "Junior Graphic Designer",
-                    JobType = "Full Time",
-                    IsActive = true,
-                    DaysRemaining = 24,
-                    ApplicationCount = 583,
-                    ExpirationDate = DateTime.Now.AddDays(24).ToString("MMM d, yyyy")
-                },
-                new RecentJobViewModel
-                {
-                    Id = 5,
-                    Title = "Front End Developer",
-                    JobType = "Full Time",
-                    IsActive = false,
-                    DaysRemaining = 0,
-                    ApplicationCount = 740,
-                    ExpirationDate = "Dec 7, 2019"
-                }
-            };
+                Id = j.Id,
+                Title = j.Title,
+                JobType = j.JobType.ToString(),
+                IsActive = j.IsActive,
+                DaysRemaining = (int)Math.Ceiling((j.ExpiryDate - DateTime.Now).TotalDays),
+                ApplicationCount = j.Applications?.Count ?? 0,
+                ExpirationDate = j.ExpiryDate.ToString("MMM d, yyyy")
+            });
+
 
             var viewModel = new EmployerDashboardViewModel
             {
@@ -107,7 +64,7 @@ namespace WorkFinder.Web.Areas.Employer.Controllers
                 CompanyLogo = company.Logo,
                 OpenJobs = openJobs,
                 SavedCandidates = savedCandidates,
-                RecentJobs = recentJobs
+                RecentJobs = recentJobs.ToList()
             };
 
             return View(viewModel);

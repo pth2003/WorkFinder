@@ -1,0 +1,39 @@
+@{
+    ViewData["Title"] = "Error";
+    Layout = "_EmployerLayout";
+}
+
+<div class="container d-flex align-items-center justify-content-center min-vh-100">
+    <div class="row align-items-center">
+        <div class="col-md-6">
+            <h1 class="display-4 fw-bold mb-3">Oops! Something went wrong</h1>
+            <p class="fs-5 text-muted mb-4">We're sorry, but an error has occurred while processing your request.</p>
+            <div class="d-flex">
+                <a href="@Url.Action("Index", "Home", new { area = "Employer" })"
+                    class="btn btn-primary me-3 px-4 py-2">
+                    Dashboard <i class="fas fa-arrow-right ms-1"></i>
+                </a>
+                <button onclick="history.back()" class="btn btn-light px-4 py-2">Go Back</button>
+            </div>
+        </div>
+        <div class="col-md-6 text-center">
+            <img src="~/img/bg-404.png" alt="Error" class="img-fluid" style="max-height: 400px;">
+        </div>
+    </div>
+</div>
+
+<style>
+    .min-vh-100 {
+        min-height: calc(100vh - 100px);
+    }
+
+    .btn-primary {
+        background-color: #0d6efd;
+        border-color: #0d6efd;
+    }
+
+    .btn-light {
+        background-color: #f8f9fa;
+        border-color: #dee2e6;
+    }
+</style>

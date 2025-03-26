@@ -11,5 +11,9 @@ namespace WorkFinder.Web.Repositories
         Task<IEnumerable<Category>> GetAllAsync();
         Task<Category> GetByIdAsync(int id);
         Task<IEnumerable<Category>> GetCategoriesByJobId(int jobId);
+
+        // Thêm các phương thức mới cần thiết
+        Task<Category> GetCategoryByNameAsync(string name);
+        Task AddJobCategoryAsync(int jobId, int categoryId);
     }
 }

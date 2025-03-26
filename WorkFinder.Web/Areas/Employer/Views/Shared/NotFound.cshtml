@@ -1,0 +1,52 @@
+@{
+    ViewData["Title"] = "Page Not Found";
+    Layout = "_EmployerLayout";
+}
+
+<div class="container error-container d-flex align-items-center justify-content-center">
+    <div class="row align-items-center">
+        <div class="col-md-6">
+            <h1 class="display-4 fw-bold mb-3">Opps! Page not found</h1>
+            <p class="fs-5 text-muted mb-4">Something went wrong. It's look like the link is broken or the page is
+                removed.</p>
+            <div class="d-flex">
+                <a href="@Url.Action("Index", "Home", new { area = "Employer" })"
+                    class="btn btn-primary me-3 px-4 py-2">
+                    Dashboard <i class="fas fa-arrow-right ms-1"></i>
+                </a>
+                <button onclick="history.back()" class="btn btn-light px-4 py-2">Go Back</button>
+            </div>
+        </div>
+        <div class="col-md-6 text-center">
+            <img src="~/img/bg-404.png" alt="404 Error" class="img-fluid error-image">
+        </div>
+    </div>
+</div>
+
+<style>
+    .error-container {
+        padding: 2rem 0;
+        min-height: calc(100vh - 80px - 6rem);
+    }
+
+    .error-image {
+        max-height: 350px;
+        width: auto;
+    }
+
+    .btn-primary {
+        background-color: #0d6efd;
+        border-color: #0d6efd;
+    }
+
+    .btn-light {
+        background-color: #f8f9fa;
+        border-color: #dee2e6;
+    }
+
+    @@media(max - height: 700px) {
+            .error-image {
+                max-height: 250px;
+            }
+        }
+    </style>

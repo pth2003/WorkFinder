@@ -1,7 +1,6 @@
-﻿@model ErrorViewModel
 @{
     ViewData["Title"] = "Error";
-    Layout = "_Layout";
+    Layout = "_AuthLayout";
 }
 
 <div class="container d-flex align-items-center justify-content-center min-vh-100">
@@ -10,8 +9,8 @@
             <h1 class="display-4 fw-bold mb-3">Oops! Something went wrong</h1>
             <p class="fs-5 text-muted mb-4">We're sorry, but an error has occurred while processing your request.</p>
             <div class="d-flex">
-                <a href="@Url.Action("Index", "Home")" class="btn btn-primary me-3 px-4 py-2">
-                    Home <i class="fas fa-arrow-right ms-1"></i>
+                <a href="@Url.Action("Login", "Auth", new { area = "Auth" })" class="btn btn-primary me-3 px-4 py-2">
+                    Login <i class="fas fa-arrow-right ms-1"></i>
                 </a>
                 <button onclick="history.back()" class="btn btn-light px-4 py-2">Go Back</button>
             </div>
@@ -41,23 +40,3 @@
         border-color: #dee2e6;
     }
 </style>
-
-@if (Model.ShowRequestId)
-{
-    <p>
-        <strong>Request ID:</strong> <code>@Model.RequestId</code>
-    </p>
-}
-
-<h3>Development Mode</h3>
-<p>
-    Swapping to <strong>Development</strong> environment will display more detailed information about the error that
-    occurred.
-</p>
-<p>
-    <strong>The Development environment shouldn't be enabled for deployed applications.</strong>
-    It can result in displaying sensitive information from exceptions to end users.
-    For local debugging, enable the <strong>Development</strong> environment by setting the
-    <strong>ASPNETCORE_ENVIRONMENT</strong> environment variable to <strong>Development</strong>
-    and restarting the app.
-</p>

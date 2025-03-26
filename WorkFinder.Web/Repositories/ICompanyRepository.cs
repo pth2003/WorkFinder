@@ -34,5 +34,7 @@ namespace WorkFinder.Web.Repositories
 
         Task<IEnumerable<Company>> GetTopCompaniesAsync(int limit);
         Task<Company> GetByOwnerIdAsync(int ownerId);
+
+        // Task<int> GetTotalJobsByCompanyIdAsync(int companyId);
     }
 }

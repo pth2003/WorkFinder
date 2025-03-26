@@ -24,7 +24,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="d-flex align-items-center">
+                    <a href="@Url.Action("Create", "Job", new { area = "Employer" })" class="d-flex align-items-center">
                         <i class="fas fa-plus-circle me-2"></i>
                         <span>Post a Job</span>
                     </a>
@@ -61,7 +61,7 @@
                 </li>
             </ul>
             <div class="sidebar-footer mt-4">
-                <a href="#" class="d-flex align-items-center">
+                <a href="@Url.Action("Logout", "Auth")" class="d-flex align-items-center">
                     <i class="fas fa-sign-out-alt me-2"></i> Log-out
                 </a>
             </div>
@@ -178,6 +178,7 @@
     .sidebar {
         width: 250px;
         flex-shrink: 0;
+        font-size: 1.6rem;
     }
 
     .sidebar-header h5 {

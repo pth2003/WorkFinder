@@ -1,0 +1,335 @@
+@model IEnumerable<WorkFinder.Web.Models.Job>
+@using WorkFinder.Web.Extensions
+@{
+    ViewData["Title"] = "My Jobs";
+    Layout = "_EmployerLayout";
+}
+
+<div class="container">
+    <div class="employers-dashboard mt-4">
+        <div class="sidebar">
+            <div class="sidebar-header mb-4">
+                <h5>EMPLOYERS DASHBOARD</h5>
+            </div>
+            <ul class="sidebar-menu">
+                <li>
+                    <a href="@Url.Action("Index", "Home", new { area = "Employer" })" class="d-flex align-items-center">
+                        <i class="fas fa-tachometer-alt me-2"></i>
+                        <span>Overview</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="d-flex align-items-center">
+                        <i class="fas fa-building me-2"></i>
+                        <span>Employers Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Create", "Job", new { area = "Employer" })" class="d-flex align-items-center">
+                        <i class="fas fa-plus-circle me-2"></i>
+                        <span>Post a Job</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="@Url.Action("Index", "Job", new { area = "Employer" })" class="d-flex align-items-center">
+                        <i class="fas fa-briefcase me-2"></i>
+                        <span>My Jobs</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="d-flex align-items-center">
+                        <i class="fas fa-user me-2"></i>
+                        <span>Saved Candidate</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="d-flex align-items-center">
+                        <i class="fas fa-credit-card me-2"></i>
+                        <span>Plans & Billing</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="d-flex align-items-center">
+                        <i class="fas fa-building me-2"></i>
+                        <span>All Companies</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="d-flex align-items-center">
+                        <i class="fas fa-cog me-2"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="sidebar-footer mt-4">
+                <a href="@Url.Action("Logout", "Auth", new { area = "Auth" })" class="d-flex align-items-center">
+                    <i class="fas fa-sign-out-alt me-2"></i> Log-out
+                </a>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="jobs-list-container bg-white p-4 rounded shadow-sm">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2>My Jobs</h2>
+                    <a href="@Url.Action("Create", "Job", new { area = "Employer" })" class="btn btn-primary">
+                        <i class="fas fa-plus me-1"></i> Post a New Job
+                    </a>
+                </div>
+
+                @if (TempData["SuccessMessage"] != null)
+                {
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            @TempData["SuccessMessage"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                }
+
+                @if (Model != null && Model.Any())
+                {
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Type</th>
+                                        <th>Vacancies</th>
+                                        <th>Applicants</th>
+                                        <th>Posted Date</th>
+                                        <th>Expires</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var job in Model)
+                                    {
+                                            <tr>
+                                                <td class="job-title">
+                                                    <a href="@Url.Action("Details", "Job", new { id = job.Id, area = "Employer" })">
+                                                        @job.Title
+                                                    </a>
+                                                </td>
+                                                <td>@job.JobType</td>
+                                                <td>
+                                                    @job.GetMetadataValue("Vacancies", "1")
+                                                </td>
+                                                <td>
+                                                    <span class="badge bg-info">@job.Applications.Count</span>
+                                                </td>
+                                                <td>@job.CreatedAt.ToString("dd MMM yyyy")</td>
+                                                <td>
+                                                    @{
+                                                            var daysRemaining = (job.ExpiryDate - DateTime.Now).Days;
+                                                            var expiryClass = daysRemaining <= 3 ? "text-danger" :
+                                                                                              daysRemaining <= 7 ? "text-warning" : "";
+                                                    }
+                                                    <span class="@expiryClass">
+                                                        @(daysRemaining > 0 ? $"{daysRemaining} days" : "Expired")
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    @if (job.IsActive)
+                                                    {
+                                                            <span class="badge bg-success">Active</span>
+                                                    }
+                                                    else
+                                                    {
+                                                            <span class="badge bg-secondary">Inactive</span>
+                                                    }
+                                                </td>
+                                                <td>
+                                                    <div class="btn-group">
+                                                        <a href="@Url.Action("Edit", "Job", new { id = job.Id, area = "Employer" })" 
+                                                           class="btn btn-sm btn-outline-primary">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                        <a href="@Url.Action("Applicants", "Job", new { id = job.Id, area = "Employer" })" 
+                                                           class="btn btn-sm btn-outline-info">
+                                                            <i class="fas fa-users"></i>
+                                                        </a>
+                                                        <button type="button" class="btn btn-sm btn-outline-danger" 
+                                                                data-bs-toggle="modal" data-bs-target="#deleteModal" 
+                                                                data-job-id="@job.Id" data-job-title="@job.Title">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                }
+                else
+                {
+                        <div class="text-center py-5">
+                            <i class="fas fa-briefcase fs-1 text-muted mb-3"></i>
+                            <h4>You haven't posted any jobs yet</h4>
+                            <p class="text-muted">Get started by posting your first job vacancy!</p>
+                            <a href="@Url.Action("Create", "Job", new { area = "Employer" })" class="btn btn-primary mt-3">
+                                <i class="fas fa-plus me-2"></i> Post a Job
+                            </a>
+                        </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm Delete</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete the job "<span id="jobTitleToDelete"></span>"?</p>
+                <p class="text-danger">This action cannot be undone.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <form id="deleteJobForm" asp-action="Delete" asp-controller="Job" asp-area="Employer" method="post">
+                    <input type="hidden" id="jobIdToDelete" name="id" />
+                    <button type="submit" class="btn btn-danger">Delete Job</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    
+    .employers-dashboard {
+        display: flex;
+        gap: 30px;
+    }
+
+    /* Sidebar */
+    .sidebar {
+        width: 250px;
+        flex-shrink: 0;
+        font-size: 1.6rem;
+    }
+
+    .sidebar-header h5 {
+        font-size: 14px;
+        font-weight: 600;
+        color: #777;
+        margin-bottom: 20px;
+    }
+
+    .sidebar-menu {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .sidebar-menu li {
+        margin-bottom: 15px;
+    }
+
+    .sidebar-menu li a {
+        display: flex;
+        align-items: center;
+        color: #666;
+        text-decoration: none;
+        padding: 8px 15px;
+        border-radius: 6px;
+        transition: all 0.3s;
+    }
+
+    .sidebar-menu li a:hover,
+    .sidebar-menu li.active a {
+        background-color: rgba(0, 123, 255, 0.1);
+        color: #0d6efd;
+    }
+
+    .sidebar-menu li.active a {
+        font-weight: 500;
+    }
+
+    .sidebar-menu li a i {
+        width: 20px;
+        text-align: center;
+        margin-right: 8px;
+    }
+
+    .sidebar-footer {
+        padding-top: 15px;
+        border-top: 1px solid #eee;
+    }
+
+    .sidebar-footer a {
+        color: #666;
+        text-decoration: none;
+        font-size: 14px;
+    }
+
+    .sidebar-footer a:hover {
+        color: #0d6efd;
+    }
+
+    /* Main Content */
+    .main-content {
+        flex: 1;
+    }
+
+    /* Table Styles */
+    .table {
+        font-size: 14px;
+    }
+
+    .table th {
+        font-weight: 600;
+        color: #555;
+    }
+
+    .job-title a {
+        color: #0d6efd;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    .job-title a:hover {
+        text-decoration: underline;
+    }
+
+    .btn-group .btn {
+        padding: 0.25rem 0.5rem;
+    }
+
+    /* Responsive */
+    @@media (max-width: 992px) {
+        .employers-dashboard {
+            flex-direction: column;
+        }
+
+        .sidebar {
+            width: 100%;
+            margin-bottom: 30px;
+        }
+    }
+</style>
+
+@section Scripts {
+        <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Set up delete modal
+                var deleteModal = document.getElementById('deleteModal');
+                if (deleteModal) {
+                    deleteModal.addEventListener('show.bs.modal', function(event) {
+                        var button = event.relatedTarget;
+                        var jobId = button.getAttribute('data-job-id');
+                        var jobTitle = button.getAttribute('data-job-title');
+                    
+                        document.getElementById('jobIdToDelete').value = jobId;
+                        document.getElementById('jobTitleToDelete').textContent = jobTitle;
+                    });
+                }
+            });
+        </script>
+}

@@ -15,7 +15,10 @@ public class Job : BaseEntity
     public ExperienceLevel ExperienceLevel { get; set; }
     public DateTime ExpiryDate { get; set; }
     public bool IsActive { get; set; }
-    
+
+    // Thêm trường metadata để lưu trữ dữ liệu bổ sung có thể được serialize/deserialize
+    public string Metadata { get; set; } = "{}";
+
     public int CompanyId { get; set; }
     public virtual Company Company { get; set; } = null!;
     public virtual ICollection<JobApplication> Applications { get; set; } = new List<JobApplication>();

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "1zZRRBTKeLnFiQS1XRgh7k9vuDsvaBbjKx6rbgznnFo=",
+  "Hash": "8smS0aHYBYwWlsTPWJ2k2RHIZS8GYylvbaaPPcOwMLE=",
   "Source": "WorkFinder.Web",
   "BasePath": "_content/WorkFinder.Web",
   "Mode": "Default",
@@ -1611,27 +1611,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/icon/Arrows.svg"
-    },
-    {
-      "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/34xu3t8x3r-61n19gt1b8.gz",
-      "SourceId": "WorkFinder.Web",
-      "SourceType": "Discovered",
-      "ContentRoot": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/",
-      "BasePath": "_content/WorkFinder.Web",
-      "RelativePath": "favicon#[.{fingerprint=61n19gt1b8}]?.ico.gz",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Alternative",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/favicon.ico",
-      "AssetTraitName": "Content-Encoding",
-      "AssetTraitValue": "gzip",
-      "Fingerprint": "jefwejb9ld",
-      "Integrity": "+/824NtfTA0L7Mr42Fo+86YJP4R5cigdi9S7Fx5VVl4=",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/favicon.ico"
     },
     {
       "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/35wc6ml3dn-h1s4sie4z3.gz",
@@ -3860,6 +3839,27 @@
       "OriginalItemSpec": "/Users/hieupt/.nuget/packages/microsoft.aspnetcore.identity.ui/9.0.3/staticwebassets/V5/lib/jquery-validation/dist/additional-methods.min.js"
     },
     {
+      "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/tdy2q30xu8-aqwqjbwtwp.gz",
+      "SourceId": "WorkFinder.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/",
+      "BasePath": "_content/WorkFinder.Web",
+      "RelativePath": "img/404-robot#[.{fingerprint=aqwqjbwtwp}]?.svg.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/img/404-robot.svg",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "odycicbiim",
+      "Integrity": "DGsmzcl8TGpeYjXVvOxL8CGLOAvGRy+AiCSkSi+KDHE=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/img/404-robot.svg"
+    },
+    {
       "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/tg53r17ghy-dxx9fxp4il.gz",
       "SourceId": "Microsoft.AspNetCore.Identity.UI",
       "SourceType": "Package",
@@ -4257,6 +4257,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/icon/LogoCp/Employers=Default, Size=Large.svg"
+    },
+    {
+      "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/ynjrzpcwxc-sw8kbue69q.gz",
+      "SourceId": "WorkFinder.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/",
+      "BasePath": "_content/WorkFinder.Web",
+      "RelativePath": "favicon#[.{fingerprint=sw8kbue69q}]?.svg.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/favicon.svg",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "6jv0gcs5e0",
+      "Integrity": "ol+FsG+CiXFl47Cu9bvIGYvRACY9MYF3uBNpVrrjkWg=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/favicon.svg"
     },
     {
       "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/ypb07cdwot-c2jlpeoesf.gz",
@@ -4742,12 +4763,12 @@
       "OriginalItemSpec": "wwwroot/css/top-company.css"
     },
     {
-      "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/favicon.ico",
+      "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/favicon.svg",
       "SourceId": "WorkFinder.Web",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/",
       "BasePath": "_content/WorkFinder.Web",
-      "RelativePath": "favicon#[.{fingerprint}]?.ico",
+      "RelativePath": "favicon#[.{fingerprint}]?.svg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -4756,11 +4777,11 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "61n19gt1b8",
-      "Integrity": "Jtxf9L+5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM=",
+      "Fingerprint": "sw8kbue69q",
+      "Integrity": "5BI/uqEMCx62Ao/WnTvEqL9vxuBSiVzxbqHf7UYy0sE=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/favicon.ico"
+      "OriginalItemSpec": "wwwroot/favicon.svg"
     },
     {
       "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/icon/Arrows.svg",
@@ -5076,6 +5097,48 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/icon/users-duotone 1.png"
+    },
+    {
+      "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/img/404-robot.svg",
+      "SourceId": "WorkFinder.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/",
+      "BasePath": "_content/WorkFinder.Web",
+      "RelativePath": "img/404-robot#[.{fingerprint}]?.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "aqwqjbwtwp",
+      "Integrity": "zpi9FKZM0Bngk5ywbU+9CGyhJD9at8V8n55u4PZLYTY=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/img/404-robot.svg"
+    },
+    {
+      "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/img/bg-404.png",
+      "SourceId": "WorkFinder.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/",
+      "BasePath": "_content/WorkFinder.Web",
+      "RelativePath": "img/bg-404#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "n17owjhk15",
+      "Integrity": "VWpO2orwh5num3YNaA47VGen2hnEp2bBHuwMW1aAxMU=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/img/bg-404.png"
     },
     {
       "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/img/bg-auth.png",
@@ -6884,6 +6947,27 @@
       "OriginalItemSpec": "wwwroot/uploads/logos/fe714775-102a-40d4-804e-84f5808873b5_IMG_1645.jpeg"
     },
     {
+      "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/resumes/0a68db58-e7a6-4ad4-8adc-05e3dc552cb6_Hieu Phan Trung_intern.pdf",
+      "SourceId": "WorkFinder.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/",
+      "BasePath": "_content/WorkFinder.Web",
+      "RelativePath": "uploads/resumes/0a68db58-e7a6-4ad4-8adc-05e3dc552cb6_Hieu Phan Trung_intern#[.{fingerprint}]?.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "yq05mbroap",
+      "Integrity": "9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/resumes/0a68db58-e7a6-4ad4-8adc-05e3dc552cb6_Hieu Phan Trung_intern.pdf"
+    },
+    {
       "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/resumes/28977a92-f5a4-432c-b54c-a0eb24a6208e_Hieu Phan Trung_intern.pdf",
       "SourceId": "WorkFinder.Web",
       "SourceType": "Discovered",
@@ -6947,6 +7031,69 @@
       "OriginalItemSpec": "wwwroot/uploads/resumes/4babb222-2a6d-4b88-9a0f-adf84450932a_Hieu Phan Trung_intern.pdf"
     },
     {
+      "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/resumes/72326daf-29c4-4b00-9d4e-647ec3069fa9_Hieu Phan Trung_intern.pdf",
+      "SourceId": "WorkFinder.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/",
+      "BasePath": "_content/WorkFinder.Web",
+      "RelativePath": "uploads/resumes/72326daf-29c4-4b00-9d4e-647ec3069fa9_Hieu Phan Trung_intern#[.{fingerprint}]?.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "yq05mbroap",
+      "Integrity": "9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/resumes/72326daf-29c4-4b00-9d4e-647ec3069fa9_Hieu Phan Trung_intern.pdf"
+    },
+    {
+      "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/resumes/7c4a50fa-f260-4e32-85b0-f0c69465bcd6_Hieu Phan Trung_intern.pdf",
+      "SourceId": "WorkFinder.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/",
+      "BasePath": "_content/WorkFinder.Web",
+      "RelativePath": "uploads/resumes/7c4a50fa-f260-4e32-85b0-f0c69465bcd6_Hieu Phan Trung_intern#[.{fingerprint}]?.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "yq05mbroap",
+      "Integrity": "9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/resumes/7c4a50fa-f260-4e32-85b0-f0c69465bcd6_Hieu Phan Trung_intern.pdf"
+    },
+    {
+      "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/resumes/96cba19d-c4aa-46e2-9150-7f2d6c5fcfc8_Hieu Phan Trung_intern.pdf",
+      "SourceId": "WorkFinder.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/",
+      "BasePath": "_content/WorkFinder.Web",
+      "RelativePath": "uploads/resumes/96cba19d-c4aa-46e2-9150-7f2d6c5fcfc8_Hieu Phan Trung_intern#[.{fingerprint}]?.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "yq05mbroap",
+      "Integrity": "9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/resumes/96cba19d-c4aa-46e2-9150-7f2d6c5fcfc8_Hieu Phan Trung_intern.pdf"
+    },
+    {
       "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/resumes/ba43fd37-d7d8-4c94-b112-84e6a8d37ba3_Hieu Phan Trung_intern.pdf",
       "SourceId": "WorkFinder.Web",
       "SourceType": "Discovered",
@@ -6987,6 +7134,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/uploads/resumes/cb4672f0-636b-42b8-a8ab-79cbf7cb019b_Hieu Phan Trung_intern.pdf"
+    },
+    {
+      "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/resumes/ff70db77-f6df-4396-98a6-8c52454f00c6_Hieu Phan Trung_intern.pdf",
+      "SourceId": "WorkFinder.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/",
+      "BasePath": "_content/WorkFinder.Web",
+      "RelativePath": "uploads/resumes/ff70db77-f6df-4396-98a6-8c52454f00c6_Hieu Phan Trung_intern#[.{fingerprint}]?.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "yq05mbroap",
+      "Integrity": "9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/resumes/ff70db77-f6df-4396-98a6-8c52454f00c6_Hieu Phan Trung_intern.pdf"
     }
   ],
   "Endpoints": [
@@ -10604,167 +10772,6 @@
       ]
     },
     {
-      "Route": "favicon.61n19gt1b8.ico",
-      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/34xu3t8x3r-61n19gt1b8.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000405022276"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "2468"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"+/824NtfTA0L7Mr42Fo+86YJP4R5cigdi9S7Fx5VVl4=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 13 Mar 2025 16:52:07 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "image/x-icon"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"Jtxf9L+5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM=\""
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "61n19gt1b8"
-        },
-        {
-          "Name": "label",
-          "Value": "favicon.ico"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-Jtxf9L+5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM="
-        }
-      ]
-    },
-    {
-      "Route": "favicon.61n19gt1b8.ico",
-      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/favicon.ico",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "5430"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "image/x-icon"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"Jtxf9L+5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 13 Mar 2025 16:52:07 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "61n19gt1b8"
-        },
-        {
-          "Name": "label",
-          "Value": "favicon.ico"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-Jtxf9L+5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM="
-        }
-      ]
-    },
-    {
-      "Route": "favicon.61n19gt1b8.ico.gz",
-      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/34xu3t8x3r-61n19gt1b8.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "2468"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "image/x-icon"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"+/824NtfTA0L7Mr42Fo+86YJP4R5cigdi9S7Fx5VVl4=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 13 Mar 2025 16:52:07 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "61n19gt1b8"
-        },
-        {
-          "Name": "label",
-          "Value": "favicon.ico.gz"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-+/824NtfTA0L7Mr42Fo+86YJP4R5cigdi9S7Fx5VVl4="
-        }
-      ]
-    },
-    {
       "Route": "favicon.ico",
       "AssetFile": "/Users/hieupt/.nuget/packages/microsoft.aspnetcore.identity.ui/9.0.3/staticwebassets/favicon.ico",
       "Selectors": [],
@@ -10802,13 +10809,13 @@
       ]
     },
     {
-      "Route": "favicon.ico",
-      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/34xu3t8x3r-61n19gt1b8.gz",
+      "Route": "favicon.svg",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/ynjrzpcwxc-sw8kbue69q.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000405022276"
+          "Quality": "0.000657030223"
         }
       ],
       "ResponseHeaders": [
@@ -10818,15 +10825,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2468"
+          "Value": "1521"
         },
         {
           "Name": "ETag",
-          "Value": "\"+/824NtfTA0L7Mr42Fo+86YJP4R5cigdi9S7Fx5VVl4=\""
+          "Value": "\"ol+FsG+CiXFl47Cu9bvIGYvRACY9MYF3uBNpVrrjkWg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 13 Mar 2025 16:52:07 GMT"
+          "Value": "Wed, 26 Mar 2025 15:44:47 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -10842,23 +10849,23 @@
         },
         {
           "Name": "Content-Type",
-          "Value": "image/x-icon"
+          "Value": "image/svg+xml"
         },
         {
           "Name": "ETag",
-          "Value": "W/\"Jtxf9L+5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM=\""
+          "Value": "W/\"5BI/uqEMCx62Ao/WnTvEqL9vxuBSiVzxbqHf7UYy0sE=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-Jtxf9L+5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM="
+          "Value": "sha256-5BI/uqEMCx62Ao/WnTvEqL9vxuBSiVzxbqHf7UYy0sE="
         }
       ]
     },
     {
-      "Route": "favicon.ico",
-      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/favicon.ico",
+      "Route": "favicon.svg",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/favicon.svg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -10867,19 +10874,19 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "5430"
+          "Value": "3336"
         },
         {
           "Name": "Content-Type",
-          "Value": "image/x-icon"
+          "Value": "image/svg+xml"
         },
         {
           "Name": "ETag",
-          "Value": "\"Jtxf9L+5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM=\""
+          "Value": "\"5BI/uqEMCx62Ao/WnTvEqL9vxuBSiVzxbqHf7UYy0sE=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 13 Mar 2025 16:52:07 GMT"
+          "Value": "Wed, 26 Mar 2025 15:44:47 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -10889,13 +10896,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-Jtxf9L+5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM="
+          "Value": "sha256-5BI/uqEMCx62Ao/WnTvEqL9vxuBSiVzxbqHf7UYy0sE="
         }
       ]
     },
     {
-      "Route": "favicon.ico.gz",
-      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/34xu3t8x3r-61n19gt1b8.gz",
+      "Route": "favicon.svg.gz",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/ynjrzpcwxc-sw8kbue69q.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -10904,19 +10911,19 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2468"
+          "Value": "1521"
         },
         {
           "Name": "Content-Type",
-          "Value": "image/x-icon"
+          "Value": "image/svg+xml"
         },
         {
           "Name": "ETag",
-          "Value": "\"+/824NtfTA0L7Mr42Fo+86YJP4R5cigdi9S7Fx5VVl4=\""
+          "Value": "\"ol+FsG+CiXFl47Cu9bvIGYvRACY9MYF3uBNpVrrjkWg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 13 Mar 2025 16:52:07 GMT"
+          "Value": "Wed, 26 Mar 2025 15:44:47 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -10934,7 +10941,168 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-+/824NtfTA0L7Mr42Fo+86YJP4R5cigdi9S7Fx5VVl4="
+          "Value": "sha256-ol+FsG+CiXFl47Cu9bvIGYvRACY9MYF3uBNpVrrjkWg="
+        }
+      ]
+    },
+    {
+      "Route": "favicon.sw8kbue69q.svg",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/ynjrzpcwxc-sw8kbue69q.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000657030223"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1521"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ol+FsG+CiXFl47Cu9bvIGYvRACY9MYF3uBNpVrrjkWg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 26 Mar 2025 15:44:47 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"5BI/uqEMCx62Ao/WnTvEqL9vxuBSiVzxbqHf7UYy0sE=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "sw8kbue69q"
+        },
+        {
+          "Name": "label",
+          "Value": "favicon.svg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-5BI/uqEMCx62Ao/WnTvEqL9vxuBSiVzxbqHf7UYy0sE="
+        }
+      ]
+    },
+    {
+      "Route": "favicon.sw8kbue69q.svg",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/favicon.svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3336"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"5BI/uqEMCx62Ao/WnTvEqL9vxuBSiVzxbqHf7UYy0sE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 26 Mar 2025 15:44:47 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "sw8kbue69q"
+        },
+        {
+          "Name": "label",
+          "Value": "favicon.svg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-5BI/uqEMCx62Ao/WnTvEqL9vxuBSiVzxbqHf7UYy0sE="
+        }
+      ]
+    },
+    {
+      "Route": "favicon.sw8kbue69q.svg.gz",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/ynjrzpcwxc-sw8kbue69q.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1521"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ol+FsG+CiXFl47Cu9bvIGYvRACY9MYF3uBNpVrrjkWg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 26 Mar 2025 15:44:47 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "sw8kbue69q"
+        },
+        {
+          "Name": "label",
+          "Value": "favicon.svg.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-ol+FsG+CiXFl47Cu9bvIGYvRACY9MYF3uBNpVrrjkWg="
         }
       ]
     },
@@ -22856,6 +23024,386 @@
         {
           "Name": "integrity",
           "Value": "sha256-F1wMlgb/juW08DFUssW6Pm9EBKfjXXRiSK0F5FgXxJU="
+        }
+      ]
+    },
+    {
+      "Route": "img/404-robot.aqwqjbwtwp.svg",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/tdy2q30xu8-aqwqjbwtwp.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001333333333"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "749"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"DGsmzcl8TGpeYjXVvOxL8CGLOAvGRy+AiCSkSi+KDHE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 26 Mar 2025 15:49:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"zpi9FKZM0Bngk5ywbU+9CGyhJD9at8V8n55u4PZLYTY=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "aqwqjbwtwp"
+        },
+        {
+          "Name": "label",
+          "Value": "img/404-robot.svg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-zpi9FKZM0Bngk5ywbU+9CGyhJD9at8V8n55u4PZLYTY="
+        }
+      ]
+    },
+    {
+      "Route": "img/404-robot.aqwqjbwtwp.svg",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/img/404-robot.svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2955"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"zpi9FKZM0Bngk5ywbU+9CGyhJD9at8V8n55u4PZLYTY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 26 Mar 2025 15:49:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "aqwqjbwtwp"
+        },
+        {
+          "Name": "label",
+          "Value": "img/404-robot.svg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-zpi9FKZM0Bngk5ywbU+9CGyhJD9at8V8n55u4PZLYTY="
+        }
+      ]
+    },
+    {
+      "Route": "img/404-robot.aqwqjbwtwp.svg.gz",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/tdy2q30xu8-aqwqjbwtwp.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "749"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"DGsmzcl8TGpeYjXVvOxL8CGLOAvGRy+AiCSkSi+KDHE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 26 Mar 2025 15:49:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "aqwqjbwtwp"
+        },
+        {
+          "Name": "label",
+          "Value": "img/404-robot.svg.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-DGsmzcl8TGpeYjXVvOxL8CGLOAvGRy+AiCSkSi+KDHE="
+        }
+      ]
+    },
+    {
+      "Route": "img/404-robot.svg",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/tdy2q30xu8-aqwqjbwtwp.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001333333333"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "749"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"DGsmzcl8TGpeYjXVvOxL8CGLOAvGRy+AiCSkSi+KDHE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 26 Mar 2025 15:49:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"zpi9FKZM0Bngk5ywbU+9CGyhJD9at8V8n55u4PZLYTY=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-zpi9FKZM0Bngk5ywbU+9CGyhJD9at8V8n55u4PZLYTY="
+        }
+      ]
+    },
+    {
+      "Route": "img/404-robot.svg",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/img/404-robot.svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2955"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"zpi9FKZM0Bngk5ywbU+9CGyhJD9at8V8n55u4PZLYTY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 26 Mar 2025 15:49:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-zpi9FKZM0Bngk5ywbU+9CGyhJD9at8V8n55u4PZLYTY="
+        }
+      ]
+    },
+    {
+      "Route": "img/404-robot.svg.gz",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/tdy2q30xu8-aqwqjbwtwp.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "749"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"DGsmzcl8TGpeYjXVvOxL8CGLOAvGRy+AiCSkSi+KDHE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 26 Mar 2025 15:49:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-DGsmzcl8TGpeYjXVvOxL8CGLOAvGRy+AiCSkSi+KDHE="
+        }
+      ]
+    },
+    {
+      "Route": "img/bg-404.n17owjhk15.png",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/img/bg-404.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "96324"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"VWpO2orwh5num3YNaA47VGen2hnEp2bBHuwMW1aAxMU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 26 Mar 2025 15:38:50 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "n17owjhk15"
+        },
+        {
+          "Name": "label",
+          "Value": "img/bg-404.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-VWpO2orwh5num3YNaA47VGen2hnEp2bBHuwMW1aAxMU="
+        }
+      ]
+    },
+    {
+      "Route": "img/bg-404.png",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/img/bg-404.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "96324"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"VWpO2orwh5num3YNaA47VGen2hnEp2bBHuwMW1aAxMU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 26 Mar 2025 15:38:50 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-VWpO2orwh5num3YNaA47VGen2hnEp2bBHuwMW1aAxMU="
         }
       ]
     },
@@ -45345,6 +45893,88 @@
       ]
     },
     {
+      "Route": "uploads/resumes/0a68db58-e7a6-4ad4-8adc-05e3dc552cb6_Hieu Phan Trung_intern.pdf",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/resumes/0a68db58-e7a6-4ad4-8adc-05e3dc552cb6_Hieu Phan Trung_intern.pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "21940"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 26 Mar 2025 04:34:14 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/resumes/0a68db58-e7a6-4ad4-8adc-05e3dc552cb6_Hieu Phan Trung_intern.yq05mbroap.pdf",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/resumes/0a68db58-e7a6-4ad4-8adc-05e3dc552cb6_Hieu Phan Trung_intern.pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "21940"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 26 Mar 2025 04:34:14 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "yq05mbroap"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/resumes/0a68db58-e7a6-4ad4-8adc-05e3dc552cb6_Hieu Phan Trung_intern.pdf"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ="
+        }
+      ]
+    },
+    {
       "Route": "uploads/resumes/28977a92-f5a4-432c-b54c-a0eb24a6208e_Hieu Phan Trung_intern.pdf",
       "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/resumes/28977a92-f5a4-432c-b54c-a0eb24a6208e_Hieu Phan Trung_intern.pdf",
       "Selectors": [],
@@ -45591,6 +46221,252 @@
       ]
     },
     {
+      "Route": "uploads/resumes/72326daf-29c4-4b00-9d4e-647ec3069fa9_Hieu Phan Trung_intern.pdf",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/resumes/72326daf-29c4-4b00-9d4e-647ec3069fa9_Hieu Phan Trung_intern.pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "21940"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 26 Mar 2025 04:34:21 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/resumes/72326daf-29c4-4b00-9d4e-647ec3069fa9_Hieu Phan Trung_intern.yq05mbroap.pdf",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/resumes/72326daf-29c4-4b00-9d4e-647ec3069fa9_Hieu Phan Trung_intern.pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "21940"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 26 Mar 2025 04:34:21 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "yq05mbroap"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/resumes/72326daf-29c4-4b00-9d4e-647ec3069fa9_Hieu Phan Trung_intern.pdf"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/resumes/7c4a50fa-f260-4e32-85b0-f0c69465bcd6_Hieu Phan Trung_intern.pdf",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/resumes/7c4a50fa-f260-4e32-85b0-f0c69465bcd6_Hieu Phan Trung_intern.pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "21940"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 26 Mar 2025 04:34:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/resumes/7c4a50fa-f260-4e32-85b0-f0c69465bcd6_Hieu Phan Trung_intern.yq05mbroap.pdf",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/resumes/7c4a50fa-f260-4e32-85b0-f0c69465bcd6_Hieu Phan Trung_intern.pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "21940"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 26 Mar 2025 04:34:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "yq05mbroap"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/resumes/7c4a50fa-f260-4e32-85b0-f0c69465bcd6_Hieu Phan Trung_intern.pdf"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/resumes/96cba19d-c4aa-46e2-9150-7f2d6c5fcfc8_Hieu Phan Trung_intern.pdf",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/resumes/96cba19d-c4aa-46e2-9150-7f2d6c5fcfc8_Hieu Phan Trung_intern.pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "21940"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 26 Mar 2025 04:34:17 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/resumes/96cba19d-c4aa-46e2-9150-7f2d6c5fcfc8_Hieu Phan Trung_intern.yq05mbroap.pdf",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/resumes/96cba19d-c4aa-46e2-9150-7f2d6c5fcfc8_Hieu Phan Trung_intern.pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "21940"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 26 Mar 2025 04:34:17 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "yq05mbroap"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/resumes/96cba19d-c4aa-46e2-9150-7f2d6c5fcfc8_Hieu Phan Trung_intern.pdf"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ="
+        }
+      ]
+    },
+    {
       "Route": "uploads/resumes/ba43fd37-d7d8-4c94-b112-84e6a8d37ba3_Hieu Phan Trung_intern.pdf",
       "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/resumes/ba43fd37-d7d8-4c94-b112-84e6a8d37ba3_Hieu Phan Trung_intern.pdf",
       "Selectors": [],
@@ -45747,6 +46623,88 @@
         {
           "Name": "label",
           "Value": "uploads/resumes/cb4672f0-636b-42b8-a8ab-79cbf7cb019b_Hieu Phan Trung_intern.pdf"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/resumes/ff70db77-f6df-4396-98a6-8c52454f00c6_Hieu Phan Trung_intern.pdf",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/resumes/ff70db77-f6df-4396-98a6-8c52454f00c6_Hieu Phan Trung_intern.pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "21940"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 26 Mar 2025 04:34:19 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/resumes/ff70db77-f6df-4396-98a6-8c52454f00c6_Hieu Phan Trung_intern.yq05mbroap.pdf",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/resumes/ff70db77-f6df-4396-98a6-8c52454f00c6_Hieu Phan Trung_intern.pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "21940"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 26 Mar 2025 04:34:19 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "yq05mbroap"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/resumes/ff70db77-f6df-4396-98a6-8c52454f00c6_Hieu Phan Trung_intern.pdf"
         },
         {
           "Name": "integrity",

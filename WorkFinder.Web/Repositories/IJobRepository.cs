@@ -123,9 +123,14 @@ namespace WorkFinder.Web.Repositories
 
         // Phương thức mới để lấy thông tin công ty theo ID
         Task<Company> GetCompanyByIdAsync(int companyId);
-
+        // Phương thức mới để lấy công việc gần đây của một công ty 
         Task<IEnumerable<Job>> GetRecentJobsByCompanyIdAsync(int companyId, int count);
+        // Phương thức mới để lấy tổng số công việc của một công ty
         Task<int> GetTotalJobsByCompanyIdAsync(int companyId);
+        // Phương thức mới để lấy tổng số ứng viên của một công ty
         Task<int> GetTotalApplicationsByCompanyIdAsync(int companyId);
+
+
+
     }
 }

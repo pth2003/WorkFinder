@@ -1,0 +1,417 @@
+@model WorkFinder.Web.Areas.Employer.Models.JobPostViewModel
+@{
+    ViewData["Title"] = "Post a Job";
+    Layout = "_EmployerLayout";
+}
+
+<div class="container">
+    <div class="employers-dashboard mt-4">
+        <div class="sidebar">
+            <div class="sidebar-header mb-4">
+                <h5>EMPLOYERS DASHBOARD</h5>
+            </div>
+            <ul class="sidebar-menu">
+                <li>
+                    <a href="@Url.Action("Index", "Home", new { area = "Employer" })" class="d-flex align-items-center">
+                        <i class="fas fa-tachometer-alt me-2"></i>
+                        <span>Overview</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="d-flex align-items-center">
+                        <i class="fas fa-building me-2"></i>
+                        <span>Employers Profile</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="@Url.Action("Create", "Job", new { area = "Employer" })" class="d-flex align-items-center">
+                        <i class="fas fa-plus-circle me-2"></i>
+                        <span>Post a Job</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Index", "Job", new { area = "Employer" })" class="d-flex align-items-center">
+                        <i class="fas fa-briefcase me-2"></i>
+                        <span>My Jobs</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="d-flex align-items-center">
+                        <i class="fas fa-user me-2"></i>
+                        <span>Saved Candidate</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="d-flex align-items-center">
+                        <i class="fas fa-credit-card me-2"></i>
+                        <span>Plans & Billing</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="d-flex align-items-center">
+                        <i class="fas fa-building me-2"></i>
+                        <span>All Companies</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="d-flex align-items-center">
+                        <i class="fas fa-cog me-2"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="sidebar-footer mt-4">
+                <a href="@Url.Action("Logout", "Auth", new { area = "Auth" })" class="d-flex align-items-center">
+                    <i class="fas fa-sign-out-alt me-2"></i> Log-out
+                </a>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="post-job-container bg-white p-4 rounded shadow-sm">
+                <h2 class="mb-4">Post a job</h2>
+
+                <form asp-action="Create" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-4"></div>
+
+                    <div class="mb-4">
+                        <label asp-for="Title" class="form-label fw-medium">Job Title</label>
+                        <input asp-for="Title" class="form-control form-control-lg"
+                            placeholder="Add job title, role, vacancies etc" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <label asp-for="Tags" class="form-label fw-medium">Tags</label>
+                            <input asp-for="Tags" class="form-control form-control-lg"
+                                placeholder="Job keyword, tags etc..." />
+                            <span asp-validation-for="Tags" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="JobRole" class="form-label fw-medium">Job Role</label>
+                            <select asp-for="JobRole" class="form-select form-select-lg">
+                                <option value="">Select...</option>
+                                <option value="Developer">Developer</option>
+                                <option value="Designer">Designer</option>
+                                <option value="Manager">Manager</option>
+                                <option value="Marketing">Marketing</option>
+                                <option value="Sales">Sales</option>
+                            </select>
+                            <span asp-validation-for="JobRole" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <h4 class="mt-5 mb-4">Salary</h4>
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <label asp-for="MinSalary" class="form-label fw-medium">Min Salary</label>
+                            <div class="input-group">
+                                <input asp-for="MinSalary" class="form-control form-control-lg"
+                                    placeholder="Minimum salary..." />
+                                <span class="input-group-text">USD</span>
+                            </div>
+                            <span asp-validation-for="MinSalary" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="MaxSalary" class="form-label fw-medium">Max Salary</label>
+                            <div class="input-group">
+                                <input asp-for="MaxSalary" class="form-control form-control-lg"
+                                    placeholder="Maximum salary..." />
+                                <span class="input-group-text">USD</span>
+                            </div>
+                            <span asp-validation-for="MaxSalary" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="SalaryType" class="form-label fw-medium">Salary Type</label>
+                            <select asp-for="SalaryType" class="form-select form-select-lg">
+                                <option value="">Select...</option>
+                                <option value="Hourly">Hourly</option>
+                                <option value="Monthly">Monthly</option>
+                                <option value="Yearly">Yearly</option>
+                            </select>
+                            <span asp-validation-for="SalaryType" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <h4 class="mt-5 mb-4">Advance Information</h4>
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <label asp-for="Education" class="form-label fw-medium">Education</label>
+                            <select asp-for="Education" class="form-select form-select-lg">
+                                <option value="">Select...</option>
+                                <option value="High School">High School</option>
+                                <option value="Associate Degree">Associate Degree</option>
+                                <option value="Bachelor's Degree">Bachelor's Degree</option>
+                                <option value="Master's Degree">Master's Degree</option>
+                                <option value="Doctorate">Doctorate</option>
+                            </select>
+                            <span asp-validation-for="Education" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="Experience" class="form-label fw-medium">Experience</label>
+                            <select asp-for="Experience" class="form-select form-select-lg">
+                                <option value="">Select...</option>
+                                <option value="Entry Level">Entry Level</option>
+                                <option value="1-3 Years">1-3 Years</option>
+                                <option value="3-5 Years">3-5 Years</option>
+                                <option value="5-10 Years">5-10 Years</option>
+                                <option value="10+ Years">10+ Years</option>
+                            </select>
+                            <span asp-validation-for="Experience" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="JobType" class="form-label fw-medium">Job Type</label>
+                            <select asp-for="JobType" class="form-select form-select-lg">
+                                <option value="">Select...</option>
+                                <option value="Full Time">Full Time</option>
+                                <option value="Part Time">Part Time</option>
+                                <option value="Contract">Contract</option>
+                                <option value="Internship">Internship</option>
+                                <option value="Freelance">Freelance</option>
+                            </select>
+                            <span asp-validation-for="JobType" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <label asp-for="Vacancies" class="form-label fw-medium">Vacancies</label>
+                            <select asp-for="Vacancies" class="form-select form-select-lg">
+                                <option value="">Select...</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10+</option>
+                            </select>
+                            <span asp-validation-for="Vacancies" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="ExpirationDate" class="form-label fw-medium">Expiration Date</label>
+                            <input asp-for="ExpirationDate" class="form-control form-control-lg"
+                                placeholder="DD/MM/YYYY" />
+                            <span asp-validation-for="ExpirationDate" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="JobLevel" class="form-label fw-medium">Job Level</label>
+                            <select asp-for="JobLevel" class="form-select form-select-lg">
+                                <option value="">Select...</option>
+                                <option value="Entry Level">Entry Level</option>
+                                <option value="Mid Level">Mid Level</option>
+                                <option value="Senior Level">Senior Level</option>
+                                <option value="Director">Director</option>
+                                <option value="Executive">Executive</option>
+                            </select>
+                            <span asp-validation-for="JobLevel" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="apply-job-section my-5 p-4 bg-light rounded">
+                        <h4 class="mb-4">Apply Job on:</h4>
+                        <div class="apply-methods">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="ApplyMethod" id="onJobpilot"
+                                    value="Jobpilot" checked />
+                                <label class="form-check-label" for="onJobpilot">
+                                    <strong>On Jobpilot</strong>
+                                    <p class="text-muted mt-1">Candidate will apply job using jobpilot & all application
+                                        will show on your dashboard.</p>
+                                </label>
+                            </div>
+                            <div class="form-check mt-3">
+                                <input class="form-check-input" type="radio" asp-for="ApplyMethod" id="externalPlatform"
+                                    value="External" />
+                                <label class="form-check-label" for="externalPlatform">
+                                    <strong>External Platform</strong>
+                                    <p class="text-muted mt-1">Candidate apply job on your website, all application on
+                                        your own website.</p>
+                                </label>
+                            </div>
+                            <div class="form-check mt-3">
+                                <input class="form-check-input" type="radio" asp-for="ApplyMethod" id="onEmail"
+                                    value="Email" />
+                                <label class="form-check-label" for="onEmail">
+                                    <strong>On Your Email</strong>
+                                    <p class="text-muted mt-1">Candidate apply job on your email address, and all
+                                        application in your email.</p>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 class="mt-5 mb-4">Description & Responsibility</h4>
+                    <div class="mb-4">
+                        <label asp-for="Description" class="form-label fw-medium">Description</label>
+                        <textarea asp-for="Description" class="form-control" rows="6"
+                            placeholder="Add your job description..."></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="Responsibilities" class="form-label fw-medium">Responsibilities</label>
+                        <textarea asp-for="Responsibilities" class="form-control" rows="6"
+                            placeholder="Add your job responsibilities..."></textarea>
+                        <span asp-validation-for="Responsibilities" class="text-danger"></span>
+                    </div>
+
+                    <div class="mt-5">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            Post Job <i class="fas fa-arrow-right ms-1"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Sidebar styles (same as in Index.cshtml) */
+    .employers-dashboard {
+        display: flex;
+        gap: 30px;
+    }
+
+    /* Sidebar */
+    .sidebar {
+        width: 250px;
+        flex-shrink: 0;
+    }
+
+    .sidebar-header h5 {
+        font-size: 14px;
+        font-weight: 600;
+        color: #777;
+        margin-bottom: 20px;
+    }
+
+    .sidebar-menu {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .sidebar-menu li {
+        margin-bottom: 15px;
+    }
+
+    .sidebar-menu li a {
+        display: flex;
+        align-items: center;
+        color: #666;
+        text-decoration: none;
+        padding: 8px 15px;
+        border-radius: 6px;
+        transition: all 0.3s;
+    }
+
+    .sidebar-menu li a:hover,
+    .sidebar-menu li.active a {
+        background-color: rgba(0, 123, 255, 0.1);
+        color: #0d6efd;
+    }
+
+    .sidebar-menu li.active a {
+        font-weight: 500;
+    }
+
+    .sidebar-menu li a i {
+        width: 20px;
+        text-align: center;
+        margin-right: 8px;
+    }
+
+    .sidebar-footer {
+        padding-top: 15px;
+        border-top: 1px solid #eee;
+    }
+
+    .sidebar-footer a {
+        color: #666;
+        text-decoration: none;
+        font-size: 14px;
+    }
+
+    .sidebar-footer a:hover {
+        color: #0d6efd;
+    }
+
+    /* Main Content */
+    .main-content {
+        flex: 1;
+    }
+
+    /* Form Styles */
+    .post-job-container {
+        margin-bottom: 40px;
+    }
+
+    .form-label {
+        margin-bottom: 8px;
+        color: #333;
+    }
+
+    .form-control,
+    .form-select {
+        padding: 10px 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+
+    .form-check-label {
+        font-weight: normal;
+        padding-left: 10px;
+    }
+
+    .form-check-label p {
+        font-size: 14px;
+        margin-bottom: 0;
+    }
+
+    .apply-job-section {
+        border: 1px solid #eee;
+    }
+
+    .btn-primary {
+        background-color: #0d6efd;
+        border: none;
+        padding: 10px 25px;
+        font-weight: 500;
+        transition: all 0.3s;
+    }
+
+    .btn-primary:hover {
+        background-color: #0b5ed7;
+    }
+
+    /* Responsive */
+    @@media(max - width: 992px) {
+            .employers-dashboard {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                margin-bottom: 30px;
+            }
+        }
+    </style>
+
+    @section Scripts {
+        <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }

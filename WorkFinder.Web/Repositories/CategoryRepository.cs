@@ -45,6 +45,25 @@ namespace WorkFinder.Web.Repositories
                 .Select(jc => jc.Category)
                 .ToListAsync();
         }
+        public async Task<Category> GetCategoryByNameAsync(string name)
+        {
+            return await _context.Categories
+                .FirstOrDefaultAsync(c => c.Name == name);
+        }
 
+        public async Task AddJobCategoryAsync(int jobId, int categoryId)
+        {
+            var jobCategory = await _context.JobCategories.FirstOrDefaultAsync(jc => jc.JobId == jobId && jc.CategoryId == categoryId);
+            if (jobCategory == null)
+            {
+                jobCategory = new JobCategory
+                {
+                    JobId = jobId,
+                    CategoryId = categoryId
+                };
+                await _context.JobCategories.AddAsync(jobCategory);
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }

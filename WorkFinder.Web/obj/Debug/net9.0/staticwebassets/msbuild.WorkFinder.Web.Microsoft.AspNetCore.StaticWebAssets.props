@@ -216,23 +216,23 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\top-company.css'))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\favicon.ico'))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\favicon.svg'))">
       <SourceType>Package</SourceType>
       <SourceId>WorkFinder.Web</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/WorkFinder.Web</BasePath>
-      <RelativePath>favicon.ico</RelativePath>
+      <RelativePath>favicon.svg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>61n19gt1b8</Fingerprint>
-      <Integrity>Jtxf9L+5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM=</Integrity>
+      <Fingerprint>sw8kbue69q</Fingerprint>
+      <Integrity>5BI/uqEMCx62Ao/WnTvEqL9vxuBSiVzxbqHf7UYy0sE=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\favicon.ico'))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\favicon.svg'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\icon\Arrows.svg'))">
       <SourceType>Package</SourceType>
@@ -503,6 +503,42 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\icon\users-duotone 1.png'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\img\404-robot.svg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>WorkFinder.Web</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/WorkFinder.Web</BasePath>
+      <RelativePath>img/404-robot.svg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>aqwqjbwtwp</Fingerprint>
+      <Integrity>zpi9FKZM0Bngk5ywbU+9CGyhJD9at8V8n55u4PZLYTY=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\img\404-robot.svg'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\img\bg-404.png'))">
+      <SourceType>Package</SourceType>
+      <SourceId>WorkFinder.Web</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/WorkFinder.Web</BasePath>
+      <RelativePath>img/bg-404.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>n17owjhk15</Fingerprint>
+      <Integrity>VWpO2orwh5num3YNaA47VGen2hnEp2bBHuwMW1aAxMU=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\img\bg-404.png'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\img\bg-auth.png'))">
       <SourceType>Package</SourceType>
@@ -2052,6 +2088,24 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\logos\fe714775-102a-40d4-804e-84f5808873b5_IMG_1645.jpeg'))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\resumes\0a68db58-e7a6-4ad4-8adc-05e3dc552cb6_Hieu Phan Trung_intern.pdf'))">
+      <SourceType>Package</SourceType>
+      <SourceId>WorkFinder.Web</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/WorkFinder.Web</BasePath>
+      <RelativePath>uploads/resumes/0a68db58-e7a6-4ad4-8adc-05e3dc552cb6_Hieu Phan Trung_intern.pdf</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>yq05mbroap</Fingerprint>
+      <Integrity>9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\resumes\0a68db58-e7a6-4ad4-8adc-05e3dc552cb6_Hieu Phan Trung_intern.pdf'))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\resumes\28977a92-f5a4-432c-b54c-a0eb24a6208e_Hieu Phan Trung_intern.pdf'))">
       <SourceType>Package</SourceType>
       <SourceId>WorkFinder.Web</SourceId>
@@ -2106,6 +2160,60 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\resumes\4babb222-2a6d-4b88-9a0f-adf84450932a_Hieu Phan Trung_intern.pdf'))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\resumes\72326daf-29c4-4b00-9d4e-647ec3069fa9_Hieu Phan Trung_intern.pdf'))">
+      <SourceType>Package</SourceType>
+      <SourceId>WorkFinder.Web</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/WorkFinder.Web</BasePath>
+      <RelativePath>uploads/resumes/72326daf-29c4-4b00-9d4e-647ec3069fa9_Hieu Phan Trung_intern.pdf</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>yq05mbroap</Fingerprint>
+      <Integrity>9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\resumes\72326daf-29c4-4b00-9d4e-647ec3069fa9_Hieu Phan Trung_intern.pdf'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\resumes\7c4a50fa-f260-4e32-85b0-f0c69465bcd6_Hieu Phan Trung_intern.pdf'))">
+      <SourceType>Package</SourceType>
+      <SourceId>WorkFinder.Web</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/WorkFinder.Web</BasePath>
+      <RelativePath>uploads/resumes/7c4a50fa-f260-4e32-85b0-f0c69465bcd6_Hieu Phan Trung_intern.pdf</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>yq05mbroap</Fingerprint>
+      <Integrity>9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\resumes\7c4a50fa-f260-4e32-85b0-f0c69465bcd6_Hieu Phan Trung_intern.pdf'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\resumes\96cba19d-c4aa-46e2-9150-7f2d6c5fcfc8_Hieu Phan Trung_intern.pdf'))">
+      <SourceType>Package</SourceType>
+      <SourceId>WorkFinder.Web</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/WorkFinder.Web</BasePath>
+      <RelativePath>uploads/resumes/96cba19d-c4aa-46e2-9150-7f2d6c5fcfc8_Hieu Phan Trung_intern.pdf</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>yq05mbroap</Fingerprint>
+      <Integrity>9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\resumes\96cba19d-c4aa-46e2-9150-7f2d6c5fcfc8_Hieu Phan Trung_intern.pdf'))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\resumes\ba43fd37-d7d8-4c94-b112-84e6a8d37ba3_Hieu Phan Trung_intern.pdf'))">
       <SourceType>Package</SourceType>
       <SourceId>WorkFinder.Web</SourceId>
@@ -2141,6 +2249,24 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\resumes\cb4672f0-636b-42b8-a8ab-79cbf7cb019b_Hieu Phan Trung_intern.pdf'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\resumes\ff70db77-f6df-4396-98a6-8c52454f00c6_Hieu Phan Trung_intern.pdf'))">
+      <SourceType>Package</SourceType>
+      <SourceId>WorkFinder.Web</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/WorkFinder.Web</BasePath>
+      <RelativePath>uploads/resumes/ff70db77-f6df-4396-98a6-8c52454f00c6_Hieu Phan Trung_intern.pdf</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>yq05mbroap</Fingerprint>
+      <Integrity>9trY9tp2DWmZUS3UPkdZGQcyF3YYQV+hQCVv895GiyQ=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\resumes\ff70db77-f6df-4396-98a6-8c52454f00c6_Hieu Phan Trung_intern.pdf'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\WorkFinder.Web.9h8o3lycsa.bundle.scp.css'))">
       <SourceType>Package</SourceType>
