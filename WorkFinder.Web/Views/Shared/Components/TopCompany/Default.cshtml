@@ -21,7 +21,7 @@
                         <div class="card-body">
                             <h3 class="company-name">@company.Name</h3>
                             <p class="company-location"><i class="fas fa-map-marker-alt"></i> @(company.Location == "Unknown" ? "Remote" : company.Location)</p>
-                            <a href="#" class="open-position-btn">Open Positions</a>
+                            <a href="@Url.Action("Details", "Company", new { id = company.Id })" class="open-position-btn">Open Positions</a>
                         </div>
                     </div>
                 </div>

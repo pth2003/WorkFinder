@@ -1,0 +1,433 @@
+@model WorkFinder.Web.Areas.Employer.Models.EmployerDashboardViewModel
+@{
+    ViewData["Title"] = "Employer Dashboard";
+    Layout = "_EmployerLayout";
+}
+
+<div class="container">
+    <div class="employers-dashboard mt-4">
+        <div class="sidebar">
+            <div class="sidebar-header mb-4">
+                <h5>EMPLOYERS DASHBOARD</h5>
+            </div>
+            <ul class="sidebar-menu">
+                <li class="active">
+                    <a href="#" class="d-flex align-items-center">
+                        <i class="fas fa-tachometer-alt me-2"></i>
+                        <span>Overview</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="d-flex align-items-center">
+                        <i class="fas fa-building me-2"></i>
+                        <span>Employers Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="d-flex align-items-center">
+                        <i class="fas fa-plus-circle me-2"></i>
+                        <span>Post a Job</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="d-flex align-items-center">
+                        <i class="fas fa-briefcase me-2"></i>
+                        <span>My Jobs</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="d-flex align-items-center">
+                        <i class="fas fa-user me-2"></i>
+                        <span>Saved Candidate</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="d-flex align-items-center">
+                        <i class="fas fa-credit-card me-2"></i>
+                        <span>Plans & Billing</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="d-flex align-items-center">
+                        <i class="fas fa-building me-2"></i>
+                        <span>All Companies</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="d-flex align-items-center">
+                        <i class="fas fa-cog me-2"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="sidebar-footer mt-4">
+                <a href="#" class="d-flex align-items-center">
+                    <i class="fas fa-sign-out-alt me-2"></i> Log-out
+                </a>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="dashboard-greeting mb-4">
+                <h3>Hello, @Model.CompanyName</h3>
+                <p class="text-muted">Here is your daily activities and applications</p>
+            </div>
+
+            <div class="stats-cards row mb-4">
+                <div class="col-md-6">
+                    <div class="stats-card">
+                        <div class="stats-content">
+                            <h2>@Model.OpenJobs</h2>
+                            <p>Open Jobs</p>
+                        </div>
+                        <div class="stats-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="stats-card">
+                        <div class="stats-content">
+                            <h2>@Model.SavedCandidates</h2>
+                            <p>Saved Candidates</p>
+                        </div>
+                        <div class="stats-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recent-jobs-section">
+                <div class="section-header d-flex justify-content-between align-items-center mb-3">
+                    <h5>Recently Posted Jobs</h5>
+                    <a href="#" class="view-all">View all <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="jobs-table-container">
+                    <table class="table jobs-table">
+                        <thead>
+                            <tr>
+                                <th>JOBS</th>
+                                <th>STATUS</th>
+                                <th>APPLICATIONS</th>
+                                <th>ACTIONS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var job in Model.RecentJobs)
+                            {
+                                <tr>
+                                    <td class="job-info">
+                                        <h6>@job.Title</h6>
+                                        <div class="job-meta">
+                                            <span class="job-type">@job.JobType</span>
+                                            <span class="separator">•</span>
+                                            <span class="time-remaining">@job.DaysRemaining days remaining</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-@(job.IsActive ? "success" : "secondary")">
+                                            @(job.IsActive ? "Active" : "Expired")
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div class="applications-count">
+                                            <i class="fas fa-users me-2"></i>
+                                            <span>@job.ApplicationCount Applications</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button class="btn btn-view-applications" id="dropdownMenuButton@(job.Id)"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                View Applications
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-end"
+                                                aria-labelledby="dropdownMenuButton@(job.Id)">
+                                                <a class="dropdown-item" href="#">
+                                                    <i class="fas fa-bullhorn me-2"></i> Promote Job
+                                                </a>
+                                                <a class="dropdown-item" href="#">
+                                                    <i class="fas fa-eye me-2"></i> View Detail
+                                                </a>
+                                                <a class="dropdown-item" href="#">
+                                                    <i class="fas fa-times-circle me-2"></i> Mark as expired
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Dashboard Layout */
+    .employers-dashboard {
+        display: flex;
+        gap: 30px;
+    }
+
+    /* Sidebar */
+    .sidebar {
+        width: 250px;
+        flex-shrink: 0;
+    }
+
+    .sidebar-header h5 {
+        font-size: 14px;
+        font-weight: 600;
+        color: #777;
+        margin-bottom: 20px;
+    }
+
+    .sidebar-menu {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .sidebar-menu li {
+        margin-bottom: 15px;
+    }
+
+    .sidebar-menu li a {
+        display: flex;
+        align-items: center;
+        color: #666;
+        text-decoration: none;
+        padding: 8px 15px;
+        border-radius: 6px;
+        transition: all 0.3s;
+    }
+
+    .sidebar-menu li a:hover,
+    .sidebar-menu li.active a {
+        background-color: rgba(0, 123, 255, 0.1);
+        color: #0d6efd;
+    }
+
+    .sidebar-menu li.active a {
+        font-weight: 500;
+    }
+
+    .sidebar-menu li a i {
+        width: 20px;
+        text-align: center;
+        margin-right: 8px;
+    }
+
+    .sidebar-footer {
+        padding-top: 15px;
+        border-top: 1px solid #eee;
+    }
+
+    .sidebar-footer a {
+        color: #666;
+        text-decoration: none;
+        font-size: 14px;
+    }
+
+    .sidebar-footer a:hover {
+        color: #0d6efd;
+    }
+
+    /* Main Content */
+    .main-content {
+        flex: 1;
+    }
+
+    .dashboard-greeting h3 {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+
+    .dashboard-greeting p {
+        font-size: 14px;
+        color: #777;
+    }
+
+    /* Stats Cards */
+    .stats-cards {
+        margin-left: -10px;
+        margin-right: -10px;
+    }
+
+    .stats-cards .col-md-6 {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .stats-card {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        height: 100%;
+    }
+
+    .stats-content h2 {
+        font-size: 28px;
+        font-weight: 700;
+        margin-bottom: 5px;
+    }
+
+    .stats-content p {
+        font-size: 14px;
+        color: #777;
+        margin: 0;
+    }
+
+    .stats-icon {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        background-color: rgba(0, 123, 255, 0.1);
+    }
+
+    .stats-icon i {
+        font-size: 20px;
+        color: #0d6efd;
+    }
+
+    /* Jobs Table */
+    .section-header h5 {
+        font-size: 18px;
+        font-weight: 600;
+        margin: 0;
+    }
+
+    .view-all {
+        font-size: 14px;
+        color: #0d6efd;
+        text-decoration: none;
+    }
+
+    .view-all:hover {
+        text-decoration: underline;
+    }
+
+    .jobs-table-container {
+        background-color: #fff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    .jobs-table {
+        margin-bottom: 0;
+    }
+
+    .jobs-table th {
+        font-size: 12px;
+        font-weight: 600;
+        color: #777;
+        text-transform: uppercase;
+        padding: 15px 20px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .jobs-table td {
+        padding: 15px 20px;
+        vertical-align: middle;
+        border-bottom: 1px solid #eee;
+    }
+
+    .job-info h6 {
+        font-size: 16px;
+        font-weight: 500;
+        margin-bottom: 5px;
+    }
+
+    .job-meta {
+        font-size: 13px;
+        color: #777;
+    }
+
+    .job-type {
+        color: #0d6efd;
+    }
+
+    .separator {
+        margin: 0 5px;
+    }
+
+    .badge {
+        font-weight: normal;
+        padding: 6px 10px;
+        border-radius: 30px;
+        font-size: 12px;
+    }
+
+    .applications-count {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+    }
+
+    .applications-count i {
+        color: #0d6efd;
+        margin-right: 5px;
+    }
+
+    .btn-view-applications {
+        color: #0d6efd;
+        background: none;
+        border: none;
+        padding: 5px 10px;
+        font-size: 14px;
+    }
+
+    .btn-view-applications:hover,
+    .btn-view-applications:focus {
+        text-decoration: underline;
+        background: none;
+    }
+
+    .dropdown-menu {
+        min-width: 200px;
+        padding: 10px 0;
+        border: none;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+
+    .dropdown-item {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+
+    .dropdown-item i {
+        width: 20px;
+        text-align: center;
+    }
+
+    /* Responsive */
+    @@media(max - width: 992px) {
+            .employers-dashboard {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                margin-bottom: 30px;
+            }
+        }
+    </style>
+
+    @section Scripts {
+        <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    }

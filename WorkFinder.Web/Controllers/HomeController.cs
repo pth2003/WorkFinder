@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WorkFinder.Web.Data;
@@ -14,6 +15,7 @@ public class HomeController : Controller
     public HomeController(WorkFinderContext context)
     {
         _context = context;
+
     }
 
     public async Task<IActionResult> Index()

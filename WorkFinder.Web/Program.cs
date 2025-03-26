@@ -108,6 +108,9 @@ app.UseSession();
 app.UseAuthentication();
 app.UseAuthorization();
 
+// Thêm middleware RoleAuthorization
+app.UseRoleAuthorization();
+
 // Thêm middleware kiểm tra và chuyển hướng Employer
 app.UseEmployerSetup();
 

@@ -1,5 +1,6 @@
-﻿@model WorkFinder.Web.Models.ViewModels.HomeViewModel
-
+﻿@using Microsoft.AspNetCore.Identity
+@model WorkFinder.Web.Models.ViewModels.HomeViewModel
+@inject SignInManager<ApplicationUser> SignInManager
 <!DOCTYPE html>
 <html>
 
@@ -89,43 +90,38 @@
                                 </div>
                             </div>
                         </div>
-                        @* <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel"
-                            data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel"
-                            data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button> *@
+
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <section class="cta-section py-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 mb-4 mb-md-0">
-                    <div class="cta-card bg-light p-4 rounded">
-                        <h3 class="mb-3">Become a Candidate</h3>
-                        <p class="mb-4">Create your profile and get noticed by top employers. Apply to jobs with just a
-                            few clicks.</p>
-                        <button class="btn btn-outline-primary">Register Now</button>
+    @if (!SignInManager.IsSignedIn(User))
+    {
+        <section class="cta-section py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 mb-4 mb-md-0">
+                        <div class="cta-card bg-light p-4 rounded">
+                            <h3 class="mb-3">Become a Candidate</h3>
+                            <p class="mb-4">Create your profile and get noticed by top employers. Apply to jobs with just a
+                                few clicks.</p>
+                            <button class="btn btn-outline-primary">Register Now</button>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="cta-card bg-primary text-white p-4 rounded">
-                        <h3 class="mb-3">Become an Employer</h3>
-                        <p class="mb-4">Post jobs and find the perfect candidates for your positions with our advanced
-                            search tools.</p>
-                        <button class="btn btn-light">Register Now</button>
+                    <div class="col-md-6">
+                        <div class="cta-card bg-primary text-white p-4 rounded">
+                            <h3 class="mb-3">Become an Employer</h3>
+                            <p class="mb-4">Post jobs and find the perfect candidates for your positions with our advanced
+                                search tools.</p>
+                            <button class="btn btn-light">Register Now</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    }
+
 </body>
 
 </html>

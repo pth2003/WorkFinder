@@ -380,5 +380,32 @@ namespace WorkFinder.Web.Repositories
 
             return query;
         }
+
+        public async Task<IEnumerable<Job>> GetRecentJobsByCompanyIdAsync(int companyId, int count)
+        {
+            return await _context.Jobs
+                .Where(j => j.CompanyId == companyId)
+                .OrderByDescending(j => j.CreatedAt)
+                .Take(count)
+                .ToListAsync();
+        }
+
+        public async Task<int> GetTotalJobsByCompanyIdAsync(int companyId)
+        {
+            return await _context.Jobs
+                .CountAsync(j => j.CompanyId == companyId);
+        }
+
+        // public async Task<int> GetActiveJobCountByCompanyIdAsync(int companyId)
+        // {
+        //     return await _context.Jobs
+        //         .CountAsync(j => j.CompanyId == companyId && j.IsActive);
+        // }
+
+        public async Task<int> GetTotalApplicationsByCompanyIdAsync(int companyId)
+        {
+            return await _context.JobApplications
+                .CountAsync(ja => ja.Job.CompanyId == companyId);
+        }
     }
 }

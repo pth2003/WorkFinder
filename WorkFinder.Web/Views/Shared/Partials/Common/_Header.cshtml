@@ -1,22 +1,47 @@
+@using Microsoft.AspNetCore.Identity
 @using Microsoft.AspNetCore.Mvc.TagHelpers
+@inject UserManager<ApplicationUser> UserManager;
+@{
+    var user = await UserManager.GetUserAsync(User);
+    var profilePicture = "/img/default-avatar.png";
+
+}
 <div id="header-top-bar" class="header-top-bar">
     <nav class="navbar navbar-expand-lg">
         <div class="container">
-
             <div class="collapse navbar-collapse" id="topNavbarContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a
-                            class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Home" && ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")"
-                            href="/">Home</a></li>
-                    <li class="nav-item"><a
-                            class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Job" && ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")"
-                            href="/Job">Find Job</a></li>
-                    <li class="nav-item"><a
-                            class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Company" && ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")"
-                            href="/Company">Companies</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Employers</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Customer Supports</a></li>
-                </ul>
+                @if (User.IsInRole(UserRoles.Employer))
+                {
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a
+                                class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Home" && ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")"
+                                href="/Employer/Home">Dashboard</a></li>
+                        <li class="nav-item"><a
+                                class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Job" ? "active" : "")"
+                                href="/Employer/Job">My Jobs</a></li>
+                        <li class="nav-item"><a
+                                class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Company" && ViewContext.RouteData.Values["action"].ToString() == "Profile" ? "active" : "")"
+                                href="/Employer/Company/Profile">Company Profile</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/Employer/Job/Create">Post A Job</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Customer Support</a></li>
+                    </ul>
+                }
+                else
+                {
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a
+                                class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Home" && ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")"
+                                href="/">Home</a></li>
+                        <li class="nav-item"><a
+                                class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Job" && ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")"
+                                href="/Job">Find Job</a></li>
+                        <li class="nav-item"><a
+                                class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Company" && ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")"
+                                href="/Company">Companies</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Employers</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Customer Support</a></li>
+                    </ul>
+                }
                 <div class="header-right d-flex gap-3 d-none d-lg-flex">
                     <div class="d-flex align-items-center gap-1">
                         <img src="~/icon/PhoneCall.svg" alt="" />
@@ -34,23 +59,26 @@
 <header id="main-header" class="main-header">
     <div class="container d-flex justify-content-between align-items-center">
         <div class="header-left d-flex align-items-center">
-            <div class="header-logo me-4 d-none d-lg-block">
+            <div class="header-logo me-4 d-none d-lg-block ">
                 <img src="~/icon/Logo.png" alt="logo" />
             </div>
             <div class="search-wrapper d-none d-md-block">
-                @await Component.InvokeAsync("Search")
+                @if (User.IsInRole(UserRoles.JobSeeker))
+                {
+                    @await Component.InvokeAsync("Search")
+                }
+
             </div>
         </div>
         <div class="header-login d-flex align-items-center">
-            @if (User?.Identity?.IsAuthenticated == true)
+            @if (User?.Identity?.IsAuthenticated == true && User.IsInRole(UserRoles.JobSeeker))
             {
                 <div class="user-profile dropdown">
                     <div class="d-flex align-items-center dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         <span class="me-2 user-greeting d-none d-lg-inline">Xin chào, @User.Identity.Name</span>
                         <div class="avatar-container">
-                            <img src="@(User.Claims.FirstOrDefault(c => c.Type == "ProfilePicture")?.Value ?? "/images/default-avatar.png")"
-                                alt="User Avatar" class="rounded-circle" width="40" height="40">
+                            <img src="@profilePicture" alt="User Avatar" class="rounded-circle" width="40" height="40">
                         </div>
                     </div>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
@@ -67,6 +95,40 @@
                         </li>
                     </ul>
                 </div>
+            }
+            else if (User?.Identity?.IsAuthenticated == true && User.IsInRole(UserRoles.Employer))
+            {
+                <ul class="list-unstyled d-flex gap-3">
+                    <li class="nav-item dropdown">
+                        <div class="nav-link dropdown-toggle text-dark d-flex gap-3 align-items-center justify-content-between"
+                            href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <button class="btn btn-outline-primary">Post A Job</button>
+                            <img src=@profilePicture alt="User Avatar" class="rounded-circle" width="40" height="40">
+                        </div>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li>
+                                <a class="dropdown-item" asp-area="Employer" asp-controller="Account" asp-action="Profile">
+                                    <i class="fas fa-user me-2"></i> Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" asp-area="Employer" asp-controller="Account" asp-action="Settings">
+                                    <i class="fas fa-cog me-2"></i> Settings
+                                </a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <form class="form-inline" asp-area="Auth" asp-controller="Auth" asp-action="Logout">
+                                    <button type="submit" class="dropdown-item">
+                                        <i class="fas fa-sign-out-alt me-2"></i> Logout
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
             }
             else
             {
@@ -102,8 +164,7 @@
             {
                 <div class="d-flex align-items-center py-2">
                     <div class="flex-shrink-0">
-                        <img src="@(User.Claims.FirstOrDefault(c => c.Type == "ProfilePicture")?.Value ?? "/images/default-avatar.png")"
-                            alt="User Avatar" class="rounded-circle" width="40" height="40">
+                        <img src="@profilePicture" alt="User Avatar" class="rounded-circle" width="40" height="40">
                     </div>
                     <div class="flex-grow-1 ms-3">
                         <p class="mb-0 fs-5 fw-semibold">@User.Identity.Name</p>
@@ -112,17 +173,34 @@
             }
         </div>
         <ul class="navbar-nav mobile-menu">
-            <li class="nav-item"><a
-                    class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Home" && ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")"
-                    href="/">Home</a></li>
-            <li class="nav-item"><a
-                    class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Job" && ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")"
-                    href="/Job">Find Job</a></li>
-            <li class="nav-item"><a
-                    class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Company" && ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")"
-                    href="/Company">Companies</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Employers</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Customer Supports</a></li>
+            @if (User.IsInRole(UserRoles.Employer))
+            {
+                <li class="nav-item"><a
+                        class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Home" && ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")"
+                        href="/Employer/Home">Dashboard</a></li>
+                <li class="nav-item"><a
+                        class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Job" ? "active" : "")"
+                        href="/Employer/Job">My Jobs</a></li>
+                <li class="nav-item"><a
+                        class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Company" && ViewContext.RouteData.Values["action"].ToString() == "Profile" ? "active" : "")"
+                        href="/Employer/Company/Profile">Company Profile</a></li>
+                <li class="nav-item"><a class="nav-link" href="/Employer/Job/Create">Post A Job</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Customer Support</a></li>
+            }
+            else
+            {
+                <li class="nav-item"><a
+                        class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Home" && ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")"
+                        href="/">Home</a></li>
+                <li class="nav-item"><a
+                        class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Job" && ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")"
+                        href="/Job">Find Job</a></li>
+                <li class="nav-item"><a
+                        class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Company" && ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")"
+                        href="/Company">Companies</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Employers</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Customer Support</a></li>
+            }
             <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-phone-alt me-2"></i>0867713501</a></li>
             @if (!User?.Identity?.IsAuthenticated == true)
             {
@@ -218,6 +296,14 @@
         background-color: rgba(10, 101, 204, 0.08);
         color: #0A65CC;
         font-weight: 500;
+    }
+
+    .header-logo {
+        width: 200px;
+    }
+
+    .header-logo img {
+        width: 100%;
     }
 
     @@media(max - width: 992px) {

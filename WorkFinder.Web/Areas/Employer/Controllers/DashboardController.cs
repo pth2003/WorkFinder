@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using WorkFinder.Web.Models;
 
 namespace WorkFinder.Web.Areas.Employer.Controllers
 {
-    [Route("[controller]")]
+    [Area("Employer")]
+    [Authorize(Roles = UserRoles.Employer)]
     public class DashboardController : Controller
     {
         private readonly ILogger<DashboardController> _logger;

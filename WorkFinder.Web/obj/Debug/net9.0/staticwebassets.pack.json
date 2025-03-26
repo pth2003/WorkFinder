@@ -129,6 +129,10 @@
       "PackagePath": "staticwebassets/img/company-bg.png"
     },
     {
+      "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/img/default-avatar.png",
+      "PackagePath": "staticwebassets/img/default-avatar.png"
+    },
+    {
       "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/js/site.js",
       "PackagePath": "staticwebassets/js/site.js"
     },
@@ -389,6 +393,10 @@
       "PackagePath": "staticwebassets/uploads/banners/1c4ed042-b381-4803-8bac-79f5bafc35c4_IMG_1795.jpeg"
     },
     {
+      "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/banners/296b8e24-0e56-41f8-8d6c-f20745221567_IMG_1823.jpeg",
+      "PackagePath": "staticwebassets/uploads/banners/296b8e24-0e56-41f8-8d6c-f20745221567_IMG_1823.jpeg"
+    },
+    {
       "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/banners/362d6883-5871-451b-b1a2-ad74b2d71969_IMG_1795.jpeg",
       "PackagePath": "staticwebassets/uploads/banners/362d6883-5871-451b-b1a2-ad74b2d71969_IMG_1795.jpeg"
     },
@@ -443,6 +451,10 @@
     {
       "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/logos/df2b1d76-c572-41fd-ac0d-49321316290c_IMG_1645.jpeg",
       "PackagePath": "staticwebassets/uploads/logos/df2b1d76-c572-41fd-ac0d-49321316290c_IMG_1645.jpeg"
+    },
+    {
+      "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/logos/e9f2c276-6917-46db-a268-b9697c8908c3_IMG_1796.jpeg",
+      "PackagePath": "staticwebassets/uploads/logos/e9f2c276-6917-46db-a268-b9697c8908c3_IMG_1796.jpeg"
     },
     {
       "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/logos/fe714775-102a-40d4-804e-84f5808873b5_IMG_1645.jpeg",

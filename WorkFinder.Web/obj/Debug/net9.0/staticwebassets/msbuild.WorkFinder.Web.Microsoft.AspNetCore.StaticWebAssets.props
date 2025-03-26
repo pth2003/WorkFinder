@@ -120,8 +120,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>86j2om3q92</Fingerprint>
-      <Integrity>kK3DoldFIRJmynjoN5gc4ZFsQ2xjfV2nljZvRuw3Xe4=</Integrity>
+      <Fingerprint>r2xl516g6z</Fingerprint>
+      <Integrity>TTzlXoFtcbTee8P06FoxC6CCGBd44R28OZHqc3x/GR4=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\header.css'))</OriginalItemSpec>
@@ -539,6 +539,24 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\img\company-bg.png'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\img\default-avatar.png'))">
+      <SourceType>Package</SourceType>
+      <SourceId>WorkFinder.Web</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/WorkFinder.Web</BasePath>
+      <RelativePath>img/default-avatar.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>61m21kt9on</Fingerprint>
+      <Integrity>9qJmj54g60ab2x80fNGA0TYcwP2C8PmcRHfcOk2jADU=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\img\default-avatar.png'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\img\Illustration.png'))">
       <SourceType>Package</SourceType>
@@ -1728,6 +1746,24 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\banners\1c4ed042-b381-4803-8bac-79f5bafc35c4_IMG_1795.jpeg'))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\banners\296b8e24-0e56-41f8-8d6c-f20745221567_IMG_1823.jpeg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>WorkFinder.Web</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/WorkFinder.Web</BasePath>
+      <RelativePath>uploads/banners/296b8e24-0e56-41f8-8d6c-f20745221567_IMG_1823.jpeg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>x1zz8euidh</Fingerprint>
+      <Integrity>ywMfYVHYJgr8S+AnvsZPCyGeApOkbgB9Q2XXq0vKlEw=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\banners\296b8e24-0e56-41f8-8d6c-f20745221567_IMG_1823.jpeg'))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\banners\362d6883-5871-451b-b1a2-ad74b2d71969_IMG_1795.jpeg'))">
       <SourceType>Package</SourceType>
       <SourceId>WorkFinder.Web</SourceId>
@@ -1979,6 +2015,24 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\logos\df2b1d76-c572-41fd-ac0d-49321316290c_IMG_1645.jpeg'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\logos\e9f2c276-6917-46db-a268-b9697c8908c3_IMG_1796.jpeg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>WorkFinder.Web</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/WorkFinder.Web</BasePath>
+      <RelativePath>uploads/logos/e9f2c276-6917-46db-a268-b9697c8908c3_IMG_1796.jpeg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>mysxisa0ef</Fingerprint>
+      <Integrity>3vKfC9VuOmo4pYrsgkVQrw3Mtc6M8N23RBHIQYiliQA=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\logos\e9f2c276-6917-46db-a268-b9697c8908c3_IMG_1796.jpeg'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\logos\fe714775-102a-40d4-804e-84f5808873b5_IMG_1645.jpeg'))">
       <SourceType>Package</SourceType>
