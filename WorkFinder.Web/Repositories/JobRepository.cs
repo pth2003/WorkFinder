@@ -305,6 +305,7 @@ namespace WorkFinder.Web.Repositories
                 .Include(j => j.Categories)
                     .ThenInclude(jc => jc.Category)
                 .Include(j => j.Company)
+                .Include(j => j.Applications)
                 .ToListAsync();
         }
 
@@ -387,6 +388,7 @@ namespace WorkFinder.Web.Repositories
                 .Where(j => j.CompanyId == companyId)
                 .OrderByDescending(j => j.CreatedAt)
                 .Take(count)
+                .Include(j => j.Applications)
                 .ToListAsync();
         }
 

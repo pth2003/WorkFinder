@@ -67,33 +67,126 @@ namespace WorkFinder.Web.Areas.Employer.Controllers
         {
             if (!ModelState.IsValid)
             {
+                // Nếu request là AJAX, trả về lỗi dạng JSON
+                if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                {
+                    return Json(new
+                    {
+                        success = false,
+                        message = "Validation failed",
+                        errors = ModelState.Where(x => x.Value.Errors.Count > 0)
+                            .ToDictionary(
+                                kvp => kvp.Key,
+                                kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+                            )
+                    });
+                }
+
                 return View(model);
             }
 
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
+                // Nếu request là AJAX
+                if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                {
+                    return Json(new { success = false, message = "User not found" });
+                }
+
                 return NotFound();
             }
 
             var company = await _companyRepository.GetByOwnerIdAsync(user.Id);
             if (company == null)
             {
+                // Nếu request là AJAX
+                if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                {
+                    return Json(new { success = false, message = "Company not found" });
+                }
+
                 return RedirectToAction("SetupBasic", "Company", new { area = "Employer" });
             }
 
-            // Tạo đối tượng Job từ ViewModel với mapping chính xác
-            var job = await CreateJobFromViewModel(model, company.Id);
+            var companyId = company.Id;
 
-            // Lưu job vào database
-            await _jobRepository.AddAsync(job);
-            await _jobRepository.SaveChangesAsync();
+            // Create metadata dictionary
+            var metadata = new Dictionary<string, string>
+            {
+                { "SalaryType", model.SalaryType ?? "Monthly" },
+                { "ApplyMethod", model.ApplyMethod ?? "Jobpilot" },
+                { "Vacancies", model.Vacancies?.ToString() ?? "1" },
+                { "JobLevel", model.JobLevel ?? "Entry" },
+                { "JobRole", model.JobRole ?? model.Title }
+            };
 
-            // Xử lý thêm danh mục và tags (nếu có repository)
-            await ProcessJobCategoriesAndTags(job.Id, model);
+            try
+            {
+                // Create job from model
+                var job = new Job
+                {
+                    Title = model.Title,
+                    Description = model.Description,
+                    Requirements = model.Responsibilities,
+                    Location = company.Location, // Mặc định lấy theo địa chỉ công ty thay vì Remote
+                    SalaryMin = model.MinSalary ?? 0,
+                    SalaryMax = model.MaxSalary ?? 0,
+                    // Chuyển đổi các Enum
+                    ExperienceLevel = Enum.TryParse<ExperienceLevel>(model.Experience, out var expLevel) ? expLevel : ExperienceLevel.Entry,
+                    JobType = Enum.TryParse<JobType>(model.JobType, out var jobType) ? jobType : JobType.FullTime,
+                    // Sử dụng Benefits từ model nếu có, nếu không dùng giá trị mặc định
+                    Benefits = !string.IsNullOrEmpty(model.Benefits) ? model.Benefits : "Standard benefits package",
+                    // Chuyển đổi ExpirationDate sang UTC trước khi lưu vào ExpiryDate
+                    ExpiryDate = model.ExpirationDate.HasValue
+                        ? DateTime.SpecifyKind(model.ExpirationDate.Value, DateTimeKind.Utc)
+                        : DateTime.UtcNow.AddMonths(1),
+                    IsActive = true,
+                    CompanyId = companyId,
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow,
+                    // Lưu metadata vào trường mới
+                    Metadata = System.Text.Json.JsonSerializer.Serialize(metadata)
+                };
 
-            TempData["SuccessMessage"] = "Job posted successfully!";
-            return RedirectToAction("Index", "Job", new { area = "Employer" });
+                // Add job to database
+                await _jobRepository.AddAsync(job);
+                await _jobRepository.SaveChangesAsync();
+
+                // Parse tags
+                if (!string.IsNullOrEmpty(model.Tags))
+                {
+                    var tags = model.Tags.Split(',');
+                    // Process tags
+                }
+
+                // Nếu request là AJAX
+                if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                {
+                    return Json(new
+                    {
+                        success = true,
+                        message = "Job posted successfully!",
+                        redirectUrl = Url.Action("Index", "Job")
+                    });
+                }
+
+                TempData["SuccessMessage"] = "Job posted successfully!";
+                return RedirectToAction("Index", "Job");
+            }
+            catch (Exception ex)
+            {
+                // Log exception
+                ModelState.AddModelError("", "An error occurred while saving the job: " + ex.Message);
+
+                // Nếu request là AJAX
+                if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                {
+                    return Json(new { success = false, message = "Failed to create job: " + ex.Message });
+                }
+
+                return View(model);
+            }
         }
 
         [HttpPost]
@@ -178,6 +271,9 @@ namespace WorkFinder.Web.Areas.Employer.Controllers
             if (!string.IsNullOrEmpty(model.ApplyMethod))
                 metadata.Add("ApplyMethod", model.ApplyMethod);
 
+            if (!string.IsNullOrEmpty(model.Benefits))
+                metadata.Add("Benefits", model.Benefits);
+
             // Tạo đối tượng Job từ ViewModel với mapping chính xác
             var job = new Job
             {
@@ -188,10 +284,14 @@ namespace WorkFinder.Web.Areas.Employer.Controllers
                 ExperienceLevel = experienceLevel,
                 SalaryMin = model.MinSalary ?? 0,
                 SalaryMax = model.MaxSalary ?? 0,
-                // Gán các giá trị mặc định nếu không có trong model
-                Location = "Remote", // Có thể thêm trường Location vào ViewModel nếu cần
-                Benefits = "To be added", // Có thể thêm trường Benefits vào ViewModel nếu cần
-                ExpiryDate = model.ExpirationDate.HasValue ? model.ExpirationDate.Value : DateTime.Now.AddMonths(1),
+                // Lấy location từ company thay vì hardcode "Remote"
+                Location = await GetCompanyLocation(companyId),
+                // Sử dụng Benefits từ model nếu có, nếu không dùng giá trị mặc định
+                Benefits = !string.IsNullOrEmpty(model.Benefits) ? model.Benefits : "Standard benefits package",
+                // Chuyển đổi ExpirationDate sang UTC trước khi lưu vào ExpiryDate
+                ExpiryDate = model.ExpirationDate.HasValue
+                    ? DateTime.SpecifyKind(model.ExpirationDate.Value, DateTimeKind.Utc)
+                    : DateTime.UtcNow.AddMonths(1),
                 IsActive = true,
                 CompanyId = companyId,
                 CreatedAt = DateTime.UtcNow,
@@ -201,6 +301,22 @@ namespace WorkFinder.Web.Areas.Employer.Controllers
             };
 
             return job;
+        }
+
+        /// <summary>
+        /// Lấy location của company để gán cho job
+        /// </summary>
+        private async Task<string> GetCompanyLocation(int companyId)
+        {
+            try
+            {
+                var company = await _jobRepository.GetCompanyByIdAsync(companyId);
+                return !string.IsNullOrEmpty(company?.Location) ? company.Location : "Remote";
+            }
+            catch
+            {
+                return "Remote"; // Fallback nếu có lỗi
+            }
         }
 
         /// <summary>
@@ -275,3 +391,4 @@ namespace WorkFinder.Web.Areas.Employer.Controllers
         #endregion
     }
 }
+

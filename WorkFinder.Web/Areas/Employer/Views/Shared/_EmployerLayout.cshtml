@@ -5,6 +5,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - WorkFinder</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="~/favicon.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="~/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/favicon-16x16.png">
+    <link rel="manifest" href="~/site.webmanifest">
+    <link rel="mask-icon" href="~/safari-pinned-tab.svg" color="#1E60C6">
+    <meta name="msapplication-TileColor" content="#1E60C6">
+    <meta name="theme-color" content="#1E60C6">
+    <!-- Styles -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WorkFinder.Web.styles.css" asp-append-version="true" />
@@ -65,11 +75,35 @@
         .btn-primary:hover {
             background-image: linear-gradient(310deg, #1634b9 0%, #21d4fd 100%);
         }
+
+        /* Page loading overlay - Z-index cao hơn để hiển thị đè lên tất cả */
+        #page-loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
     </style>
     @await RenderSectionAsync("Styles", required: false)
 </head>
 
 <body>
+    <!-- Page Loading Overlay -->
+    <div id="page-loading-overlay" class="d-flex justify-content-center align-items-center">
+        <div class="d-flex flex-column align-items-center">
+            <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-2 fw-bold text-primary">Loading...</p>
+        </div>
+    </div>
+
     <div>
         @await Html.PartialAsync("~/Views/Shared/Partials/Common/_Header.cshtml");
     </div>
@@ -79,6 +113,9 @@
             @RenderBody()
         </main>
     </div>
+
+    <!-- Toast container -->
+    <div id="toast-container" class="toast-container position-fixed bottom-0 end-0 p-3"></div>
 
     <footer class="border-top footer text-muted">
         <div class="container">
@@ -91,6 +128,9 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <script>
+        console.log('Layout loaded, page loading overlay:', document.getElementById('page-loading-overlay'));
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 

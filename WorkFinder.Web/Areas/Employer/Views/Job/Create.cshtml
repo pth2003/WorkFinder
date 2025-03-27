@@ -254,6 +254,13 @@
                     </div>
 
                     <div class="mb-4">
+                        <label asp-for="Benefits" class="form-label fw-medium">Benefits</label>
+                        <textarea asp-for="Benefits" class="form-control" rows="4"
+                            placeholder="Add job benefits like health insurance, PTO, etc..."></textarea>
+                        <span asp-validation-for="Benefits" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-4">
                         <label asp-for="Responsibilities" class="form-label fw-medium">Responsibilities</label>
                         <textarea asp-for="Responsibilities" class="form-control" rows="6"
                             placeholder="Add your job responsibilities..."></textarea>
@@ -282,6 +289,7 @@
     .sidebar {
         width: 250px;
         flex-shrink: 0;
+        font-size: 1.6rem;
     }
 
     .sidebar-header h5 {
@@ -410,8 +418,36 @@
     </style>
 
     @section Scripts {
-        <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-        @{
-            await Html.RenderPartialAsync("_ValidationScriptsPartial");
-        }
+        <script src="~/js/employer-dashboard.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Thêm loading indicator nếu chưa có
+                if (!document.getElementById('loading-indicator')) {
+                    const loadingIndicator = document.createElement('div');
+                    loadingIndicator.id = 'loading-indicator';
+                    loadingIndicator.className = 'text-center py-3';
+                    loadingIndicator.style.display = 'none';
+                    loadingIndicator.innerHTML = `
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            `;
+                    document.querySelector('main').appendChild(loadingIndicator);
+                }
+
+                // Thêm toast container nếu chưa có
+                if (!document.getElementById('toast-container')) {
+                    const toastContainer = document.createElement('div');
+                    toastContainer.id = 'toast-container';
+                    toastContainer.className = 'toast-container position-fixed bottom-0 end-0 p-3';
+                    document.body.appendChild(toastContainer);
+                }
+
+                // Thêm id cho form nếu chưa có
+                const form = document.querySelector('form');
+                if (form && !form.id) {
+                    form.id = 'job-form';
+                }
+            });
+        </script>
     }

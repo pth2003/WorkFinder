@@ -44,6 +44,9 @@ namespace WorkFinder.Web.Areas.Employer.Models
         [Display(Name = "Apply Method")]
         public string ApplyMethod { get; set; } // "Jobpilot", "External", "Email"
 
+        [Display(Name = "Benefits")]
+        public string Benefits { get; set; }
+
         [Required(ErrorMessage = "Job description is required")]
         [Display(Name = "Description")]
         public string Description { get; set; }

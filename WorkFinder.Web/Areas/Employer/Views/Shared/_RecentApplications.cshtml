@@ -1,0 +1,81 @@
+@model dynamic
+
+@if (Model != null && Model.Any())
+{
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Applicant</th>
+                        <th>Job Position</th>
+                        <th>Applied Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var application in Model)
+                    {
+                            <tr>
+                                <td class="d-flex align-items-center">
+                                    <img src="@application.ApplicantAvatar" alt="Avatar" class="rounded-circle me-2" width="40" height="40">
+                                    <div>
+                                        <div>@application.ApplicantName</div>
+                                        <small class="text-muted">@application.ApplicantEmail</small>
+                                    </div>
+                                </td>
+                                <td>@application.JobTitle</td>
+                                <td>@application.AppliedDate.ToString("MMM d, yyyy")</td>
+                                <td>
+                                    <span class="badge bg-@(application.Status == "Pending" ? "warning" : 
+                                                         application.Status == "Shortlisted" ? "info" :
+                                                         application.Status == "Accepted" ? "success" : "danger")">
+                                    @application.Status
+                                </span>
+                            </td>
+                            <td>
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Actions
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a class="dropdown-item" href="#" 
+                                               onclick="handleAjaxAction('@Url.Action("ViewApplication", "Applications", new { id = application.Id, area = "Employer" })', 'GET'); return false;">
+                                                <i class="fas fa-eye me-2"></i> View Details
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="#" 
+                                               onclick="handleAjaxAction('@Url.Action("DownloadResume", "Applications", new { id = application.Id, area = "Employer" })', 'GET'); return false;">
+                                                <i class="fas fa-download me-2"></i> Download Resume
+                                            </a>
+                                        </li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li>
+                                            <a class="dropdown-item" href="#" 
+                                               onclick="handleAjaxAction('@Url.Action("UpdateStatus", "Applications", new { id = application.Id, status = "Shortlisted", area = "Employer" })', 'PUT'); return false;">
+                                                <i class="fas fa-user-check me-2"></i> Shortlist
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="#" 
+                                               onclick="handleAjaxAction('@Url.Action("UpdateStatus", "Applications", new { id = application.Id, status = "Rejected", area = "Employer" })', 'PUT'); return false;">
+                                                <i class="fas fa-user-times me-2"></i> Reject
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                                }
+                </tbody>
+            </table>
+        </div>
+}
+else
+{
+        <div class="alert alert-info">
+            <p class="mb-0">You don't have any applications yet.</p>
+        </div>
+}
