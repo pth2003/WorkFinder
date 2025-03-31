@@ -25,5 +25,6 @@ namespace WorkFinder.Web.Areas.Employer.Models
         public int DaysRemaining { get; set; }
         public int ApplicationCount { get; set; }
         public string ExpirationDate { get; set; }
+        public List<JobApplication> Applications { get; set; } = new List<JobApplication>();
     }
 }

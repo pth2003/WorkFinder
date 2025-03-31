@@ -26,7 +26,7 @@ namespace WorkFinder.Web.Areas.Employer.Controllers
         [Route("Employer/NotFound")]
         public IActionResult NotFound()
         {
-            return View();
+            return View("NotFound");
         }
     }
 }

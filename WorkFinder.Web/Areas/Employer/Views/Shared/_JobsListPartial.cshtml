@@ -1,0 +1,547 @@
+@model IEnumerable<WorkFinder.Web.Models.Job>
+
+<div class="jobs-list-container">
+    @if (ViewBag.IsHomePage != true)
+    {
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <div class="jobs-count">
+                <h3 class="m-0">My Jobs @(Model.Count() > 0 ? $"({Model.Count()})" : "")</h3>
+            </div>
+            <div class="jobs-filter">
+                <div class="dropdown">
+                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="jobStatusFilter" data-bs-toggle="dropdown" aria-expanded="false">
+                        All Jobs
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="jobStatusFilter">
+                        <li><a class="dropdown-item active" href="#">All Jobs</a></li>
+                        <li><a class="dropdown-item" href="#">Active Jobs</a></li>
+                        <li><a class="dropdown-item" href="#">Expired Jobs</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="job-list-card">
+        <div class="job-header">
+            <div class="job-header-cell jobs-header">JOBS</div>
+            <div class="job-header-cell status-header">STATUS</div>
+            <div class="job-header-cell applications-header">APPLICATIONS</div>
+            <div class="job-header-cell actions-header">ACTIONS</div>
+        </div>
+
+        @if (Model.Any())
+        {
+            foreach (var job in Model)
+            {
+                var daysRemaining = (job.ExpiryDate - DateTime.Now).Days;
+                var isExpired = daysRemaining <= 0;
+                var jobStatus = job.IsActive && !isExpired ? "Active" : "Expire";
+                var statusClass = job.IsActive && !isExpired ? "active" : "expired";
+
+                <div class="job-item" data-job-id="@job.Id">
+                    <div class="job-cell job-info">
+                        <h5 class="job-title">
+                            <a href="@Url.Action("Details", "Job", new { id = job.Id, area = "Employer" })">@job.Title</a>
+                        </h5>
+                        <div class="job-meta">
+                            <span class="job-type">@job.JobType.ToString()</span>
+                            <span class="separator">•</span>
+                            @if (isExpired)
+                            {
+                                <span class="time-remaining text-danger">Expired</span>
+                            }
+                            else
+                            {
+                                <span class="time-remaining @(daysRemaining <= 3 ? "text-danger" : daysRemaining <= 7 ? "text-warning" : "")">
+                                    @daysRemaining days remaining
+                                </span>
+                            }
+                        </div>
+                    </div>
+                    <div class="job-cell status-cell">
+                        <span class="status-badge @statusClass">
+                            @jobStatus
+                        </span>
+                    </div>
+                    <div class="job-cell applications-cell">
+                        <span class="applications-badge">
+                            @(job.Applications?.Count ?? 0) Applications
+                        </span>
+                    </div>
+                    <div class="job-cell actions-cell">
+                        <a href="@Url.Action("Index", "Application", new { jobId = job.Id, area = "Employer" })" class="btn view-applications-btn">
+                            View Applications
+                        </a>
+                        <div class="dropdown action-dropdown">
+                            <button class="btn more-actions-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                    <a class="dropdown-item" href="@Url.Action("Details", "Job", new { id = job.Id, area = "Employer" })">
+                                        <i class="fas fa-eye me-2"></i> View Detail
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#" data-job-id="@job.Id">
+                                        <i class="fas fa-bullhorn me-2"></i> Promote Job
+                                    </a>
+                                </li>
+                                @if (!isExpired)
+                                {
+                                    <li>
+                                        <a class="dropdown-item" href="#" 
+                                            data-bs-toggle="modal" data-bs-target="#expireModal" 
+                                            data-job-id="@job.Id" data-job-title="@job.Title">
+                                            <i class="fas fa-times-circle me-2"></i> Make it Expire
+                                        </a>
+                                    </li>
+                                }
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <a class="dropdown-item text-danger" href="#" 
+                                        data-bs-toggle="modal" data-bs-target="#deleteModal" 
+                                        data-job-id="@job.Id" data-job-title="@job.Title">
+                                        <i class="fas fa-trash me-2"></i> Delete Job
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="empty-jobs-message">
+                <i class="fas fa-briefcase fs-1 text-muted mb-3"></i>
+                <h4>You haven't posted any jobs yet</h4>
+                <p class="text-muted">Get started by posting your first job vacancy!</p>
+                <a href="@Url.Action("Create", "Job", new { area = "Employer" })" class="btn btn-primary mt-3">
+                    <i class="fas fa-plus me-2"></i> Post a Job
+                </a>
+            </div>
+        }
+    </div>
+
+    @if (ViewBag.IsHomePage != true && ViewBag.ShowPagination != false && Model.Count() > 0)
+    {
+        <div class="pagination-container mt-4">
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center" id="jobs-pagination">
+                    @if (ViewBag.Pagination != null)
+                    {
+                        var pagination = ViewBag.Pagination;
+                        <li class="page-item @(pagination.CurrentPage == 1 ? "disabled" : "")">
+                            <a class="page-link" href="@Url.Action("Index", "Job", new { page = pagination.CurrentPage - 1, area = "Employer" })">Previous</a>
+                        </li>
+                
+                        @for (int i = 1; i <= pagination.TotalPages; i++)
+                        {
+                            if (i == 1 || i == pagination.TotalPages || (i >= pagination.CurrentPage - 2 && i <= pagination.CurrentPage + 2))
+                            {
+                                <li class="page-item @(i == pagination.CurrentPage ? "active" : "")">
+                                    <a class="page-link" href="@Url.Action("Index", "Job", new { page = i, area = "Employer" })">@i</a>
+                                </li>
+                            }
+                            else if (i == pagination.CurrentPage - 3 || i == pagination.CurrentPage + 3)
+                            {
+                                <li class="page-item disabled"><span class="page-link">...</span></li>
+                            }
+                        }
+                
+                        <li class="page-item @(pagination.CurrentPage == pagination.TotalPages ? "disabled" : "")">
+                            <a class="page-link" href="@Url.Action("Index", "Job", new { page = pagination.CurrentPage + 1, area = "Employer" })">Next</a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        </div>
+    }
+</div>
+
+<style>
+    /* Container styles */
+    .jobs-list-container {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 2rem;
+    }
+    
+    /* Card style */
+    .job-list-card {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        margin-bottom: 1.5rem;
+        overflow: visible;
+    }
+    
+    /* Header styles */
+    .job-header {
+        display: flex;
+        background-color: #f8f9fa;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        padding: 15px 20px;
+    }
+    
+    .job-header-cell {
+        font-size: 12px;
+        font-weight: 600;
+        color: #6c757d;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .jobs-header {
+        width: 40%;
+    }
+    
+    .status-header {
+        width: 15%;
+    }
+    
+    .applications-header {
+        width: 20%;
+    }
+    
+    .actions-header {
+        width: 25%;
+        text-align: right;
+    }
+    
+    /* Job item styles */
+    .job-item {
+        display: flex;
+        border-bottom: 1px solid #eee;
+        padding: 20px;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+    
+    .job-item::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        border: 1px solid transparent;
+        border-radius: 6px;
+        pointer-events: none;
+        transition: all 0.3s ease;
+        z-index: 1;
+    }
+    
+    .job-item:hover {
+        background-color: rgba(0, 123, 255, 0.02);
+    }
+    
+    .job-item:hover::before {
+        border-color: #0d6efd;
+        opacity: 0.3;
+    }
+    
+    .job-cell {
+        padding: 0 10px;
+    }
+    
+    /* Job info cell */
+    .job-info {
+        width: 40%;
+    }
+    
+    .job-title {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+    
+    .job-title a {
+        color: #0d6efd;
+        text-decoration: none;
+    }
+    
+    .job-title a:hover {
+        text-decoration: underline;
+    }
+    
+    .job-meta {
+        font-size: 13px;
+        color: #6c757d;
+    }
+    
+    .job-type {
+        color: #0d6efd;
+        font-weight: 500;
+    }
+    
+    .separator {
+        margin: 0 5px;
+    }
+    
+    /* Status cell */
+    .status-cell {
+        width: 15%;
+        display: flex;
+        align-items: center;
+    }
+    
+    .status-badge {
+        display: inline-block;
+        padding: 6px 12px;
+        border-radius: 30px;
+        font-size: 13px;
+        font-weight: 500;
+    }
+    
+    .status-badge.active {
+        background-color: #28a745;
+        color: white;
+    }
+    
+    .status-badge.expired {
+        background-color: #6c757d;
+        color: white;
+    }
+    
+    /* Applications cell */
+    .applications-cell {
+        width: 20%;
+        display: flex;
+        align-items: center;
+    }
+    
+    .applications-badge {
+        display: inline-block;
+        padding: 6px 12px;
+        border-radius: 30px;
+        font-size: 13px;
+        font-weight: 500;
+        background-color: #17a2b8;
+        color: white;
+    }
+    
+    /* Actions cell */
+    .actions-cell {
+        width: 25%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .view-applications-btn {
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        color: #212529;
+        padding: 8px 15px;
+        font-size: 14px;
+        border-radius: 4px;
+        font-weight: normal;
+        text-decoration: none;
+    }
+    
+    .view-applications-btn:hover {
+        background-color: #e9ecef;
+        color: #0d6efd;
+        text-decoration: none;
+    }
+    
+    .more-actions-btn {
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        color: #212529;
+        width: 36px;
+        height: 36px;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+    }
+    
+    .more-actions-btn:hover {
+        background-color: #e9ecef;
+    }
+    
+    /* Dropdown menu */
+    .action-dropdown {
+        position: relative;
+        z-index: 1050;
+    }
+    
+    .action-dropdown .dropdown-menu {
+        min-width: 200px;
+        padding: 8px 0;
+        margin-top: 8px;
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        right: 0;
+        left: auto;
+        z-index: 1050;
+        position: absolute;
+    }
+    
+    .dropdown-item {
+        padding: 10px 15px;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+    }
+    
+    .dropdown-item i {
+        margin-right: 10px;
+        width: 18px;
+    }
+    
+    .dropdown-item:hover {
+        background-color: #f8f9fa;
+    }
+    
+    .dropdown-item.text-danger {
+        color: #dc3545;
+    }
+    
+    .dropdown-item.text-danger:hover {
+        background-color: #ffebee;
+    }
+    
+    /* Empty message */
+    .empty-jobs-message {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 50px 20px;
+        text-align: center;
+    }
+    
+    /* Pagination styles */
+    .pagination-container {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .pagination {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .pagination .page-link {
+        margin: 0 3px;
+        border-radius: 4px;
+        color: #0d6efd;
+    }
+    
+    .pagination .page-item.active .page-link {
+        background-color: #0d6efd;
+        border-color: #0d6efd;
+    }
+    
+    /* Responsive styles */
+    @@media (max-width: 991px) {
+        .job-header-cell, .job-cell {
+            padding: 0 5px;
+        }
+        
+        .job-item {
+            padding: 15px 10px;
+        }
+    }
+    
+    @@media (max-width: 767px) {
+        .job-header, .job-item {
+            flex-direction: column;
+        }
+        
+        .job-header-cell, .job-cell {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        
+        .actions-cell {
+            justify-content: flex-start;
+        }
+    }
+</style>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm Delete</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete the job "<span id="jobTitleToDelete"></span>"?</p>
+                <p class="text-danger">This action cannot be undone.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <form id="deleteJobForm" asp-action="Delete" asp-controller="Job" asp-area="Employer" method="post">
+                    <input type="hidden" id="jobIdToDelete" name="id" />
+                    <button type="submit" class="btn btn-danger">Delete Job</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Expire Modal -->
+<div class="modal fade" id="expireModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm Mark as Expired</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to mark the job "<span id="jobTitleToExpire"></span>" as expired?</p>
+                <p class="text-warning">This will prevent new applicants from applying to this job.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <form id="expireJobForm" asp-action="MarkAsExpired" asp-controller="Job" asp-area="Employer" method="post">
+                    <input type="hidden" id="jobIdToExpire" name="id" />
+                    <button type="submit" class="btn btn-warning">Mark as Expired</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Setup Delete Modal
+        const deleteModal = document.getElementById('deleteModal');
+        if (deleteModal) {
+            deleteModal.addEventListener('show.bs.modal', function(event) {
+                const button = event.relatedTarget;
+                const jobId = button.getAttribute('data-job-id');
+                const jobTitle = button.getAttribute('data-job-title');
+                
+                document.getElementById('jobIdToDelete').value = jobId;
+                document.getElementById('jobTitleToDelete').textContent = jobTitle;
+            });
+        }
+        
+        // Setup Expire Modal
+        const expireModal = document.getElementById('expireModal');
+        if (expireModal) {
+            expireModal.addEventListener('show.bs.modal', function(event) {
+                const button = event.relatedTarget;
+                const jobId = button.getAttribute('data-job-id');
+                const jobTitle = button.getAttribute('data-job-title');
+                
+                document.getElementById('jobIdToExpire').value = jobId;
+                document.getElementById('jobTitleToExpire').textContent = jobTitle;
+            });
+        }
+    });
+</script> 

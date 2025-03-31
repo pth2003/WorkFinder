@@ -308,6 +308,7 @@
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/nezrqnk58p-muycvpuwrr.gz
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/v0zgfp0y55-87fc7y1x7t.gz
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/yfc7ypekbg-mlv21k5csn.gz
+/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/bk969yvb2a-7um2x9vecg.gz
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/es4im42h7p-e5onelikqi.gz
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/6cvtt9wo3g-fsdh5ue7jq.gz
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/l654nposfe-8yvi8v85nk.gz
@@ -320,6 +321,7 @@
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/crcvv1k8kg-ap5m9sfg0h.gz
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/ely8ow1dzq-x499kjc8ih.gz
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/jur64tdre6-gnopta5har.gz
+/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/ynjrzpcwxc-48eprhda54.gz
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/349wg6nvct-9bbw35csid.gz
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/32ay0fjd1c-sw8kbue69q.gz
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/co3t201f08-13p4k30vz4.gz
@@ -331,7 +333,11 @@
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/gp2ms2y0zz-6ydne6ni3s.gz
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/oyedeh50dg-nohz51k08h.gz
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/tdy2q30xu8-aqwqjbwtwp.gz
+/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/q0td0drkzo-48eprhda54.gz
+/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/ifs6eyexms-a99ufrvw1n.gz
+/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/cw6d0az9i9-9l1ejqt2yx.gz
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/r73o7iqov8-fr7q2aak1r.gz
+/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/6vdtjzyf8i-3xorfzndo4.gz
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/3265v5oncb-6moud2o9ak.gz
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/xy0u0co96d-bqjiyaj88i.gz
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/ypb07cdwot-c2jlpeoesf.gz
@@ -392,6 +398,7 @@
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/7uuh5o3f02-muycvpuwrr.gz
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/jrkg0orh4e-87fc7y1x7t.gz
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/qke9xy9y2o-jfsiqqwiad.gz
+/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/hbtmet2o8u-por4xz0xj3.gz
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/ovqwnxt373-9h8o3lycsa.gz
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/5e0uuw28j7-9h8o3lycsa.gz
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/staticwebassets.build.json
@@ -409,8 +416,3 @@
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/WorkFinder.Web.pdb
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/WorkFinder.Web.genruntimeconfig.cache
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/ref/WorkFinder.Web.dll
-/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/bk969yvb2a-7um2x9vecg.gz
-/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/ynjrzpcwxc-48eprhda54.gz
-/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/q0td0drkzo-48eprhda54.gz
-/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/ifs6eyexms-foab659qfp.gz
-/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/hbtmet2o8u-por4xz0xj3.gz

@@ -7,6 +7,7 @@
 
 <div class="container">
     <div class="employers-dashboard mt-4">
+        <!-- Sidebar -->
         <div class="sidebar">
             <div class="sidebar-header mb-4">
                 <h5>EMPLOYERS DASHBOARD</h5>
@@ -67,112 +68,9 @@
                 </a>
             </div>
         </div>
-
+        <!-- Main Content -->
         <div class="main-content">
-            <div class="jobs-list-container bg-white p-4 rounded shadow-sm">
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h2>My Jobs</h2>
-                    <a href="@Url.Action("Create", "Job", new { area = "Employer" })" class="btn btn-primary">
-                        <i class="fas fa-plus me-1"></i> Post a New Job
-                    </a>
-                </div>
-
-                @if (TempData["SuccessMessage"] != null)
-                {
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            @TempData["SuccessMessage"]
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                }
-
-                @if (Model != null && Model.Any())
-                {
-                        <div class="table-responsive">
-                            <table class="table table-hover">
-                                <thead class="table-light">
-                                    <tr>
-                                        <th>Title</th>
-                                        <th>Type</th>
-                                        <th>Vacancies</th>
-                                        <th>Applicants</th>
-                                        <th>Posted Date</th>
-                                        <th>Expires</th>
-                                        <th>Status</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var job in Model)
-                                    {
-                                            <tr>
-                                                <td class="job-title">
-                                                    <a href="@Url.Action("Details", "Job", new { id = job.Id, area = "Employer" })">
-                                                        @job.Title
-                                                    </a>
-                                                </td>
-                                                <td>@job.JobType</td>
-                                                <td>
-                                                    @job.GetMetadataValue("Vacancies", "1")
-                                                </td>
-                                                <td>
-                                                    <span class="badge bg-info">@job.Applications.Count</span>
-                                                </td>
-                                                <td>@job.CreatedAt.ToString("dd MMM yyyy")</td>
-                                                <td>
-                                                    @{
-                                                            var daysRemaining = (job.ExpiryDate - DateTime.Now).Days;
-                                                            var expiryClass = daysRemaining <= 3 ? "text-danger" :
-                                                                                              daysRemaining <= 7 ? "text-warning" : "";
-                                                    }
-                                                    <span class="@expiryClass">
-                                                        @(daysRemaining > 0 ? $"{daysRemaining} days" : "Expired")
-                                                    </span>
-                                                </td>
-                                                <td>
-                                                    @if (job.IsActive)
-                                                    {
-                                                            <span class="badge bg-success">Active</span>
-                                                    }
-                                                    else
-                                                    {
-                                                            <span class="badge bg-secondary">Inactive</span>
-                                                    }
-                                                </td>
-                                                <td>
-                                                    <div class="btn-group">
-                                                        <a href="@Url.Action("Edit", "Job", new { id = job.Id, area = "Employer" })" 
-                                                           class="btn btn-sm btn-outline-primary">
-                                                            <i class="fas fa-edit"></i>
-                                                        </a>
-                                                        <a href="@Url.Action("Applicants", "Job", new { id = job.Id, area = "Employer" })" 
-                                                           class="btn btn-sm btn-outline-info">
-                                                            <i class="fas fa-users"></i>
-                                                        </a>
-                                                        <button type="button" class="btn btn-sm btn-outline-danger" 
-                                                                data-bs-toggle="modal" data-bs-target="#deleteModal" 
-                                                                data-job-id="@job.Id" data-job-title="@job.Title">
-                                                            <i class="fas fa-trash"></i>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                }
-                else
-                {
-                        <div class="text-center py-5">
-                            <i class="fas fa-briefcase fs-1 text-muted mb-3"></i>
-                            <h4>You haven't posted any jobs yet</h4>
-                            <p class="text-muted">Get started by posting your first job vacancy!</p>
-                            <a href="@Url.Action("Create", "Job", new { area = "Employer" })" class="btn btn-primary mt-3">
-                                <i class="fas fa-plus me-2"></i> Post a Job
-                            </a>
-                        </div>
-                }
-            </div>
+            @await Html.PartialAsync("../Shared/_JobsListPartial", Model)
         </div>
     </div>
 </div>
@@ -201,7 +99,6 @@
 </div>
 
 <style>
-    
     .employers-dashboard {
         display: flex;
         gap: 30px;
@@ -302,34 +199,87 @@
     }
 
     /* Responsive */
-    @@media (max-width: 992px) {
-        .employers-dashboard {
-            flex-direction: column;
-        }
+    @@media(max - width: 992px) {
+            .employers-dashboard {
+                flex-direction: column;
+            }
 
-        .sidebar {
-            width: 100%;
-            margin-bottom: 30px;
+            .sidebar {
+                width: 100%;
+                margin-bottom: 30px;
+            }
         }
-    }
-</style>
+    </style>
 
-@section Scripts {
-        <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    @section Scripts {
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                // Set up delete modal
-                var deleteModal = document.getElementById('deleteModal');
-                if (deleteModal) {
-                    deleteModal.addEventListener('show.bs.modal', function(event) {
-                        var button = event.relatedTarget;
-                        var jobId = button.getAttribute('data-job-id');
-                        var jobTitle = button.getAttribute('data-job-title');
-                    
-                        document.getElementById('jobIdToDelete').value = jobId;
-                        document.getElementById('jobTitleToDelete').textContent = jobTitle;
-                    });
+            document.addEventListener('DOMContentLoaded', function () {
+                // Hiển thị toast message khi có tham số toastMessage từ controller
+                const urlParams = new URLSearchParams(window.location.search);
+                const toastMessage = urlParams.get('toastMessage');
+                if (toastMessage && window.toast) {
+                    window.toast.showToast('Success', toastMessage, 'success');
+
+                    // Xóa tham số toastMessage khỏi URL để tránh hiển thị lại khi refresh
+                    const cleanUrl = window.location.pathname +
+                        (urlParams.toString() ? '?' + urlParams.toString().replace(/toastMessage=[^&]*(&|$)/, '') : '');
+                    window.history.replaceState({}, document.title, cleanUrl.replace(/\?$/, ''));
                 }
+
+                // Load jobs data via AJAX for dynamic updating
+                async function loadJobsData(page = 1, pageSize = 10) {
+                    try {
+                        const response = await fetch(`/Employer/Job/GetJobs?page=${page}&pageSize=${pageSize}`, {
+                            headers: {
+                                'X-Requested-With': 'XMLHttpRequest',
+                                'Accept': 'application/json'
+                            }
+                        });
+
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+
+                        const contentType = response.headers.get("content-type");
+                        if (!contentType || !contentType.includes("application/json")) {
+                            throw new TypeError("Response was not JSON");
+                        }
+
+                        const result = await response.json();
+
+                        if (result && result.success) {
+                            // Reload the page to apply the changes
+                            window.location.href = window.location.pathname + '?page=' + page;
+                        } else {
+                            if (window.toast) {
+                                window.toast.showToast('Error', result?.message || 'Failed to load jobs', 'error');
+                            } else {
+                                alert(result?.message || 'Failed to load jobs');
+                            }
+                        }
+                    } catch (error) {
+                        console.error('Failed to load jobs data:', error);
+                        if (window.toast) {
+                            window.toast.showToast('Error', 'Failed to load jobs data. Please try again.', 'error');
+                        } else {
+                            alert('Failed to load jobs data. Please try again.');
+                        }
+                    }
+                }
+
+                // Add click handlers to pagination links
+                const paginationLinks = document.querySelectorAll('#jobs-pagination .page-link');
+                paginationLinks.forEach(link => {
+                    link.addEventListener('click', function (e) {
+                        if (!this.getAttribute('href').startsWith('javascript:')) {
+                            e.preventDefault();
+                            const page = parseInt(this.getAttribute('data-page'));
+                            if (!isNaN(page)) {
+                                loadJobsData(page);
+                            }
+                        }
+                    });
+                });
             });
         </script>
-}
+    }

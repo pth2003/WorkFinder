@@ -153,8 +153,16 @@
       "PackagePath": "staticwebassets/js/employer-dashboard.js"
     },
     {
+      "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/js/loading-handler.js",
+      "PackagePath": "staticwebassets/js/loading-handler.js"
+    },
+    {
       "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/js/site.js",
       "PackagePath": "staticwebassets/js/site.js"
+    },
+    {
+      "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/js/toast.js",
+      "PackagePath": "staticwebassets/js/toast.js"
     },
     {
       "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/js/utils.js",
@@ -403,6 +411,10 @@
     {
       "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/site.webmanifest",
       "PackagePath": "staticwebassets/site.webmanifest"
+    },
+    {
+      "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/resumes/a2f4bfd6-c85c-4a9c-b35e-c1aeb19b174d_Hieu-Phan-Trung.pdf",
+      "PackagePath": "staticwebassets/uploads/resumes/a2f4bfd6-c85c-4a9c-b35e-c1aeb19b174d_Hieu-Phan-Trung.pdf"
     },
     {
       "Id": "obj/Debug/net9.0/staticwebassets/msbuild.WorkFinder.Web.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",

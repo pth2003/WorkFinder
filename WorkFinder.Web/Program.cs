@@ -102,6 +102,7 @@ else
     app.UseDeveloperExceptionPage();
 }
 
+// Cấu hình xử lý lỗi status code (404, 500, etc.)
 app.UseStatusCodePagesWithReExecute("/Error/{0}");
 
 app.UseHttpsRedirection();
@@ -126,10 +127,14 @@ app.MapControllerRoute(
     name: "auth",
     pattern: "Auth/{action=Login}",
     defaults: new { area = "Auth", controller = "Auth" });
-// Giữ lại các route hiện có
+
+// Route cho Employer area
 app.MapControllerRoute(
-    name: "areas",
-    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+    name: "employer",
+    pattern: "Employer/{controller=Home}/{action=Index}/{id?}",
+    defaults: new { area = "Employer" });
+
+// Route mặc định cho JobSeeker (không có prefix)
 app.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}")

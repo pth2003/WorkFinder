@@ -14,6 +14,18 @@ namespace WorkFinder.Web.Middleware
 
         public async Task InvokeAsync(HttpContext context, UserManager<ApplicationUser> userManager)
         {
+            // Bỏ qua middleware này cho trường hợp các route error 
+            if (context.Request.Path.StartsWithSegments("/Error") ||
+                context.Request.Path.StartsWithSegments("/Auth/Error") ||
+                context.Request.Path.StartsWithSegments("/Employer/Error") ||
+                context.Request.Path.StartsWithSegments("/Employer/NotFound") ||
+                context.Request.Path.StartsWithSegments("/Auth/NotFound") ||
+                context.Request.Path.StartsWithSegments("/NotFound"))
+            {
+                await _next(context);
+                return;
+            }
+
             if (context.User.Identity.IsAuthenticated)
             {
                 var user = await userManager.GetUserAsync(context.User);
@@ -25,11 +37,11 @@ namespace WorkFinder.Web.Middleware
                 // Nếu user có role là employer
                 if (roles.Contains("Employer"))
                 {
-                    // Nếu đang cố truy cập vào trang của jobseeker
-                    if (path.StartsWith("/jobseeker") || path == "/" || path == "/home" || path == "/home/index")
+                    // Nếu đang cố truy cập vào trang không có prefix (trang dành cho JobSeeker)
+                    if (!path.StartsWith("/employer") && !path.StartsWith("/auth"))
                     {
                         // Chuyển hướng về trang home của employer
-                        context.Response.Redirect("/employer/home");
+                        context.Response.Redirect("/employer");
                         return;
                     }
                 }

@@ -6,16 +6,19 @@ using Microsoft.EntityFrameworkCore;
 using WorkFinder.Web.Data;
 using WorkFinder.Web.Models;
 using WorkFinder.Web.Models.Enums;
+using Microsoft.Extensions.Logging;
 
 namespace WorkFinder.Web.Repositories
 {
     public class JobRepository : Repository<Job>, IJobRepository
     {
         private readonly WorkFinderContext _context;
+        private readonly ILogger<JobRepository> _logger;
 
-        public JobRepository(WorkFinderContext context) : base(context)
+        public JobRepository(WorkFinderContext context, ILogger<JobRepository> logger) : base(context)
         {
             _context = context;
+            _logger = logger;
         }
 
         public async Task<IEnumerable<Job>> GetActiveJobsAsync()
@@ -296,17 +299,76 @@ namespace WorkFinder.Web.Repositories
                 .CountAsync(j => j.CompanyId == companyId && j.IsActive && j.ExpiryDate > DateTime.UtcNow);
         }
 
+        public async Task<List<Job>> GetJobsByCompanyIdAsync(int companyId)
+        {
+            return await _context.Jobs
+                .Where(j => j.CompanyId == companyId)
+                .OrderByDescending(j => j.CreatedAt)
+                .ToListAsync();
+        }
+
         public async Task<IEnumerable<Job>> GetJobsByCompanyIdAsync(int companyId, int limit)
         {
             return await _context.Jobs
-                .Where(j => j.CompanyId == companyId && j.IsActive && j.ExpiryDate > DateTime.UtcNow)
+                .Where(j => j.CompanyId == companyId)
                 .OrderByDescending(j => j.CreatedAt)
                 .Take(limit)
-                .Include(j => j.Categories)
-                    .ThenInclude(jc => jc.Category)
-                .Include(j => j.Company)
-                .Include(j => j.Applications)
                 .ToListAsync();
+        }
+
+        public async Task<(List<Job> Jobs, int TotalCount)> GetAllJobsByCompanyIdAsync(int companyId, int page = 1, int pageSize = 10)
+        {
+            try
+            {
+                var query = _context.Jobs
+                    .AsNoTracking()
+                    .Where(j => j.CompanyId == companyId)
+                    .OrderByDescending(j => j.CreatedAt);
+
+                var totalCount = await query.CountAsync();
+
+                var jobs = await query
+                    .Skip((page - 1) * pageSize)
+                    .Take(pageSize)
+                    .Select(j => new Job
+                    {
+                        Id = j.Id,
+                        Title = j.Title,
+                        JobType = j.JobType,
+                        Description = j.Description,
+                        Requirements = j.Requirements,
+                        Benefits = j.Benefits,
+                        Location = j.Location,
+                        SalaryMin = j.SalaryMin,
+                        SalaryMax = j.SalaryMax,
+                        CreatedAt = j.CreatedAt,
+                        ExpiryDate = j.ExpiryDate,
+                        IsActive = j.IsActive,
+                        Metadata = j.Metadata,
+                        CompanyId = j.CompanyId,
+                        Applications = j.Applications.Select(a => new JobApplication
+                        {
+                            Id = a.Id,
+                            Status = a.Status,
+                            AppliedDate = a.AppliedDate,
+                            ApplicantId = a.ApplicantId,
+                            Applicant = new ApplicationUser
+                            {
+                                Id = a.Applicant.Id,
+                                FirstName = a.Applicant.FirstName,
+                                LastName = a.Applicant.LastName
+                            }
+                        }).ToList()
+                    })
+                    .ToListAsync();
+
+                return (jobs, totalCount);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error getting jobs for company {CompanyId}", companyId);
+                throw;
+            }
         }
 
         // Get company by ID
@@ -398,16 +460,72 @@ namespace WorkFinder.Web.Repositories
                 .CountAsync(j => j.CompanyId == companyId);
         }
 
-        // public async Task<int> GetActiveJobCountByCompanyIdAsync(int companyId)
-        // {
-        //     return await _context.Jobs
-        //         .CountAsync(j => j.CompanyId == companyId && j.IsActive);
-        // }
-
         public async Task<int> GetTotalApplicationsByCompanyIdAsync(int companyId)
         {
             return await _context.JobApplications
                 .CountAsync(ja => ja.Job.CompanyId == companyId);
         }
+
+        public async Task<Job> GetJobByApplicationIdAsync(int applicationId)
+        {
+            return await _context.Jobs
+                .AsNoTracking()
+                .Include(j => j.Applications)
+                    .ThenInclude(a => a.Applicant)
+                .FirstOrDefaultAsync(j => j.Applications.Any(a => a.Id == applicationId));
+        }
+
+        public async Task DeleteApplicationAsync(int applicationId)
+        {
+            var application = await _context.Set<JobApplication>().FindAsync(applicationId);
+            if (application != null)
+            {
+                _context.Set<JobApplication>().Remove(application);
+            }
+        }
+
+        public async Task UpdateApplicationStatusAsync(int applicationId, int status)
+        {
+            var application = await _context.Set<JobApplication>().FindAsync(applicationId);
+            if (application != null)
+            {
+                // Không gán trực tiếp cho Status vì nó là enum
+                // Thay vào đó, lưu thông tin này vào database theo cách khác
+                // Ví dụ: có thể lưu vào một trường metadata
+
+                // Đánh dấu là đã cập nhật
+                application.UpdatedAt = DateTime.UtcNow;
+
+                _context.Update(application);
+            }
+        }
+
+        public async Task<Job> GetJobWithApplicationsAsync(int jobId)
+        {
+            try
+            {
+                var job = await _context.Jobs
+                    .Include(j => j.Applications)
+                        .ThenInclude(a => a.Applicant)
+                    .FirstOrDefaultAsync(j => j.Id == jobId);
+
+                if (job != null)
+                {
+                    _logger.LogInformation($"Found job {job.Id} with {job.Applications?.Count ?? 0} applications");
+                }
+                else
+                {
+                    _logger.LogWarning($"Job with ID {jobId} not found");
+                }
+
+                return job;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error retrieving job with applications for job ID {jobId}");
+                throw;
+            }
+        }
+
     }
 }

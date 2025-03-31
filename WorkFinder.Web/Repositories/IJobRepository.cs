@@ -10,6 +10,12 @@ namespace WorkFinder.Web.Repositories
 {
     public interface IJobRepository : IRepository<Job>
     {
+        Task<Job> GetByIdAsync(int id);
+        // Task<List<Job>> GetActiveJobsAsync();
+        Task<List<Job>> GetJobsByCompanyIdAsync(int companyId);
+        Task<(List<Job> Jobs, int TotalCount)> GetAllJobsByCompanyIdAsync(int companyId, int page = 1, int pageSize = 10);
+        Task<Company> GetCompanyByIdAsync(int companyId);
+
         // Các phương thức bổ sung đặc thù cho Job
         Task<IEnumerable<Job>> GetActiveJobsAsync();
         /// <summary>
@@ -118,11 +124,6 @@ namespace WorkFinder.Web.Repositories
         // Phương thức mới để lấy số lượng công việc đang hoạt động của một công ty
         Task<int> GetActiveJobCountByCompanyIdAsync(int companyId);
 
-        // Phương thức mới để lấy công việc của một công ty
-        Task<IEnumerable<Job>> GetJobsByCompanyIdAsync(int companyId, int limit);
-
-        // Phương thức mới để lấy thông tin công ty theo ID
-        Task<Company> GetCompanyByIdAsync(int companyId);
         // Phương thức mới để lấy công việc gần đây của một công ty 
         Task<IEnumerable<Job>> GetRecentJobsByCompanyIdAsync(int companyId, int count);
         // Phương thức mới để lấy tổng số công việc của một công ty
@@ -130,7 +131,13 @@ namespace WorkFinder.Web.Repositories
         // Phương thức mới để lấy tổng số ứng viên của một công ty
         Task<int> GetTotalApplicationsByCompanyIdAsync(int companyId);
 
+        Task<IEnumerable<Job>> GetJobsByCompanyIdAsync(int companyId, int limit);
 
+        Task<Job> GetJobByApplicationIdAsync(int applicationId);
+        Task DeleteApplicationAsync(int applicationId);
+        Task UpdateApplicationStatusAsync(int applicationId, int status);
 
+        // Phương thức mới để lấy job cùng với tất cả applications của nó
+        Task<Job> GetJobWithApplicationsAsync(int jobId);
     }
 }

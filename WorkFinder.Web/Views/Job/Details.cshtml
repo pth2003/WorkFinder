@@ -19,6 +19,16 @@
     </div>
 }
 
+@if (TempData["SuccessMessage"] != null)
+{
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.toast) {
+                window.toast.showToast('Success', '@TempData["SuccessMessage"]', 'success');
+            }
+        });
+    </script>
+}
 
 <div class="job-detail-page">
     <!-- Header with breadcrumb -->

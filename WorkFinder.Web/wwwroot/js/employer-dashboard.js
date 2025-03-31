@@ -51,9 +51,7 @@ function setupLoadingProtection() {
 
 // Xử lý tác vụ không cần refresh trang
 async function handleAjaxAction(url, method = 'GET', data = null) {
-    showPageLoading();
-    
-    try {
+    return window.loadingHandler.withLoading(async () => {
         const options = {
             method: method,
             headers: {
@@ -81,13 +79,7 @@ async function handleAjaxAction(url, method = 'GET', data = null) {
         }
         
         return jsonResult;
-    } catch (error) {
-        console.error('AJAX error:', error);
-        showToast('Error', 'An error occurred while processing your request.', 'error');
-        return null;
-    } finally {
-        hidePageLoading();
-    }
+    });
 }
 
 // Hiển thị thông báo toast
@@ -134,9 +126,7 @@ function showToast(title, message, type = 'success') {
 
 // Load dữ liệu Dashboard Stats và Recent Jobs cùng lúc
 async function loadDashboardData() {
-    showPageLoading();
-    console.log("Loading dashboard data...");
-    
+
     try {
         // Tạo promises cho các request cần thực hiện
         const promises = [
@@ -146,21 +136,15 @@ async function loadDashboardData() {
             fetch('/Employer/Home/GetRecentJobs', {
                 headers: { 'X-Requested-With': 'XMLHttpRequest' }
             })
-            // Bỏ endpoint GetRecentApplications vì chúng ta không sử dụng
-        ];
-        
-        console.log("Fetching data from multiple endpoints...");
-        
+        ]
         // Thực hiện tất cả các request cùng lúc
         const responses = await Promise.all(promises);
-        console.log("All requests completed, processing results...");
-        
         // Xử lý kết quả cho dashboard stats
         if (responses[0].ok) {
             try {
                 const statsResult = await responses[0].json();
-                console.log("Stats data received:", statsResult);
                 updateDashboardStats(statsResult);
+                window.loadingHandler.hidePageLoading();
             } catch (error) {
                 console.error('Failed to parse dashboard stats JSON:', error);
             }
@@ -172,7 +156,7 @@ async function loadDashboardData() {
         if (responses[1].ok) {
             try {
                 const jobsResult = await responses[1].json();
-                console.log("Jobs data received:", jobsResult);
+                window.loadingHandler.hidePageLoading();
                 updateRecentJobs(jobsResult);
             } catch (error) {
                 console.error('Failed to parse recent jobs JSON:', error);
@@ -183,12 +167,12 @@ async function loadDashboardData() {
     } catch (error) {
         console.error('Failed to load dashboard data:', error);
         showToast('Error', 'Failed to load dashboard data. Please try again.', 'error');
-    } finally {
-        // Đảm bảo luôn ẩn loading dù có lỗi
-        console.log("Hiding loading overlay...");
-        hidePageLoading();
     }
 }
+
+
+
+
 
 // Cập nhật phần Dashboard Stats từ dữ liệu trả về
 function updateDashboardStats(result) {
@@ -220,29 +204,29 @@ function updateDashboardStats(result) {
         const totalApplications = result.data.totalApplications || 0;
         
         statsEl.innerHTML = `
-            <div class="col-md-6">
-                <div class="stats-card">
-                    <div class="stats-content">
+        <div class="col-md-6">
+            <div class="stats-card">
+                <div class="stats-content">
                         <h2>${activeJobs}</h2>
-                        <p>Open Jobs</p>
-                    </div>
-                    <div class="stats-icon">
-                        <i class="fas fa-briefcase"></i>
-                    </div>
+                    <p>Open Jobs</p>
+                </div>
+                <div class="stats-icon">
+                    <i class="fas fa-briefcase"></i>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="stats-card">
-                    <div class="stats-content">
+        </div>
+        <div class="col-md-6">
+            <div class="stats-card">
+                <div class="stats-content">
                         <h2>${totalApplications}</h2>
                         <p>Saved Candidates</p>
-                    </div>
-                    <div class="stats-icon">
-                        <i class="fas fa-user"></i>
-                    </div>
+                </div>
+                <div class="stats-icon">
+                    <i class="fas fa-user"></i>
                 </div>
             </div>
-        `;
+        </div>
+    `;
     }
 }
 
@@ -259,18 +243,18 @@ function updateRecentJobs(result) {
     
     if (result.data && result.data.length > 0) {
         let tableHtml = `
-            <table class="table jobs-table">
-                <thead>
-                    <tr>
+        <table class="table jobs-table">
+            <thead>
+                <tr>
                         <th>JOBS</th>
                         <th>STATUS</th>
                         <th>APPLICATIONS</th>
                         <th>ACTIONS</th>
-                    </tr>
-                </thead>
-                <tbody>
-        `;
-        
+                </tr>
+            </thead>
+            <tbody>
+    `;
+    
         result.data.forEach(job => {
             const title = job.title || 'Untitled';
             const jobType = job.jobType || 'Unknown';
@@ -298,13 +282,13 @@ function updateRecentJobs(result) {
                         <div class="applications-count">
                             <i class="fas fa-users me-2"></i>
                             <span>${applicationCount} Applications</span>
-                        </div>
-                    </td>
-                    <td>
+                    </div>
+                </td>
+                <td>
                         <div class="dropdown">
                             <button class="btn btn-view-applications" id="dropdownMenuButton${id}"
                                 data-bs-toggle="dropdown" aria-expanded="false">
-                                View Applications
+                        View Applications
                             </button>
                             <div class="dropdown-menu dropdown-menu-end"
                                 aria-labelledby="dropdownMenuButton${id}">
@@ -319,16 +303,16 @@ function updateRecentJobs(result) {
                                 </a>
                             </div>
                         </div>
-                    </td>
-                </tr>
-            `;
-        });
-        
-        tableHtml += `
-                </tbody>
-            </table>
+                </td>
+            </tr>
         `;
-        
+    });
+    
+        tableHtml += `
+            </tbody>
+        </table>
+    `;
+    
         jobsEl.innerHTML = tableHtml;
     } else {
         jobsEl.innerHTML = `
@@ -344,20 +328,13 @@ function updateRecentJobs(result) {
 
 // Document ready
 document.addEventListener('DOMContentLoaded', function() {
-    console.log("DOM content loaded, initializing dashboard...");
-    
+  
     // Thiết lập bảo vệ chống treo loading
-    setupLoadingProtection();
-    
-    // Kiểm tra các phần tử DOM quan trọng
-    console.log("Loading overlay element:", document.getElementById('page-loading-overlay'));
-    console.log("Dashboard greeting element:", document.getElementById('dashboard-greeting'));
-    console.log("Stats section element:", document.getElementById('stats-section'));
-    console.log("Recent jobs section element:", document.getElementById('recent-jobs-section'));
+    window.loadingHandler.setupLoadingProtection();
     
     // Tạo toast container nếu chưa có
     if (!document.getElementById('toast-container')) {
-        console.log("Creating toast container...");
+        
         const toastContainer = document.createElement('div');
         toastContainer.id = 'toast-container';
         toastContainer.className = 'toast-container position-fixed bottom-0 end-0 p-3';
@@ -366,13 +343,10 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Kiểm tra nếu đang ở trang dashboard
     if (document.querySelector('.employers-dashboard')) {
-        console.log("Employer dashboard detected, loading data...");
+        
         try {
             // Tải dữ liệu dashboard lần đầu
             loadDashboardData();
-            
-            // Thiết lập cập nhật định kỳ
-            console.log("Setting up refresh interval...");
             setInterval(loadDashboardData, 300000); // 5 phút
         } catch (error) {
             console.error('Dashboard initialization error:', error);

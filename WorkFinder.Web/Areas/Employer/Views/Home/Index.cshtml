@@ -6,6 +6,7 @@
 
 <div class="container">
     <div class="employers-dashboard mt-4">
+        <!-- Sidebar -->
         <div class="sidebar">
             <div class="sidebar-header mb-4">
                 <h5>EMPLOYERS DASHBOARD</h5>
@@ -30,7 +31,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="d-flex align-items-center">
+                    <a href="@Url.Action("Index", "Job", new { area = "Employer" })" class="d-flex align-items-center">
                         <i class="fas fa-briefcase me-2"></i>
                         <span>My Jobs</span>
                     </a>
@@ -68,17 +69,19 @@
         </div>
 
         <div class="main-content">
-            <div id="dashboard-greeting" class="dashboard-greeting mb-4">
-                <h3>Hello, @Model.CompanyName</h3>
-                <p class="text-muted">Here is your daily activities and applications</p>
+            <div class="row mb-4">
+                <div class="col">
+                    <h2 class="page-title mb-0">@ViewData["Title"]</h2>
+                    <p class="text-muted">Welcome to your employer dashboard</p>
+                </div>
             </div>
 
-            <div id="stats-section" class="stats-cards row mb-4">
-                <!-- Đặt nội dung mặc định để hiển thị trong lúc chờ AJAX -->
+            <!-- Dashboard Stats Section -->
+            <div class="row" id="stats-section">
                 <div class="col-md-6">
                     <div class="stats-card">
                         <div class="stats-content">
-                            <h2>0</h2>
+                            <h2>@Model.OpenJobs</h2>
                             <p>Open Jobs</p>
                         </div>
                         <div class="stats-icon">
@@ -89,7 +92,7 @@
                 <div class="col-md-6">
                     <div class="stats-card">
                         <div class="stats-content">
-                            <h2>0</h2>
+                            <h2>@Model.SavedCandidates</h2>
                             <p>Saved Candidates</p>
                         </div>
                         <div class="stats-icon">
@@ -99,17 +102,44 @@
                 </div>
             </div>
 
-            <div class="recent-jobs-section">
-                <div class="section-header d-flex justify-content-between align-items-center mb-3">
-                    <h5>Recently Posted Jobs</h5>
-                    <a href="@Url.Action("Index", "Job", new { area = "Employer" })" class="view-all">View all <i
-                            class="fas fa-arrow-right"></i></a>
-                </div>
-
-                <div id="recent-jobs-section" class="jobs-table-container">
-                    <!-- Đặt nội dung mặc định để hiển thị trong lúc chờ AJAX -->
-                    <div class="p-4 text-center">
-                        <p>Loading job data...</p>
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Recent Jobs</h5>
+                            <a href="@Url.Action("Index", "Job", new { area = "Employer" })"
+                                class="btn btn-sm btn-outline-primary page-loader">
+                                <i class="fas fa-list me-1"></i> All Jobs
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <div id="recent-jobs-section">
+                                @if (Model.RecentJobs != null && Model.RecentJobs.Any())
+                                {
+                                    ViewBag.IsHomePage = true;
+                                    @await Html.PartialAsync("_JobsListPartial", Model.RecentJobs.Select(rj => new
+                                    WorkFinder.Web.Models.Job
+                                                                {
+                                        Id = rj.Id,
+                                                                Title = rj.Title,
+                                                                JobType = Enum.Parse<WorkFinder.Web.Models.Enums.JobType>(rj.JobType),
+                                                                IsActive = rj.IsActive,
+                                                                ExpiryDate = DateTime.Parse(rj.ExpirationDate),
+                                                                Applications = rj.Applications
+                                                                }).ToList())
+                                                                }
+                                else
+                                {
+                                    <div class="p-4 text-center">
+                                        <p>You haven't posted any jobs yet.</p>
+                                        <a href="@Url.Action("Create", "Job", new { area = "Employer" })"
+                                            class="btn btn-primary mt-2">
+                                            <i class="fas fa-plus-circle me-2"></i> Post a Job
+                                        </a>
+                                    </div>
+                                }
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -329,11 +359,3 @@
         background-color: #e9ecef;
     }
 </style>
-
-@section Scripts {
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <script src="~/js/employer-dashboard.js"></script>
-    <script>
-        console.log("Dashboard page loaded");
-    </script>
-}

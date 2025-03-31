@@ -32,12 +32,10 @@ public class AuthController : Controller
         var result = await _authService.RegisterAsync(model);
         if (result.Succeeded)
         {
-
             if (model.Role == UserRoles.Employer)
             {
                 return RedirectToAction("SetupBasic", "Company", new { area = "Employer" });
             }
-            // return RedirectToAction("Index", "Home");
 
             // Automatically log in the user after registration
             var loginResult = await _authService.LoginAsync(new LoginViewModel
@@ -48,6 +46,11 @@ public class AuthController : Controller
 
             if (loginResult.succeeded)
             {
+                // Chuyển hướng dựa vào role
+                if (model.Role == UserRoles.Employer)
+                {
+                    return LocalRedirect(returnUrl ?? "/Employer");
+                }
                 return LocalRedirect(returnUrl ?? "/");
             }
             else
@@ -85,7 +88,11 @@ public class AuthController : Controller
         var (succeeded, errors) = await _authService.LoginAsync(model);
         if (succeeded)
         {
-
+            // Kiểm tra role của user và chuyển hướng tương ứng
+            if (User.IsInRole(UserRoles.Employer))
+            {
+                return LocalRedirect(returnUrl ?? "/Employer");
+            }
             return LocalRedirect(returnUrl ?? "/");
         }
         foreach (var error in errors)

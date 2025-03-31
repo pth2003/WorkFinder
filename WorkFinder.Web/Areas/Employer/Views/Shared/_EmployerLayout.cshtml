@@ -103,7 +103,7 @@
             <p class="mt-2 fw-bold text-primary">Loading...</p>
         </div>
     </div>
-
+    <!-- Header -->
     <div>
         @await Html.PartialAsync("~/Views/Shared/Partials/Common/_Header.cshtml");
     </div>
@@ -127,10 +127,52 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/loading-handler.js" asp-append-version="true"></script>
+    <script src="~/js/toast.js" asp-append-version="true"></script>
+    @* <script src="~/js/employer-dashboard.js" asp-append-version="true"></script> *@
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+
     <script>
-        console.log('Layout loaded, page loading overlay:', document.getElementById('page-loading-overlay'));
+        // Xử lý bổ sung cho lỗi 404 và chuyển hướng
+        (function () {
+            // Đặt timeout cho mọi chuyển trang để tránh treo loading
+            var navigationTimeout;
+
+            // Lắng nghe sự kiện click trên liên kết
+            document.addEventListener('click', function (e) {
+                var link = e.target.closest('a');
+                if (!link) return;
+
+                // Bỏ qua các link đặc biệt
+                if (link.hasAttribute('data-no-loading') ||
+                    link.getAttribute('target') === '_blank' ||
+                    link.href.startsWith('javascript:') ||
+                    link.href.includes('#') ||
+                    link.href.includes('mailto:') ||
+                    link.href.includes('tel:')) {
+                    return;
+                }
+
+                // Thiết lập timeout để xử lý trường hợp route không tồn tại
+                if (navigationTimeout) clearTimeout(navigationTimeout);
+                navigationTimeout = setTimeout(function () {
+                    // Nếu sau 3 giây trang vẫn chưa chuyển hướng, điều hướng về trang 404
+                    if (window.loadingHandler) {
+                        window.loadingHandler.hidePageLoading();
+                    }
+                    window.location.href = '@Url.Action("NotFound", "Error", new { area = "Employer" })';
+                }, 3000);
+            });
+
+            // Xóa timeout khi trang đã được tải
+            window.addEventListener('load', function () {
+                if (navigationTimeout) {
+                    clearTimeout(navigationTimeout);
+                }
+            });
+        })();
     </script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 
