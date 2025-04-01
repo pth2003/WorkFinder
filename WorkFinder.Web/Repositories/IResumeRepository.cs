@@ -10,5 +10,6 @@ namespace WorkFinder.Web.Repositories
         Task<Resume> GetResumeByUserIdAsync(int userId);
         Task AddResumeAsync(Resume resume);
         Task<bool> UserHasResumeAsync(int userId);
+        Task<Dictionary<int, Resume>> GetResumesByUserIdsAsync(IEnumerable<int> userIds);
     }
 }

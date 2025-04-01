@@ -23,7 +23,7 @@
     }
 
     <div class="job-list-card">
-        <div class="job-header">
+        <div class="job-header d-none d-lg-flex">
             <div class="job-header-cell jobs-header">JOBS</div>
             <div class="job-header-cell status-header">STATUS</div>
             <div class="job-header-cell applications-header">APPLICATIONS</div>
@@ -214,6 +214,7 @@
     /* Job item styles */
     .job-item {
         display: flex;
+        flex-wrap: wrap;
         border-bottom: 1px solid #eee;
         padding: 20px;
         transition: all 0.3s ease;
@@ -250,6 +251,7 @@
     /* Job info cell */
     .job-info {
         width: 40%;
+        min-width: 280px;
     }
     
     .job-title {
@@ -259,26 +261,26 @@
     }
     
     .job-title a {
-        color: #0d6efd;
+        color: #333;
         text-decoration: none;
+        transition: all 0.2s;
     }
     
     .job-title a:hover {
-        text-decoration: underline;
+        color: #0d6efd;
     }
     
     .job-meta {
+        color: #777;
         font-size: 13px;
-        color: #6c757d;
     }
     
     .job-type {
         color: #0d6efd;
-        font-weight: 500;
     }
     
-    .separator {
-        margin: 0 5px;
+    .time-remaining {
+        color: #666;
     }
     
     /* Status cell */
@@ -294,16 +296,17 @@
         border-radius: 30px;
         font-size: 13px;
         font-weight: 500;
+        text-align: center;
     }
     
     .status-badge.active {
-        background-color: #28a745;
-        color: white;
+        background-color: rgba(40, 167, 69, 0.1);
+        color: #28a745;
     }
     
     .status-badge.expired {
-        background-color: #6c757d;
-        color: white;
+        background-color: rgba(108, 117, 125, 0.1);
+        color: #6c757d;
     }
     
     /* Applications cell */
@@ -314,39 +317,52 @@
     }
     
     .applications-badge {
-        display: inline-block;
-        padding: 6px 12px;
-        border-radius: 30px;
-        font-size: 13px;
-        font-weight: 500;
-        background-color: #17a2b8;
-        color: white;
+        font-size: 14px;
+        color: #555;
     }
     
     /* Actions cell */
     .actions-cell {
         width: 25%;
         display: flex;
-        justify-content: flex-end;
         align-items: center;
-        gap: 10px;
+        justify-content: flex-end;
     }
     
     .view-applications-btn {
-        background-color: #f8f9fa;
         border: 1px solid #dee2e6;
-        color: #212529;
-        padding: 8px 15px;
-        font-size: 14px;
-        border-radius: 4px;
-        font-weight: normal;
-        text-decoration: none;
+        color: #495057;
+        font-size: 13px;
+        padding: 8px 16px;
+        border-radius: 6px;
+        background-color: #f8f9fa;
+        margin-right: 10px;
+        transition: all 0.2s;
     }
     
     .view-applications-btn:hover {
         background-color: #e9ecef;
+        color: #212529;
+    }
+    
+    .view-detail-btn {
+        background-color: #e6f0ff;
+        border: 1px solid #b3d4ff;
         color: #0d6efd;
-        text-decoration: none;
+        width: 36px;
+        height: 36px;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 6px;
+        margin-right: 10px;
+        transition: all 0.2s;
+    }
+    
+    .view-detail-btn:hover {
+        background-color: #d4e5ff;
+        color: #0a58ca;
     }
     
     .more-actions-btn {
@@ -359,54 +375,11 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 4px;
+        border-radius: 6px;
     }
     
     .more-actions-btn:hover {
         background-color: #e9ecef;
-    }
-    
-    /* Dropdown menu */
-    .action-dropdown {
-        position: relative;
-        z-index: 1050;
-    }
-    
-    .action-dropdown .dropdown-menu {
-        min-width: 200px;
-        padding: 8px 0;
-        margin-top: 8px;
-        border: none;
-        border-radius: 8px;
-        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-        right: 0;
-        left: auto;
-        z-index: 1050;
-        position: absolute;
-    }
-    
-    .dropdown-item {
-        padding: 10px 15px;
-        font-size: 14px;
-        display: flex;
-        align-items: center;
-    }
-    
-    .dropdown-item i {
-        margin-right: 10px;
-        width: 18px;
-    }
-    
-    .dropdown-item:hover {
-        background-color: #f8f9fa;
-    }
-    
-    .dropdown-item.text-danger {
-        color: #dc3545;
-    }
-    
-    .dropdown-item.text-danger:hover {
-        background-color: #ffebee;
     }
     
     /* Empty message */
@@ -419,53 +392,117 @@
         text-align: center;
     }
     
-    /* Pagination styles */
-    .pagination-container {
-        margin-top: 20px;
-        margin-bottom: 20px;
+    .empty-jobs-message h4 {
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
     }
     
-    .pagination {
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
+    .empty-jobs-message p {
+        margin-bottom: 0;
     }
-    
-    .pagination .page-link {
-        margin: 0 3px;
-        border-radius: 4px;
-        color: #0d6efd;
-    }
-    
-    .pagination .page-item.active .page-link {
-        background-color: #0d6efd;
-        border-color: #0d6efd;
-    }
-    
+
     /* Responsive styles */
-    @@media (max-width: 991px) {
-        .job-header-cell, .job-cell {
-            padding: 0 5px;
+    @@media(max-width: 1199px) {
+        .job-info {
+            width: 35%;
+    }
+    
+        .status-cell {
+            width: 15%;
+    }
+    
+        .applications-cell {
+            width: 20%;
         }
         
-        .job-item {
-            padding: 15px 10px;
+        .actions-cell {
+            width: 30%;
+    }
+    }
+    
+    @@media(max-width: 991px) {
+        .job-info {
+            width: 40%;
+            min-width: 250px;
+        }
+        
+        .status-cell {
+            width: 20%;
+        }
+        
+        .applications-cell {
+            width: 15%;
+        }
+        
+        .actions-cell {
+            width: 25%;
+        }
+        
+        .view-applications-btn {
+            padding: 6px 12px;
+            font-size: 12px;
         }
     }
     
-    @@media (max-width: 767px) {
-        .job-header, .job-item {
-            flex-direction: column;
+    @@media(max-width: 767px) {
+        .job-item {
+            padding: 15px;
         }
         
-        .job-header-cell, .job-cell {
+        .job-info {
             width: 100%;
             margin-bottom: 10px;
         }
         
+        .status-cell {
+            width: auto;
+            margin-right: 15px;
+        }
+        
+        .applications-cell {
+            width: auto;
+            margin-right: auto;
+        }
+        
         .actions-cell {
+            width: auto;
+            margin-top: 10px;
+            width: 100%;
             justify-content: flex-start;
+        }
+    }
+    
+    @@media(max-width: 575px) {
+        .job-item {
+            padding: 12px;
+        }
+        
+        .job-info {
+            min-width: 0;
+        }
+        
+        .job-title {
+            font-size: 15px;
+        }
+        
+        .job-meta {
+            font-size: 12px;
+        }
+        
+        .status-badge, 
+        .applications-badge {
+            font-size: 12px;
+        }
+        
+        .view-applications-btn {
+            padding: 5px 10px;
+            font-size: 12px;
+        }
+        
+        .more-actions-btn {
+            width: 32px;
+            height: 32px;
         }
     }
 </style>

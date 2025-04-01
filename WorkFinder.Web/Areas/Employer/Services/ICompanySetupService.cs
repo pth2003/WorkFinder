@@ -27,5 +27,8 @@ namespace WorkFinder.Web.Areas.Employer.Services
         bool HasCompletedBasicInfo();
         bool HasCompletedOrganizationInfo();
         bool HasCompletedSocialInfo();
+
+        // Initialize setup service with existing company data for profile editing
+        Task InitializeWithExistingCompanyAsync(Company company);
     }
 }

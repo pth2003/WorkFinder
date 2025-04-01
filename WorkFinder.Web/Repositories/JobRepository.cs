@@ -489,11 +489,7 @@ namespace WorkFinder.Web.Repositories
             var application = await _context.Set<JobApplication>().FindAsync(applicationId);
             if (application != null)
             {
-                // Không gán trực tiếp cho Status vì nó là enum
-                // Thay vào đó, lưu thông tin này vào database theo cách khác
-                // Ví dụ: có thể lưu vào một trường metadata
-
-                // Đánh dấu là đã cập nhật
+                application.Status = (ApplicationStatus)status;
                 application.UpdatedAt = DateTime.UtcNow;
 
                 _context.Update(application);

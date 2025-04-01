@@ -236,7 +236,55 @@ namespace WorkFinder.Web.Areas.Employer.Services
 
         public bool HasCompletedSocialInfo()
         {
-            return GetSessionData<CompanySetupSocialViewModel>(SocialInfoKey) != null;
+            return _httpContextAccessor.HttpContext.Session.TryGetValue(SocialInfoKey, out _);
+        }
+
+        public async Task InitializeWithExistingCompanyAsync(Company company)
+        {
+            var httpContext = _httpContextAccessor.HttpContext;
+
+            // Store basic info in session
+            var basicModel = new CompanySetupBasicViewModel
+            {
+                Name = company.Name,
+                Description = company.Description,
+                LogoPath = company.Logo,
+                BannerPath = company.Banner
+            };
+            SetSessionData(BasicInfoKey, basicModel);
+
+            // Store organization info in session
+            var orgModel = new CompanySetupOrganizationViewModel
+            {
+                CategoryId = company.CategoryId,
+                Industry = company.Industry,
+                EmployeeCount = company.EmployeeCount,
+                FoundedDate = company.FoundedDate,
+                Website = company.Website,
+                Vision = company.Vision
+            };
+            SetSessionData(OrganizationInfoKey, orgModel);
+
+            // Store social info in session
+            var socialModel = new CompanySetupSocialViewModel
+            {
+                SocialLinks = company.SocialLinks?.Select(sl => new SocialLinkViewModel
+                {
+                    Id = sl.Id,
+                    Platform = sl.Platform,
+                    Url = sl.Url
+                }).ToList() ?? new List<SocialLinkViewModel>()
+            };
+            SetSessionData(SocialInfoKey, socialModel);
+
+            // Store contact info in session
+            var contactModel = new CompanySetupContactViewModel
+            {
+                Location = company.Location,
+                Phone = company.Phone,
+                Email = company.Email
+            };
+            SetSessionData(ContactInfoKey, contactModel);
         }
 
         private async Task<string> SaveFileAsync(IFormFile file, string folder)

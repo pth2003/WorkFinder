@@ -293,6 +293,693 @@ namespace WorkFinder.Web.Areas.Employer.Controllers
 
         #endregion
 
+        #region Company Profile
+
+        // GET: Employer/Company/Profile
+        public async Task<IActionResult> Profile()
+        {
+            // Get the current user
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Auth", new { area = "Auth" });
+            }
+
+            // Check if the user has a company
+            var company = await _companyRepository.GetByOwnerIdAsync(user.Id);
+
+            // If no company exists, redirect to the setup flow
+            if (company == null)
+            {
+                return RedirectToAction("SetupBasic");
+            }
+
+            // Create a view model with all company information
+            var basicInfo = new CompanySetupBasicViewModel
+            {
+                Name = company.Name,
+                Description = company.Description,
+                LogoPath = company.Logo,
+                BannerPath = company.Banner
+            };
+
+            var organizationInfo = new CompanySetupOrganizationViewModel
+            {
+                CategoryId = company.CategoryId,
+                Industry = company.Industry,
+                EmployeeCount = company.EmployeeCount,
+                FoundedDate = company.FoundedDate,
+                Website = company.Website,
+                Vision = company.Vision
+            };
+
+            var socialInfo = new CompanySetupSocialViewModel
+            {
+                SocialLinks = company.SocialLinks?.Select(sl => new SocialLinkViewModel
+                {
+                    Id = sl.Id,
+                    Platform = sl.Platform,
+                    Url = sl.Url
+                }).ToList() ?? new List<SocialLinkViewModel>()
+            };
+
+            var contactInfo = new CompanySetupContactViewModel
+            {
+                Location = company.Location,
+                Phone = company.Phone,
+                Email = company.Email
+            };
+
+            // Load categories for dropdown
+            ViewBag.Categories = await _categoryRepository.GetAllAsync();
+
+            // Create a combined view model for the tabbed interface
+            var viewModel = new CompanyProfileViewModel
+            {
+                CompanyId = company.Id,
+                BasicInfo = basicInfo,
+                OrganizationInfo = organizationInfo,
+                SocialInfo = socialInfo,
+                ContactInfo = contactInfo,
+                ActiveTab = "basic" // Default active tab
+            };
+
+            return View(viewModel);
+        }
+
+        // POST: Employer/Company/UpdateBasicInfo
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdateBasicInfo(CompanySetupBasicViewModel model)
+        {
+            // Loại bỏ validation cho các trường liên quan đến file upload
+            ModelState.Remove("Logo");
+            ModelState.Remove("Banner");
+            ModelState.Remove("LogoPath");
+            ModelState.Remove("BannerPath");
+
+            // Return validation errors if any
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
+                if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                {
+                    return Json(new { success = false, message = "Validation failed", errors = errors });
+                }
+                return RedirectToAction("Profile", new { tab = "basic", error = "Invalid input data" });
+            }
+
+            try
+            {
+                // Get the current user's company
+                var user = await _userManager.GetUserAsync(User);
+                var company = await _companyRepository.GetByOwnerIdAsync(user.Id);
+
+                if (company == null)
+                {
+                    if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                    {
+                        return Json(new { success = false, message = "Company not found" });
+                    }
+                    return RedirectToAction("SetupBasic");
+                }
+
+                // Kiểm tra các trường thay đổi và cập nhật chỉ khi có thay đổi
+                bool hasChanges = false;
+
+                // Update name if changed
+                if (!string.IsNullOrEmpty(model.Name) && company.Name != model.Name)
+                {
+                    company.Name = model.Name;
+                    hasChanges = true;
+                }
+
+                // Update description if changed
+                if (!string.IsNullOrEmpty(model.Description) && company.Description != model.Description)
+                {
+                    company.Description = model.Description;
+                    hasChanges = true;
+                }
+
+                // Process logo if provided
+                string logoPath = company.Logo;
+                if (model.Logo != null && model.Logo.Length > 0)
+                {
+                    logoPath = await SaveFileAsync(model.Logo, "companies/logos");
+                    company.Logo = logoPath;
+                    hasChanges = true;
+                }
+
+                // Process banner if provided
+                string bannerPath = company.Banner;
+                if (model.Banner != null && model.Banner.Length > 0)
+                {
+                    bannerPath = await SaveFileAsync(model.Banner, "companies/banners");
+                    company.Banner = bannerPath;
+                    hasChanges = true;
+                }
+
+                if (hasChanges)
+                {
+                    company.UpdatedAt = DateTime.UtcNow;
+
+                    // Save changes
+                    await _companyRepository.UpdateAsync(company);
+                    int saveResult = await _companyRepository.SaveChangesAsync();
+
+                    if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                    {
+                        return Json(new
+                        {
+                            success = true,
+                            message = "Company basic information updated successfully!",
+                            logoPath = logoPath,
+                            bannerPath = bannerPath,
+                            company = new
+                            {
+                                id = company.Id,
+                                name = company.Name,
+                                description = company.Description,
+                                updatedAt = company.UpdatedAt
+                            },
+                            saveResult = saveResult,
+                            hasChanges = hasChanges
+                        });
+                    }
+
+                    TempData["SuccessMessage"] = "Company basic information updated successfully!";
+                }
+                else
+                {
+                    if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                    {
+                        return Json(new
+                        {
+                            success = true,
+                            message = "No changes detected!",
+                            logoPath = logoPath,
+                            bannerPath = bannerPath,
+                            company = new
+                            {
+                                id = company.Id,
+                                name = company.Name,
+                                description = company.Description,
+                                updatedAt = company.UpdatedAt
+                            },
+                            saveResult = 0,
+                            hasChanges = hasChanges
+                        });
+                    }
+
+                    TempData["InfoMessage"] = "No changes detected!";
+                }
+
+                return RedirectToAction("Profile", new { tab = "basic" });
+            }
+            catch (Exception ex)
+            {
+                if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                {
+                    return Json(new
+                    {
+                        success = false,
+                        message = "Error saving company information",
+                        error = ex.Message,
+                        stackTrace = ex.StackTrace
+                    });
+                }
+
+                TempData["ErrorMessage"] = $"Error: {ex.Message}";
+                return RedirectToAction("Profile", new { tab = "basic" });
+            }
+        }
+
+        // POST: Employer/Company/UpdateOrganizationInfo
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdateOrganizationInfo(CompanySetupOrganizationViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
+                if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                {
+                    return Json(new { success = false, message = "Validation failed", errors = errors });
+                }
+                return RedirectToAction("Profile", new { tab = "organization", error = "Invalid input data" });
+            }
+
+            try
+            {
+                // Get the current user's company
+                var user = await _userManager.GetUserAsync(User);
+                var company = await _companyRepository.GetByOwnerIdAsync(user.Id);
+
+                if (company == null)
+                {
+                    if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                    {
+                        return Json(new { success = false, message = "Company not found" });
+                    }
+                    return RedirectToAction("SetupBasic");
+                }
+
+                // Kiểm tra các trường thay đổi và cập nhật chỉ khi có thay đổi
+                bool hasChanges = false;
+
+                // Update CategoryId if changed
+                if (company.CategoryId != model.CategoryId)
+                {
+                    company.CategoryId = model.CategoryId;
+                    hasChanges = true;
+                }
+
+                // Update Industry if changed
+                if (!string.IsNullOrEmpty(model.Industry) && company.Industry != model.Industry)
+                {
+                    company.Industry = model.Industry;
+                    hasChanges = true;
+                }
+
+                // Update EmployeeCount if changed
+                if (company.EmployeeCount != model.EmployeeCount)
+                {
+                    company.EmployeeCount = model.EmployeeCount;
+                    hasChanges = true;
+                }
+
+                // Update FoundedDate if changed
+                if (model.FoundedDate.HasValue && company.FoundedDate != model.FoundedDate)
+                {
+                    company.FoundedDate = model.FoundedDate;
+                    hasChanges = true;
+                }
+
+                // Update Website if changed
+                if (model.Website != company.Website)
+                {
+                    company.Website = model.Website;
+                    hasChanges = true;
+                }
+
+                // Update Vision if changed
+                if (model.Vision != company.Vision)
+                {
+                    company.Vision = model.Vision;
+                    hasChanges = true;
+                }
+
+                if (hasChanges)
+                {
+                    company.UpdatedAt = DateTime.UtcNow;
+
+                    // Save changes
+                    await _companyRepository.UpdateAsync(company);
+                    int saveResult = await _companyRepository.SaveChangesAsync();
+
+                    if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                    {
+                        return Json(new
+                        {
+                            success = true,
+                            message = "Company organization information updated successfully!",
+                            company = new
+                            {
+                                id = company.Id,
+                                categoryId = company.CategoryId,
+                                industry = company.Industry,
+                                employeeCount = company.EmployeeCount,
+                                foundedDate = company.FoundedDate,
+                                website = company.Website,
+                                vision = company.Vision,
+                                updatedAt = company.UpdatedAt
+                            },
+                            saveResult = saveResult,
+                            hasChanges = hasChanges
+                        });
+                    }
+
+                    TempData["SuccessMessage"] = "Company organization information updated successfully!";
+                }
+                else
+                {
+                    if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                    {
+                        return Json(new
+                        {
+                            success = true,
+                            message = "No changes detected!",
+                            company = new
+                            {
+                                id = company.Id,
+                                categoryId = company.CategoryId,
+                                industry = company.Industry,
+                                employeeCount = company.EmployeeCount,
+                                foundedDate = company.FoundedDate,
+                                website = company.Website,
+                                vision = company.Vision,
+                                updatedAt = company.UpdatedAt
+                            },
+                            saveResult = 0,
+                            hasChanges = hasChanges
+                        });
+                    }
+
+                    TempData["InfoMessage"] = "No changes detected!";
+                }
+
+                return RedirectToAction("Profile", new { tab = "organization" });
+            }
+            catch (Exception ex)
+            {
+                if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                {
+                    return Json(new
+                    {
+                        success = false,
+                        message = "Error saving company information",
+                        error = ex.Message,
+                        stackTrace = ex.StackTrace
+                    });
+                }
+
+                TempData["ErrorMessage"] = $"Error: {ex.Message}";
+                return RedirectToAction("Profile", new { tab = "organization" });
+            }
+        }
+
+        // POST: Employer/Company/UpdateSocialInfo
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdateSocialInfo(CompanySetupSocialViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
+                if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                {
+                    return Json(new { success = false, message = "Validation failed", errors = errors });
+                }
+                return RedirectToAction("Profile", new { tab = "social", error = "Invalid input data" });
+            }
+
+            try
+            {
+                // Get the current user's company
+                var user = await _userManager.GetUserAsync(User);
+                var company = await _companyRepository.GetByOwnerIdAsync(user.Id);
+
+                if (company == null)
+                {
+                    if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                    {
+                        return Json(new { success = false, message = "Company not found" });
+                    }
+                    return RedirectToAction("SetupBasic");
+                }
+
+                // Kiểm tra xem liệu có thay đổi nào không
+                bool hasChanges = false;
+                var updatedLinks = new List<object>();
+
+                // Đảm bảo SocialLinks đã được khởi tạo
+                if (company.SocialLinks == null)
+                {
+                    company.SocialLinks = new List<SocialLink>();
+                    hasChanges = true;
+                }
+
+                // So sánh danh sách liên kết cũ và mới
+                // Đối với trường hợp social links, thường cách đơn giản nhất là xóa tất cả và tạo lại
+                // Vì việc phát hiện chính xác sự thay đổi khá phức tạp
+                if (model.SocialLinks != null)
+                {
+                    // Chuyển đổi ICollection thành List để có thể truy cập bằng index
+                    var socialLinksList = company.SocialLinks.ToList();
+
+                    // Kiểm tra số lượng links
+                    if (socialLinksList.Count != model.SocialLinks.Count)
+                    {
+                        hasChanges = true;
+                    }
+                    else
+                    {
+                        // Kiểm tra từng link có thay đổi không
+                        for (int i = 0; i < model.SocialLinks.Count; i++)
+                        {
+                            var newLink = model.SocialLinks[i];
+                            // Nếu i vượt quá số phần tử trong danh sách cũ hoặc link bị thay đổi
+                            if (i >= socialLinksList.Count ||
+                                socialLinksList[i].Platform != newLink.Platform ||
+                                socialLinksList[i].Url != newLink.Url)
+                            {
+                                hasChanges = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (hasChanges)
+                    {
+                        // Xóa tất cả liên kết hiện tại
+                        company.SocialLinks.Clear();
+
+                        // Thêm các liên kết mới
+                        foreach (var link in model.SocialLinks)
+                        {
+                            if (!string.IsNullOrEmpty(link.Platform) && !string.IsNullOrEmpty(link.Url))
+                            {
+                                var socialLink = new SocialLink
+                                {
+                                    Platform = link.Platform,
+                                    Url = link.Url,
+                                    CreatedAt = DateTime.UtcNow,
+                                    UpdatedAt = DateTime.UtcNow
+                                };
+
+                                company.SocialLinks.Add(socialLink);
+                                updatedLinks.Add(new
+                                {
+                                    platform = socialLink.Platform,
+                                    url = socialLink.Url
+                                });
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // Nếu không có thay đổi, vẫn cần tạo danh sách để trả về cho client
+                        foreach (var link in company.SocialLinks)
+                        {
+                            updatedLinks.Add(new
+                            {
+                                platform = link.Platform,
+                                url = link.Url
+                            });
+                        }
+                    }
+                }
+
+                if (hasChanges)
+                {
+                    company.UpdatedAt = DateTime.UtcNow;
+
+                    // Save changes
+                    await _companyRepository.UpdateAsync(company);
+                    int saveResult = await _companyRepository.SaveChangesAsync();
+
+                    if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                    {
+                        return Json(new
+                        {
+                            success = true,
+                            message = "Company social information updated successfully!",
+                            socialLinks = updatedLinks,
+                            company = new
+                            {
+                                id = company.Id,
+                                updatedAt = company.UpdatedAt,
+                                socialLinkCount = company.SocialLinks.Count
+                            },
+                            saveResult = saveResult,
+                            hasChanges = hasChanges
+                        });
+                    }
+
+                    TempData["SuccessMessage"] = "Company social information updated successfully!";
+                }
+                else
+                {
+                    if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                    {
+                        return Json(new
+                        {
+                            success = true,
+                            message = "No changes detected!",
+                            socialLinks = updatedLinks,
+                            company = new
+                            {
+                                id = company.Id,
+                                updatedAt = company.UpdatedAt,
+                                socialLinkCount = company.SocialLinks.Count
+                            },
+                            saveResult = 0,
+                            hasChanges = hasChanges
+                        });
+                    }
+
+                    TempData["InfoMessage"] = "No changes detected!";
+                }
+
+                return RedirectToAction("Profile", new { tab = "social" });
+            }
+            catch (Exception ex)
+            {
+                if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                {
+                    return Json(new
+                    {
+                        success = false,
+                        message = "Error saving company information",
+                        error = ex.Message,
+                        stackTrace = ex.StackTrace
+                    });
+                }
+
+                TempData["ErrorMessage"] = $"Error: {ex.Message}";
+                return RedirectToAction("Profile", new { tab = "social" });
+            }
+        }
+
+        // POST: Employer/Company/UpdateContactInfo
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdateContactInfo(CompanySetupContactViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
+                if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                {
+                    return Json(new { success = false, message = "Validation failed", errors = errors });
+                }
+                return RedirectToAction("Profile", new { tab = "contact", error = "Invalid input data" });
+            }
+
+            try
+            {
+                // Get the current user's company
+                var user = await _userManager.GetUserAsync(User);
+                var company = await _companyRepository.GetByOwnerIdAsync(user.Id);
+
+                if (company == null)
+                {
+                    if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                    {
+                        return Json(new { success = false, message = "Company not found" });
+                    }
+                    return RedirectToAction("SetupBasic");
+                }
+
+                // Kiểm tra các trường thay đổi và cập nhật chỉ khi có thay đổi
+                bool hasChanges = false;
+
+                // Update Location if changed
+                if (!string.IsNullOrEmpty(model.Location) && company.Location != model.Location)
+                {
+                    company.Location = model.Location;
+                    hasChanges = true;
+                }
+
+                // Update Phone if changed
+                if (!string.IsNullOrEmpty(model.Phone) && company.Phone != model.Phone)
+                {
+                    company.Phone = model.Phone;
+                    hasChanges = true;
+                }
+
+                // Update Email if changed
+                if (!string.IsNullOrEmpty(model.Email) && company.Email != model.Email)
+                {
+                    company.Email = model.Email;
+                    hasChanges = true;
+                }
+
+                if (hasChanges)
+                {
+                    company.UpdatedAt = DateTime.UtcNow;
+
+                    // Save changes
+                    await _companyRepository.UpdateAsync(company);
+                    int saveResult = await _companyRepository.SaveChangesAsync();
+
+                    if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                    {
+                        return Json(new
+                        {
+                            success = true,
+                            message = "Company contact information updated successfully!",
+                            company = new
+                            {
+                                id = company.Id,
+                                location = company.Location,
+                                phone = company.Phone,
+                                email = company.Email,
+                                updatedAt = company.UpdatedAt
+                            },
+                            saveResult = saveResult,
+                            hasChanges = hasChanges
+                        });
+                    }
+
+                    TempData["SuccessMessage"] = "Company contact information updated successfully!";
+                }
+                else
+                {
+                    if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                    {
+                        return Json(new
+                        {
+                            success = true,
+                            message = "No changes detected!",
+                            company = new
+                            {
+                                id = company.Id,
+                                location = company.Location,
+                                phone = company.Phone,
+                                email = company.Email,
+                                updatedAt = company.UpdatedAt
+                            },
+                            saveResult = 0,
+                            hasChanges = hasChanges
+                        });
+                    }
+
+                    TempData["InfoMessage"] = "No changes detected!";
+                }
+
+                return RedirectToAction("Profile", new { tab = "contact" });
+            }
+            catch (Exception ex)
+            {
+                if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                {
+                    return Json(new
+                    {
+                        success = false,
+                        message = "Error saving company information",
+                        error = ex.Message,
+                        stackTrace = ex.StackTrace
+                    });
+                }
+
+                TempData["ErrorMessage"] = $"Error: {ex.Message}";
+                return RedirectToAction("Profile", new { tab = "contact" });
+            }
+        }
+
+        #endregion
+
         // Helper method to save file
         private async Task<string> SaveFileAsync(IFormFile file, string folder)
         {

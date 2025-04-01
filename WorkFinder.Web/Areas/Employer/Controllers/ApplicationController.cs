@@ -8,7 +8,8 @@ using WorkFinder.Web.Models;
 using WorkFinder.Web.Repositories;
 using WorkFinder.Web.Areas.Employer.Models;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Text.Json;
 
 namespace WorkFinder.Web.Areas.Employer.Controllers
 {
@@ -19,84 +20,76 @@ namespace WorkFinder.Web.Areas.Employer.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ICompanyRepository _companyRepository;
         private readonly IJobRepository _jobRepository;
+        private readonly IResumeRepository _resumeRepository;
         private readonly ILogger<ApplicationController> _logger;
 
+        // Chỉ có một constructor duy nhất
         public ApplicationController(
             UserManager<ApplicationUser> userManager,
             ICompanyRepository companyRepository,
             IJobRepository jobRepository,
+            IResumeRepository resumeRepository,
             ILogger<ApplicationController> logger)
         {
             _userManager = userManager;
             _companyRepository = companyRepository;
             _jobRepository = jobRepository;
+            _resumeRepository = resumeRepository;
             _logger = logger;
         }
 
-        public async Task<IActionResult> Index(int jobId, string filter = "All")
+        [HttpGet]
+        public async Task<IActionResult> Index(int jobId)
         {
             try
             {
                 var user = await _userManager.GetUserAsync(User);
                 if (user == null)
                 {
-                    return NotFound("User not found");
+                    return RedirectToAction("Login", "Auth", new { area = "Auth" });
                 }
 
                 var company = await _companyRepository.GetByOwnerIdAsync(user.Id);
                 if (company == null)
                 {
-                    return RedirectToAction("SetupBasic", "Company", new { area = "Employer" });
+                    return RedirectToAction("Index", "Home", new { area = "" });
                 }
 
                 var job = await _jobRepository.GetJobWithApplicationsAsync(jobId);
-
-
-                if (job == null)
+                if (job == null || job.CompanyId != company.Id)
                 {
-                    return NotFound("Job not found");
+                    TempData["ErrorMessage"] = "Job not found or you don't have permission to view applications for this job.";
+                    return RedirectToAction("Index", "Job", new { area = "Employer" });
                 }
 
-                if (job.CompanyId != company.Id)
+                var applications = job.Applications.ToList();
+
+                // Lấy tất cả user IDs từ applications
+                var userIds = applications.Select(a => a.Applicant.Id).Distinct().ToList();
+
+                // Tạo dictionary để lưu trữ resumes theo user ID
+                var userResumes = new Dictionary<int, Resume>();
+
+                // Lấy tất cả resumes cho một lần truy vấn
+                if (userIds.Any())
                 {
-                    _logger.LogWarning($"Unauthorized access: User {user.Id} attempting to access job {jobId} which belongs to company {job.CompanyId} while user belongs to company {company.Id}");
-
-                    // Cảnh báo cho người dùng và xóa cookie Authentication
-                    TempData["ErrorMessage"] = "You attempted to access a job that doesn't belong to your company. Security checks have been performed.";
-
-                    return RedirectToAction("Index", "Home", new { area = "Employer" });
+                    userResumes = await _resumeRepository.GetResumesByUserIdsAsync(userIds);
                 }
 
                 var applicationsViewModel = new JobApplicationsViewModel
                 {
                     Job = job,
-                    Filter = filter
+                    Applications = applications,
+                    UserResumes = userResumes
                 };
-                if (job.Applications != null && job.Applications.Any())
-                {
-                    var applications = job.Applications.ToList();
-
-                    // Filter applications if needed - simplified to use status as int
-                    if (filter != "All")
-                    {
-                        // For now, we won't filter
-                        // Later you can implement filtering based on status as int
-                    }
-
-                    applicationsViewModel.Applications = applications;
-
-                    // Count applications 
-                    applicationsViewModel.TotalApplications = job.Applications.Count;
-                    applicationsViewModel.ShortlistedCount = 0; // Not using complex status now
-                    applicationsViewModel.NewCount = job.Applications.Count; // Consider all as new
-                }
 
                 return View(applicationsViewModel);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Error getting applications for job {jobId}");
-                return RedirectToAction("Index", "Home", new { area = "Employer", errorMessage = "An error occurred while retrieving job applications" });
+                _logger.LogError(ex, "Error while retrieving job applications");
+                TempData["ErrorMessage"] = "An error occurred while retrieving job applications.";
+                return RedirectToAction("Index", "Job", new { area = "Employer" });
             }
         }
 
@@ -136,15 +129,6 @@ namespace WorkFinder.Web.Areas.Employer.Controllers
                 if (application == null)
                 {
                     return NotFound("Application not found");
-                }
-
-                // Add a CustomStatus field to JobApplication if it doesn't exist
-                if (!application.GetType().GetProperties().Any(p => p.Name == "CustomStatus"))
-                {
-                    // We can't add dynamic property, let's use a different approach 
-                    // Later we'll need to add a CustomStatus property to the JobApplication model
-                    // For now, we'll just return a success message without updating status
-                    _logger.LogInformation($"Status not updated for application {applicationId} - Status property not available");
                 }
 
                 try
@@ -210,6 +194,112 @@ namespace WorkFinder.Web.Areas.Employer.Controllers
             {
                 _logger.LogError(ex, "Error deleting application");
                 return RedirectToAction(nameof(Index), new { toastMessage = "Failed to delete application." });
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetCandidateDetail(int applicationId)
+        {
+            try
+            {
+                var user = await _userManager.GetUserAsync(User);
+                if (user == null)
+                {
+                    return Json(new { success = false, message = "User not found" });
+                }
+
+                var company = await _companyRepository.GetByOwnerIdAsync(user.Id);
+                if (company == null)
+                {
+                    return Json(new { success = false, message = "Company not found" });
+                }
+
+                // Find the application
+                var job = await _jobRepository.GetJobByApplicationIdAsync(applicationId);
+
+                if (job == null)
+                {
+                    return Json(new { success = false, message = "Job not found" });
+                }
+
+                if (job.CompanyId != company.Id)
+                {
+                    return Json(new { success = false, message = "You don't have permission to view this candidate" });
+                }
+
+                var application = job.Applications.FirstOrDefault(a => a.Id == applicationId);
+
+                if (application == null)
+                {
+                    return Json(new { success = false, message = "Application not found" });
+                }
+
+
+                var applicant = application.Applicant;
+
+
+                // Get the resume if available
+                Resume resume = null;
+                try
+                {
+                    resume = await _resumeRepository.GetResumeByUserIdAsync(applicant.Id);
+
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, $"Error getting resume for applicant {applicant.Id}");
+                    // Continue without resume data
+                }
+
+                // Tạo ViewModel với đầy đủ thông tin
+                var candidateDetail = new CandidateDetailViewModel
+                {
+                    // Thông tin từ ApplicationUser
+                    Id = applicant.Id,
+                    FirstName = applicant.FirstName,
+                    LastName = applicant.LastName,
+                    Email = applicant.Email,
+                    PhoneNumber = applicant.PhoneNumber ?? "Not specified",
+                    ProfilePicture = applicant.ProfilePicture ?? "/images/avatar-placeholder.jpg",
+                    DateOfBirth = applicant.DateOfBirth,
+
+
+                    // Thông tin từ Resume
+                    Title = resume?.Skills?.Split(',').FirstOrDefault() ?? "Job Seeker",
+                    Summary = resume?.Summary ?? "No biography available.",
+                    Skills = resume?.Skills ?? "Not specified",
+                    Education = resume?.Education ?? "Not specified",
+                    Experience = resume?.Experience ?? "Not specified",
+                    Certifications = resume?.Certifications ?? "Not specified",
+                    Languages = resume?.Languages ?? "Not specified",
+                    ResumeFileUrl = resume?.FileUrl,
+
+                    // Thông tin từ JobApplication
+                    ApplicationId = application.Id,
+                    CoverLetter = application.CoverLetter ?? "No cover letter provided.",
+                    Status = application.Status,
+                    AppliedDate = application.AppliedDate,
+
+                    // Thông tin bổ sung
+                    JobId = job.Id,
+                    JobTitle = job.Title
+                };
+
+                // Log resume URL for debugging
+                _logger.LogInformation($"Resume File URL: {candidateDetail.ResumeFileUrl ?? "NULL"}");
+
+                var responseData = new
+                {
+                    success = true,
+                    data = candidateDetail
+                };
+
+                return Json(responseData);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error retrieving candidate details for application {applicationId}");
+                return Json(new { success = false, message = $"An error occurred while retrieving candidate details: {ex.Message}" });
             }
         }
     }

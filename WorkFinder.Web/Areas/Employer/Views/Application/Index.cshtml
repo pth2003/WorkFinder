@@ -1,13 +1,27 @@
 @model WorkFinder.Web.Areas.Employer.Models.JobApplicationsViewModel
+@using WorkFinder.Web.Models.Enums
 @{
     ViewData["Title"] = $"Applications for {Model.Job.Title}";
     Layout = "_EmployerLayout";
+
+    string GetStatusClass(ApplicationStatus status)
+    {
+        return status switch
+        {
+            ApplicationStatus.Applied => "primary",
+            ApplicationStatus.Reviewing => "info",
+            ApplicationStatus.Interview => "warning",
+            ApplicationStatus.Accepted => "success",
+            ApplicationStatus.Rejected => "danger",
+            _ => "secondary"
+        };
+    }
 }
 
 <div class="container">
     <div class="employers-dashboard mt-4">
         <!-- Sidebar -->
-        <div class="sidebar">
+        <div class="sidebar d-none d-md-block">
             <div class="sidebar-header mb-4">
                 <h5>EMPLOYERS DASHBOARD</h5>
             </div>
@@ -19,15 +33,10 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="d-flex align-items-center">
-                        <i class="fas fa-building me-2"></i>
-                        <span>Employers Profile</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="@Url.Action("Create", "Job", new { area = "Employer" })" class="d-flex align-items-center">
-                        <i class="fas fa-plus-circle me-2"></i>
-                        <span>Post a Job</span>
+                    <a href="@Url.Action("Profile", "Company", new { area = "Employer" })"
+                        class="d-flex align-items-center">
+                        <i class="fas fa-user me-2"></i>
+                        <span>Profile</span>
                     </a>
                 </li>
                 <li class="active">
@@ -37,9 +46,10 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="d-flex align-items-center">
-                        <i class="fas fa-user me-2"></i>
-                        <span>Saved Candidate</span>
+                    <a href="@Url.Action("Settings", "Account", new { area = "Employer" })"
+                        class="d-flex align-items-center">
+                        <i class="fas fa-cog me-2"></i>
+                        <span>Settings</span>
                     </a>
                 </li>
             </ul>
@@ -66,14 +76,14 @@
                 </nav>
             </div>
 
-            <!-- Job Applications Header and Filter on Same Row -->
-            <div class="d-flex justify-content-between align-items-center mb-4">
+            <!-- Job Applications Header -->
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
                 <div>
-                    <h2 class="mb-0">Job Applications</h2>
+                    <h2 class="mb-0 h3">Job Applications</h2>
                 </div>
                 <div class="d-flex">
                     <div class="dropdown">
-                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="sortDropdown"
+                        <button class="btn btn-outline-secondary dropdown-toggle btn-sm" type="button" id="sortDropdown"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             Sort
                         </button>
@@ -83,7 +93,7 @@
                         </ul>
                     </div>
 
-                    <button class="btn btn-outline-secondary ms-2">
+                    <button class="btn btn-outline-secondary ms-2 btn-sm">
                         Filter
                     </button>
                 </div>
@@ -94,7 +104,7 @@
                 @if (Model.Applications.Any())
                 {
                     <div class="application-list-card">
-                        <div class="application-header">
+                        <div class="application-header d-none d-lg-flex">
                             <div class="application-header-cell applicant-header">APPLICANT</div>
                             <div class="application-header-cell status-header">STATUS</div>
                             <div class="application-header-cell applied-header">APPLIED DATE</div>
@@ -103,12 +113,12 @@
 
                         @foreach (var application in Model.Applications)
                         {
-                            var statusClass = "primary";
-                            var statusText = "Applied";
-
+                            var statusClass = GetStatusClass(application.Status);
+                            var userId = application.Applicant.Id;
+                            var hasResume = Model.UserResumes.TryGetValue(userId, out var resume);
                             <div class="application-item" data-application-id="@application.Id">
                                 <div class="application-cell applicant-info">
-                                    <div class="d-flex align-items-center">
+                                    <div class="d-flex align-items-center flex-wrap">
                                         <div class="applicant-avatar me-3">
                                             @if (!string.IsNullOrEmpty(application.Applicant.ProfilePicture))
                                             {
@@ -122,37 +132,56 @@
                                                 </div>
                                             }
                                         </div>
-                                        <div>
+                                        <div class="applicant-detail-wrapper">
                                             <h5 class="applicant-name">
                                                 @application.Applicant.FirstName @application.Applicant.LastName
                                             </h5>
-                                            <div class="applicant-role">UI/UX Designer</div>
-                                            <ul class="applicant-details">
-                                                <li>
-                                                    <i class="fas fa-briefcase"></i> 7 Years Experience
-                                                </li>
-                                                <li>
-                                                    <i class="fas fa-graduation-cap"></i> Education: Master Degree
-                                                </li>
-                                                <li>
-                                                    <i class="fas fa-calendar"></i> Applied:
-                                                    @application.AppliedDate.ToString("MMM dd, yyyy")
-                                                </li>
-                                            </ul>
+                                            @if (hasResume)
+                                            {
+                                                <ul class="applicant-details list-unstyled">
+                                                    @if (!string.IsNullOrEmpty(resume.Experience))
+                                                    {
+                                                        <li class="d-none d-sm-block">
+                                                            <i class="fas fa-briefcase"></i> @resume.Experience
+                                                        </li>
+                                                    }
+                                                    @if (!string.IsNullOrEmpty(resume.Education))
+                                                    {
+                                                        <li class="d-none d-sm-block">
+                                                            <i class="fas fa-graduation-cap"></i> @resume.Education
+                                                        </li>
+                                                    }
+                                                    <li class="text-muted d-block d-lg-none">
+                                                        <i class="fas fa-calendar"></i> Applied:
+                                                        @application.AppliedDate.ToString("MMM dd, yyyy")
+                                                    </li>
+                                                </ul>
+                                            }
+                                            else
+                                            {
+                                                <ul class="applicant-details">
+                                                    <li class="d-block d-lg-none">
+                                                        <i class="fas fa-calendar"></i> Applied:
+                                                        @application.AppliedDate.ToString("MMM dd, yyyy")
+                                                    </li>
+                                                </ul>
+                                            }
                                         </div>
                                     </div>
                                 </div>
                                 <div class="application-cell status-cell">
-                                    <span class="status-badge status-@statusClass">
-                                        @statusText
+                                    <span class="status-badge status-@statusClass.ToLower()">
+                                        @application.Status.ToString()
                                     </span>
                                 </div>
-                                <div class="application-cell applied-date-cell">
+                                <div class="application-cell applied-date-cell d-none d-lg-flex">
                                     @application.AppliedDate.ToString("dd MMM, yyyy")
                                 </div>
-                                <div class="application-cell actions-cell">
-                                    <a href="#" class="btn view-application-btn mb-2">
-                                        View Application
+                                <div class="application-cell actions-cell ">
+                                    <a href="javascript:void(0)" class="btn view-detail-btn "
+                                        data-application-id="@application.Id"
+                                        data-applicant-name="@application.Applicant.FirstName @application.Applicant.LastName">
+                                        <i class="fas fa-eye me-1"></i> View Detail
                                     </a>
                                     <div class="dropdown action-dropdown">
                                         <button class="btn more-actions-btn" type="button" data-bs-toggle="dropdown"
@@ -160,71 +189,22 @@
                                             <i class="fas fa-ellipsis-v"></i>
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-end">
-                                            <li>
-                                                <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                    data-bs-target="#downloadCvModal">
-                                                    <i class="fas fa-download me-2"></i> Download CV
-                                                </a>
-                                            </li>
-                                            <li class="dropdown-submenu">
-                                                <a class="dropdown-item dropdown-toggle" href="#">
-                                                    <i class="fas fa-exchange-alt me-2"></i> Change Status
-                                                </a>
-                                                <ul class="dropdown-menu dropdown-menu-end">
-                                                    <li>
-                                                        <form method="post"
-                                                            action="@Url.Action("UpdateStatus", "Application", new { area = "Employer" })">
-                                                            <input type="hidden" name="applicationId" value="@application.Id" />
-                                                            <input type="hidden" name="newStatus" value="1" />
-                                                            @Html.AntiForgeryToken()
-                                                            <button type="submit" class="dropdown-item">
-                                                                Mark as Reviewing
-                                                            </button>
-                                                        </form>
-                                                    </li>
-                                                    <li>
-                                                        <form method="post"
-                                                            action="@Url.Action("UpdateStatus", "Application", new { area = "Employer" })">
-                                                            <input type="hidden" name="applicationId" value="@application.Id" />
-                                                            <input type="hidden" name="newStatus" value="2" />
-                                                            @Html.AntiForgeryToken()
-                                                            <button type="submit" class="dropdown-item">
-                                                                Mark as Interview
-                                                            </button>
-                                                        </form>
-                                                    </li>
-                                                    <li>
-                                                        <form method="post"
-                                                            action="@Url.Action("UpdateStatus", "Application", new { area = "Employer" })">
-                                                            <input type="hidden" name="applicationId" value="@application.Id" />
-                                                            <input type="hidden" name="newStatus" value="3" />
-                                                            @Html.AntiForgeryToken()
-                                                            <button type="submit" class="dropdown-item">
-                                                                Mark as Rejected
-                                                            </button>
-                                                        </form>
-                                                    </li>
-                                                    <li>
-                                                        <form method="post"
-                                                            action="@Url.Action("UpdateStatus", "Application", new { area = "Employer" })">
-                                                            <input type="hidden" name="applicationId" value="@application.Id" />
-                                                            <input type="hidden" name="newStatus" value="4" />
-                                                            @Html.AntiForgeryToken()
-                                                            <button type="submit" class="dropdown-item">
-                                                                Mark as Accepted
-                                                            </button>
-                                                        </form>
-                                                    </li>
-                                                </ul>
-                                            </li>
+                                            @if (hasResume && !string.IsNullOrEmpty(resume.FileUrl))
+                                            {
+                                                <li>
+                                                    <a class="dropdown-item" href="@resume.FileUrl" target="_blank">
+                                                        <i class="fas fa-download me-2"></i> Download CV
+                                                    </a>
+                                                </li>
+                                            }
                                             <li>
                                                 <hr class="dropdown-divider">
                                             </li>
                                             <li>
-                                                <a class="dropdown-item text-danger" href="#" data-bs-toggle="modal"
+                                                <a class="dropdown-item text-danger" href="javascript:;" data-bs-toggle="modal"
                                                     data-bs-target="#deleteModal" data-application-id="@application.Id"
                                                     data-applicant-name="@application.Applicant.FirstName @application.Applicant.LastName">
-                                                    <i class="fas fa-trash me-2"></i> Delete Application
+                                                    <i class="fas fa-trash me-2"></i> Reject Candidate
                                                 </a>
                                             </li>
                                         </ul>
@@ -249,31 +229,6 @@
     </div>
 </div>
 
-<!-- Delete Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Confirm Delete</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>Are you sure you want to delete the application from "<span id="applicantName"></span>"?</p>
-                <p class="text-danger">This action cannot be undone.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <form id="deleteApplicationForm" asp-action="Delete" asp-controller="Application" asp-area="Employer"
-                    method="post">
-                    <input type="hidden" id="applicationIdToDelete" name="applicationId" />
-                    @Html.AntiForgeryToken()
-                    <button type="submit" class="btn btn-danger">Delete Application</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
 <style>
     .employers-dashboard {
         display: flex;
@@ -284,11 +239,11 @@
     .sidebar {
         width: 250px;
         flex-shrink: 0;
-        font-size: 1.6rem;
+        font-size: 16px;
     }
 
     .sidebar-header h5 {
-        font-size: 14px;
+        font-size: 16px;
         font-weight: 600;
         color: #777;
         margin-bottom: 20px;
@@ -309,9 +264,10 @@
         align-items: center;
         color: #666;
         text-decoration: none;
-        padding: 8px 15px;
+        padding: 10px 15px;
         border-radius: 6px;
         transition: all 0.3s;
+        font-size: 15px;
     }
 
     .sidebar-menu li a:hover,
@@ -348,37 +304,9 @@
     /* Main Content */
     .main-content {
         flex: 1;
-    }
-
-    /* Updated styles for the application header and UI */
-    .page-header {
-        padding-bottom: 0.5rem;
-        border-bottom: 1px solid #e9ecef;
-    }
-
-    .breadcrumb {
-        margin-bottom: 0;
-        font-size: 1.05rem;
-    }
-
-    .breadcrumb-item a {
-        color: #0d6efd;
-        text-decoration: none;
-    }
-
-    .breadcrumb-item a:hover {
-        text-decoration: underline;
-    }
-
-    .breadcrumb-item.active {
-        font-weight: 600;
-    }
-
-    .applications-container {
-        background-color: #fff;
-        border-radius: 0.5rem;
-        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-        padding: 1.5rem;
+        min-width: 0;
+        /* Prevent flex item from overflowing */
+        overflow-x: auto;
     }
 
     /* Application list card */
@@ -421,14 +349,15 @@
 
     .actions-header {
         width: 25%;
-        text-align: right;
+        text-align: center;
     }
 
     /* Application item styles */
     .application-item {
         display: flex;
+        flex-wrap: wrap;
         border-bottom: 1px solid #eee;
-        padding: 20px;
+        padding: 15px 20px;
         transition: all 0.3s ease;
         position: relative;
     }
@@ -444,14 +373,16 @@
     /* Applicant info cell */
     .applicant-info {
         width: 45%;
+        min-width: 250px;
     }
 
     .applicant-avatar {
-        width: 65px;
-        height: 65px;
+        width: 55px;
+        height: 55px;
         overflow: hidden;
         border-radius: 50%;
         background-color: #e9ecef;
+        flex-shrink: 0;
     }
 
     .applicant-avatar img {
@@ -466,7 +397,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 24px;
+        font-size: 20px;
         font-weight: 600;
         color: #fff;
         background-color: #0d6efd;
@@ -475,32 +406,26 @@
     .applicant-name {
         font-size: 16px;
         font-weight: 600;
-        margin-bottom: 5px;
+        margin-bottom: 2px;
     }
 
-    .applicant-role {
-        font-size: 14px;
-        color: #0d6efd;
-        font-weight: 500;
-        margin-bottom: 8px;
+    .applicant-detail-wrapper {
+        flex: 1;
+        min-width: 0;
     }
 
     .applicant-details {
-        list-style: none;
-        padding: 0;
         margin: 0;
+        padding: 0;
+        font-size: 13px;
+        color: #555;
     }
 
     .applicant-details li {
-        display: inline-block;
-        font-size: 13px;
-        color: #6c757d;
-        margin-right: 15px;
-    }
-
-    .applicant-details li i {
-        margin-right: 5px;
-        color: #0d6efd;
+        margin-bottom: 4px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     /* Status cell */
@@ -508,14 +433,16 @@
         width: 15%;
         display: flex;
         align-items: center;
+        margin: 10px 0;
     }
 
     .status-badge {
         display: inline-block;
-        padding: 6px 12px;
+        padding: 5px 10px;
         border-radius: 30px;
-        font-size: 13px;
+        font-size: 12px;
         font-weight: 500;
+        white-space: nowrap;
     }
 
     .status-primary {
@@ -528,14 +455,14 @@
         color: #17a2b8;
     }
 
-    .status-success {
-        background-color: #e6fff2;
-        color: #28a745;
-    }
-
     .status-warning {
         background-color: #fff9e6;
         color: #ffc107;
+    }
+
+    .status-success {
+        background-color: #e6fff2;
+        color: #28a745;
     }
 
     .status-danger {
@@ -561,28 +488,9 @@
     .actions-cell {
         width: 25%;
         display: flex;
-        flex-direction: column;
-        align-items: flex-end;
+        align-items: center;
         justify-content: center;
-    }
-
-    .view-application-btn {
-        width: 100%;
-        background-color: #f8f9fa;
-        border: 1px solid #dee2e6;
-        color: #212529;
-        padding: 8px 15px;
-        font-size: 14px;
-        border-radius: 4px;
-        font-weight: normal;
-        text-decoration: none;
-        text-align: center;
-    }
-
-    .view-application-btn:hover {
-        background-color: #e9ecef;
-        color: #0d6efd;
-        text-decoration: none;
+        gap: 10px;
     }
 
     .more-actions-btn {
@@ -600,6 +508,23 @@
 
     .more-actions-btn:hover {
         background-color: #e9ecef;
+    }
+
+    /* View Detail Button */
+    .view-detail-btn {
+        border: 1px solid #dee2e6;
+        color: #495057;
+        font-size: 13px;
+        padding: 8px 16px;
+        border-radius: 6px;
+        background-color: #f8f9fa;
+        transition: all 0.2s;
+    }
+
+    .view-detail-btn:hover {
+        background-color: #e9ecef;
+        color: #212529;
+    }
     }
 
     /* Dropdown menu */
@@ -684,79 +609,729 @@
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     }
 
+    /* Button styles */
+    .btn-sm {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.875rem;
+    }
+
     /* Responsive styles */
-    @@media(max - width: 991px) {
-
-            .application-header-cell,
-            .application-cell {
-                padding: 0 5px;
-            }
-
-            .application-item {
-                padding: 15px 10px;
-            }
+    @@media(max-width:1199px) {
+        .applicant-info {
+            width: 60%;
         }
 
-        @@media(max - width: 767px) {
+        .status-cell {
+            width: 20%;
+        }
 
-                .application-header,
-                .application-item {
-                    flex-direction: column;
-                }
+        .actions-cell {
+            width: 20%;
+        }
+    }
 
-                .application-header-cell,
-                .application-cell {
-                    width: 100%;
-                    margin-bottom: 10px;
-                }
+    @@media(max-width:991px) {
+        .applicant-info {
+            width: 70%;
+        }
 
-                .actions-cell {
-                    align-items: flex-start;
-                }
-            }
-        </style>
+        .status-cell {
+            width: auto;
+            margin-left: auto;
+        }
 
-        @section Scripts {
-            <script>
-                document.addEventListener('DOMContentLoaded', function () {
-                    // Process toast message if present
-                    const urlParams = new URLSearchParams(window.location.search);
-                    const toastMessage = urlParams.get('toastMessage');
-                    if (toastMessage && window.toast) {
-                        window.toast.showToast('Success', toastMessage, 'success');
+        .application-header-cell,
+        .application-cell {
+            padding: 0 5px;
+        }
 
-                        // Remove toastMessage from URL
-                        const cleanUrl = window.location.pathname +
-                            (urlParams.toString() ? '?' + urlParams.toString().replace(/toastMessage=[^&]*(&|$)/, '') : '');
-                        window.history.replaceState({}, document.title, cleanUrl.replace(/\?$/, ''));
-                    }
+        .application-item {
+            padding: 15px 10px;
+        }
+    }
 
-                    // Setup delete modal
-                    const deleteModal = document.getElementById('deleteModal');
-                    if (deleteModal) {
-                        deleteModal.addEventListener('show.bs.modal', function (event) {
-                            const button = event.relatedTarget;
-                            const applicationId = button.getAttribute('data-application-id');
-                            const applicantName = button.getAttribute('data-applicant-name');
+    @@media(max-width:767px) {
+        .employers-dashboard {
+            flex-direction: column;
+        }
 
-                            document.getElementById('applicationIdToDelete').value = applicationId;
-                            document.getElementById('applicantName').textContent = applicantName;
-                        });
-                    }
+        .application-item {
+            gap: 10px;
+        }
 
-                    // Setup dropdown submenu on hover
-                    $('.dropdown-submenu').on('mouseenter', function () {
-                        var menu = $(this).find('.dropdown-menu');
-                        var menupos = $(menu).offset();
+        .applicant-info {
+            width: 100%;
+        }
 
-                        if ((menupos.left + menu.width()) + 30 > $(window).width()) {
-                            var newpos = -$(menu).width();
-                            menu.css({ left: newpos });
+        .status-cell {
+            margin-left: 0;
+            margin-top: 5px;
+        }
+
+        .actions-cell {
+            margin-left: auto;
+            align-items: flex-start;
+        }
+
+        .breadcrumb {
+            flex-wrap: wrap;
+            font-size: 0.85rem;
+        }
+    }
+
+    @@media(max-width:575px) {
+        .application-item {
+            padding: 15px;
+        }
+
+        .applicant-avatar {
+            width: 45px;
+            height: 45px;
+        }
+
+        .default-avatar {
+            font-size: 16px;
+        }
+
+        .applicant-name {
+            font-size: 14px;
+        }
+
+        .applicant-details {
+            font-size: 12px;
+        }
+
+        .status-badge {
+            padding: 4px 8px;
+            font-size: 11px;
+        }
+
+        .more-actions-btn {
+            width: 32px;
+            height: 32px;
+        }
+    }
+
+    /* Candidate Detail Modal Styles */
+    .candidate-profile {
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .profile-image img {
+        border: 4px solid #e6f0ff;
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+    }
+
+    .candidate-info,
+    .candidate-contact {
+        border: 1px solid #e9ecef;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    }
+
+    .candidate-name {
+        font-weight: 600;
+        margin: 10px 0 5px;
+        font-size: 22px;
+        color: #333;
+    }
+
+    .candidate-title {
+        color: #6c757d;
+        margin-bottom: 15px;
+    }
+
+    .info-label {
+        font-weight: 500;
+        margin-right: 5px;
+        color: #495057;
+    }
+
+    .info-value {
+        color: #6c757d;
+    }
+
+    .candidate-actions {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin: 15px 0;
+    }
+
+    #candidateDetailTabs .nav-link {
+        color: #6c757d;
+        font-weight: 500;
+        padding: 10px 20px;
+    }
+
+    #candidateDetailTabs .nav-link.active {
+        color: #0d6efd;
+        font-weight: 600;
+        border-bottom: 2px solid #0d6efd;
+    }
+
+    .card-title {
+        font-size: 18px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 15px;
+    }
+
+    #candidateBiography p,
+    #candidateCoverLetter p {
+        margin-bottom: 1rem;
+        line-height: 1.6;
+    }
+
+    /* Loading spinner */
+    .spinner-border {
+        width: 3rem;
+        height: 3rem;
+    }
+</style>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Reject Candidate</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to reject this candidate?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <form method="post" action="@Url.Action("UpdateStatus", "Application", new { area = "Employer" })"
+                    id="deleteForm">
+                    <input type="hidden" name="applicationId" id="deleteApplicationId" />
+                    <input type="hidden" name="newStatus" id="newStatus" value="3" />
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-danger">Reject</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Candidate Detail Modal -->
+<div class="modal fade" id="candidateDetailModal" tabindex="-1" aria-labelledby="candidateDetailModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="candidateDetailModalLabel">Candidate Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <!-- Left Column - Candidate Basic Info -->
+                        <div class="col-md-4">
+                            <div class="candidate-profile text-center mb-4">
+                                <div class="profile-image mb-3 d-flex justify-content-center">
+                                    ${data.profilePicture ?
+                                    `<img src="${data.profilePicture}" alt="Candidate" class="rounded-circle"
+                                        width="100" height="100" id="candidateAvatar">` :
+                                    `<div
+                                        class="avatar-placeholder rounded-circle d-flex align-items-center justify-content-center"
+                                        style="width: 100px; height: 100px; background-color: #007bff; color: white; font-size: 2rem; font-weight: bold;">
+                                        ${data.firstName && data.lastName ? data.firstName.charAt(0) +
+                                        data.lastName.charAt(0) : 'U'}
+                                    </div>`
+                                    }
+                                </div>
+                                <h4 class="candidate-name" id="candidateName">${data.fullName}</h4>
+                                <p class="candidate-title text-muted" id="candidateTitle">${data.title}</p>
+                                <div class="candidate-actions mt-3">
+                                    <a href="mailto:${data.email}" class="btn btn-primary"><i
+                                            class="fas fa-envelope me-2"></i>Send Mail</a>
+                                </div>
+                            </div>
+                            <div class="candidate-info card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">Personal Information</h5>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2">
+                                            <span class="text-muted me-2"><i class="fas fa-birthday-cake"></i></span>
+                                            <span class="info-label">Date of Birth:</span>
+                                            <span class="info-value">14 June, 2021</span>
+                                        </li>
+                                        <li class="mb-2">
+                                            <span class="text-muted me-2"><i class="fas fa-flag"></i></span>
+                                            <span class="info-label">Nationality:</span>
+                                            <span class="info-value">Bangladesh</span>
+                                        </li>
+                                        <li class="mb-2">
+                                            <span class="text-muted me-2"><i class="fas fa-ring"></i></span>
+                                            <span class="info-label">Marital Status:</span>
+                                            <span class="info-value">Single</span>
+                                        </li>
+                                        <li class="mb-2">
+                                            <span class="text-muted me-2"><i class="fas fa-venus-mars"></i></span>
+                                            <span class="info-label">Gender:</span>
+                                            <span class="info-value">Male</span>
+                                        </li>
+                                        <li class="mb-2">
+                                            <span class="text-muted me-2"><i class="fas fa-briefcase"></i></span>
+                                            <span class="info-label">Experience:</span>
+                                            <span class="info-value" id="candidateExperience">7 Years</span>
+                                        </li>
+                                        <li>
+                                            <span class="text-muted me-2"><i class="fas fa-graduation-cap"></i></span>
+                                            <span class="info-label">Education:</span>
+                                            <span class="info-value" id="candidateEducation">Master Degree</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="candidate-contact card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Contact Information</h5>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2">
+                                            <span class="text-muted me-2"><i class="fas fa-globe"></i></span>
+                                            <span class="info-label">Website:</span>
+                                            <a href="#" class="info-value">www.esterhoward.com</a>
+                                        </li>
+                                        <li class="mb-2">
+                                            <span class="text-muted me-2"><i class="fas fa-map-marker-alt"></i></span>
+                                            <span class="info-label">Location:</span>
+                                            <span class="info-value">Beverly Hills, California 90202</span>
+                                        </li>
+                                        <li class="mb-2">
+                                            <span class="text-muted me-2"><i class="fas fa-phone"></i></span>
+                                            <span class="info-label">Phone:</span>
+                                            <span class="info-value">+1-202-555-0141</span>
+                                        </li>
+                                        <li>
+                                            <span class="text-muted me-2"><i class="fas fa-envelope"></i></span>
+                                            <span class="info-label">Email:</span>
+                                            <a href="mailto:esther.howard@gmail.com" class="info-value"
+                                                id="candidateEmail">esther.howard@gmail.com</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Column - Biography & Cover Letter -->
+                        <div class="col-md-8">
+                            <ul class="nav nav-tabs mb-3" id="candidateDetailTabs" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="biography-tab" data-bs-toggle="tab"
+                                        data-bs-target="#biography" type="button" role="tab" aria-controls="biography"
+                                        aria-selected="true">Biography</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="cover-letter-tab" data-bs-toggle="tab"
+                                        data-bs-target="#cover-letter" type="button" role="tab"
+                                        aria-controls="cover-letter" aria-selected="false">Cover Letter</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="skills-tab" data-bs-toggle="tab"
+                                        data-bs-target="#skills" type="button" role="tab" aria-controls="skills"
+                                        aria-selected="false">Skills</button>
+                                </li>
+                                ${data.resumeFileUrl ? '<li class="nav-item" role="presentation"><button
+                                        class="nav-link" id="resume-tab" data-bs-toggle="tab" data-bs-target="#resume"
+                                        type="button" role="tab" aria-controls="resume"
+                                        aria-selected="false">Resume</button></li>' : ''}
+                            </ul>
+                            <div class="tab-content" id="candidateDetailTabsContent">
+                                <div class="tab-pane fade show active" id="biography" role="tabpanel"
+                                    aria-labelledby="biography-tab">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Biography</h5>
+                                            <div id="candidateBiography">
+                                                <p>I've been passionate about graphic design and digital art from an
+                                                    early age with a keen interest in Website and Mobile Application
+                                                    User Interfaces. I can create high-quality and aesthetically
+                                                    pleasing designs in a quick turnaround time. Check out the portfolio
+                                                    section of my profile to see samples of my work and feel free to
+                                                    discuss your designing needs.</p>
+                                                <p>I mostly use Adobe Photoshop, Illustrator, XD and Figma.</p>
+                                                <ul>
+                                                    <li>Website User Experience and Interface (UI/UX) Design - for all
+                                                        kinds of Professional and Personal websites.</li>
+                                                    <li>Mobile Application User Experience and Interface Design - for
+                                                        all kinds of iOS/Android and Hybrid Mobile Applications.</li>
+                                                    <li>Wireframe Designs.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="cover-letter" role="tabpanel"
+                                    aria-labelledby="cover-letter-tab">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Cover Letter</h5>
+                                            <div id="candidateCoverLetter">
+                                                <p>Dear Sir,</p>
+                                                <p>I am writing to express my interest in the fourth grade instructional
+                                                    position that is currently available in the Fort Wayne Community
+                                                    School System. I learned of the opening through a notice posted on
+                                                    JobZone, IPFW's job database. I am confident that my academic
+                                                    background and curriculum development skills would be successfully
+                                                    utilized in this teaching position.</p>
+                                                <p>I have just completed my Bachelor of Science degree in Elementary
+                                                    Education and have successfully completed Praxis I and Praxis II.
+                                                    During my student teaching experience, I developed and initiated a
+                                                    three-week curriculum sequence on animal species and earth
+                                                    resources. This collaborative unit involved working with three other
+                                                    third grade teachers within my team, and culminated in a field trip
+                                                    to the Indianapolis Zoo Animal Research Unit.</p>
+                                                <p>Sincerely,</p>
+                                                <p>Esther Howard</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="skills" role="tabpanel" aria-labelledby="skills-tab">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Skills & Qualifications</h5>
+                                            <div class="mb-4">
+                                                <h6 class="mb-2">Skills</h6>
+                                                <div class="skill-tags">
+                                                    ${data.skills && data.skills !== 'Not specified'
+                                                    ? data.skills.split(',').map(skill =>
+                                                    `<span
+                                                        class="badge bg-light text-dark me-2 mb-2 p-2">${skill.trim()}</span>`
+                                                    ).join('')
+                                                    : '<p>No skills specified</p>'}
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-4">
+                                                <h6 class="mb-2">Languages</h6>
+                                                <p>${data.languages || 'Not specified'}</p>
+                                            </div>
+
+                                            <div>
+                                                <h6 class="mb-2">Certifications</h6>
+                                                <p>${data.certifications || 'Not specified'}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        ${data.resumeFileUrl ?
+                        `<div class="tab-pane fade" id="resume" role="tabpanel" aria-labelledby="resume-tab">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Resume</h5>
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <p class="mb-0">Download the candidate's full resume for more detailed
+                                            information.</p>
+                                        <a href="${data.resumeFileUrl}" class="btn btn-outline-primary"
+                                            id="downloadResumeBtn" target="_blank"
+                                            onclick="console.log('Download URL: ${data.resumeFileUrl}');"><i
+                                                class="fas fa-download me-2"></i>Download Resume</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>` : ''}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+        <a href="#" class="btn btn-primary" id="contactCandidateBtn"><i class="fas fa-envelope me-2"></i>Contact
+            Candidate</a>
+    </div>
+</div>
+</div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Handle delete modal
+            const deleteModal = document.getElementById('deleteModal');
+            deleteModal?.addEventListener('show.bs.modal', event => {
+                const button = event.relatedTarget;
+                const applicationId = button.dataset.applicationId;
+                const applicantName = button.dataset.applicantName;
+                const modal = event.target;
+
+                modal.querySelector('#deleteApplicationId').value = applicationId;
+                modal.querySelector('.modal-body').textContent = `Are you sure you want to reject the candidate ${applicantName}?`;
+            });
+
+            // Handle Candidate Detail Modal
+            document.querySelectorAll('.view-detail-btn').forEach(btn => {
+                btn.addEventListener('click', e => {
+                    e.preventDefault();
+
+                    const applicationId = btn.dataset.applicationId;
+                    const applicantName = btn.dataset.applicantName;
+                    const candidateDetailModal = document.getElementById('candidateDetailModal');
+                    const modalBody = candidateDetailModal.querySelector('.modal-body');
+
+                    // Show loading state
+                    modalBody.innerHTML = '<div class="text-center py-5"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div><p class="mt-3">Loading candidate details...</p></div>';
+
+                    // Show modal using Bootstrap 5 API
+                    const bsModal = new bootstrap.Modal(candidateDetailModal);
+                    bsModal.show();
+
+                    // Fetch candidate details
+                    fetch(`@Url.Action("GetCandidateDetail", "Application", new { area = "Employer" })?applicationId=${applicationId}`, {
+                        method: 'GET',
+                        headers: {
+                            'Cache-Control': 'no-cache'
                         }
-                        menu.show();
-                    }).on('mouseleave', function () {
-                        $(this).find('.dropdown-menu').hide();
-                    });
+                    })
+                        .then(response => response.json())
+                        .then(response => {
+                            console.log("Response from GetCandidateDetail:", response);
+
+                            if (response && response.success) {
+                                const data = response.data;
+                                const modalDialog = candidateDetailModal.querySelector('.modal-dialog');
+
+                                // Debug resume file URL
+                                console.log("Resume File URL:", data.resumeFileUrl);
+
+                                // Reset modal to normal state
+                                modalDialog.classList.remove('modal-sm');
+                                modalDialog.classList.add('modal-xl');
+
+                                // Rebuild the entire modal content
+                                const modalContent = `
+                                                                                                                                                                                                                <div class="container-fluid">
+                                                                                                                                                                                                                    <div class="row">
+                                                                                                                                                                                                                        <!-- Left Column - Candidate Basic Info -->
+                                                                                                                                                                                                                        <div class="col-md-4">
+                                                                                                                                                                                                                            <div class="candidate-profile text-center mb-4">
+                                                                                                                                                                                                                                <div class="profile-image mb-3 d-flex justify-content-center">
+                                                                                                                                                                                                                                    ${data.profilePicture ?
+                                        `<img src="${data.profilePicture}" alt="Candidate" class="rounded-circle" width="100" height="100" id="candidateAvatar">` :
+                                        `<div class="avatar-placeholder rounded-circle d-flex align-items-center justify-content-center" style="width: 100px; height: 100px; background-color: #007bff; color: white; font-size: 2rem; font-weight: bold;">
+                                                                                                                                                                                                                                            ${data.firstName && data.lastName ? data.firstName.charAt(0) + data.lastName.charAt(0) : 'U'}
+                                                                                                                                                                                                                                        </div>`
+                                    }
+                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                                <h4 class="candidate-name" id="candidateName">${data.fullName}</h4>
+                                                                                                                                                                                                                                <p class="candidate-title text-muted" id="candidateTitle">${data.title}</p>
+                                                                                                                                                                                                                                <div class="candidate-actions mt-3">
+                                                                                                                                                                                                                                    <a href="mailto:${data.email}" class="btn btn-primary"><i class="fas fa-envelope me-2"></i>Send Mail</a>
+                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                            <div class="candidate-info card mb-4">
+                                                                                                                                                                                                                                <div class="card-body">
+                                                                                                                                                                                                                                    <h5 class="card-title">Personal Information</h5>
+                                                                                                                                                                                                                                    <ul class="list-unstyled">
+                                                                                                                                                                                                                                        <li class="mb-2">
+                                                                                                                                                                                                                                            <span class="text-muted me-2"><i class="fas fa-briefcase"></i></span>
+                                                                                                                                                                                                                                            <span class="info-label">Experience:</span>
+                                                                                                                                                                                                                                            <span class="info-value">${data.experience}</span>
+                                                                                                                                                                                                                                        </li>
+                                                                                                                                                                                                                                        <li class="mb-2">
+                                                                                                                                                                                                                                            <span class="text-muted me-2"><i class="fas fa-graduation-cap"></i></span>
+                                                                                                                                                                                                                                            <span class="info-label">Education:</span>
+                                                                                                                                                                                                                                            <span class="info-value">${data.education}</span>
+                                                                                                                                                                                                                                        </li>
+                                                                                                                                                                                                                                        <li>
+                                                                                                                                                                                                                                            <span class="text-muted me-2"><i class="fas fa-map-marker-alt"></i></span>
+                                                                                                                                                                                                                                            <span class="info-label">Address:</span>
+                                                                                                                                                                                                                                            <span class="info-value">${data.address}</span>
+                                                                                                                                                                                                                                        </li>
+                                                                                                                                                                                                                                    </ul>
+                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                            <div class="candidate-contact card">
+                                                                                                                                                                                                                                <div class="card-body">
+                                                                                                                                                                                                                                    <h5 class="card-title">Contact Information</h5>
+                                                                                                                                                                                                                                    <ul class="list-unstyled">
+                                                                                                                                                                                                                                        <li class="mb-2">
+                                                                                                                                                                                                                                            <span class="text-muted me-2"><i class="fas fa-phone"></i></span>
+                                                                                                                                                                                                                                            <span class="info-label">Phone:</span>
+                                                                                                                                                                                                                                            <span class="info-value">${data.phoneNumber}</span>
+                                                                                                                                                                                                                                        </li>
+                                                                                                                                                                                                                                        <li>
+                                                                                                                                                                                                                                            <span class="text-muted me-2"><i class="fas fa-envelope"></i></span>
+                                                                                                                                                                                                                                            <span class="info-label">Email:</span>
+                                                                                                                                                                                                                                            <a href="mailto:${data.email}" class="info-value">${data.email}</a>
+                                                                                                                                                                                                                                        </li>
+                                                                                                                                                                                                                                    </ul>
+                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                        </div>
+
+                                                                                                                                                                                                                        <!-- Right Column - Biography & Cover Letter -->
+                                                                                                                                                                                                                        <div class="col-md-8">
+                                                                                                                                                                                                                            <ul class="nav nav-tabs mb-3" id="candidateDetailTabs" role="tablist">
+                                                                                                                                                                                                                                <li class="nav-item" role="presentation">
+                                                                                                                                                                                                                                    <button class="nav-link active" id="biography-tab" data-bs-toggle="tab" data-bs-target="#biography" type="button" role="tab" aria-controls="biography" aria-selected="true">Biography</button>
+                                                                                                                                                                                                                                </li>
+                                                                                                                                                                                                                                <li class="nav-item" role="presentation">
+                                                                                                                                                                                                                                    <button class="nav-link" id="cover-letter-tab" data-bs-toggle="tab" data-bs-target="#cover-letter" type="button" role="tab" aria-controls="cover-letter" aria-selected="false">Cover Letter</button>
+                                                                                                                                                                                                                                </li>
+                                                                                                                                                                                                                                <li class="nav-item" role="presentation">
+                                                                                                                                                                                                                                    <button class="nav-link" id="skills-tab" data-bs-toggle="tab" data-bs-target="#skills" type="button" role="tab" aria-controls="skills" aria-selected="false">Skills</button>
+                                                                                                                                                                                                                                </li>
+                                                                                                                                                                                                                                ${data.resumeFileUrl ? '<li class="nav-item" role="presentation"><button class="nav-link" id="resume-tab" data-bs-toggle="tab" data-bs-target="#resume" type="button" role="tab" aria-controls="resume" aria-selected="false">Resume</button></li>' : ''}
+                                                                                                                                                                                                                            </ul>
+                                                                                                                                                                                                                            <div class="tab-content" id="candidateDetailTabsContent">
+                                                                                                                                                                                                                                <div class="tab-pane fade show active" id="biography" role="tabpanel" aria-labelledby="biography-tab">
+                                                                                                                                                                                                                                    <div class="card">
+                                                                                                                                                                                                                                        <div class="card-body">
+                                                                                                                                                                                                                                            <h5 class="card-title">Biography</h5>
+                                                                                                                                                                                                                                            <div id="candidateBiography">
+                                                                                                                                                                                                                                                ${data.summary ? data.summary.replace(/\n/g, '<br>') : '<p>No biography available.</p>'}
+                                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                                <div class="tab-pane fade" id="cover-letter" role="tabpanel" aria-labelledby="cover-letter-tab">
+                                                                                                                                                                                                                                    <div class="card">
+                                                                                                                                                                                                                                        <div class="card-body">
+                                                                                                                                                                                                                                            <h5 class="card-title">Cover Letter</h5>
+                                                                                                                                                                                                                                            <div id="candidateCoverLetter">
+                                                                                                                                                                                                                                                ${data.coverLetter ? data.coverLetter.replace(/\n/g, '<br>') : '<p>No cover letter provided.</p>'}
+                                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                                <div class="tab-pane fade" id="skills" role="tabpanel" aria-labelledby="skills-tab">
+                                                                                                                                                                                                                                    <div class="card">
+                                                                                                                                                                                                                                        <div class="card-body">
+                                                                                                                                                                                                                                            <h5 class="card-title">Skills & Qualifications</h5>
+                                                                                                                                                                                                                                            <div class="mb-4">
+                                                                                                                                                                                                                                                <h6 class="mb-2">Skills</h6>
+                                                                                                                                                                                                                                                <div class="skill-tags">
+                                                                                                                                                                                                                                                    ${data.skills && data.skills !== 'Not specified'
+                                        ? data.skills.split(',').map(skill =>
+                                            `<span class="badge bg-light text-dark me-2 mb-2 p-2">${skill.trim()}</span>`
+                                        ).join('')
+                                        : '<p>No skills specified</p>'}
+                                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                                            </div>
+                                                        
+                                                                                                                                                                                                                                            <div class="mb-4">
+                                                                                                                                                                                                                                                <h6 class="mb-2">Languages</h6>
+                                                                                                                                                                                                                                                <p>${data.languages || 'Not specified'}</p>
+                                                                                                                                                                                                                                            </div>
+                                                        
+                                                                                                                                                                                                                                            <div>
+                                                                                                                                                                                                                                                <h6 class="mb-2">Certifications</h6>
+                                                                                                                                                                                                                                                <p>${data.certifications || 'Not specified'}</p>
+                                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                                ${data.resumeFileUrl ?
+                                        `<div class="tab-pane fade" id="resume" role="tabpanel" aria-labelledby="resume-tab">
+                                                                                                                                                                                                                                    <div class="card">
+                                                                                                                                                                                                                                        <div class="card-body">
+                                                                                                                                                                                                                                            <h5 class="card-title">Resume</h5>
+                                                                                                                                                                                                                                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                                                                                                                                                                                                                                <p class="mb-0">Download the candidate's full resume for more detailed information.</p>
+                                                                                                                                                                                                                                                <a href="${data.resumeFileUrl}" class="btn btn-outline-primary" id="downloadResumeBtn" target="_blank" onclick="console.log('Download URL: ${data.resumeFileUrl}');"><i class="fas fa-download me-2"></i>Download Resume</a>
+                                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                                </div>` : ''}
+                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                </div>`;
+
+                                modalBody.innerHTML = modalContent;
+
+                                // Update the footer
+                                const modalFooter = candidateDetailModal.querySelector('.modal-footer');
+                                modalFooter.innerHTML = `
+                                                                                                                                                                                                                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                                                                                                                                                                                                                    <a href="mailto:${data.email}" class="btn btn-primary" id="contactCandidateBtn">
+                                                                                                                                                                                                                        <i class="fas fa-envelope me-2"></i>Contact Candidate
+                                                                                                                                                                                                                    </a>
+                                                                                                                                                                                                                `;
+                            } else {
+                                // Show error message
+                                const modalDialog = candidateDetailModal.querySelector('.modal-dialog');
+                                modalDialog.classList.remove('modal-xl');
+                                modalDialog.classList.add('modal-sm');
+
+                                const errorMessage = response && response.message ? response.message : 'Failed to load candidate details';
+                                modalBody.innerHTML = `
+                                                                                                                                                                                                                    <div class="alert alert-danger" role="alert">
+                                                                                                                                                                                                                        <i class="fas fa-exclamation-circle me-2"></i>${errorMessage}
+                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                `;
+                                console.error('Error in response:', response);
+                            }
+                        })
+                        .catch((error) => {
+                            // Show error message
+                            const modalDialog = candidateDetailModal.querySelector('.modal-dialog');
+                            modalDialog.classList.remove('modal-xl');
+                            modalDialog.classList.add('modal-sm');
+
+                            modalBody.innerHTML = `
+                                                                                                                                                                                                                <div class="alert alert-danger" role="alert">
+                                                                                                                                                                                                                    <i class="fas fa-exclamation-circle me-2"></i>Failed to load candidate details. Please try again later.
+                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                <div class="small text-muted mt-2">Error details: ${error.message || 'Unknown error'}</div>
+                                                                                                                                                                                                            `;
+                            console.error('Fetch error:', error);
+                        });
                 });
-            </script>
-        }
+            });
+
+            // Handle deleteForm submission
+            const deleteForm = document.getElementById('deleteForm');
+            deleteForm?.addEventListener('submit', event => {
+                event.preventDefault();
+
+                // Show loading state on the button
+                const submitBtn = deleteForm.querySelector('button[type="submit"]');
+                submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Rejecting...';
+                submitBtn.disabled = true;
+
+                // Create form data from the form
+                const formData = new FormData(deleteForm);
+
+                // Get the anti-forgery token
+                const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
+
+                // Send the form using fetch
+                fetch(deleteForm.action, {
+                    method: 'POST',
+                    headers: {
+                        'RequestVerificationToken': token
+                    },
+                    body: formData
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            // Refresh the page or redirect
+                            window.location.reload();
+                        } else {
+                            throw new Error('Server returned error');
+                        }
+                    })
+                    .catch(error => {
+                        // Re-enable the button on error
+                        submitBtn.innerHTML = 'Reject';
+                        submitBtn.disabled = false;
+                        console.error('Error:', error);
+                    });
+            });
+        });
+    </script>
+}

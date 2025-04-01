@@ -38,5 +38,17 @@ namespace WorkFinder.Web.Repositories
         {
             return await _context.Resumes.AnyAsync(r => r.UserId == userId);
         }
+
+        public async Task<Dictionary<int, Resume>> GetResumesByUserIdsAsync(IEnumerable<int> userIds)
+        {
+            var resumes = await _context.Resumes
+                .Where(r => userIds.Contains(r.UserId))
+                .ToListAsync();
+
+            // Group by UserId and take the first resume for each user
+            // This handles cases where a user might have multiple resumes
+            return resumes.GroupBy(r => r.UserId)
+                .ToDictionary(g => g.Key, g => g.First());
+        }
     }
 }

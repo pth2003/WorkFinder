@@ -7,27 +7,22 @@
 <div class="container">
     <div class="employers-dashboard mt-4">
         <!-- Sidebar -->
-        <div class="sidebar">
+        <div class="sidebar d-none d-md-block">
             <div class="sidebar-header mb-4">
                 <h5>EMPLOYERS DASHBOARD</h5>
             </div>
             <ul class="sidebar-menu">
                 <li class="active">
-                    <a href="#" class="d-flex align-items-center">
+                    <a href="@Url.Action("Index", "Home", new { area = "Employer" })" class="d-flex align-items-center">
                         <i class="fas fa-tachometer-alt me-2"></i>
                         <span>Overview</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="d-flex align-items-center">
-                        <i class="fas fa-building me-2"></i>
-                        <span>Employers Profile</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="@Url.Action("Create", "Job", new { area = "Employer" })" class="d-flex align-items-center">
-                        <i class="fas fa-plus-circle me-2"></i>
-                        <span>Post a Job</span>
+                    <a href="@Url.Action("Profile", "Company", new { area = "Employer" })"
+                        class="d-flex align-items-center">
+                        <i class="fas fa-user me-2"></i>
+                        <span>Profile</span>
                     </a>
                 </li>
                 <li>
@@ -37,32 +32,15 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="d-flex align-items-center">
-                        <i class="fas fa-user me-2"></i>
-                        <span>Saved Candidate</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="d-flex align-items-center">
-                        <i class="fas fa-credit-card me-2"></i>
-                        <span>Plans & Billing</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="d-flex align-items-center">
-                        <i class="fas fa-building me-2"></i>
-                        <span>All Companies</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="d-flex align-items-center">
+                    <a href="@Url.Action("Settings", "Account", new { area = "Employer" })"
+                        class="d-flex align-items-center">
                         <i class="fas fa-cog me-2"></i>
                         <span>Settings</span>
                     </a>
                 </li>
             </ul>
             <div class="sidebar-footer mt-4">
-                <a href="@Url.Action("Logout", "Auth")" class="d-flex align-items-center">
+                <a href="@Url.Action("Logout", "Auth", new { area = "Auth" })" class="d-flex align-items-center">
                     <i class="fas fa-sign-out-alt me-2"></i> Log-out
                 </a>
             </div>
@@ -152,17 +130,20 @@
     .employers-dashboard {
         display: flex;
         gap: 30px;
+        width: 100%;
+        overflow-x: hidden;
     }
 
     /* Sidebar */
     .sidebar {
         width: 250px;
         flex-shrink: 0;
-        font-size: 1.6rem;
+        font-size: 16px;
+        overflow-x: hidden;
     }
 
     .sidebar-header h5 {
-        font-size: 14px;
+        font-size: 16px;
         font-weight: 600;
         color: #777;
         margin-bottom: 20px;
@@ -183,9 +164,10 @@
         align-items: center;
         color: #666;
         text-decoration: none;
-        padding: 8px 15px;
+        padding: 10px 15px;
         border-radius: 6px;
         transition: all 0.3s;
+        font-size: 15px;
     }
 
     .sidebar-menu li a:hover,
@@ -222,6 +204,8 @@
     /* Main Content */
     .main-content {
         flex: 1;
+        min-width: 0;
+        overflow-x: hidden;
     }
 
     .dashboard-greeting h3 {
@@ -255,6 +239,7 @@
         padding: 20px;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
         height: 100%;
+        margin-bottom: 1rem;
     }
 
     .stats-content h2 {
@@ -357,5 +342,102 @@
 
     .btn-view-applications:hover {
         background-color: #e9ecef;
+    }
+
+    /* Card styles */
+    .card {
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        border: none;
+        margin-bottom: 1.5rem;
+    }
+
+    .card-header {
+        background-color: #f8f9fa;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        padding: 15px 20px;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    /* Responsive styles */
+    @@media(max-width: 1199px) {
+        .stats-content h2 {
+            font-size: 24px;
+        }
+    }
+
+    @@media(max-width: 991px) {
+        .sidebar {
+            font-size: 1.2rem;
+        }
+
+        .stats-card {
+            padding: 15px;
+        }
+
+        .stats-icon {
+            width: 45px;
+            height: 45px;
+        }
+
+        .stats-icon i {
+            font-size: 18px;
+        }
+    }
+
+    @@media(max-width: 767px) {
+        .employers-dashboard {
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        .sidebar {
+            width: 100%;
+            margin-bottom: 20px;
+            overflow-x: hidden;
+        }
+
+        .stats-card {
+            margin-bottom: 15px;
+        }
+
+        .jobs-table th,
+        .jobs-table td {
+            padding: 10px 15px;
+        }
+    }
+
+    @@media(max-width: 575px) {
+        .page-title {
+            font-size: 24px;
+        }
+
+        .stats-content h2 {
+            font-size: 20px;
+        }
+
+        .stats-content p {
+            font-size: 12px;
+        }
+
+        .stats-icon {
+            width: 40px;
+            height: 40px;
+        }
+
+        .stats-icon i {
+            font-size: 16px;
+        }
+
+        .card-header {
+            padding: 12px 15px;
+        }
+
+        .card-body {
+            padding: 15px;
+        }
     }
 </style>

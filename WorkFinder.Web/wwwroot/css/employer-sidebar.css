@@ -1,0 +1,105 @@
+/* Employer Sidebar Responsive Styles - Bootstrap 5 */
+
+/* Base sidebar styles */
+.sidebar {
+    width: 280px;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+    z-index: 100;
+    
+    /* Cải thiện sidebar cho layout linh hoạt */
+    position: sticky;
+    top: 0;
+    max-height: 100vh; /* Thay height thành max-height */
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+/* Sidebar menu */
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 15px 0; /* Thêm margin bottom */
+}
+
+/* Sidebar footer */
+.sidebar-footer {
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+    /* Bỏ margin-top: auto để footer không bị đẩy xuống dưới cùng khi không cần thiết */
+}
+
+/* Main content styles */
+.main-content {
+    flex: 1;
+    transition: all 0.3s ease;
+    padding-bottom: 30px; /* Thêm khoảng cách ở dưới để tránh bị footer che */
+}
+
+/* Mobile toggle button - Removed as we're using the navbar toggle */
+
+/* Mobile styles */
+@media (max-width: 767.98px) {
+    .employers-dashboard {
+        position: relative;
+    }
+    
+    .sidebar {
+        position: fixed;
+        left: -280px;
+        top: 0;
+        height: 100vh; /* Giữ nguyên height: 100vh cho mobile */
+        width: 280px;
+        z-index: 1050;
+        overflow-y: auto;
+        transition: transform 0.3s ease;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        
+        /* Giữ flex layout ngay cả ở chế độ mobile */
+        display: flex;
+        flex-direction: column;
+    }
+    
+    /* Riêng ở mobile thì giữ footer nằm dưới cùng */
+    .sidebar-menu {
+        flex-grow: 1;
+    }
+    
+    .sidebar-footer {
+        margin-top: auto;
+    }
+    
+    .sidebar.mobile-hidden {
+        transform: translateX(-100%);
+    }
+    
+    .sidebar.mobile-visible {
+        transform: translateX(280px);
+    }
+    
+    .main-content.full-width {
+        width: 100%;
+    }
+    
+    /* Overlay when sidebar is visible */
+    .sidebar-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1040;
+        display: none;
+    }
+    
+    .sidebar-overlay.active {
+        display: block;
+    }
+}

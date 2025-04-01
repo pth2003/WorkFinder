@@ -8,11 +8,23 @@ using WorkFinder.Web.Models;
 using WorkFinder.Web.Repositories;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.Http.Features;
+using WorkFinder.Web.Areas.Employer.Controllers;
+using Microsoft.AspNetCore.Mvc;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(options =>
+{
+    // Có thể thêm global filters nếu cần
+})
+.ConfigureApplicationPartManager(manager =>
+{
+    // Clear và đăng ký lại các phần của ứng dụng nếu cần
+    // manager.ApplicationParts.Clear();
+    // manager.ApplicationParts.Add(new AssemblyPart(typeof(Program).Assembly));
+});
 
 // Cấu hình giới hạn kích thước form
 builder.Services.Configure<IISServerOptions>(options =>

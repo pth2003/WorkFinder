@@ -6,7 +6,7 @@
 
 <div class="container">
     <div class="employers-dashboard mt-4">
-        <div class="sidebar">
+        <div class="sidebar d-none d-md-block">
             <div class="sidebar-header mb-4">
                 <h5>EMPLOYERS DASHBOARD</h5>
             </div>
@@ -428,10 +428,10 @@
                     loadingIndicator.className = 'text-center py-3';
                     loadingIndicator.style.display = 'none';
                     loadingIndicator.innerHTML = `
-                                <div class="spinner-border text-primary" role="status">
-                                    <span class="visually-hidden">Loading...</span>
-                                </div>
-                            `;
+                                        <div class="spinner-border text-primary" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    `;
                     document.querySelector('main').appendChild(loadingIndicator);
                 }
 

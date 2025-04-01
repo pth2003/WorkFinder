@@ -25,6 +25,10 @@
       "PackagePath": "staticwebassets/css/company.css"
     },
     {
+      "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/employer-sidebar.css",
+      "PackagePath": "staticwebassets/css/employer-sidebar.css"
+    },
+    {
       "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/featured-job.css",
       "PackagePath": "staticwebassets/css/featured-job.css"
     },
@@ -151,6 +155,10 @@
     {
       "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/js/employer-dashboard.js",
       "PackagePath": "staticwebassets/js/employer-dashboard.js"
+    },
+    {
+      "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/js/employer-sidebar.js",
+      "PackagePath": "staticwebassets/js/employer-sidebar.js"
     },
     {
       "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/js/loading-handler.js",

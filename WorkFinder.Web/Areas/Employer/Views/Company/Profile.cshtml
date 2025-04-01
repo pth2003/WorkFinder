@@ -1,0 +1,880 @@
+@model WorkFinder.Web.Areas.Employer.Models.CompanyProfileViewModel
+@{
+    ViewData["Title"] = "Company Profile";
+    Layout = "_EmployerLayout";
+}
+
+<div class="container">
+    <!-- Toast container for notifications -->
+    <div id="toast-container" class="toast-container position-fixed top-0 end-0 p-3"></div>
+
+    <div class="employers-dashboard mt-4">
+        <!-- Sidebar -->
+        <div class="sidebar d-none d-md-block">
+            <div class="sidebar-header mb-4">
+                <h5>EMPLOYERS DASHBOARD</h5>
+            </div>
+            <ul class="sidebar-menu">
+                <li>
+                    <a href="@Url.Action("Index", "Home", new { area = "Employer" })" class="d-flex align-items-center">
+                        <i class="fas fa-tachometer-alt me-2"></i>
+                        <span>Overview</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="@Url.Action("Profile", "Company", new { area = "Employer" })" class="d-flex align-items-center">
+                        <i class="fas fa-user me-2"></i>
+                        <span>Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Index", "Job", new { area = "Employer" })" class="d-flex align-items-center">
+                        <i class="fas fa-briefcase me-2"></i>
+                        <span>My Jobs</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Settings", "Account", new { area = "Employer" })" class="d-flex align-items-center">
+                        <i class="fas fa-cog me-2"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="sidebar-footer mt-4">
+                <a href="@Url.Action("Logout", "Auth", new { area = "Auth" })" class="d-flex align-items-center">
+                    <i class="fas fa-sign-out-alt me-2"></i> Log-out
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="row mb-4">
+                <div class="col">
+                    <h2 class="page-title mb-0">@ViewData["Title"]</h2>
+                    <p class="text-muted">Update your company information</p>
+                </div>
+            </div>
+
+            <!-- Tabs Navigation -->
+            <ul class="nav nav-tabs nav-tabs-custom" id="profileTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link @(Model.ActiveTab == "basic" ? "active" : "")" id="basic-tab" data-bs-toggle="tab" data-bs-target="#basic" type="button" role="tab" aria-controls="basic" aria-selected="@(Model.ActiveTab == "basic" ? "true" : "false")">
+                        <i class="fas fa-building me-2"></i> Company Info
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link @(Model.ActiveTab == "organization" ? "active" : "")" id="organization-tab" data-bs-toggle="tab" data-bs-target="#organization" type="button" role="tab" aria-controls="organization" aria-selected="@(Model.ActiveTab == "organization" ? "true" : "false")">
+                        <i class="fas fa-info-circle me-2"></i> Organization
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link @(Model.ActiveTab == "social" ? "active" : "")" id="social-tab" data-bs-toggle="tab" data-bs-target="#social" type="button" role="tab" aria-controls="social" aria-selected="@(Model.ActiveTab == "social" ? "true" : "false")">
+                        <i class="fas fa-globe me-2"></i> Social Media
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link @(Model.ActiveTab == "contact" ? "active" : "")" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="@(Model.ActiveTab == "contact" ? "true" : "false")">
+                        <i class="fas fa-phone me-2"></i> Contact
+                    </button>
+                </li>
+            </ul>
+
+            <!-- Tabs Content -->
+            <div class="tab-content profile-tab-content" id="profileTabsContent">
+                <!-- Basic Information Tab -->
+                <div class="tab-pane fade @(Model.ActiveTab == "basic" ? "show active" : "")" id="basic" role="tabpanel" aria-labelledby="basic-tab">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Company Basic Information</h5>
+                        </div>
+                        <div class="card-body">
+                            <form method="post" action="@Url.Action("UpdateBasicInfo", "Company", new { area = "Employer" })" enctype="multipart/form-data">
+                                @Html.AntiForgeryToken()
+                                <div class="row mb-4">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="Name" class="form-label">Company Name <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="Name" name="Name" value="@Model.BasicInfo.Name" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-4">
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label for="Description" class="form-label">Company Description <span class="text-danger">*</span></label>
+                                            <textarea class="form-control" id="Description" name="Description" rows="6" required>@Model.BasicInfo.Description</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-4">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="Logo" class="form-label">Company Logo</label>
+                                            <input type="file" class="form-control" id="Logo" name="Logo">
+                                            @if (!string.IsNullOrEmpty(Model.BasicInfo.LogoPath))
+                                            {
+                                                                                                <div class="mt-2">
+                                                                                                    <img src="@Model.BasicInfo.LogoPath" alt="Company Logo" class="img-thumbnail" style="height: 100px;">
+                                                                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="Banner" class="form-label">Company Banner</label>
+                                            <input type="file" class="form-control" id="Banner" name="Banner">
+                                            @if (!string.IsNullOrEmpty(Model.BasicInfo.BannerPath))
+                                            {
+                                                                                                <div class="mt-2">
+                                                                                                    <img src="@Model.BasicInfo.BannerPath" alt="Company Banner" class="img-thumbnail" style="height: 100px;">
+                                                                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="text-end">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-save me-2"></i> Save Changes
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Organization Information Tab -->
+                <div class="tab-pane fade @(Model.ActiveTab == "organization" ? "show active" : "")" id="organization" role="tabpanel" aria-labelledby="organization-tab">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Organization Information</h5>
+                        </div>
+                        <div class="card-body">
+                            <form method="post" action="@Url.Action("UpdateOrganizationInfo", "Company", new { area = "Employer" })">
+                                @Html.AntiForgeryToken()
+                                <div class="row mb-4">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="CategoryId" class="form-label">Organization Type <span class="text-danger">*</span></label>
+                                            <select class="form-select" id="CategoryId" name="CategoryId" required>
+                                                @foreach (var category in ViewBag.Categories)
+                                                {
+                                                                                                    if (Model.OrganizationInfo.CategoryId == category.Id)
+                                                                                                    {
+                                                                                                                                                        <option value="@category.Id" selected>@category.Name</option>
+                                                                                                    }
+                                                                                                    else
+                                                                                                    {
+                                                                                                                                                        <option value="@category.Id">@category.Name</option>
+                                                                                                    }
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="Industry" class="form-label">Industry <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="Industry" name="Industry" value="@Model.OrganizationInfo.Industry" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-4">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="EmployeeCount" class="form-label">Number of Employees</label>
+                                            <input type="number" class="form-control" id="EmployeeCount" name="EmployeeCount" value="@Model.OrganizationInfo.EmployeeCount">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="FoundedDate" class="form-label">Founded Date</label>
+                                            <input type="date" class="form-control" id="FoundedDate" name="FoundedDate" value="@(Model.OrganizationInfo.FoundedDate?.ToString("yyyy-MM-dd"))">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-4">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="Website" class="form-label">Company Website</label>
+                                            <input type="url" class="form-control" id="Website" name="Website" value="@Model.OrganizationInfo.Website">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-4">
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label for="Vision" class="form-label">Company Vision</label>
+                                            <textarea class="form-control" id="Vision" name="Vision" rows="4">@Model.OrganizationInfo.Vision</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="text-end">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-save me-2"></i> Save Changes
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Media Tab -->
+                <div class="tab-pane fade @(Model.ActiveTab == "social" ? "show active" : "")" id="social" role="tabpanel" aria-labelledby="social-tab">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Social Media Links</h5>
+                        </div>
+                        <div class="card-body">
+                            <form method="post" action="@Url.Action("UpdateSocialInfo", "Company", new { area = "Employer" })">
+                                @Html.AntiForgeryToken()
+                                <div id="socialLinksContainer">
+                                    @if (Model.SocialInfo.SocialLinks != null && Model.SocialInfo.SocialLinks.Any())
+                                    {
+                                                                                        @for (int i = 0; i < Model.SocialInfo.SocialLinks.Count; i++)
+                                                                                        {
+                                                                                                                                            var platform = Model.SocialInfo.SocialLinks[i].Platform;
+                                                                                                                                            <div class="social-link-item mb-3">
+                                                                                                                                                <div class="row">
+                                                                                                                                                    <div class="col-md-5">
+                                                                                                                                                        <input type="hidden" name="SocialLinks[@i].Id" value="@Model.SocialInfo.SocialLinks[i].Id" />
+                                                                                                                                                        <select class="form-select" name="SocialLinks[@i].Platform" required>
+                                                                                                                                                            <option value="" disabled selected="@string.IsNullOrEmpty(platform)">Select Platform</option>
+                                                                                                                                                            <option value="Facebook" selected="@(platform == "Facebook")">Facebook</option>
+                                                                                                                                                            <option value="Twitter" selected="@(platform == "Twitter")">Twitter</option>
+                                                                                                                                                            <option value="LinkedIn" selected="@(platform == "LinkedIn")">LinkedIn</option>
+                                                                                                                                                            <option value="Instagram" selected="@(platform == "Instagram")">Instagram</option>
+                                                                                                                                                            <option value="YouTube" selected="@(platform == "YouTube")">YouTube</option>
+                                                                                                                                                            <option value="Website" selected="@(platform == "Website")">Website</option>
+                                                                                                                                                        </select>
+                                                                                                                                                    </div>
+                                                                                                                                                    <div class="col-md-6">
+                                                                                                                                                        <input type="url" class="form-control" name="SocialLinks[@i].Url" value="@Model.SocialInfo.SocialLinks[i].Url" placeholder="URL" required>
+                                                                                                                                                    </div>
+                                                                                                                                                    <div class="col-md-1">
+                                                                                                                                                        <button type="button" class="btn btn-danger btn-sm remove-social-link">
+                                                                                                                                                            <i class="fas fa-trash"></i>
+                                                                                                                                                        </button>
+                                                                                                                                                    </div>
+                                                                                                                                                </div>
+                                                                                                                                            </div>
+                                                                                        }
+                                    }
+                                    else
+                                    {
+                                                                                        <div class="social-link-item mb-3">
+                                                                                            <div class="row">
+                                                                                                <div class="col-md-5">
+                                                                                                    <select class="form-select" name="SocialLinks[0].Platform" required>
+                                                                                                        <option value="" disabled selected>Select Platform</option>
+                                                                                                        <option value="Facebook">Facebook</option>
+                                                                                                        <option value="Twitter">Twitter</option>
+                                                                                                        <option value="LinkedIn">LinkedIn</option>
+                                                                                                        <option value="Instagram">Instagram</option>
+                                                                                                        <option value="YouTube">YouTube</option>
+                                                                                                        <option value="Website">Website</option>
+                                                                                                    </select>
+                                                                                                </div>
+                                                                                                <div class="col-md-6">
+                                                                                                    <input type="url" class="form-control" name="SocialLinks[0].Url" placeholder="URL" required>
+                                                                                                </div>
+                                                                                                <div class="col-md-1">
+                                                                                                    <button type="button" class="btn btn-danger btn-sm remove-social-link">
+                                                                                                        <i class="fas fa-trash"></i>
+                                                                                                    </button>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                    }
+                                </div>
+
+                                <div class="mb-3">
+                                    <button type="button" id="addSocialLink" class="btn btn-outline-primary">
+                                        <i class="fas fa-plus me-2"></i> Add Social Link
+                                    </button>
+                                </div>
+
+                                <div class="text-end">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-save me-2"></i> Save Changes
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Information Tab -->
+                <div class="tab-pane fade @(Model.ActiveTab == "contact" ? "show active" : "")" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Contact Information</h5>
+                        </div>
+                        <div class="card-body">
+                            <form method="post" action="@Url.Action("UpdateContactInfo", "Company", new { area = "Employer" })">
+                                @Html.AntiForgeryToken()
+                                <div class="row mb-4">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="Location" class="form-label">Location <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="Location" name="Location" value="@Model.ContactInfo.Location" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="Phone" class="form-label">Phone <span class="text-danger">*</span></label>
+                                            <input type="tel" class="form-control" id="Phone" name="Phone" value="@Model.ContactInfo.Phone" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-4">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="Email" class="form-label">Email <span class="text-danger">*</span></label>
+                                            <input type="email" class="form-control" id="Email" name="Email" value="@Model.ContactInfo.Email" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="text-end">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-save me-2"></i> Save Changes
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Unsaved Changes Modal -->
+<div class="modal fade" id="unsavedChangesModal" tabindex="-1" aria-labelledby="unsavedChangesModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="unsavedChangesModalLabel">Unsaved Changes</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>You have unsaved changes. Do you want to save changes before continuing?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="discardChangesBtn">Discard Changes</button>
+                <button type="button" class="btn btn-primary" id="saveChangesBtn">Save Changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+            <script src="~/js/toast.js"></script>
+            <script>
+                // Global variable to track form changes
+                let formsChanged = {
+                    basic: false,
+                    organization: false,
+                    social: false,
+                    contact: false
+                };
+        
+                // Variables to store target tab when changing tabs
+                let targetTab = null;
+
+                $(document).ready(function () {
+                    // Display toast notifications if TempData exists
+                    @if (TempData["SuccessMessage"] != null)
+                    {
+                                <text>
+                                window.toast.showToast('Success', '@TempData["SuccessMessage"]', 'success');
+                                </text>
+                    }
+
+                    @if (TempData["ErrorMessage"] != null)
+                    {
+                                <text>
+                                window.toast.showToast('Error', '@TempData["ErrorMessage"]', 'error');
+                                </text>
+                    }
+
+                    // Function to refresh the page after successful updates
+                    function refreshProfile() {
+                        location.reload();
+                    }
+
+                    // Handle Social Links
+                    $("#addSocialLink").click(function () {
+                        const linkCount = $(".social-link-item").length;
+                
+                        const newLink = `
+                            <div class="social-link-item mb-3">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <select class="form-select" name="SocialLinks[${linkCount}].Platform" required>
+                                            <option value="" disabled selected>Select Platform</option>
+                                            <option value="Facebook">Facebook</option>
+                                            <option value="Twitter">Twitter</option>
+                                            <option value="LinkedIn">LinkedIn</option>
+                                            <option value="Instagram">Instagram</option>
+                                            <option value="YouTube">YouTube</option>
+                                            <option value="Website">Website</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="url" class="form-control" name="SocialLinks[${linkCount}].Url" placeholder="URL" required>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <button type="button" class="btn btn-danger btn-sm remove-social-link">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                
+                        $("#socialLinksContainer").append(newLink);
+                        formsChanged.social = true;
+                    });
+            
+                    // Remove social link
+                    $(document).on("click", ".remove-social-link", function () {
+                        if ($(".social-link-item").length > 1) {
+                            $(this).closest(".social-link-item").remove();
+                            // Renumber the indices
+                            $(".social-link-item").each(function (index) {
+                                $(this).find("select").attr("name", `SocialLinks[${index}].Platform`);
+                                $(this).find("input[type='url']").attr("name", `SocialLinks[${index}].Url`);
+                                $(this).find("input[type='hidden']").attr("name", `SocialLinks[${index}].Id`);
+                            });
+                            formsChanged.social = true;
+                        } else {
+                            window.toast.showToast('Warning', 'You must have at least one social link', 'error');
+                        }
+                    });
+
+                    // Track form input changes - use input event for real-time tracking
+                    $("#basic input, #basic textarea").on('input change', function() {
+                        formsChanged.basic = true;
+                    });
+
+                    $("#organization input, #organization textarea, #organization select").on('input change', function() {
+                        formsChanged.organization = true;
+                    });
+
+                    $("#social input, #social select").on('input change', function() {
+                        formsChanged.social = true;
+                    });
+
+                    $("#contact input").on('input change', function() {
+                        formsChanged.contact = true;
+                    });
+
+                    // Handle form submissions with AJAX to prevent page reload
+                    $("form").on('submit', function(e) {
+                        e.preventDefault();
+                        const formId = $(this).closest('.tab-pane').attr('id');
+                        const form = $(this);
+                        const url = form.attr('action');
+                        const formData = new FormData(this);
+                
+                        // Show loading state
+                        const submitBtn = form.find('button[type="submit"]');
+                        const originalBtnText = submitBtn.html();
+                        submitBtn.html('<i class="fas fa-spinner fa-spin me-2"></i> Saving...');
+                        submitBtn.prop('disabled', true);
+                
+                        // Debug to console what's being sent
+                        console.log(`Submitting form to ${url}`);
+                        for (let pair of formData.entries()) {
+                            console.log(pair[0] + ': ' + pair[1]);
+                        }
+                
+                        $.ajax({
+                            url: url,
+                            type: 'POST',
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            headers: {
+                                'X-Requested-With': 'XMLHttpRequest'
+                            },
+                            success: function(response) {
+                                console.log('Success response:', response);
+                                
+                                // Check if we have a successful response
+                                if (response && response.success) {
+                                    // Reset form changed state
+                                    formsChanged[formId] = false;
+                                    
+                                    // Show success message
+                                    window.toast.showToast('Success', response.message || 'Changes saved successfully', 'success');
+                                    
+                                    // Check if any data was updated (saveResult should be > 0)
+                                    if (response.saveResult && response.saveResult > 0) {
+                                        // Refresh the page after a short delay to show the updated data
+                                        setTimeout(refreshProfile, 1500);
+                                    } else if (response.saveResult === 0) {
+                                        // If no changes were made, inform the user
+                                        window.toast.showToast('Info', 'No changes were detected', 'success');
+                                    }
+                                    
+                                    // If we have images to refresh in the basic tab
+                                    if (formId === 'basic' && (response.logoPath || response.bannerPath)) {
+                                        if (response.logoPath) {
+                                            const logoImg = $('#basic').find('img[alt="Company Logo"]');
+                                            if (logoImg.length) {
+                                                logoImg.attr('src', response.logoPath + '?t=' + new Date().getTime());
+                                            } else {
+                                                $('#Logo').after('<div class="mt-2"><img src="' + response.logoPath + '" alt="Company Logo" class="img-thumbnail" style="height: 100px;"></div>');
+                                            }
+                                        }
+                                        
+                                        if (response.bannerPath) {
+                                            const bannerImg = $('#basic').find('img[alt="Company Banner"]');
+                                            if (bannerImg.length) {
+                                                bannerImg.attr('src', response.bannerPath + '?t=' + new Date().getTime());
+                                            } else {
+                                                $('#Banner').after('<div class="mt-2"><img src="' + response.bannerPath + '" alt="Company Banner" class="img-thumbnail" style="height: 100px;"></div>');
+                                            }
+                                        }
+                                    }
+                                } else {
+                                    // This handles cases where we got a 200 response but success was false or undefined
+                                    window.toast.showToast('Error', response.message || 'Failed to save changes', 'error');
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                console.error('Error response:', xhr, status, error);
+                                
+                                // Show error message
+                                let errorMessage = 'An error occurred while saving changes';
+                                if (xhr.responseJSON && xhr.responseJSON.message) {
+                                    errorMessage = xhr.responseJSON.message;
+                                }
+                                window.toast.showToast('Error', errorMessage, 'error');
+                            },
+                            complete: function() {
+                                // Reset button state
+                                submitBtn.html(originalBtnText);
+                                submitBtn.prop('disabled', false);
+                            }
+                        });
+                    });
+
+                    // Tab change modal handling
+                    $('#profileTabs button[data-bs-toggle="tab"]').on('show.bs.tab', function (e) {
+                        // Get the current active tab id
+                        const currentTab = $('.tab-pane.active').attr('id');
+                
+                        // If there are unsaved changes in the current tab
+                        if (formsChanged[currentTab]) {
+                            // Prevent the tab from being shown
+                            e.preventDefault();
+                    
+                            // Store the target tab
+                            targetTab = $(e.target);
+                    
+                            // Show confirmation modal
+                            $('#unsavedChangesModal').modal('show');
+                        }
+                    });
+            
+                    // Handle discard changes button
+                    $('#discardChangesBtn').on('click', function() {
+                        if (targetTab) {
+                            // Reset the change tracking for the current tab
+                            const currentTab = $('.tab-pane.active').attr('id');
+                            formsChanged[currentTab] = false;
+                    
+                            // Switch to the target tab
+                            targetTab.tab('show');
+                    
+                            // Close the modal
+                            $('#unsavedChangesModal').modal('hide');
+                    
+                            // Optional: Show toast for discarded changes
+                            window.toast.showToast('Info', 'Changes discarded', 'success');
+                        }
+                    });
+            
+                    // Handle save changes button
+                    $('#saveChangesBtn').on('click', function() {
+                        const currentTab = $('.tab-pane.active').attr('id');
+                
+                        // Get the form in the current tab and submit it
+                        const form = $(`#${currentTab} form`);
+                        form.submit();
+                
+                        // Close the modal
+                        $('#unsavedChangesModal').modal('hide');
+                    });
+
+                    // Page leave confirmation
+                    window.addEventListener('beforeunload', function (e) {
+                        // Check if any form has unsaved changes
+                        const hasUnsavedChanges = Object.values(formsChanged).some(changed => changed === true);
+                
+                        if (hasUnsavedChanges) {
+                            // Standard message (browser may override this)
+                            const message = 'You have unsaved changes. Are you sure you want to leave?';
+                            e.returnValue = message;
+                            return message;
+                        }
+                    });
+            
+                    // Also handle sidebar and other navigation links
+                    $('.sidebar-menu a, a:not([href^="#"])').on('click', function(e) {
+                        // Check if any form has unsaved changes
+                        const hasUnsavedChanges = Object.values(formsChanged).some(changed => changed === true);
+                
+                        if (hasUnsavedChanges) {
+                            e.preventDefault();
+                    
+                            // Store the href for later navigation
+                            const href = $(this).attr('href');
+                    
+                            // Show custom confirmation dialog
+                            if (confirm('You have unsaved changes. Are you sure you want to leave without saving?')) {
+                                // Navigate to the link if confirmed
+                                window.location.href = href;
+                            }
+                        }
+                    });
+            
+                    // Set active tab based on URL parameter
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const tab = urlParams.get('tab');
+                    if (tab) {
+                        $(`#${tab}-tab`).tab('show');
+                    }
+                });
+            </script>
+}
+
+<style>
+    /* Container */
+    .container {
+        overflow-y: auto;
+        overflow-x: hidden;
+        scrollbar-width: none; /* Firefox */
+    }
+
+    .container::-webkit-scrollbar {
+        display: none; /* Chrome, Safari */
+    }
+
+    /* Dashboard Layout */
+    .employers-dashboard {
+        display: flex;
+        gap: 30px;
+        position: relative;
+        width: 100%;
+    }
+
+    /* Sidebar */
+    .sidebar {
+        width: 250px;
+        flex-shrink: 0;
+        font-size: 16px;
+        position: sticky;
+        top: 0;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        overflow-x: hidden;
+        scrollbar-width: none; /* Firefox */
+    }
+
+    .sidebar::-webkit-scrollbar {
+        display: none; /* Chrome, Safari */
+    }
+
+    .sidebar-header h5 {
+        font-size: 16px;
+        font-weight: 600;
+        color: #777;
+        margin-bottom: 20px;
+    }
+
+    .sidebar-menu {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 15px 0;
+    }
+
+    .sidebar-menu li {
+        margin-bottom: 15px;
+    }
+
+    .sidebar-menu li a {
+        display: flex;
+        align-items: center;
+        color: #666;
+        text-decoration: none;
+        padding: 10px 15px;
+        border-radius: 6px;
+        transition: all 0.3s;
+        font-size: 15px;
+    }
+
+    .sidebar-menu li a:hover,
+    .sidebar-menu li.active a {
+        background-color: rgba(0, 123, 255, 0.1);
+        color: #0d6efd;
+    }
+
+    .sidebar-menu li.active a {
+        font-weight: 500;
+    }
+
+    .sidebar-menu li a i {
+        width: 20px;
+        text-align: center;
+        margin-right: 8px;
+    }
+
+    .sidebar-footer {
+        padding-top: 15px;
+        border-top: 1px solid #eee;
+        z-index: 1000;
+        position: relative;
+    }
+
+    .sidebar-footer a {
+        color: #666;
+        text-decoration: none;
+        font-size: 14px;
+    }
+
+    .sidebar-footer a:hover {
+        color: #0d6efd;
+    }
+
+    /* Main Content */
+    .main-content {
+        flex: 1;
+        padding-bottom: 30px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        width: calc(100% - 280px);
+        scrollbar-width: none; /* Firefox */
+    }
+
+    .main-content::-webkit-scrollbar {
+        display: none; /* Chrome, Safari */
+    }
+
+    /* Custom tabs style */
+    .nav-tabs-custom {
+        border-bottom: 1px solid #e9ecef;
+        margin-bottom: 1.5rem;
+    }
+
+    .nav-tabs-custom .nav-link {
+        border: none;
+        color: #6c757d;
+        padding: 1rem;
+        font-weight: 500;
+        position: relative;
+    }
+
+    .nav-tabs-custom .nav-link.active {
+        color: #0d6efd;
+        background: transparent;
+    }
+
+    .nav-tabs-custom .nav-link.active:after {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: #0d6efd;
+    }
+
+    .profile-tab-content {
+        padding: 1rem 0;
+    }
+
+    /* Tab Content */
+    .tab-content {
+        overflow-y: auto;
+        overflow-x: hidden;
+        scrollbar-width: none; /* Firefox */
+    }
+
+    .tab-content::-webkit-scrollbar {
+        display: none; /* Chrome, Safari */
+    }
+
+    .tab-pane {
+        overflow-y: auto;
+        overflow-x: hidden;
+        scrollbar-width: none; /* Firefox */
+    }
+
+    .tab-pane::-webkit-scrollbar {
+        display: none; /* Chrome, Safari */
+    }
+
+    /* Card styles */
+    .card {
+        border: none;
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        margin-bottom: 1.5rem;
+    }
+
+    .card-header {
+        background-color: #fff;
+        border-bottom: 1px solid #e9ecef;
+        padding: 1rem 1.25rem;
+    }
+
+    .card-body {
+        padding: 1.5rem;
+        overflow-y: auto;
+        overflow-x: hidden;
+        scrollbar-width: none; /* Firefox */
+    }
+
+    .card-body::-webkit-scrollbar {
+        display: none; /* Chrome, Safari */
+    }
+
+    /* Form styles */
+    .form-label {
+        font-weight: 500;
+    }
+
+    /* Responsive */
+    @@media(max-width: 992px) {
+        .employers-dashboard {
+            flex-direction: column;
+        }
+
+        .sidebar {
+            width: 100%;
+            margin-bottom: 30px;
+        }
+        
+        .sidebar-menu {
+            flex-grow: 1;
+        }
+        
+        .sidebar-footer {
+            margin-top: auto;
+            z-index: 1000;
+        }
+    }
+</style> 
