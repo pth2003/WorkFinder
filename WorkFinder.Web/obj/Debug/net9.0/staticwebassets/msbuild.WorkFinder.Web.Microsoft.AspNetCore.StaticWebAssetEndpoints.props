@@ -64,13 +64,13 @@
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\employer-sidebar.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"87jxp5d8ov"},{"Name":"integrity","Value":"sha256-dJy3FurgG\u002BQVx1WmRFsgwUJlujLRv/KFE4M\u002B/LiXWLc="},{"Name":"label","Value":"_content/WorkFinder.Web/css/employer-sidebar.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"2428"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022dJy3FurgG\u002BQVx1WmRFsgwUJlujLRv/KFE4M\u002B/LiXWLc=\u0022"},{"Name":"Last-Modified","Value":"Tue, 01 Apr 2025 15:23:14 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"2428"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022dJy3FurgG\u002BQVx1WmRFsgwUJlujLRv/KFE4M\u002B/LiXWLc=\u0022"},{"Name":"Last-Modified","Value":"Wed, 02 Apr 2025 08:37:03 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/WorkFinder.Web/css/employer-sidebar.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\employer-sidebar.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-dJy3FurgG\u002BQVx1WmRFsgwUJlujLRv/KFE4M\u002B/LiXWLc="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"2428"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022dJy3FurgG\u002BQVx1WmRFsgwUJlujLRv/KFE4M\u002B/LiXWLc=\u0022"},{"Name":"Last-Modified","Value":"Tue, 01 Apr 2025 15:23:14 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"2428"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022dJy3FurgG\u002BQVx1WmRFsgwUJlujLRv/KFE4M\u002B/LiXWLc=\u0022"},{"Name":"Last-Modified","Value":"Wed, 02 Apr 2025 08:37:03 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/WorkFinder.Web/css/featured-job.8i5gtug8ls.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\featured-job.css'))</AssetFile>
@@ -1247,6 +1247,42 @@
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-1y1lOQY33M7ueTH2Bx3ph\u002B9iuj2gQWDaB6ApxDcLZMk="}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"476"},{"Name":"Content-Type","Value":"application/manifest\u002Bjson"},{"Name":"ETag","Value":"\u00221y1lOQY33M7ueTH2Bx3ph\u002B9iuj2gQWDaB6ApxDcLZMk=\u0022"},{"Name":"Last-Modified","Value":"Thu, 27 Mar 2025 10:18:43 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/WorkFinder.Web/uploads/companies/banners/2ec0a971-8b86-42d2-9e9e-227667241dbe_IMG_1795.00mkpkiqs8.jpeg">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\companies\banners\2ec0a971-8b86-42d2-9e9e-227667241dbe_IMG_1795.jpeg'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"00mkpkiqs8"},{"Name":"integrity","Value":"sha256-YNVRavgLeyQ0a33kUCrLh5NLiaZq15VqOeC\u002Bg3kTUDo="},{"Name":"label","Value":"_content/WorkFinder.Web/uploads/companies/banners/2ec0a971-8b86-42d2-9e9e-227667241dbe_IMG_1795.jpeg"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"332057"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u0022YNVRavgLeyQ0a33kUCrLh5NLiaZq15VqOeC\u002Bg3kTUDo=\u0022"},{"Name":"Last-Modified","Value":"Wed, 02 Apr 2025 04:28:50 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/WorkFinder.Web/uploads/companies/banners/2ec0a971-8b86-42d2-9e9e-227667241dbe_IMG_1795.jpeg">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\companies\banners\2ec0a971-8b86-42d2-9e9e-227667241dbe_IMG_1795.jpeg'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-YNVRavgLeyQ0a33kUCrLh5NLiaZq15VqOeC\u002Bg3kTUDo="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"332057"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u0022YNVRavgLeyQ0a33kUCrLh5NLiaZq15VqOeC\u002Bg3kTUDo=\u0022"},{"Name":"Last-Modified","Value":"Wed, 02 Apr 2025 04:28:50 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/WorkFinder.Web/uploads/companies/logos/663f0bff-cee2-4664-97de-ce62f9eda5ba_fpt-software-6073b38a10cb4.lp7v21xdzd.webp">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\companies\logos\663f0bff-cee2-4664-97de-ce62f9eda5ba_fpt-software-6073b38a10cb4.webp'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"lp7v21xdzd"},{"Name":"integrity","Value":"sha256-yW41u0nhNHozyY52Uto7b79berBmO4Dsku4CxFf8AQw="},{"Name":"label","Value":"_content/WorkFinder.Web/uploads/companies/logos/663f0bff-cee2-4664-97de-ce62f9eda5ba_fpt-software-6073b38a10cb4.webp"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"6954"},{"Name":"Content-Type","Value":"image/webp"},{"Name":"ETag","Value":"\u0022yW41u0nhNHozyY52Uto7b79berBmO4Dsku4CxFf8AQw=\u0022"},{"Name":"Last-Modified","Value":"Wed, 02 Apr 2025 04:28:50 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/WorkFinder.Web/uploads/companies/logos/663f0bff-cee2-4664-97de-ce62f9eda5ba_fpt-software-6073b38a10cb4.webp">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\companies\logos\663f0bff-cee2-4664-97de-ce62f9eda5ba_fpt-software-6073b38a10cb4.webp'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-yW41u0nhNHozyY52Uto7b79berBmO4Dsku4CxFf8AQw="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"6954"},{"Name":"Content-Type","Value":"image/webp"},{"Name":"ETag","Value":"\u0022yW41u0nhNHozyY52Uto7b79berBmO4Dsku4CxFf8AQw=\u0022"},{"Name":"Last-Modified","Value":"Wed, 02 Apr 2025 04:28:50 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/WorkFinder.Web/uploads/resumes/814b68f7-299d-4ba5-828f-7aaae032c4af_CV hieu Phan Trung  - React Developer Resume-TopCV.vn.ixjixiq02c.pdf">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\resumes\814b68f7-299d-4ba5-828f-7aaae032c4af_CV hieu Phan Trung  - React Developer Resume-TopCV.vn.pdf'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"ixjixiq02c"},{"Name":"integrity","Value":"sha256-muH7Cc0pLbyhsOJr54Ir27fQPnXAn6Y5P0Kjcz1\u002BinI="},{"Name":"label","Value":"_content/WorkFinder.Web/uploads/resumes/814b68f7-299d-4ba5-828f-7aaae032c4af_CV hieu Phan Trung  - React Developer Resume-TopCV.vn.pdf"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"484056"},{"Name":"Content-Type","Value":"application/pdf"},{"Name":"ETag","Value":"\u0022muH7Cc0pLbyhsOJr54Ir27fQPnXAn6Y5P0Kjcz1\u002BinI=\u0022"},{"Name":"Last-Modified","Value":"Wed, 02 Apr 2025 04:34:30 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/WorkFinder.Web/uploads/resumes/814b68f7-299d-4ba5-828f-7aaae032c4af_CV hieu Phan Trung  - React Developer Resume-TopCV.vn.pdf">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\resumes\814b68f7-299d-4ba5-828f-7aaae032c4af_CV hieu Phan Trung  - React Developer Resume-TopCV.vn.pdf'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-muH7Cc0pLbyhsOJr54Ir27fQPnXAn6Y5P0Kjcz1\u002BinI="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"484056"},{"Name":"Content-Type","Value":"application/pdf"},{"Name":"ETag","Value":"\u0022muH7Cc0pLbyhsOJr54Ir27fQPnXAn6Y5P0Kjcz1\u002BinI=\u0022"},{"Name":"Last-Modified","Value":"Wed, 02 Apr 2025 04:34:30 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/WorkFinder.Web/uploads/resumes/a2f4bfd6-c85c-4a9c-b35e-c1aeb19b174d_Hieu-Phan-Trung.exqsh3of5x.pdf">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\resumes\a2f4bfd6-c85c-4a9c-b35e-c1aeb19b174d_Hieu-Phan-Trung.pdf'))</AssetFile>

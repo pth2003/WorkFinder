@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "mQv8fJUI0TJdsluR+j0rUdV9CcJkY+QSFSqu4EbdzEI=",
+  "Hash": "epBBw0pFDXdRsQ8MMC5nGRBopSJOi2DLEu3rrl1adMw=",
   "Source": "WorkFinder.Web",
   "BasePath": "_content/WorkFinder.Web",
   "Mode": "Default",
@@ -6863,6 +6863,69 @@
       "OriginalItemSpec": "wwwroot/site.webmanifest"
     },
     {
+      "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/companies/banners/2ec0a971-8b86-42d2-9e9e-227667241dbe_IMG_1795.jpeg",
+      "SourceId": "WorkFinder.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/",
+      "BasePath": "_content/WorkFinder.Web",
+      "RelativePath": "uploads/companies/banners/2ec0a971-8b86-42d2-9e9e-227667241dbe_IMG_1795#[.{fingerprint}]?.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "00mkpkiqs8",
+      "Integrity": "YNVRavgLeyQ0a33kUCrLh5NLiaZq15VqOeC+g3kTUDo=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/companies/banners/2ec0a971-8b86-42d2-9e9e-227667241dbe_IMG_1795.jpeg"
+    },
+    {
+      "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/companies/logos/663f0bff-cee2-4664-97de-ce62f9eda5ba_fpt-software-6073b38a10cb4.webp",
+      "SourceId": "WorkFinder.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/",
+      "BasePath": "_content/WorkFinder.Web",
+      "RelativePath": "uploads/companies/logos/663f0bff-cee2-4664-97de-ce62f9eda5ba_fpt-software-6073b38a10cb4#[.{fingerprint}]?.webp",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "lp7v21xdzd",
+      "Integrity": "yW41u0nhNHozyY52Uto7b79berBmO4Dsku4CxFf8AQw=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/companies/logos/663f0bff-cee2-4664-97de-ce62f9eda5ba_fpt-software-6073b38a10cb4.webp"
+    },
+    {
+      "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/resumes/814b68f7-299d-4ba5-828f-7aaae032c4af_CV hieu Phan Trung  - React Developer Resume-TopCV.vn.pdf",
+      "SourceId": "WorkFinder.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/",
+      "BasePath": "_content/WorkFinder.Web",
+      "RelativePath": "uploads/resumes/814b68f7-299d-4ba5-828f-7aaae032c4af_CV hieu Phan Trung  - React Developer Resume-TopCV.vn#[.{fingerprint}]?.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "ixjixiq02c",
+      "Integrity": "muH7Cc0pLbyhsOJr54Ir27fQPnXAn6Y5P0Kjcz1+inI=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/resumes/814b68f7-299d-4ba5-828f-7aaae032c4af_CV hieu Phan Trung  - React Developer Resume-TopCV.vn.pdf"
+    },
+    {
       "Identity": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/resumes/a2f4bfd6-c85c-4a9c-b35e-c1aeb19b174d_Hieu-Phan-Trung.pdf",
       "SourceId": "WorkFinder.Web",
       "SourceType": "Discovered",
@@ -8400,7 +8463,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 01 Apr 2025 15:23:14 GMT"
+          "Value": "Wed, 02 Apr 2025 08:37:03 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8461,7 +8524,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 01 Apr 2025 15:23:14 GMT"
+          "Value": "Wed, 02 Apr 2025 08:37:03 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8506,7 +8569,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 01 Apr 2025 15:23:14 GMT"
+          "Value": "Wed, 02 Apr 2025 08:37:03 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8561,7 +8624,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 01 Apr 2025 15:23:14 GMT"
+          "Value": "Wed, 02 Apr 2025 08:37:03 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8614,7 +8677,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 01 Apr 2025 15:23:14 GMT"
+          "Value": "Wed, 02 Apr 2025 08:37:03 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8651,7 +8714,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 01 Apr 2025 15:23:14 GMT"
+          "Value": "Wed, 02 Apr 2025 08:37:03 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -46360,6 +46423,252 @@
         {
           "Name": "integrity",
           "Value": "sha256-G/tJtFpECrWqVnociT7pp5ikR2woimWoDuc+fePCs/g="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/companies/banners/2ec0a971-8b86-42d2-9e9e-227667241dbe_IMG_1795.00mkpkiqs8.jpeg",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/companies/banners/2ec0a971-8b86-42d2-9e9e-227667241dbe_IMG_1795.jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "332057"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"YNVRavgLeyQ0a33kUCrLh5NLiaZq15VqOeC+g3kTUDo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 02 Apr 2025 04:28:50 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "00mkpkiqs8"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/companies/banners/2ec0a971-8b86-42d2-9e9e-227667241dbe_IMG_1795.jpeg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-YNVRavgLeyQ0a33kUCrLh5NLiaZq15VqOeC+g3kTUDo="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/companies/banners/2ec0a971-8b86-42d2-9e9e-227667241dbe_IMG_1795.jpeg",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/companies/banners/2ec0a971-8b86-42d2-9e9e-227667241dbe_IMG_1795.jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "332057"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"YNVRavgLeyQ0a33kUCrLh5NLiaZq15VqOeC+g3kTUDo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 02 Apr 2025 04:28:50 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-YNVRavgLeyQ0a33kUCrLh5NLiaZq15VqOeC+g3kTUDo="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/companies/logos/663f0bff-cee2-4664-97de-ce62f9eda5ba_fpt-software-6073b38a10cb4.lp7v21xdzd.webp",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/companies/logos/663f0bff-cee2-4664-97de-ce62f9eda5ba_fpt-software-6073b38a10cb4.webp",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6954"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/webp"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"yW41u0nhNHozyY52Uto7b79berBmO4Dsku4CxFf8AQw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 02 Apr 2025 04:28:50 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "lp7v21xdzd"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/companies/logos/663f0bff-cee2-4664-97de-ce62f9eda5ba_fpt-software-6073b38a10cb4.webp"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-yW41u0nhNHozyY52Uto7b79berBmO4Dsku4CxFf8AQw="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/companies/logos/663f0bff-cee2-4664-97de-ce62f9eda5ba_fpt-software-6073b38a10cb4.webp",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/companies/logos/663f0bff-cee2-4664-97de-ce62f9eda5ba_fpt-software-6073b38a10cb4.webp",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6954"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/webp"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"yW41u0nhNHozyY52Uto7b79berBmO4Dsku4CxFf8AQw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 02 Apr 2025 04:28:50 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-yW41u0nhNHozyY52Uto7b79berBmO4Dsku4CxFf8AQw="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/resumes/814b68f7-299d-4ba5-828f-7aaae032c4af_CV hieu Phan Trung  - React Developer Resume-TopCV.vn.ixjixiq02c.pdf",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/resumes/814b68f7-299d-4ba5-828f-7aaae032c4af_CV hieu Phan Trung  - React Developer Resume-TopCV.vn.pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "484056"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"muH7Cc0pLbyhsOJr54Ir27fQPnXAn6Y5P0Kjcz1+inI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 02 Apr 2025 04:34:30 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ixjixiq02c"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/resumes/814b68f7-299d-4ba5-828f-7aaae032c4af_CV hieu Phan Trung  - React Developer Resume-TopCV.vn.pdf"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-muH7Cc0pLbyhsOJr54Ir27fQPnXAn6Y5P0Kjcz1+inI="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/resumes/814b68f7-299d-4ba5-828f-7aaae032c4af_CV hieu Phan Trung  - React Developer Resume-TopCV.vn.pdf",
+      "AssetFile": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/resumes/814b68f7-299d-4ba5-828f-7aaae032c4af_CV hieu Phan Trung  - React Developer Resume-TopCV.vn.pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "484056"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"muH7Cc0pLbyhsOJr54Ir27fQPnXAn6Y5P0Kjcz1+inI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 02 Apr 2025 04:34:30 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-muH7Cc0pLbyhsOJr54Ir27fQPnXAn6Y5P0Kjcz1+inI="
         }
       ]
     },

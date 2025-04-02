@@ -18,47 +18,10 @@
     }
 }
 
-<div class="container">
-    <div class="employers-dashboard mt-4">
+<div class="container-fluid my-4">
+    <div class="employers-dashboard">
         <!-- Sidebar -->
-        <div class="sidebar d-none d-md-block">
-            <div class="sidebar-header mb-4">
-                <h5>EMPLOYERS DASHBOARD</h5>
-            </div>
-            <ul class="sidebar-menu">
-                <li>
-                    <a href="@Url.Action("Index", "Home", new { area = "Employer" })" class="d-flex align-items-center">
-                        <i class="fas fa-tachometer-alt me-2"></i>
-                        <span>Overview</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="@Url.Action("Profile", "Company", new { area = "Employer" })"
-                        class="d-flex align-items-center">
-                        <i class="fas fa-user me-2"></i>
-                        <span>Profile</span>
-                    </a>
-                </li>
-                <li class="active">
-                    <a href="@Url.Action("Index", "Job", new { area = "Employer" })" class="d-flex align-items-center">
-                        <i class="fas fa-briefcase me-2"></i>
-                        <span>My Jobs</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="@Url.Action("Settings", "Account", new { area = "Employer" })"
-                        class="d-flex align-items-center">
-                        <i class="fas fa-cog me-2"></i>
-                        <span>Settings</span>
-                    </a>
-                </li>
-            </ul>
-            <div class="sidebar-footer mt-4">
-                <a href="@Url.Action("Logout", "Auth", new { area = "Auth" })" class="d-flex align-items-center">
-                    <i class="fas fa-sign-out-alt me-2"></i> Log-out
-                </a>
-            </div>
-        </div>
+        @await Html.PartialAsync("~/Areas/Employer/Views/Shared/_SidebarPartial.cshtml")
 
         <!-- Main Content -->
         <div class="main-content">
@@ -178,9 +141,10 @@
                                     @application.AppliedDate.ToString("dd MMM, yyyy")
                                 </div>
                                 <div class="application-cell actions-cell ">
-                                    <a href="javascript:void(0)" class="btn view-detail-btn "
+                                    <a href="javascript:void(0)" class="btn view-detail-btn"
                                         data-application-id="@application.Id"
-                                        data-applicant-name="@application.Applicant.FirstName @application.Applicant.LastName">
+                                        data-applicant-name="@application.Applicant.FirstName @application.Applicant.LastName"
+                                        onclick="showCandidateDetail(@application.Id); return false;">
                                         <i class="fas fa-eye me-1"></i> View Detail
                                     </a>
                                     <div class="dropdown action-dropdown">
@@ -830,230 +794,19 @@
                 <h5 class="modal-title" id="candidateDetailModalLabel">Candidate Details</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <div class="container-fluid">
-                    <div class="row">
-                        <!-- Left Column - Candidate Basic Info -->
-                        <div class="col-md-4">
-                            <div class="candidate-profile text-center mb-4">
-                                <div class="profile-image mb-3 d-flex justify-content-center">
-                                    ${data.profilePicture ?
-                                    `<img src="${data.profilePicture}" alt="Candidate" class="rounded-circle"
-                                        width="100" height="100" id="candidateAvatar">` :
-                                    `<div
-                                        class="avatar-placeholder rounded-circle d-flex align-items-center justify-content-center"
-                                        style="width: 100px; height: 100px; background-color: #007bff; color: white; font-size: 2rem; font-weight: bold;">
-                                        ${data.firstName && data.lastName ? data.firstName.charAt(0) +
-                                        data.lastName.charAt(0) : 'U'}
-                                    </div>`
-                                    }
-                                </div>
-                                <h4 class="candidate-name" id="candidateName">${data.fullName}</h4>
-                                <p class="candidate-title text-muted" id="candidateTitle">${data.title}</p>
-                                <div class="candidate-actions mt-3">
-                                    <a href="mailto:${data.email}" class="btn btn-primary"><i
-                                            class="fas fa-envelope me-2"></i>Send Mail</a>
-                                </div>
-                            </div>
-                            <div class="candidate-info card mb-4">
-                                <div class="card-body">
-                                    <h5 class="card-title">Personal Information</h5>
-                                    <ul class="list-unstyled">
-                                        <li class="mb-2">
-                                            <span class="text-muted me-2"><i class="fas fa-birthday-cake"></i></span>
-                                            <span class="info-label">Date of Birth:</span>
-                                            <span class="info-value">14 June, 2021</span>
-                                        </li>
-                                        <li class="mb-2">
-                                            <span class="text-muted me-2"><i class="fas fa-flag"></i></span>
-                                            <span class="info-label">Nationality:</span>
-                                            <span class="info-value">Bangladesh</span>
-                                        </li>
-                                        <li class="mb-2">
-                                            <span class="text-muted me-2"><i class="fas fa-ring"></i></span>
-                                            <span class="info-label">Marital Status:</span>
-                                            <span class="info-value">Single</span>
-                                        </li>
-                                        <li class="mb-2">
-                                            <span class="text-muted me-2"><i class="fas fa-venus-mars"></i></span>
-                                            <span class="info-label">Gender:</span>
-                                            <span class="info-value">Male</span>
-                                        </li>
-                                        <li class="mb-2">
-                                            <span class="text-muted me-2"><i class="fas fa-briefcase"></i></span>
-                                            <span class="info-label">Experience:</span>
-                                            <span class="info-value" id="candidateExperience">7 Years</span>
-                                        </li>
-                                        <li>
-                                            <span class="text-muted me-2"><i class="fas fa-graduation-cap"></i></span>
-                                            <span class="info-label">Education:</span>
-                                            <span class="info-value" id="candidateEducation">Master Degree</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="candidate-contact card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Contact Information</h5>
-                                    <ul class="list-unstyled">
-                                        <li class="mb-2">
-                                            <span class="text-muted me-2"><i class="fas fa-globe"></i></span>
-                                            <span class="info-label">Website:</span>
-                                            <a href="#" class="info-value">www.esterhoward.com</a>
-                                        </li>
-                                        <li class="mb-2">
-                                            <span class="text-muted me-2"><i class="fas fa-map-marker-alt"></i></span>
-                                            <span class="info-label">Location:</span>
-                                            <span class="info-value">Beverly Hills, California 90202</span>
-                                        </li>
-                                        <li class="mb-2">
-                                            <span class="text-muted me-2"><i class="fas fa-phone"></i></span>
-                                            <span class="info-label">Phone:</span>
-                                            <span class="info-value">+1-202-555-0141</span>
-                                        </li>
-                                        <li>
-                                            <span class="text-muted me-2"><i class="fas fa-envelope"></i></span>
-                                            <span class="info-label">Email:</span>
-                                            <a href="mailto:esther.howard@gmail.com" class="info-value"
-                                                id="candidateEmail">esther.howard@gmail.com</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Right Column - Biography & Cover Letter -->
-                        <div class="col-md-8">
-                            <ul class="nav nav-tabs mb-3" id="candidateDetailTabs" role="tablist">
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link active" id="biography-tab" data-bs-toggle="tab"
-                                        data-bs-target="#biography" type="button" role="tab" aria-controls="biography"
-                                        aria-selected="true">Biography</button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="cover-letter-tab" data-bs-toggle="tab"
-                                        data-bs-target="#cover-letter" type="button" role="tab"
-                                        aria-controls="cover-letter" aria-selected="false">Cover Letter</button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="skills-tab" data-bs-toggle="tab"
-                                        data-bs-target="#skills" type="button" role="tab" aria-controls="skills"
-                                        aria-selected="false">Skills</button>
-                                </li>
-                                ${data.resumeFileUrl ? '<li class="nav-item" role="presentation"><button
-                                        class="nav-link" id="resume-tab" data-bs-toggle="tab" data-bs-target="#resume"
-                                        type="button" role="tab" aria-controls="resume"
-                                        aria-selected="false">Resume</button></li>' : ''}
-                            </ul>
-                            <div class="tab-content" id="candidateDetailTabsContent">
-                                <div class="tab-pane fade show active" id="biography" role="tabpanel"
-                                    aria-labelledby="biography-tab">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Biography</h5>
-                                            <div id="candidateBiography">
-                                                <p>I've been passionate about graphic design and digital art from an
-                                                    early age with a keen interest in Website and Mobile Application
-                                                    User Interfaces. I can create high-quality and aesthetically
-                                                    pleasing designs in a quick turnaround time. Check out the portfolio
-                                                    section of my profile to see samples of my work and feel free to
-                                                    discuss your designing needs.</p>
-                                                <p>I mostly use Adobe Photoshop, Illustrator, XD and Figma.</p>
-                                                <ul>
-                                                    <li>Website User Experience and Interface (UI/UX) Design - for all
-                                                        kinds of Professional and Personal websites.</li>
-                                                    <li>Mobile Application User Experience and Interface Design - for
-                                                        all kinds of iOS/Android and Hybrid Mobile Applications.</li>
-                                                    <li>Wireframe Designs.</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="cover-letter" role="tabpanel"
-                                    aria-labelledby="cover-letter-tab">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Cover Letter</h5>
-                                            <div id="candidateCoverLetter">
-                                                <p>Dear Sir,</p>
-                                                <p>I am writing to express my interest in the fourth grade instructional
-                                                    position that is currently available in the Fort Wayne Community
-                                                    School System. I learned of the opening through a notice posted on
-                                                    JobZone, IPFW's job database. I am confident that my academic
-                                                    background and curriculum development skills would be successfully
-                                                    utilized in this teaching position.</p>
-                                                <p>I have just completed my Bachelor of Science degree in Elementary
-                                                    Education and have successfully completed Praxis I and Praxis II.
-                                                    During my student teaching experience, I developed and initiated a
-                                                    three-week curriculum sequence on animal species and earth
-                                                    resources. This collaborative unit involved working with three other
-                                                    third grade teachers within my team, and culminated in a field trip
-                                                    to the Indianapolis Zoo Animal Research Unit.</p>
-                                                <p>Sincerely,</p>
-                                                <p>Esther Howard</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="skills" role="tabpanel" aria-labelledby="skills-tab">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Skills & Qualifications</h5>
-                                            <div class="mb-4">
-                                                <h6 class="mb-2">Skills</h6>
-                                                <div class="skill-tags">
-                                                    ${data.skills && data.skills !== 'Not specified'
-                                                    ? data.skills.split(',').map(skill =>
-                                                    `<span
-                                                        class="badge bg-light text-dark me-2 mb-2 p-2">${skill.trim()}</span>`
-                                                    ).join('')
-                                                    : '<p>No skills specified</p>'}
-                                                </div>
-                                            </div>
-
-                                            <div class="mb-4">
-                                                <h6 class="mb-2">Languages</h6>
-                                                <p>${data.languages || 'Not specified'}</p>
-                                            </div>
-
-                                            <div>
-                                                <h6 class="mb-2">Certifications</h6>
-                                                <p>${data.certifications || 'Not specified'}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        ${data.resumeFileUrl ?
-                        `<div class="tab-pane fade" id="resume" role="tabpanel" aria-labelledby="resume-tab">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Resume</h5>
-                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <p class="mb-0">Download the candidate's full resume for more detailed
-                                            information.</p>
-                                        <a href="${data.resumeFileUrl}" class="btn btn-outline-primary"
-                                            id="downloadResumeBtn" target="_blank"
-                                            onclick="console.log('Download URL: ${data.resumeFileUrl}');"><i
-                                                class="fas fa-download me-2"></i>Download Resume</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>` : ''}
+            <div class="modal-body" id="candidateDetailModalContent">
+                <div class="text-center py-5">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
                     </div>
+                    <p class="mt-3">Loading candidate details...</p>
                 </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-        <a href="#" class="btn btn-primary" id="contactCandidateBtn"><i class="fas fa-envelope me-2"></i>Contact
-            Candidate</a>
-    </div>
-</div>
-</div>
 </div>
 
 @section Scripts {
@@ -1075,221 +828,8 @@
             document.querySelectorAll('.view-detail-btn').forEach(btn => {
                 btn.addEventListener('click', e => {
                     e.preventDefault();
-
                     const applicationId = btn.dataset.applicationId;
-                    const applicantName = btn.dataset.applicantName;
-                    const candidateDetailModal = document.getElementById('candidateDetailModal');
-                    const modalBody = candidateDetailModal.querySelector('.modal-body');
-
-                    // Show loading state
-                    modalBody.innerHTML = '<div class="text-center py-5"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div><p class="mt-3">Loading candidate details...</p></div>';
-
-                    // Show modal using Bootstrap 5 API
-                    const bsModal = new bootstrap.Modal(candidateDetailModal);
-                    bsModal.show();
-
-                    // Fetch candidate details
-                    fetch(`@Url.Action("GetCandidateDetail", "Application", new { area = "Employer" })?applicationId=${applicationId}`, {
-                        method: 'GET',
-                        headers: {
-                            'Cache-Control': 'no-cache'
-                        }
-                    })
-                        .then(response => response.json())
-                        .then(response => {
-                            console.log("Response from GetCandidateDetail:", response);
-
-                            if (response && response.success) {
-                                const data = response.data;
-                                const modalDialog = candidateDetailModal.querySelector('.modal-dialog');
-
-                                // Debug resume file URL
-                                console.log("Resume File URL:", data.resumeFileUrl);
-
-                                // Reset modal to normal state
-                                modalDialog.classList.remove('modal-sm');
-                                modalDialog.classList.add('modal-xl');
-
-                                // Rebuild the entire modal content
-                                const modalContent = `
-                                                                                                                                                                                                                <div class="container-fluid">
-                                                                                                                                                                                                                    <div class="row">
-                                                                                                                                                                                                                        <!-- Left Column - Candidate Basic Info -->
-                                                                                                                                                                                                                        <div class="col-md-4">
-                                                                                                                                                                                                                            <div class="candidate-profile text-center mb-4">
-                                                                                                                                                                                                                                <div class="profile-image mb-3 d-flex justify-content-center">
-                                                                                                                                                                                                                                    ${data.profilePicture ?
-                                        `<img src="${data.profilePicture}" alt="Candidate" class="rounded-circle" width="100" height="100" id="candidateAvatar">` :
-                                        `<div class="avatar-placeholder rounded-circle d-flex align-items-center justify-content-center" style="width: 100px; height: 100px; background-color: #007bff; color: white; font-size: 2rem; font-weight: bold;">
-                                                                                                                                                                                                                                            ${data.firstName && data.lastName ? data.firstName.charAt(0) + data.lastName.charAt(0) : 'U'}
-                                                                                                                                                                                                                                        </div>`
-                                    }
-                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                <h4 class="candidate-name" id="candidateName">${data.fullName}</h4>
-                                                                                                                                                                                                                                <p class="candidate-title text-muted" id="candidateTitle">${data.title}</p>
-                                                                                                                                                                                                                                <div class="candidate-actions mt-3">
-                                                                                                                                                                                                                                    <a href="mailto:${data.email}" class="btn btn-primary"><i class="fas fa-envelope me-2"></i>Send Mail</a>
-                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                            <div class="candidate-info card mb-4">
-                                                                                                                                                                                                                                <div class="card-body">
-                                                                                                                                                                                                                                    <h5 class="card-title">Personal Information</h5>
-                                                                                                                                                                                                                                    <ul class="list-unstyled">
-                                                                                                                                                                                                                                        <li class="mb-2">
-                                                                                                                                                                                                                                            <span class="text-muted me-2"><i class="fas fa-briefcase"></i></span>
-                                                                                                                                                                                                                                            <span class="info-label">Experience:</span>
-                                                                                                                                                                                                                                            <span class="info-value">${data.experience}</span>
-                                                                                                                                                                                                                                        </li>
-                                                                                                                                                                                                                                        <li class="mb-2">
-                                                                                                                                                                                                                                            <span class="text-muted me-2"><i class="fas fa-graduation-cap"></i></span>
-                                                                                                                                                                                                                                            <span class="info-label">Education:</span>
-                                                                                                                                                                                                                                            <span class="info-value">${data.education}</span>
-                                                                                                                                                                                                                                        </li>
-                                                                                                                                                                                                                                        <li>
-                                                                                                                                                                                                                                            <span class="text-muted me-2"><i class="fas fa-map-marker-alt"></i></span>
-                                                                                                                                                                                                                                            <span class="info-label">Address:</span>
-                                                                                                                                                                                                                                            <span class="info-value">${data.address}</span>
-                                                                                                                                                                                                                                        </li>
-                                                                                                                                                                                                                                    </ul>
-                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                            <div class="candidate-contact card">
-                                                                                                                                                                                                                                <div class="card-body">
-                                                                                                                                                                                                                                    <h5 class="card-title">Contact Information</h5>
-                                                                                                                                                                                                                                    <ul class="list-unstyled">
-                                                                                                                                                                                                                                        <li class="mb-2">
-                                                                                                                                                                                                                                            <span class="text-muted me-2"><i class="fas fa-phone"></i></span>
-                                                                                                                                                                                                                                            <span class="info-label">Phone:</span>
-                                                                                                                                                                                                                                            <span class="info-value">${data.phoneNumber}</span>
-                                                                                                                                                                                                                                        </li>
-                                                                                                                                                                                                                                        <li>
-                                                                                                                                                                                                                                            <span class="text-muted me-2"><i class="fas fa-envelope"></i></span>
-                                                                                                                                                                                                                                            <span class="info-label">Email:</span>
-                                                                                                                                                                                                                                            <a href="mailto:${data.email}" class="info-value">${data.email}</a>
-                                                                                                                                                                                                                                        </li>
-                                                                                                                                                                                                                                    </ul>
-                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                        </div>
-
-                                                                                                                                                                                                                        <!-- Right Column - Biography & Cover Letter -->
-                                                                                                                                                                                                                        <div class="col-md-8">
-                                                                                                                                                                                                                            <ul class="nav nav-tabs mb-3" id="candidateDetailTabs" role="tablist">
-                                                                                                                                                                                                                                <li class="nav-item" role="presentation">
-                                                                                                                                                                                                                                    <button class="nav-link active" id="biography-tab" data-bs-toggle="tab" data-bs-target="#biography" type="button" role="tab" aria-controls="biography" aria-selected="true">Biography</button>
-                                                                                                                                                                                                                                </li>
-                                                                                                                                                                                                                                <li class="nav-item" role="presentation">
-                                                                                                                                                                                                                                    <button class="nav-link" id="cover-letter-tab" data-bs-toggle="tab" data-bs-target="#cover-letter" type="button" role="tab" aria-controls="cover-letter" aria-selected="false">Cover Letter</button>
-                                                                                                                                                                                                                                </li>
-                                                                                                                                                                                                                                <li class="nav-item" role="presentation">
-                                                                                                                                                                                                                                    <button class="nav-link" id="skills-tab" data-bs-toggle="tab" data-bs-target="#skills" type="button" role="tab" aria-controls="skills" aria-selected="false">Skills</button>
-                                                                                                                                                                                                                                </li>
-                                                                                                                                                                                                                                ${data.resumeFileUrl ? '<li class="nav-item" role="presentation"><button class="nav-link" id="resume-tab" data-bs-toggle="tab" data-bs-target="#resume" type="button" role="tab" aria-controls="resume" aria-selected="false">Resume</button></li>' : ''}
-                                                                                                                                                                                                                            </ul>
-                                                                                                                                                                                                                            <div class="tab-content" id="candidateDetailTabsContent">
-                                                                                                                                                                                                                                <div class="tab-pane fade show active" id="biography" role="tabpanel" aria-labelledby="biography-tab">
-                                                                                                                                                                                                                                    <div class="card">
-                                                                                                                                                                                                                                        <div class="card-body">
-                                                                                                                                                                                                                                            <h5 class="card-title">Biography</h5>
-                                                                                                                                                                                                                                            <div id="candidateBiography">
-                                                                                                                                                                                                                                                ${data.summary ? data.summary.replace(/\n/g, '<br>') : '<p>No biography available.</p>'}
-                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                <div class="tab-pane fade" id="cover-letter" role="tabpanel" aria-labelledby="cover-letter-tab">
-                                                                                                                                                                                                                                    <div class="card">
-                                                                                                                                                                                                                                        <div class="card-body">
-                                                                                                                                                                                                                                            <h5 class="card-title">Cover Letter</h5>
-                                                                                                                                                                                                                                            <div id="candidateCoverLetter">
-                                                                                                                                                                                                                                                ${data.coverLetter ? data.coverLetter.replace(/\n/g, '<br>') : '<p>No cover letter provided.</p>'}
-                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                <div class="tab-pane fade" id="skills" role="tabpanel" aria-labelledby="skills-tab">
-                                                                                                                                                                                                                                    <div class="card">
-                                                                                                                                                                                                                                        <div class="card-body">
-                                                                                                                                                                                                                                            <h5 class="card-title">Skills & Qualifications</h5>
-                                                                                                                                                                                                                                            <div class="mb-4">
-                                                                                                                                                                                                                                                <h6 class="mb-2">Skills</h6>
-                                                                                                                                                                                                                                                <div class="skill-tags">
-                                                                                                                                                                                                                                                    ${data.skills && data.skills !== 'Not specified'
-                                        ? data.skills.split(',').map(skill =>
-                                            `<span class="badge bg-light text-dark me-2 mb-2 p-2">${skill.trim()}</span>`
-                                        ).join('')
-                                        : '<p>No skills specified</p>'}
-                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                            </div>
-                                                        
-                                                                                                                                                                                                                                            <div class="mb-4">
-                                                                                                                                                                                                                                                <h6 class="mb-2">Languages</h6>
-                                                                                                                                                                                                                                                <p>${data.languages || 'Not specified'}</p>
-                                                                                                                                                                                                                                            </div>
-                                                        
-                                                                                                                                                                                                                                            <div>
-                                                                                                                                                                                                                                                <h6 class="mb-2">Certifications</h6>
-                                                                                                                                                                                                                                                <p>${data.certifications || 'Not specified'}</p>
-                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                ${data.resumeFileUrl ?
-                                        `<div class="tab-pane fade" id="resume" role="tabpanel" aria-labelledby="resume-tab">
-                                                                                                                                                                                                                                    <div class="card">
-                                                                                                                                                                                                                                        <div class="card-body">
-                                                                                                                                                                                                                                            <h5 class="card-title">Resume</h5>
-                                                                                                                                                                                                                                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                                                                                                                                                                                                                                <p class="mb-0">Download the candidate's full resume for more detailed information.</p>
-                                                                                                                                                                                                                                                <a href="${data.resumeFileUrl}" class="btn btn-outline-primary" id="downloadResumeBtn" target="_blank" onclick="console.log('Download URL: ${data.resumeFileUrl}');"><i class="fas fa-download me-2"></i>Download Resume</a>
-                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                                                </div>` : ''}
-                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                                </div>`;
-
-                                modalBody.innerHTML = modalContent;
-
-                                // Update the footer
-                                const modalFooter = candidateDetailModal.querySelector('.modal-footer');
-                                modalFooter.innerHTML = `
-                                                                                                                                                                                                                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                                                                                                                                                                                                                    <a href="mailto:${data.email}" class="btn btn-primary" id="contactCandidateBtn">
-                                                                                                                                                                                                                        <i class="fas fa-envelope me-2"></i>Contact Candidate
-                                                                                                                                                                                                                    </a>
-                                                                                                                                                                                                                `;
-                            } else {
-                                // Show error message
-                                const modalDialog = candidateDetailModal.querySelector('.modal-dialog');
-                                modalDialog.classList.remove('modal-xl');
-                                modalDialog.classList.add('modal-sm');
-
-                                const errorMessage = response && response.message ? response.message : 'Failed to load candidate details';
-                                modalBody.innerHTML = `
-                                                                                                                                                                                                                    <div class="alert alert-danger" role="alert">
-                                                                                                                                                                                                                        <i class="fas fa-exclamation-circle me-2"></i>${errorMessage}
-                                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                                `;
-                                console.error('Error in response:', response);
-                            }
-                        })
-                        .catch((error) => {
-                            // Show error message
-                            const modalDialog = candidateDetailModal.querySelector('.modal-dialog');
-                            modalDialog.classList.remove('modal-xl');
-                            modalDialog.classList.add('modal-sm');
-
-                            modalBody.innerHTML = `
-                                                                                                                                                                                                                <div class="alert alert-danger" role="alert">
-                                                                                                                                                                                                                    <i class="fas fa-exclamation-circle me-2"></i>Failed to load candidate details. Please try again later.
-                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                <div class="small text-muted mt-2">Error details: ${error.message || 'Unknown error'}</div>
-                                                                                                                                                                                                            `;
-                            console.error('Fetch error:', error);
-                        });
+                    showCandidateDetail(applicationId);
                 });
             });
 
@@ -1332,6 +872,62 @@
                         console.error('Error:', error);
                     });
             });
+
+            function showCandidateDetail(applicationId) {
+                // Show the modal with loading state first
+                document.getElementById('candidateDetailModalContent').innerHTML = `
+                                            <div class="text-center p-5">
+                                                <div class="spinner-border text-primary" role="status">
+                                                    <span class="visually-hidden">Loading...</span>
+                                                            </div>
+                                                <p class="mt-3">Loading candidate details...</p>
+                                                        </div>
+                                        `;
+
+                // Clear footer
+                const modalFooter = document.querySelector('#candidateDetailModal .modal-footer');
+                modalFooter.innerHTML = `<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>`;
+
+                $('#candidateDetailModal').modal('show');
+
+                // Fetch the candidate detail partial view
+                fetch(`/Employer/Application/GetCandidateDetailPartial?applicationId=${applicationId}`, {
+                    method: 'GET',
+                    headers: {
+                        'Cache-Control': 'no-cache'
+                    }
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Failed to load candidate details');
+                        }
+                        return response.text();
+                    })
+                    .then(html => {
+                        // Replace modal content with the returned HTML
+                        document.getElementById('candidateDetailModalContent').innerHTML = html;
+
+                        // Add contact button to footer
+                        const email = document.querySelector('#candidateEmail')?.textContent || '';
+                        if (email) {
+                            modalFooter.innerHTML = `
+                                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <a href="mailto:${email}" class="btn btn-primary" id="contactCandidateBtn">
+                                        <i class="fas fa-envelope me-2"></i>Contact Candidate
+                                    </a>
+                                `;
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error loading candidate details:', error);
+                        document.getElementById('candidateDetailModalContent').innerHTML = `
+                                                <div class="alert alert-danger m-3">
+                                                    <h5>Error Loading Details</h5>
+                                                    <p>${error.message}</p>
+                                </div>
+                            `;
+                    });
+            }
         });
     </script>
 }

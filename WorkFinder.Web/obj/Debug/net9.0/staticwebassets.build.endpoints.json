@@ -10362,7 +10362,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 01 Apr 2025 15:23:14 GMT"
+          "Value": "Wed, 02 Apr 2025 08:37:03 GMT"
         },
         {
           "Name": "Vary",
@@ -10411,7 +10411,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 01 Apr 2025 15:23:14 GMT"
+          "Value": "Wed, 02 Apr 2025 08:37:03 GMT"
         }
       ],
       "EndpointProperties": [
@@ -10460,7 +10460,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 01 Apr 2025 15:23:14 GMT"
+          "Value": "Wed, 02 Apr 2025 08:37:03 GMT"
         },
         {
           "Name": "Vary",
@@ -10523,7 +10523,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 01 Apr 2025 15:23:14 GMT"
+          "Value": "Wed, 02 Apr 2025 08:37:03 GMT"
         },
         {
           "Name": "Vary",
@@ -10564,7 +10564,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 01 Apr 2025 15:23:14 GMT"
+          "Value": "Wed, 02 Apr 2025 08:37:03 GMT"
         }
       ],
       "EndpointProperties": [
@@ -10605,7 +10605,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 01 Apr 2025 15:23:14 GMT"
+          "Value": "Wed, 02 Apr 2025 08:37:03 GMT"
         },
         {
           "Name": "Vary",
@@ -37444,6 +37444,252 @@
         {
           "Name": "integrity",
           "Value": "sha256-G/tJtFpECrWqVnociT7pp5ikR2woimWoDuc+fePCs/g="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/companies/banners/2ec0a971-8b86-42d2-9e9e-227667241dbe_IMG_1795.00mkpkiqs8.jpeg",
+      "AssetFile": "uploads/companies/banners/2ec0a971-8b86-42d2-9e9e-227667241dbe_IMG_1795.jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "332057"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"YNVRavgLeyQ0a33kUCrLh5NLiaZq15VqOeC+g3kTUDo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 02 Apr 2025 04:28:50 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "00mkpkiqs8"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-YNVRavgLeyQ0a33kUCrLh5NLiaZq15VqOeC+g3kTUDo="
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/companies/banners/2ec0a971-8b86-42d2-9e9e-227667241dbe_IMG_1795.jpeg"
+        }
+      ]
+    },
+    {
+      "Route": "uploads/companies/banners/2ec0a971-8b86-42d2-9e9e-227667241dbe_IMG_1795.jpeg",
+      "AssetFile": "uploads/companies/banners/2ec0a971-8b86-42d2-9e9e-227667241dbe_IMG_1795.jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "332057"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"YNVRavgLeyQ0a33kUCrLh5NLiaZq15VqOeC+g3kTUDo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 02 Apr 2025 04:28:50 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-YNVRavgLeyQ0a33kUCrLh5NLiaZq15VqOeC+g3kTUDo="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/companies/logos/663f0bff-cee2-4664-97de-ce62f9eda5ba_fpt-software-6073b38a10cb4.lp7v21xdzd.webp",
+      "AssetFile": "uploads/companies/logos/663f0bff-cee2-4664-97de-ce62f9eda5ba_fpt-software-6073b38a10cb4.webp",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6954"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/webp"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"yW41u0nhNHozyY52Uto7b79berBmO4Dsku4CxFf8AQw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 02 Apr 2025 04:28:50 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "lp7v21xdzd"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-yW41u0nhNHozyY52Uto7b79berBmO4Dsku4CxFf8AQw="
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/companies/logos/663f0bff-cee2-4664-97de-ce62f9eda5ba_fpt-software-6073b38a10cb4.webp"
+        }
+      ]
+    },
+    {
+      "Route": "uploads/companies/logos/663f0bff-cee2-4664-97de-ce62f9eda5ba_fpt-software-6073b38a10cb4.webp",
+      "AssetFile": "uploads/companies/logos/663f0bff-cee2-4664-97de-ce62f9eda5ba_fpt-software-6073b38a10cb4.webp",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6954"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/webp"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"yW41u0nhNHozyY52Uto7b79berBmO4Dsku4CxFf8AQw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 02 Apr 2025 04:28:50 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-yW41u0nhNHozyY52Uto7b79berBmO4Dsku4CxFf8AQw="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/resumes/814b68f7-299d-4ba5-828f-7aaae032c4af_CV hieu Phan Trung  - React Developer Resume-TopCV.vn.ixjixiq02c.pdf",
+      "AssetFile": "uploads/resumes/814b68f7-299d-4ba5-828f-7aaae032c4af_CV hieu Phan Trung  - React Developer Resume-TopCV.vn.pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "484056"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"muH7Cc0pLbyhsOJr54Ir27fQPnXAn6Y5P0Kjcz1+inI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 02 Apr 2025 04:34:30 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ixjixiq02c"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-muH7Cc0pLbyhsOJr54Ir27fQPnXAn6Y5P0Kjcz1+inI="
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/resumes/814b68f7-299d-4ba5-828f-7aaae032c4af_CV hieu Phan Trung  - React Developer Resume-TopCV.vn.pdf"
+        }
+      ]
+    },
+    {
+      "Route": "uploads/resumes/814b68f7-299d-4ba5-828f-7aaae032c4af_CV hieu Phan Trung  - React Developer Resume-TopCV.vn.pdf",
+      "AssetFile": "uploads/resumes/814b68f7-299d-4ba5-828f-7aaae032c4af_CV hieu Phan Trung  - React Developer Resume-TopCV.vn.pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "484056"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"muH7Cc0pLbyhsOJr54Ir27fQPnXAn6Y5P0Kjcz1+inI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 02 Apr 2025 04:34:30 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-muH7Cc0pLbyhsOJr54Ir27fQPnXAn6Y5P0Kjcz1+inI="
         }
       ]
     },

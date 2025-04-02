@@ -7,44 +7,7 @@
 <div class="container">
     <div class="employers-dashboard mt-4">
         <!-- Sidebar -->
-        <div class="sidebar d-none d-md-block">
-            <div class="sidebar-header mb-4">
-                <h5>EMPLOYERS DASHBOARD</h5>
-            </div>
-            <ul class="sidebar-menu">
-                <li class="active">
-                    <a href="@Url.Action("Index", "Home", new { area = "Employer" })" class="d-flex align-items-center">
-                        <i class="fas fa-tachometer-alt me-2"></i>
-                        <span>Overview</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="@Url.Action("Profile", "Company", new { area = "Employer" })"
-                        class="d-flex align-items-center">
-                        <i class="fas fa-user me-2"></i>
-                        <span>Profile</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="@Url.Action("Index", "Job", new { area = "Employer" })" class="d-flex align-items-center">
-                        <i class="fas fa-briefcase me-2"></i>
-                        <span>My Jobs</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="@Url.Action("Settings", "Account", new { area = "Employer" })"
-                        class="d-flex align-items-center">
-                        <i class="fas fa-cog me-2"></i>
-                        <span>Settings</span>
-                    </a>
-                </li>
-            </ul>
-            <div class="sidebar-footer mt-4">
-                <a href="@Url.Action("Logout", "Auth", new { area = "Auth" })" class="d-flex align-items-center">
-                    <i class="fas fa-sign-out-alt me-2"></i> Log-out
-                </a>
-            </div>
-        </div>
+        @await Html.PartialAsync("~/Areas/Employer/Views/Shared/_SidebarPartial.cshtml")
 
         <div class="main-content">
             <div class="row mb-4">

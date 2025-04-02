@@ -96,6 +96,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXMvRW1wbG95ZXIvVmlld3MvSm9iL0luZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Settings/DeleteAccount.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvRW1wbG95ZXIvVmlld3MvU2V0dGluZ3MvRGVsZXRlQWNjb3VudC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Settings/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvRW1wbG95ZXIvVmlld3MvU2V0dGluZ3MvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXMvRW1wbG95ZXIvVmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -104,8 +112,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXMvRW1wbG95ZXIvVmlld3MvU2hhcmVkL05vdEZvdW5kLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Shared/_CandidateDetailModal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvRW1wbG95ZXIvVmlld3MvU2hhcmVkL19DYW5kaWRhdGVEZXRhaWxNb2RhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Shared/_EmployerLayout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXMvRW1wbG95ZXIvVmlld3MvU2hhcmVkL19FbXBsb3llckxheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Shared/_Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvRW1wbG95ZXIvVmlld3MvU2hhcmVkL19FcnJvci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Shared/_JobsListPartial.cshtml]
@@ -126,6 +142,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Shared/_SetupStylesPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXMvRW1wbG95ZXIvVmlld3MvU2hhcmVkL19TZXR1cFN0eWxlc1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Shared/_SidebarPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvRW1wbG95ZXIvVmlld3MvU2hhcmVkL19TaWRlYmFyUGFydGlhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Employer/Views/_ViewImports.cshtml]

@@ -1,0 +1,44 @@
+<div class="sidebar d-none d-md-block">
+    <div class="sidebar-header mb-4">
+        <h5>EMPLOYERS DASHBOARD</h5>
+    </div>
+    <ul class="sidebar-menu">
+        <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Home" ? "active" : "")">
+            <a asp-area="Employer" asp-controller="Home" asp-action="Index" class="d-flex align-items-center">
+                <i class="fas fa-tachometer-alt me-2"></i>
+                <span>Overview</span>
+            </a>
+        </li>
+        <li
+            class="@(ViewContext.RouteData.Values["controller"].ToString() == "Job" && ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")">
+            <a asp-area="Employer" asp-controller="Job" asp-action="Index" class="d-flex align-items-center">
+                <i class="fas fa-briefcase me-2"></i>
+                <span>My Jobs</span>
+            </a>
+        </li>
+        <li
+            class="@(ViewContext.RouteData.Values["controller"].ToString() == "Job" && ViewContext.RouteData.Values["action"].ToString() == "Create" ? "active" : "")">
+            <a asp-area="Employer" asp-controller="Job" asp-action="Create" class="d-flex align-items-center">
+                <i class="fa-solid fa-square-plus me-2"></i>
+                <span>Post A Job</span>
+            </a>
+        </li>
+        <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Company" ? "active" : "")">
+            <a asp-area="Employer" asp-controller="Company" asp-action="Profile" class="d-flex align-items-center">
+                <i class="fas fa-user me-2"></i>
+                <span>Profile</span>
+            </a>
+        </li>
+        <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Settings" ? "active" : "")">
+            <a asp-area="Employer" asp-controller="Settings" asp-action="Index" class="d-flex align-items-center">
+                <i class="fas fa-cog me-2"></i>
+                <span>Settings</span>
+            </a>
+        </li>
+    </ul>
+    <div class="sidebar-footer mt-4">
+        <a asp-area="Auth" asp-controller="Auth" asp-action="Logout" class="d-flex align-items-center">
+            <i class="fas fa-sign-out-alt me-2"></i> Log-out
+        </a>
+    </div>
+</div>

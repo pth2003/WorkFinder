@@ -197,21 +197,125 @@ namespace WorkFinder.Web.Areas.Employer.Controllers
             }
         }
 
+        // [HttpGet]
+        // public async Task<IActionResult> GetCandidateDetail(int applicationId)
+        // {
+        //     try
+        //     {
+        //         var user = await _userManager.GetUserAsync(User);
+        //         if (user == null)
+        //         {
+        //             return Json(new { success = false, message = "User not found" });
+        //         }
+
+        //         var company = await _companyRepository.GetByOwnerIdAsync(user.Id);
+        //         if (company == null)
+        //         {
+        //             return Json(new { success = false, message = "Company not found" });
+        //         }
+
+        //         // Find the application
+        //         var job = await _jobRepository.GetJobByApplicationIdAsync(applicationId);
+
+        //         if (job == null)
+        //         {
+        //             return Json(new { success = false, message = "Job not found" });
+        //         }
+
+        //         if (job.CompanyId != company.Id)
+        //         {
+        //             return Json(new { success = false, message = "You don't have permission to view this candidate" });
+        //         }
+
+        //         var application = job.Applications.FirstOrDefault(a => a.Id == applicationId);
+
+        //         if (application == null)
+        //         {
+        //             return Json(new { success = false, message = "Application not found" });
+        //         }
+
+
+        //         var applicant = application.Applicant;
+
+
+        //         // Get the resume if available
+        //         Resume resume = null;
+        //         try
+        //         {
+        //             resume = await _resumeRepository.GetResumeByUserIdAsync(applicant.Id);
+
+        //         }
+        //         catch (Exception ex)
+        //         {
+        //             _logger.LogError(ex, $"Error getting resume for applicant {applicant.Id}");
+        //             // Continue without resume data
+        //         }
+
+        //         // Tạo ViewModel với đầy đủ thông tin
+        //         var candidateDetail = new CandidateDetailViewModel
+        //         {
+        //             // Thông tin từ ApplicationUser
+        //             Id = applicant.Id,
+        //             FirstName = applicant.FirstName,
+        //             LastName = applicant.LastName,
+        //             Email = applicant.Email,
+        //             PhoneNumber = applicant.PhoneNumber ?? "Not specified",
+        //             ProfilePicture = applicant.ProfilePicture ?? "/images/avatar-placeholder.jpg",
+        //             DateOfBirth = applicant.DateOfBirth,
+
+
+        //             // Thông tin từ Resume
+        //             Title = resume?.Skills?.Split(',').FirstOrDefault() ?? "Job Seeker",
+        //             Summary = resume?.Summary ?? "No biography available.",
+        //             Skills = resume?.Skills ?? "Not specified",
+        //             Education = resume?.Education ?? "Not specified",
+        //             Experience = resume?.Experience ?? "Not specified",
+        //             Certifications = resume?.Certifications ?? "Not specified",
+        //             Languages = resume?.Languages ?? "Not specified",
+        //             ResumeFileUrl = resume?.FileUrl,
+
+        //             // Thông tin từ JobApplication
+        //             ApplicationId = application.Id,
+        //             CoverLetter = application.CoverLetter ?? "No cover letter provided.",
+        //             Status = application.Status,
+        //             AppliedDate = application.AppliedDate,
+
+        //             // Thông tin bổ sung
+        //             JobId = job.Id,
+        //             JobTitle = job.Title
+        //         };
+
+        //         var responseData = new
+        //         {
+        //             success = true,
+        //             data = candidateDetail
+        //         };
+
+        //         return Json(responseData);
+        //     }
+        //     catch (Exception ex)
+        //     {
+        //         _logger.LogError(ex, $"Error retrieving candidate details for application {applicationId}");
+        //         return Json(new { success = false, message = $"An error occurred while retrieving candidate details: {ex.Message}" });
+        //     }
+        // }
+
+
         [HttpGet]
-        public async Task<IActionResult> GetCandidateDetail(int applicationId)
+        public async Task<IActionResult> GetCandidateDetailPartial(int applicationId)
         {
             try
             {
                 var user = await _userManager.GetUserAsync(User);
                 if (user == null)
                 {
-                    return Json(new { success = false, message = "User not found" });
+                    return PartialView("_Error", "User not found");
                 }
 
                 var company = await _companyRepository.GetByOwnerIdAsync(user.Id);
                 if (company == null)
                 {
-                    return Json(new { success = false, message = "Company not found" });
+                    return PartialView("_Error", "Company not found");
                 }
 
                 // Find the application
@@ -219,31 +323,28 @@ namespace WorkFinder.Web.Areas.Employer.Controllers
 
                 if (job == null)
                 {
-                    return Json(new { success = false, message = "Job not found" });
+                    return PartialView("_Error", "Job not found");
                 }
 
                 if (job.CompanyId != company.Id)
                 {
-                    return Json(new { success = false, message = "You don't have permission to view this candidate" });
+                    return PartialView("_Error", "You don't have permission to view this candidate");
                 }
 
                 var application = job.Applications.FirstOrDefault(a => a.Id == applicationId);
 
                 if (application == null)
                 {
-                    return Json(new { success = false, message = "Application not found" });
+                    return PartialView("_Error", "Application not found");
                 }
 
-
                 var applicant = application.Applicant;
-
 
                 // Get the resume if available
                 Resume resume = null;
                 try
                 {
                     resume = await _resumeRepository.GetResumeByUserIdAsync(applicant.Id);
-
                 }
                 catch (Exception ex)
                 {
@@ -251,10 +352,10 @@ namespace WorkFinder.Web.Areas.Employer.Controllers
                     // Continue without resume data
                 }
 
-                // Tạo ViewModel với đầy đủ thông tin
+                // Create ViewModel with full information
                 var candidateDetail = new CandidateDetailViewModel
                 {
-                    // Thông tin từ ApplicationUser
+                    // Info from ApplicationUser
                     Id = applicant.Id,
                     FirstName = applicant.FirstName,
                     LastName = applicant.LastName,
@@ -263,8 +364,7 @@ namespace WorkFinder.Web.Areas.Employer.Controllers
                     ProfilePicture = applicant.ProfilePicture ?? "/images/avatar-placeholder.jpg",
                     DateOfBirth = applicant.DateOfBirth,
 
-
-                    // Thông tin từ Resume
+                    // Info from Resume
                     Title = resume?.Skills?.Split(',').FirstOrDefault() ?? "Job Seeker",
                     Summary = resume?.Summary ?? "No biography available.",
                     Skills = resume?.Skills ?? "Not specified",
@@ -274,32 +374,23 @@ namespace WorkFinder.Web.Areas.Employer.Controllers
                     Languages = resume?.Languages ?? "Not specified",
                     ResumeFileUrl = resume?.FileUrl,
 
-                    // Thông tin từ JobApplication
+                    // Info from JobApplication
                     ApplicationId = application.Id,
                     CoverLetter = application.CoverLetter ?? "No cover letter provided.",
                     Status = application.Status,
                     AppliedDate = application.AppliedDate,
 
-                    // Thông tin bổ sung
+                    // Additional info
                     JobId = job.Id,
                     JobTitle = job.Title
                 };
 
-                // Log resume URL for debugging
-                _logger.LogInformation($"Resume File URL: {candidateDetail.ResumeFileUrl ?? "NULL"}");
-
-                var responseData = new
-                {
-                    success = true,
-                    data = candidateDetail
-                };
-
-                return Json(responseData);
+                return PartialView("~/Areas/Employer/Views/Shared/_CandidateDetailModal.cshtml", candidateDetail);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"Error retrieving candidate details for application {applicationId}");
-                return Json(new { success = false, message = $"An error occurred while retrieving candidate details: {ex.Message}" });
+                return PartialView("_Error", $"An error occurred: {ex.Message}");
             }
         }
     }

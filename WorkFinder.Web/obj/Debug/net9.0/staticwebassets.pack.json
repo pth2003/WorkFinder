@@ -421,6 +421,18 @@
       "PackagePath": "staticwebassets/site.webmanifest"
     },
     {
+      "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/companies/banners/2ec0a971-8b86-42d2-9e9e-227667241dbe_IMG_1795.jpeg",
+      "PackagePath": "staticwebassets/uploads/companies/banners/2ec0a971-8b86-42d2-9e9e-227667241dbe_IMG_1795.jpeg"
+    },
+    {
+      "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/companies/logos/663f0bff-cee2-4664-97de-ce62f9eda5ba_fpt-software-6073b38a10cb4.webp",
+      "PackagePath": "staticwebassets/uploads/companies/logos/663f0bff-cee2-4664-97de-ce62f9eda5ba_fpt-software-6073b38a10cb4.webp"
+    },
+    {
+      "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/resumes/814b68f7-299d-4ba5-828f-7aaae032c4af_CV hieu Phan Trung  - React Developer Resume-TopCV.vn.pdf",
+      "PackagePath": "staticwebassets/uploads/resumes/814b68f7-299d-4ba5-828f-7aaae032c4af_CV hieu Phan Trung  - React Developer Resume-TopCV.vn.pdf"
+    },
+    {
       "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/resumes/a2f4bfd6-c85c-4a9c-b35e-c1aeb19b174d_Hieu-Phan-Trung.pdf",
       "PackagePath": "staticwebassets/uploads/resumes/a2f4bfd6-c85c-4a9c-b35e-c1aeb19b174d_Hieu-Phan-Trung.pdf"
     },

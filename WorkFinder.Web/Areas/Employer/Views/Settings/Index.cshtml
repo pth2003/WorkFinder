@@ -1,0 +1,284 @@
+@model WorkFinder.Web.Areas.Employer.Models.SettingsViewModel
+
+@{
+    ViewData["Title"] = "Cài đặt tài khoản";
+}
+
+<div class="container py-4">
+    <h1 class="mb-4">@ViewData["Title"]</h1>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    @if (TempData["WarningMessage"] != null)
+    {
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            @TempData["WarningMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="list-group mb-4">
+                <a class="list-group-item list-group-item-action active" id="profile-tab" data-bs-toggle="list" href="#profile" role="tab" aria-controls="profile">
+                    <i class="fas fa-user me-2"></i> Thông tin cá nhân
+                </a>
+                <a class="list-group-item list-group-item-action" id="password-tab" data-bs-toggle="list" href="#password" role="tab" aria-controls="password">
+                    <i class="fas fa-key me-2"></i> Đổi mật khẩu
+                </a>
+                <a class="list-group-item list-group-item-action" id="company-tab" data-bs-toggle="list" href="#company" role="tab" aria-controls="company">
+                    <i class="fas fa-building me-2"></i> Cài đặt công ty
+                </a>
+                <a class="list-group-item list-group-item-action" id="data-tab" data-bs-toggle="list" href="#data" role="tab" aria-controls="data">
+                    <i class="fas fa-database me-2"></i> Quản lý dữ liệu
+                </a>
+            </div>
+            <div class="card border-danger">
+                <div class="card-header bg-danger text-white">
+                    <i class="fas fa-exclamation-triangle me-2"></i> Vùng nguy hiểm
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Xóa tài khoản và tất cả dữ liệu liên quan.</p>
+                    <a asp-action="DeleteAccount" class="btn btn-outline-danger">
+                        <i class="fas fa-trash me-2"></i> Xóa tài khoản
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="tab-content">
+                <!-- Thông tin cá nhân -->
+                <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">
+                                <i class="fas fa-user me-2"></i> Thông tin cá nhân
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="text-center mb-4">
+                                @if (!string.IsNullOrEmpty(Model.ProfilePicture))
+                                {
+                                    <img src="@Model.ProfilePicture" alt="Profile Picture" class="rounded-circle img-thumbnail" style="width: 150px; height: 150px; object-fit: cover;">
+                                }
+                                else
+                                {
+                                    <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center mx-auto" style="width: 150px; height: 150px; font-size: 4rem;">
+                                        @Model.FirstName.Substring(0, 1)@Model.LastName.Substring(0, 1)
+                                    </div>
+                                }
+                                <div class="mt-3">
+                                    <h5>@Model.FirstName @Model.LastName</h5>
+                                    <p class="text-muted">@Model.Email</p>
+                                </div>
+                            </div>
+
+                            <form asp-action="UpdateProfile" method="post">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <input type="hidden" asp-for="UserId" />
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="FirstName" class="control-label"></label>
+                                            <input asp-for="FirstName" class="form-control" />
+                                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="LastName" class="control-label"></label>
+                                            <input asp-for="LastName" class="form-control" />
+                                            <span asp-validation-for="LastName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Email" class="control-label"></label>
+                                            <input asp-for="Email" class="form-control" readonly />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="PhoneNumber" class="control-label"></label>
+                                            <input asp-for="PhoneNumber" class="form-control" />
+                                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-save me-2"></i> Lưu thay đổi
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Đổi mật khẩu -->
+                <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">
+                                <i class="fas fa-key me-2"></i> Đổi mật khẩu
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <form asp-action="ChangePassword" method="post">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <input type="hidden" asp-for="UserId" />
+
+                                <div class="form-group mb-3">
+                                    <label asp-for="CurrentPassword" class="control-label"></label>
+                                    <input asp-for="CurrentPassword" class="form-control" />
+                                    <span asp-validation-for="CurrentPassword" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label asp-for="NewPassword" class="control-label"></label>
+                                    <input asp-for="NewPassword" class="form-control" />
+                                    <span asp-validation-for="NewPassword" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label asp-for="ConfirmPassword" class="control-label"></label>
+                                    <input asp-for="ConfirmPassword" class="form-control" />
+                                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-save me-2"></i> Cập nhật mật khẩu
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cài đặt công ty -->
+                <div class="tab-pane fade" id="company" role="tabpanel" aria-labelledby="company-tab">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">
+                                <i class="fas fa-building me-2"></i> Cài đặt công ty
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-4">
+                                <h5 class="mb-3">Thông tin công ty</h5>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p><strong>Tên công ty:</strong> @Model.CompanyName</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p><strong>ID công ty:</strong> @Model.CompanyId</p>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <p class="mb-2"><strong>Quản lý hiển thị:</strong></p>
+                                    <div class="form-check form-switch">
+                                        <form asp-action="UpdateCompanyVisibility" method="post" id="visibilityForm">
+                                            <input type="hidden" name="companyId" value="@Model.CompanyId" />
+                                            <input type="hidden" name="isVisible" value="@(Model.IsCompanyVerified ? "false" : "true")" />
+                                            <input class="form-check-input" type="checkbox" id="companyVisibility" @(Model.IsCompanyVerified ? "checked" : "") onchange="document.getElementById('visibilityForm').submit()">
+                                            <label class="form-check-label" for="companyVisibility">
+                                                @(Model.IsCompanyVerified ? "Công ty đang hiển thị công khai" : "Công ty đang ẩn")
+                                            </label>
+                                        </form>
+                                    </div>
+                                    <small class="text-muted">
+                                        Khi ẩn, thông tin công ty sẽ không xuất hiện trong tìm kiếm nhà tuyển dụng
+                                    </small>
+                                </div>
+                                <div class="mt-3">
+                                    <a asp-area="Employer" asp-controller="Company" asp-action="Edit" class="btn btn-outline-primary">
+                                        <i class="fas fa-edit me-2"></i> Chỉnh sửa thông tin công ty
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quản lý dữ liệu -->
+                <div class="tab-pane fade" id="data" role="tabpanel" aria-labelledby="data-tab">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">
+                                <i class="fas fa-database me-2"></i> Quản lý dữ liệu
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card mb-3">
+                                        <div class="card-body text-center">
+                                            <i class="fas fa-file-export fa-3x mb-3 text-primary"></i>
+                                            <h5 class="card-title">Xuất dữ liệu ứng viên</h5>
+                                            <p class="card-text">Tải xuống danh sách ứng viên của bạn dưới dạng file CSV.</p>
+                                            <a asp-action="ExportCandidates" class="btn btn-primary">
+                                                <i class="fas fa-download me-2"></i> Xuất ứng viên
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="card mb-3">
+                                        <div class="card-body text-center">
+                                            <i class="fas fa-save fa-3x mb-3 text-primary"></i>
+                                            <h5 class="card-title">Sao lưu dữ liệu</h5>
+                                            <p class="card-text">Sao lưu tất cả dữ liệu liên quan đến tài khoản của bạn.</p>
+                                            <a asp-action="BackupData" class="btn btn-primary">
+                                                <i class="fas fa-cloud-download-alt me-2"></i> Tải xuống bản sao lưu
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Đảm bảo các tab hoạt động đúng
+        document.addEventListener('DOMContentLoaded', function () {
+            const urlHash = window.location.hash;
+            
+            if (urlHash) {
+                const tab = document.querySelector(`a[href="${urlHash}"]`);
+                if (tab) {
+                    const tabInstance = new bootstrap.Tab(tab);
+                    tabInstance.show();
+                }
+            }
+
+            // Xử lý form toggle hiển thị công ty
+            const visibilityCheckbox = document.getElementById('companyVisibility');
+            if (visibilityCheckbox) {
+                visibilityCheckbox.addEventListener('change', function() {
+                    const isVisibleInput = this.closest('form').querySelector('input[name="isVisible"]');
+                    isVisibleInput.value = this.checked ? "true" : "false";
+                });
+            }
+        });
+    </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+} 

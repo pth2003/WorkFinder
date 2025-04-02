@@ -1,0 +1,242 @@
+@model WorkFinder.Web.Areas.Employer.Models.CandidateDetailViewModel
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- Left Column - Candidate Basic Info -->
+        <div class="col-md-4">
+            <div class="candidate-profile text-center mb-4">
+                <div class="profile-image mb-3 d-flex justify-content-center">
+                    @if (!string.IsNullOrEmpty(Model.ProfilePicture))
+                    {
+                        <img src="@Model.ProfilePicture" alt="Candidate" class="rounded-circle" width="100" height="100" id="candidateAvatar">
+                    }
+                    else
+                    {
+                        <div class="avatar-placeholder rounded-circle d-flex align-items-center justify-content-center"
+                            style="width: 100px; height: 100px; background-color: #007bff; color: white; font-size: 2rem; font-weight: bold;">
+                            @(Model.FirstName?.FirstOrDefault())@(Model.LastName?.FirstOrDefault())
+                        </div>
+                    }
+                </div>
+                <h4 class="candidate-name" id="candidateName">@Model.FirstName @Model.LastName</h4>
+                <p class="candidate-title text-muted" id="candidateTitle">@Model.Title</p>
+                <div class="candidate-actions mt-3">
+                    <a href="mailto:@Model.Email" class="btn btn-primary"><i class="fas fa-envelope me-2"></i>Send Mail</a>
+                </div>
+            </div>
+            <div class="candidate-info card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Personal Information</h5>
+                    <ul class="list-unstyled">
+                        @if (Model.DateOfBirth.HasValue)
+                        {
+                            <li class="mb-2">
+                                <span class="text-muted me-2"><i class="fas fa-birthday-cake"></i></span>
+                                <span class="info-label">Date of Birth:</span>
+                                <span class="info-value">@Model.DateOfBirth.Value.ToString("dd MMM, yyyy")</span>
+                            </li>
+                        }
+                        <li class="mb-2">
+                            <span class="text-muted me-2"><i class="fas fa-briefcase"></i></span>
+                            <span class="info-label">Experience:</span>
+                            <span class="info-value" id="candidateExperience">@Model.Experience</span>
+                        </li>
+                        <li>
+                            <span class="text-muted me-2"><i class="fas fa-graduation-cap"></i></span>
+                            <span class="info-label">Education:</span>
+                            <span class="info-value" id="candidateEducation">@Model.Education</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="candidate-contact card">
+                <div class="card-body">
+                    <h5 class="card-title">Contact Information</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <span class="text-muted me-2"><i class="fas fa-phone"></i></span>
+                            <span class="info-label">Phone:</span>
+                            <span class="info-value">@Model.PhoneNumber</span>
+                        </li>
+                        <li>
+                            <span class="text-muted me-2"><i class="fas fa-envelope"></i></span>
+                            <span class="info-label">Email:</span>
+                            <a href="mailto:@Model.Email" class="info-value" id="candidateEmail">@Model.Email</a>
+                        </li>
+                        @if (!string.IsNullOrEmpty(Model.Address))
+                        {
+                            <li class="mb-2">
+                                <span class="text-muted me-2"><i class="fas fa-map-marker-alt"></i></span>
+                                <span class="info-label">Address:</span>
+                                <span class="info-value">@Model.Address</span>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column - Biography & Cover Letter -->
+        <div class="col-md-8">
+            <ul class="nav nav-tabs mb-3" id="candidateDetailTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="biography-tab" data-bs-toggle="tab"
+                        data-bs-target="#biography" type="button" role="tab" aria-controls="biography"
+                        aria-selected="true">Biography</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="cover-letter-tab" data-bs-toggle="tab"
+                        data-bs-target="#cover-letter" type="button" role="tab"
+                        aria-controls="cover-letter" aria-selected="false">Cover Letter</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="skills-tab" data-bs-toggle="tab"
+                        data-bs-target="#skills" type="button" role="tab" aria-controls="skills"
+                        aria-selected="false">Skills</button>
+                </li>
+                @if (!string.IsNullOrEmpty(Model.ResumeFileUrl))
+                {
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="resume-tab" data-bs-toggle="tab" data-bs-target="#resume"
+                            type="button" role="tab" aria-controls="resume"
+                            aria-selected="false">Resume</button>
+                    </li>
+                }
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="status-tab" data-bs-toggle="tab" data-bs-target="#status"
+                        type="button" role="tab" aria-controls="status"
+                        aria-selected="false">Change Status</button>
+                </li>
+            </ul>
+            <div class="tab-content" id="candidateDetailTabsContent">
+                <div class="tab-pane fade show active" id="biography" role="tabpanel"
+                    aria-labelledby="biography-tab">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Biography</h5>
+                            <div id="candidateBiography">
+                                @if (!string.IsNullOrEmpty(Model.Summary))
+                                {
+                                    @Html.Raw(Model.Summary.Replace("\n", "<br>"))
+                                }
+                                else
+                                {
+                                    <p>No biography available.</p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="cover-letter" role="tabpanel"
+                    aria-labelledby="cover-letter-tab">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Cover Letter</h5>
+                            <div id="candidateCoverLetter">
+                                @if (!string.IsNullOrEmpty(Model.CoverLetter))
+                                {
+                                    @Html.Raw(Model.CoverLetter.Replace("\n", "<br>"))
+                                }
+                                else
+                                {
+                                    <p>No cover letter provided.</p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="skills" role="tabpanel" aria-labelledby="skills-tab">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Skills & Qualifications</h5>
+                            <div class="mb-4">
+                                <h6 class="mb-2">Skills</h6>
+                                <div class="skill-tags">
+                                    @if (!string.IsNullOrEmpty(Model.Skills) && Model.Skills != "Not specified")
+                                    {
+                                        @foreach (var skill in Model.Skills.Split(','))
+                                        {
+                                            <span class="badge bg-light text-dark me-2 mb-2 p-2">@skill.Trim()</span>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <p>No skills specified</p>
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <h6 class="mb-2">Languages</h6>
+                                <p>@Model.Languages</p>
+                            </div>
+
+                            <div>
+                                <h6 class="mb-2">Certifications</h6>
+                                <p>@Model.Certifications</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @if (!string.IsNullOrEmpty(Model.ResumeFileUrl))
+                {
+                    <div class="tab-pane fade" id="resume" role="tabpanel" aria-labelledby="resume-tab">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Resume</h5>
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <p class="mb-0">Download the candidate's full resume for more detailed
+                                        information.</p>
+                                    <a href="@Model.ResumeFileUrl" class="btn btn-outline-primary"
+                                        id="downloadResumeBtn" target="_blank">
+                                        <i class="fas fa-download me-2"></i>Download Resume
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div class="tab-pane fade" id="status" role="tabpanel" aria-labelledby="status-tab">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Application Status</h5>
+                            <p class="mb-3">Current status: <span class="badge bg-@(Model.Status.ToString().ToLower() switch { 
+                                "applied" => "primary", 
+                                "reviewing" => "info", 
+                                "interview" => "warning", 
+                                "accepted" => "success", 
+                                "rejected" => "danger", 
+                                _ => "secondary" 
+                            }) p-2">@Model.Status</span></p>
+                            
+                            <h6 class="mb-3">Change Status To:</h6>
+                            <div class="d-flex flex-wrap gap-2">
+                                @foreach (var status in Enum.GetValues(typeof(WorkFinder.Web.Models.Enums.ApplicationStatus)).Cast<WorkFinder.Web.Models.Enums.ApplicationStatus>())
+                                {
+                                    if (status != Model.Status)
+                                    {
+                                        <form method="post" action="@Url.Action("UpdateStatus", "Application", new { area = "Employer" })">
+                                            <input type="hidden" name="applicationId" value="@Model.ApplicationId" />
+                                            <input type="hidden" name="newStatus" value="@((int)status)" />
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit" class="btn btn-sm btn-outline-@(status.ToString().ToLower() switch { 
+                                                "applied" => "primary", 
+                                                "reviewing" => "info", 
+                                                "interview" => "warning", 
+                                                "accepted" => "success", 
+                                                "rejected" => "danger", 
+                                                _ => "secondary" 
+                                            })">
+                                                @status.ToString()
+                                            </button>
+                                        </form>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

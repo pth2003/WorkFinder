@@ -6,66 +6,8 @@
 
 <div class="container">
     <div class="employers-dashboard mt-4">
-        <div class="sidebar d-none d-md-block">
-            <div class="sidebar-header mb-4">
-                <h5>EMPLOYERS DASHBOARD</h5>
-            </div>
-            <ul class="sidebar-menu">
-                <li>
-                    <a href="@Url.Action("Index", "Home", new { area = "Employer" })" class="d-flex align-items-center">
-                        <i class="fas fa-tachometer-alt me-2"></i>
-                        <span>Overview</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="d-flex align-items-center">
-                        <i class="fas fa-building me-2"></i>
-                        <span>Employers Profile</span>
-                    </a>
-                </li>
-                <li class="active">
-                    <a href="@Url.Action("Create", "Job", new { area = "Employer" })" class="d-flex align-items-center">
-                        <i class="fas fa-plus-circle me-2"></i>
-                        <span>Post a Job</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="@Url.Action("Index", "Job", new { area = "Employer" })" class="d-flex align-items-center">
-                        <i class="fas fa-briefcase me-2"></i>
-                        <span>My Jobs</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="d-flex align-items-center">
-                        <i class="fas fa-user me-2"></i>
-                        <span>Saved Candidate</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="d-flex align-items-center">
-                        <i class="fas fa-credit-card me-2"></i>
-                        <span>Plans & Billing</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="d-flex align-items-center">
-                        <i class="fas fa-building me-2"></i>
-                        <span>All Companies</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="d-flex align-items-center">
-                        <i class="fas fa-cog me-2"></i>
-                        <span>Settings</span>
-                    </a>
-                </li>
-            </ul>
-            <div class="sidebar-footer mt-4">
-                <a href="@Url.Action("Logout", "Auth", new { area = "Auth" })" class="d-flex align-items-center">
-                    <i class="fas fa-sign-out-alt me-2"></i> Log-out
-                </a>
-            </div>
-        </div>
+        @await Html.PartialAsync("~/Areas/Employer/Views/Shared/_SidebarPartial.cshtml")
+
 
         <div class="main-content">
             <div class="post-job-container bg-white p-4 rounded shadow-sm">
@@ -406,48 +348,48 @@
 
     /* Responsive */
     @@media(max - width: 992px) {
-            .employers-dashboard {
-                flex-direction: column;
-            }
-
-            .sidebar {
-                width: 100%;
-                margin-bottom: 30px;
-            }
+        .employers-dashboard {
+            flex-direction: column;
         }
-    </style>
 
-    @section Scripts {
-        <script src="~/js/employer-dashboard.js"></script>
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                // Thêm loading indicator nếu chưa có
-                if (!document.getElementById('loading-indicator')) {
-                    const loadingIndicator = document.createElement('div');
-                    loadingIndicator.id = 'loading-indicator';
-                    loadingIndicator.className = 'text-center py-3';
-                    loadingIndicator.style.display = 'none';
-                    loadingIndicator.innerHTML = `
-                                        <div class="spinner-border text-primary" role="status">
-                                            <span class="visually-hidden">Loading...</span>
-                                        </div>
-                                    `;
-                    document.querySelector('main').appendChild(loadingIndicator);
-                }
-
-                // Thêm toast container nếu chưa có
-                if (!document.getElementById('toast-container')) {
-                    const toastContainer = document.createElement('div');
-                    toastContainer.id = 'toast-container';
-                    toastContainer.className = 'toast-container position-fixed bottom-0 end-0 p-3';
-                    document.body.appendChild(toastContainer);
-                }
-
-                // Thêm id cho form nếu chưa có
-                const form = document.querySelector('form');
-                if (form && !form.id) {
-                    form.id = 'job-form';
-                }
-            });
-        </script>
+        .sidebar {
+            width: 100%;
+            margin-bottom: 30px;
+        }
     }
+</style>
+
+@section Scripts {
+    <script src="~/js/employer-dashboard.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Thêm loading indicator nếu chưa có
+            if (!document.getElementById('loading-indicator')) {
+                const loadingIndicator = document.createElement('div');
+                loadingIndicator.id = 'loading-indicator';
+                loadingIndicator.className = 'text-center py-3';
+                loadingIndicator.style.display = 'none';
+                loadingIndicator.innerHTML = `
+                                                            <div class="spinner-border text-primary" role="status">
+                                                                <span class="visually-hidden">Loading...</span>
+                                                            </div>
+                                                        `;
+                document.querySelector('main').appendChild(loadingIndicator);
+            }
+
+            // Thêm toast container nếu chưa có
+            if (!document.getElementById('toast-container')) {
+                const toastContainer = document.createElement('div');
+                toastContainer.id = 'toast-container';
+                toastContainer.className = 'toast-container position-fixed bottom-0 end-0 p-3';
+                document.body.appendChild(toastContainer);
+            }
+
+            // Thêm id cho form nếu chưa có
+            const form = document.querySelector('form');
+            if (form && !form.id) {
+                form.id = 'job-form';
+            }
+        });
+    </script>
+}
