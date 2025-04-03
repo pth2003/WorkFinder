@@ -141,6 +141,9 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseSession();
 
+// Thêm endpoint health check cho Render
+app.MapGet("/health", () => "Healthy");
+
 // Add authentication middleware
 app.UseAuthentication();
 app.UseAuthorization();

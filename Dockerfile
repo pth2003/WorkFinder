@@ -16,11 +16,11 @@ WORKDIR /app
 COPY --from=build /app/out .
 
 # Biến môi trường
-ENV ASPNETCORE_URLS=http://+:10000
+ENV ASPNETCORE_URLS=http://+:${PORT:-8080}
 ENV ASPNETCORE_ENVIRONMENT=Production
 
-# Expose port
-EXPOSE 10000
+# Expose port (for documentation, Render ignores this)
+EXPOSE ${PORT:-8080}
 
 # Start command
 ENTRYPOINT ["dotnet", "WorkFinder.Web.dll"] 
