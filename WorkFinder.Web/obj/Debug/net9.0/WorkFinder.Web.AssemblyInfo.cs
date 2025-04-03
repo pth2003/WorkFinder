@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WorkFinder.Web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9fb325824123b98caa3ac39797b39b68363c583b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("WorkFinder.Web")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WorkFinder.Web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
