@@ -52,9 +52,27 @@ builder.Services.Configure<FormOptions>(options =>
 
 // Đăng ký DbContext với PostgreSQL
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+// Kiểm tra và ghi đè connection string từ biến môi trường nếu có
+var pgHost = Environment.GetEnvironmentVariable("PGHOST");
+var pgPort = Environment.GetEnvironmentVariable("PGPORT") ?? "5432";
+var pgDatabase = Environment.GetEnvironmentVariable("PGDATABASE");
+var pgUser = Environment.GetEnvironmentVariable("PGUSER");
+var pgPassword = Environment.GetEnvironmentVariable("PGPASSWORD");
+
+if (!string.IsNullOrEmpty(pgHost) && !string.IsNullOrEmpty(pgDatabase) &&
+    !string.IsNullOrEmpty(pgUser) && !string.IsNullOrEmpty(pgPassword))
+{
+    connectionString = $"Host={pgHost};Port={pgPort};Database={pgDatabase};Username={pgUser};Password={pgPassword};SSL Mode=Require;Trust Server Certificate=true;";
+    Console.WriteLine($"Using PostgreSQL connection from environment variables. Host: {pgHost}");
+}
+else
+{
+    Console.WriteLine("Using PostgreSQL connection from appsettings.json");
+}
+
 builder.Services.AddDbContext<WorkFinderContext>(options =>
-    options.UseNpgsql(
-        builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseNpgsql(connectionString));
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 // Add specific repositories if needed
