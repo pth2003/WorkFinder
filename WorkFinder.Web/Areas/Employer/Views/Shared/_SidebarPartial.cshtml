@@ -3,33 +3,33 @@
         <h5>EMPLOYERS DASHBOARD</h5>
     </div>
     <ul class="sidebar-menu">
-        <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Home" ? "active" : "")">
+        <li class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Home" ? "active" : "")">
             <a asp-area="Employer" asp-controller="Home" asp-action="Index" class="d-flex align-items-center">
                 <i class="fas fa-tachometer-alt me-2"></i>
                 <span>Overview</span>
             </a>
         </li>
         <li
-            class="@(ViewContext.RouteData.Values["controller"].ToString() == "Job" && ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")">
+            class="@((ViewContext.RouteData.Values["controller"]?.ToString() == "Job" && ViewContext.RouteData.Values["action"]?.ToString() == "Index") ? "active" : "")">
             <a asp-area="Employer" asp-controller="Job" asp-action="Index" class="d-flex align-items-center">
                 <i class="fas fa-briefcase me-2"></i>
                 <span>My Jobs</span>
             </a>
         </li>
         <li
-            class="@(ViewContext.RouteData.Values["controller"].ToString() == "Job" && ViewContext.RouteData.Values["action"].ToString() == "Create" ? "active" : "")">
+            class="@((ViewContext.RouteData.Values["controller"]?.ToString() == "Job" && ViewContext.RouteData.Values["action"]?.ToString() == "Create") ? "active" : "")">
             <a asp-area="Employer" asp-controller="Job" asp-action="Create" class="d-flex align-items-center">
                 <i class="fa-solid fa-square-plus me-2"></i>
                 <span>Post A Job</span>
             </a>
         </li>
-        <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Company" ? "active" : "")">
+        <li class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Company" ? "active" : "")">
             <a asp-area="Employer" asp-controller="Company" asp-action="Profile" class="d-flex align-items-center">
-                <i class="fas fa-user me-2"></i>
-                <span>Profile</span>
+                <i class="fas fa-building me-2"></i>
+                <span>Company</span>
             </a>
         </li>
-        <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Settings" ? "active" : "")">
+        <li class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Settings" ? "active" : "")">
             <a asp-area="Employer" asp-controller="Settings" asp-action="Index" class="d-flex align-items-center">
                 <i class="fas fa-cog me-2"></i>
                 <span>Settings</span>
@@ -37,8 +37,104 @@
         </li>
     </ul>
     <div class="sidebar-footer mt-4">
-        <a asp-area="Auth" asp-controller="Auth" asp-action="Logout" class="d-flex align-items-center">
-            <i class="fas fa-sign-out-alt me-2"></i> Log-out
-        </a>
+        <form asp-area="Auth" asp-controller="Auth" asp-action="Logout" method="post" id="logoutForm">
+            <button type="submit" class="btn btn-link d-flex align-items-center p-0">
+                <i class="fas fa-sign-out-alt me-2"></i>
+                <span>Log-out</span>
+            </button>
+        </form>
     </div>
 </div>
+
+<style>
+    /* Sidebar styles */
+    .sidebar {
+        width: 250px;
+        flex-shrink: 0;
+        font-size: 16px;
+        background-color: #fff;
+        border-right: 1px solid #eee;
+        height: 100%;
+        padding: 1.5rem;
+        position: sticky;
+        top: 0;
+    }
+
+    .sidebar-header h5 {
+        font-size: 16px;
+        font-weight: 600;
+        color: #777;
+        margin-bottom: 20px;
+        letter-spacing: 0.5px;
+    }
+
+    .sidebar-menu {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .sidebar-menu li {
+        margin-bottom: 15px;
+    }
+
+    .sidebar-menu li a {
+        display: flex;
+        align-items: center;
+        color: #666;
+        text-decoration: none;
+        padding: 10px 15px;
+        border-radius: 6px;
+        transition: all 0.3s;
+        font-size: 15px;
+    }
+
+    .sidebar-menu li a:hover,
+    .sidebar-menu li.active a {
+        background-color: rgba(10, 101, 204, 0.1);
+        color: #0A65CC;
+    }
+
+    .sidebar-menu li.active a {
+        font-weight: 500;
+    }
+
+    .sidebar-menu li a i {
+        width: 20px;
+        text-align: center;
+        margin-right: 8px;
+    }
+
+    .sidebar-footer {
+        padding-top: 15px;
+        border-top: 1px solid #eee;
+    }
+
+    /* Styling for the logout button */
+    #logoutForm .btn-link {
+        display: flex;
+        align-items: center;
+        color: #666;
+        text-decoration: none;
+        font-size: 14px;
+        padding: 10px 15px;
+        border-radius: 6px;
+        transition: all 0.3s;
+        background: transparent;
+        border: none;
+        width: 100%;
+        text-align: left;
+    }
+
+    #logoutForm .btn-link:hover {
+        color: #dc3545;
+        background-color: rgba(220, 53, 69, 0.1);
+    }
+
+    /* Responsive adjustments */
+    @@media (max-width: 767.98px) {
+        .sidebar {
+            display: none;
+        }
+    }
+</style>

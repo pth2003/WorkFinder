@@ -1,284 +1,479 @@
 @model WorkFinder.Web.Areas.Employer.Models.SettingsViewModel
 
 @{
-    ViewData["Title"] = "Cài đặt tài khoản";
+    ViewData["Title"] = "Account Settings";
+    Layout = "_EmployerLayout";
 }
 
-<div class="container py-4">
-    <h1 class="mb-4">@ViewData["Title"]</h1>
+<div class="employers-dashboard">
+    <!-- Sidebar -->
+    @await Html.PartialAsync("~/Areas/Employer/Views/Shared/_SidebarPartial.cshtml")
 
-    @if (TempData["SuccessMessage"] != null)
-    {
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            @TempData["SuccessMessage"]
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Page Header with Breadcrumb -->
+        <div class="page-header mb-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a
+                            href="@Url.Action("Index", "Home", new { area = "Employer" })">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Account Settings</li>
+                </ol>
+            </nav>
         </div>
-    }
 
-    @if (TempData["WarningMessage"] != null)
-    {
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            @TempData["WarningMessage"]
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <!-- Settings Header -->
+        <div class="mb-3">
+            <h2 class="mb-0 h3">@ViewData["Title"]</h2>
+            <p class="text-muted">Manage your personal information and account settings</p>
         </div>
-    }
 
-    <div class="row">
-        <div class="col-md-3">
-            <div class="list-group mb-4">
-                <a class="list-group-item list-group-item-action active" id="profile-tab" data-bs-toggle="list" href="#profile" role="tab" aria-controls="profile">
-                    <i class="fas fa-user me-2"></i> Thông tin cá nhân
-                </a>
-                <a class="list-group-item list-group-item-action" id="password-tab" data-bs-toggle="list" href="#password" role="tab" aria-controls="password">
-                    <i class="fas fa-key me-2"></i> Đổi mật khẩu
-                </a>
-                <a class="list-group-item list-group-item-action" id="company-tab" data-bs-toggle="list" href="#company" role="tab" aria-controls="company">
-                    <i class="fas fa-building me-2"></i> Cài đặt công ty
-                </a>
-                <a class="list-group-item list-group-item-action" id="data-tab" data-bs-toggle="list" href="#data" role="tab" aria-controls="data">
-                    <i class="fas fa-database me-2"></i> Quản lý dữ liệu
-                </a>
-            </div>
-            <div class="card border-danger">
-                <div class="card-header bg-danger text-white">
-                    <i class="fas fa-exclamation-triangle me-2"></i> Vùng nguy hiểm
+        <!-- Settings Content -->
+        <div class="settings-container">
+            <div class="card">
+                <div class="card-header py-2">
+                    <ul class="nav nav-tabs card-header-tabs" id="settingsTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="profile-tab" data-bs-toggle="tab"
+                                data-bs-target="#profile" type="button" role="tab" aria-controls="profile"
+                                aria-selected="true">
+                                <i class="fas fa-user me-2"></i> Profile
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="password-tab" data-bs-toggle="tab" data-bs-target="#password"
+                                type="button" role="tab" aria-controls="password" aria-selected="false">
+                                <i class="fas fa-key me-2"></i> Password
+                            </button>
+                        </li>
+                    </ul>
                 </div>
                 <div class="card-body">
-                    <p class="card-text">Xóa tài khoản và tất cả dữ liệu liên quan.</p>
-                    <a asp-action="DeleteAccount" class="btn btn-outline-danger">
-                        <i class="fas fa-trash me-2"></i> Xóa tài khoản
-                    </a>
+                    <div class="tab-content" id="settingsTabsContent">
+                        <!-- Profile Tab -->
+                        <div class="tab-pane fade show active" id="profile" role="tabpanel"
+                            aria-labelledby="profile-tab">
+                            <div class="row">
+                                <div class="col-md-3 text-center mb-4">
+                                    @if (!string.IsNullOrEmpty(Model.ProfilePicture))
+                                    {
+                                        <img src="@Model.ProfilePicture" alt="Profile Picture"
+                                            class="rounded-circle img-thumbnail mb-3"
+                                            style="width: 120px; height: 120px; object-fit: cover;">
+                                    }
+                                    else
+                                    {
+                                        <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center mx-auto mb-3"
+                                            style="width: 120px; height: 120px; font-size: 3rem;">
+                                            @(Model.FirstName?.Length > 0 ? Model.FirstName.Substring(0, 1) :
+                                                                                    "")@(Model.LastName?.Length > 0 ? Model.LastName.Substring(0, 1) : "")
+                                    </div>
+                                                                        }
+                                    <button class="btn btn-outline-primary btn-sm" type="button" data-bs-toggle="modal"
+                                        data-bs-target="#uploadAvatarModal">
+                                        <i class="fas fa-camera me-2"></i> Change Photo
+                                    </button>
+                                </div>
+                                <div class="col-md-9">
+                                    <form asp-area="Employer" asp-controller="Settings" asp-action="UpdateProfile"
+                                        method="post" class="needs-validation" novalidate id="profileForm">
+                                        <div asp-validation-summary="All" class="text-danger"></div>
+                                        <input type="hidden" asp-for="UserId" />
+                                        <input type="hidden" asp-for="ProfilePicture" />
+                                        <input type="hidden" asp-for="CompanyId" />
+                                        <input type="hidden" asp-for="CompanyName" />
+                                        <input type="hidden" asp-for="IsCompanyVerified" />
+
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label asp-for="FirstName" class="form-label">First Name</label>
+                                                    <input asp-for="FirstName" class="form-control" required />
+                                                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label asp-for="LastName" class="form-label">Last Name</label>
+                                                    <input asp-for="LastName" class="form-control" required />
+                                                    <span asp-validation-for="LastName" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label asp-for="Email" class="form-label">Email</label>
+                                                    <input asp-for="Email" class="form-control" readonly />
+                                                    <small class="text-muted">Email cannot be changed</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label asp-for="PhoneNumber" class="form-label">Phone Number</label>
+                                                    <input asp-for="PhoneNumber" class="form-control" />
+                                                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label asp-for="DateOfBirth" class="form-label">Date of
+                                                        Birth</label>
+                                                    <input asp-for="DateOfBirth" class="form-control" type="date" />
+                                                    <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary">
+                                                <i class="fas fa-save me-2"></i> Save Changes
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Password Tab -->
+                        <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
+                            <div class="row">
+                                <div class="col-md-8 offset-md-2">
+                                    <form asp-area="Employer" asp-controller="Settings" asp-action="ChangePassword"
+                                        method="post" class="needs-validation" novalidate id="passwordForm">
+                                        <div asp-validation-summary="All" class="text-danger"></div>
+                                        <input type="hidden" asp-for="UserId" />
+
+                                        <div class="form-group mb-3">
+                                            <label asp-for="CurrentPassword" class="form-label">Current Password</label>
+                                            <div class="input-group">
+                                                <input asp-for="CurrentPassword" class="form-control" type="password"
+                                                    required />
+                                                <button class="btn btn-outline-secondary toggle-password" type="button"
+                                                    data-target="CurrentPassword">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                            </div>
+                                            <span asp-validation-for="CurrentPassword" class="text-danger"></span>
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label asp-for="NewPassword" class="form-label">New Password</label>
+                                            <div class="input-group">
+                                                <input asp-for="NewPassword" class="form-control" type="password"
+                                                    required />
+                                                <button class="btn btn-outline-secondary toggle-password" type="button"
+                                                    data-target="NewPassword">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                            </div>
+                                            <span asp-validation-for="NewPassword" class="text-danger"></span>
+                                            <small class="form-text text-muted">Password must be at least 6 characters
+                                                long.</small>
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label asp-for="ConfirmPassword" class="form-label">Confirm Password</label>
+                                            <div class="input-group">
+                                                <input asp-for="ConfirmPassword" class="form-control" type="password"
+                                                    required />
+                                                <button class="btn btn-outline-secondary toggle-password" type="button"
+                                                    data-target="ConfirmPassword">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                            </div>
+                                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary">
+                                                <i class="fas fa-key me-2"></i> Update Password
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-9">
-            <div class="tab-content">
-                <!-- Thông tin cá nhân -->
-                <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="card-title mb-0">
-                                <i class="fas fa-user me-2"></i> Thông tin cá nhân
-                            </h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="text-center mb-4">
-                                @if (!string.IsNullOrEmpty(Model.ProfilePicture))
-                                {
-                                    <img src="@Model.ProfilePicture" alt="Profile Picture" class="rounded-circle img-thumbnail" style="width: 150px; height: 150px; object-fit: cover;">
-                                }
-                                else
-                                {
-                                    <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center mx-auto" style="width: 150px; height: 150px; font-size: 4rem;">
-                                        @Model.FirstName.Substring(0, 1)@Model.LastName.Substring(0, 1)
-                                    </div>
-                                }
-                                <div class="mt-3">
-                                    <h5>@Model.FirstName @Model.LastName</h5>
-                                    <p class="text-muted">@Model.Email</p>
-                                </div>
-                            </div>
 
-                            <form asp-action="UpdateProfile" method="post">
-                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                <input type="hidden" asp-for="UserId" />
-
-                                <div class="row mb-3">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label asp-for="FirstName" class="control-label"></label>
-                                            <input asp-for="FirstName" class="form-control" />
-                                            <span asp-validation-for="FirstName" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label asp-for="LastName" class="control-label"></label>
-                                            <input asp-for="LastName" class="form-control" />
-                                            <span asp-validation-for="LastName" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row mb-3">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label asp-for="Email" class="control-label"></label>
-                                            <input asp-for="Email" class="form-control" readonly />
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label asp-for="PhoneNumber" class="control-label"></label>
-                                            <input asp-for="PhoneNumber" class="form-control" />
-                                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary">
-                                        <i class="fas fa-save me-2"></i> Lưu thay đổi
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+            <div class="card border-danger mt-3">
+                <div class="card-header bg-danger text-white py-2">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-exclamation-triangle me-2"></i> Danger Zone
+                    </h5>
                 </div>
-
-                <!-- Đổi mật khẩu -->
-                <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="card-title mb-0">
-                                <i class="fas fa-key me-2"></i> Đổi mật khẩu
-                            </h5>
-                        </div>
-                        <div class="card-body">
-                            <form asp-action="ChangePassword" method="post">
-                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                <input type="hidden" asp-for="UserId" />
-
-                                <div class="form-group mb-3">
-                                    <label asp-for="CurrentPassword" class="control-label"></label>
-                                    <input asp-for="CurrentPassword" class="form-control" />
-                                    <span asp-validation-for="CurrentPassword" class="text-danger"></span>
-                                </div>
-
-                                <div class="form-group mb-3">
-                                    <label asp-for="NewPassword" class="control-label"></label>
-                                    <input asp-for="NewPassword" class="form-control" />
-                                    <span asp-validation-for="NewPassword" class="text-danger"></span>
-                                </div>
-
-                                <div class="form-group mb-3">
-                                    <label asp-for="ConfirmPassword" class="control-label"></label>
-                                    <input asp-for="ConfirmPassword" class="form-control" />
-                                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-                                </div>
-
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary">
-                                        <i class="fas fa-save me-2"></i> Cập nhật mật khẩu
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Cài đặt công ty -->
-                <div class="tab-pane fade" id="company" role="tabpanel" aria-labelledby="company-tab">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="card-title mb-0">
-                                <i class="fas fa-building me-2"></i> Cài đặt công ty
-                            </h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="mb-4">
-                                <h5 class="mb-3">Thông tin công ty</h5>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <p><strong>Tên công ty:</strong> @Model.CompanyName</p>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p><strong>ID công ty:</strong> @Model.CompanyId</p>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <p class="mb-2"><strong>Quản lý hiển thị:</strong></p>
-                                    <div class="form-check form-switch">
-                                        <form asp-action="UpdateCompanyVisibility" method="post" id="visibilityForm">
-                                            <input type="hidden" name="companyId" value="@Model.CompanyId" />
-                                            <input type="hidden" name="isVisible" value="@(Model.IsCompanyVerified ? "false" : "true")" />
-                                            <input class="form-check-input" type="checkbox" id="companyVisibility" @(Model.IsCompanyVerified ? "checked" : "") onchange="document.getElementById('visibilityForm').submit()">
-                                            <label class="form-check-label" for="companyVisibility">
-                                                @(Model.IsCompanyVerified ? "Công ty đang hiển thị công khai" : "Công ty đang ẩn")
-                                            </label>
-                                        </form>
-                                    </div>
-                                    <small class="text-muted">
-                                        Khi ẩn, thông tin công ty sẽ không xuất hiện trong tìm kiếm nhà tuyển dụng
-                                    </small>
-                                </div>
-                                <div class="mt-3">
-                                    <a asp-area="Employer" asp-controller="Company" asp-action="Edit" class="btn btn-outline-primary">
-                                        <i class="fas fa-edit me-2"></i> Chỉnh sửa thông tin công ty
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Quản lý dữ liệu -->
-                <div class="tab-pane fade" id="data" role="tabpanel" aria-labelledby="data-tab">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="card-title mb-0">
-                                <i class="fas fa-database me-2"></i> Quản lý dữ liệu
-                            </h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="card mb-3">
-                                        <div class="card-body text-center">
-                                            <i class="fas fa-file-export fa-3x mb-3 text-primary"></i>
-                                            <h5 class="card-title">Xuất dữ liệu ứng viên</h5>
-                                            <p class="card-text">Tải xuống danh sách ứng viên của bạn dưới dạng file CSV.</p>
-                                            <a asp-action="ExportCandidates" class="btn btn-primary">
-                                                <i class="fas fa-download me-2"></i> Xuất ứng viên
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="card mb-3">
-                                        <div class="card-body text-center">
-                                            <i class="fas fa-save fa-3x mb-3 text-primary"></i>
-                                            <h5 class="card-title">Sao lưu dữ liệu</h5>
-                                            <p class="card-text">Sao lưu tất cả dữ liệu liên quan đến tài khoản của bạn.</p>
-                                            <a asp-action="BackupData" class="btn btn-primary">
-                                                <i class="fas fa-cloud-download-alt me-2"></i> Tải xuống bản sao lưu
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="card-body">
+                    <p class="card-text">Permanently delete your account and all your data. This action cannot be
+                        undone.</p>
+                    <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
+                        data-bs-target="#deleteAccountModal">
+                        <i class="fas fa-trash me-2"></i> Delete Account
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Toast Container -->
+<div id="toast-container" class="toast-container position-fixed top-0 end-0 p-3"></div>
+
+<!-- Upload Avatar Modal -->
+<div class="modal fade" id="uploadAvatarModal" tabindex="-1" aria-labelledby="uploadAvatarModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="uploadAvatarModalLabel">Upload Profile Picture</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form asp-area="Employer" asp-controller="Settings" asp-action="UploadAvatar" method="post"
+                    enctype="multipart/form-data" id="avatarForm">
+                    <input type="hidden" name="userId" value="@Model.UserId" />
+
+                    @if (TempData["AvatarError"] != null)
+                    {
+                        <div class="alert alert-danger">
+                            @TempData["AvatarError"]
+                        </div>
+                    }
+
+                    <div class="mb-3">
+                        <label for="avatarFile" class="form-label">Select Image</label>
+                        <input class="form-control" type="file" id="avatarFile" name="avatarFile"
+                            accept="image/jpeg,image/png,image/gif" required>
+                        <div class="form-text">Max file size: 5MB. Supported formats: JPG, PNG, GIF.</div>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Upload</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Account Modal -->
+<div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-labelledby="deleteAccountModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="deleteAccountModalLabel">Confirm Account Deletion</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-warning">
+                    <i class="fas fa-exclamation-triangle me-2"></i> This action cannot be undone!
+                </div>
+                <p>You are about to permanently delete your account and all associated data including:</p>
+                <ul>
+                    <li>Your profile information</li>
+                    <li>All job postings</li>
+                    <li>Application history</li>
+                    <li>Company profile</li>
+                </ul>
+                <p>Please type <strong>DELETE</strong> to confirm:</p>
+                <input type="text" id="deleteConfirmation" class="form-control" placeholder="Type DELETE here">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <form asp-action="DeleteAccount" method="post" id="deleteForm">
+                    <button type="submit" id="confirmDeleteBtn" class="btn btn-danger" disabled>
+                        <i class="fas fa-trash me-2"></i> Delete Permanently
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Dashboard Layout */
+    .employers-dashboard {
+        display: flex;
+    }
+
+    .main-content {
+        flex: 1;
+        padding: 2rem;
+        background-color: #fff;
+    }
+
+    /* Breadcrumb Styling */
+    .breadcrumb {
+        font-size: 14px;
+        background: transparent;
+    }
+
+    .breadcrumb-item a {
+        color: #6c757d;
+        text-decoration: none;
+    }
+
+    .breadcrumb-item.active {
+        color: #000;
+    }
+
+    .breadcrumb-item+.breadcrumb-item::before {
+        content: ">";
+    }
+
+    /* Card styling */
+    .card {
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        border: none;
+        border-radius: 0.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .settings-container {
+        height: auto;
+    }
+
+    .card-header {
+        background-color: #fff;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    }
+
+    /* Form Controls */
+    .form-control {
+        padding: 0.5rem 0.75rem;
+        border-radius: 0.375rem;
+    }
+
+    .form-control:focus {
+        border-color: #0A65CC;
+        box-shadow: 0 0 0 0.25rem rgba(10, 101, 204, 0.25);
+    }
+
+    /* Responsive */
+    @@media (max-width: 767.98px) {
+        .employers-dashboard {
+            flex-direction: column;
+        }
+
+        .main-content {
+            padding: 1rem;
+        }
+    }
+</style>
+
 @section Scripts {
+    <script src="~/js/toast.js"></script>
     <script>
-        // Đảm bảo các tab hoạt động đúng
         document.addEventListener('DOMContentLoaded', function () {
-            const urlHash = window.location.hash;
-            
-            if (urlHash) {
-                const tab = document.querySelector(`a[href="${urlHash}"]`);
-                if (tab) {
-                    const tabInstance = new bootstrap.Tab(tab);
+            // Handle Delete Confirmation
+            const deleteConfirmationInput = document.getElementById('deleteConfirmation');
+            const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+
+            if (deleteConfirmationInput && confirmDeleteBtn) {
+                deleteConfirmationInput.addEventListener('input', function () {
+                    confirmDeleteBtn.disabled = this.value !== 'DELETE';
+                });
+            }
+
+            // Handle password toggle visibility
+            const togglePasswordButtons = document.querySelectorAll('.toggle-password');
+            togglePasswordButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const targetId = this.getAttribute('data-target');
+                    const passwordInput = document.getElementById(targetId);
+
+                    if (passwordInput.type === 'password') {
+                        passwordInput.type = 'text';
+                        this.innerHTML = '<i class="fas fa-eye-slash"></i>';
+                    } else {
+                        passwordInput.type = 'password';
+                        this.innerHTML = '<i class="fas fa-eye"></i>';
+                    }
+                });
+            });
+
+            // Keep tab state on page refresh or if set from server
+            const activeTab = '@TempData["ActiveTab"]';
+            if (activeTab) {
+                const tabElement = document.querySelector(`#${activeTab}-tab`);
+                if (tabElement) {
+                    const tabInstance = new bootstrap.Tab(tabElement);
                     tabInstance.show();
+                }
+            } else {
+                const url = window.location.href;
+                if (url.includes('#')) {
+                    const tab = url.split('#')[1];
+                    const tabElement = document.querySelector(`#${tab}-tab`);
+                    if (tabElement) {
+                        const tabInstance = new bootstrap.Tab(tabElement);
+                        tabInstance.show();
+                    }
                 }
             }
 
-            // Xử lý form toggle hiển thị công ty
-            const visibilityCheckbox = document.getElementById('companyVisibility');
-            if (visibilityCheckbox) {
-                visibilityCheckbox.addEventListener('change', function() {
-                    const isVisibleInput = this.closest('form').querySelector('input[name="isVisible"]');
-                    isVisibleInput.value = this.checked ? "true" : "false";
+            // Show toast if there's a success or error message in the URL params
+            const urlParams = new URLSearchParams(window.location.search);
+            const successMessage = urlParams.get('success');
+            const errorMessage = urlParams.get('error');
+
+            if (successMessage) {
+                showToast('Success', decodeURIComponent(successMessage), 'success');
+            }
+
+            if (errorMessage) {
+                showToast('Error', decodeURIComponent(errorMessage), 'error');
+            }
+
+            // Show toast if there's a TempData success message
+            @if (TempData["SuccessMessage"] != null)
+                {
+                    <text>showToast('Success', '@TempData["SuccessMessage"]', 'success');</text>
+            }
+
+                @if (TempData["ErrorMessage"] != null)
+                {
+                    <text>showToast('Error', '@TempData["ErrorMessage"]', 'error');</text>
+            }
+
+                    // Special handling for avatar form
+                    const avatarForm = document.getElementById('avatarForm');
+            if (avatarForm) {
+                const fileInput = document.getElementById('avatarFile');
+
+                fileInput.addEventListener('change', function () {
+                    const maxSize = 5 * 1024 * 1024; // 5MB
+                    const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+
+                    if (this.files.length > 0) {
+                        const file = this.files[0];
+
+                        // Check file type
+                        if (!allowedTypes.includes(file.type)) {
+                            showToast('Error', 'Invalid file type. Only JPG, PNG, and GIF files are allowed.', 'error');
+                            this.value = '';
+                            return;
+                        }
+
+                        // Check file size
+                        if (file.size > maxSize) {
+                            showToast('Error', 'File size exceeds 5MB limit.', 'error');
+                            this.value = '';
+                            return;
+                        }
+                    }
                 });
             }
         });
     </script>
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-} 
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

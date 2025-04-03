@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace WorkFinder.Web.Areas.Employer.Models
@@ -21,6 +22,10 @@ namespace WorkFinder.Web.Areas.Employer.Models
         [Phone(ErrorMessage = "Số điện thoại không hợp lệ")]
         [Display(Name = "Số điện thoại")]
         public string PhoneNumber { get; set; } = string.Empty;
+
+        [DataType(DataType.Date)]
+        [Display(Name = "Ngày sinh")]
+        public DateTime? DateOfBirth { get; set; }
 
         public string? ProfilePicture { get; set; }
 

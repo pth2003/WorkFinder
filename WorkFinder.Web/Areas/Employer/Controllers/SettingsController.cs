@@ -8,6 +8,10 @@ using WorkFinder.Web.Areas.Employer.Models;
 using System;
 using System.Linq;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace WorkFinder.Web.Areas.Employer.Controllers
 {
@@ -53,6 +57,7 @@ namespace WorkFinder.Web.Areas.Employer.Controllers
                 LastName = user.LastName,
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
+                DateOfBirth = user.DateOfBirth,
                 CompanyId = company.Id,
                 CompanyName = company.Name,
                 IsCompanyVerified = company.IsVerified,
@@ -66,74 +71,121 @@ namespace WorkFinder.Web.Areas.Employer.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UpdateProfile(SettingsViewModel model)
         {
+            // Bỏ qua validation cho các trường password khi cập nhật profile
+            ModelState.Remove("CurrentPassword");
+            ModelState.Remove("NewPassword");
+            ModelState.Remove("ConfirmPassword");
+
             if (!ModelState.IsValid)
             {
-                return View("Index", model);
-            }
-
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            user.FirstName = model.FirstName;
-            user.LastName = model.LastName;
-            user.PhoneNumber = model.PhoneNumber;
-
-            var result = await _userManager.UpdateAsync(user);
-            if (!result.Succeeded)
-            {
-                foreach (var error in result.Errors)
+                // Lấy thông tin từ database để điền lại form trong trường hợp có lỗi
+                var currentUser = await _userManager.GetUserAsync(User);
+                if (currentUser != null)
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    var company = await _companyRepository.GetByOwnerIdAsync(currentUser.Id);
+                    if (company != null)
+                    {
+                        model.CompanyId = company.Id;
+                        model.CompanyName = company.Name;
+                        model.IsCompanyVerified = company.IsVerified;
+                    }
+                    model.ProfilePicture = currentUser.ProfilePicture; // Đảm bảo giữ nguyên ảnh đại diện
                 }
                 return View("Index", model);
             }
 
-            TempData["SuccessMessage"] = "Thông tin cá nhân đã được cập nhật thành công.";
-            return RedirectToAction(nameof(Index));
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> UpdateCompanyVisibility(int companyId, bool isVisible)
-        {
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
+            try
             {
-                return NotFound();
-            }
+                var user = await _userManager.GetUserAsync(User);
+                if (user == null)
+                {
+                    return NotFound();
+                }
 
-            var company = await _companyRepository.GetByIdAsync(companyId);
-            if (company == null || company.OwnerId != user.Id)
+                // Lưu ProfilePicture hiện tại trước khi cập nhật
+                string currentProfilePicture = user.ProfilePicture;
+
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
+                user.PhoneNumber = model.PhoneNumber;
+
+                // Chuyển đổi DateTime sang UTC nếu có giá trị
+                if (model.DateOfBirth.HasValue)
+                {
+                    // Nếu Kind=Unspecified, giả định đây là giờ địa phương và chuyển đổi sang UTC
+                    if (model.DateOfBirth.Value.Kind == DateTimeKind.Unspecified)
+                    {
+                        // Giả định đây là giờ địa phương và chuyển nó sang UTC
+                        DateTime localTime = DateTime.SpecifyKind(model.DateOfBirth.Value, DateTimeKind.Local);
+                        user.DateOfBirth = localTime.ToUniversalTime();
+                    }
+                    else if (model.DateOfBirth.Value.Kind == DateTimeKind.Local)
+                    {
+                        // Chuyển từ giờ địa phương sang UTC
+                        user.DateOfBirth = model.DateOfBirth.Value.ToUniversalTime();
+                    }
+                    else
+                    {
+                        // Đã là UTC
+                        user.DateOfBirth = model.DateOfBirth;
+                    }
+                }
+                else
+                {
+                    user.DateOfBirth = null;
+                }
+
+                // Đảm bảo không ghi đè ProfilePicture với giá trị rỗng
+                if (string.IsNullOrEmpty(model.ProfilePicture))
+                {
+                    user.ProfilePicture = currentProfilePicture;
+                }
+                else
+                {
+                    user.ProfilePicture = model.ProfilePicture;
+                }
+
+                var result = await _userManager.UpdateAsync(user);
+
+                if (!result.Succeeded)
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                    return View("Index", model);
+                }
+
+                TempData["SuccessMessage"] = "Thông tin cá nhân đã được cập nhật thành công.";
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
             {
-                return NotFound();
+                ModelState.AddModelError(string.Empty, "Có lỗi xảy ra: " + ex.Message);
+                return View("Index", model);
             }
-
-            company.IsVerified = isVisible;
-            await _companyRepository.UpdateAsync(company);
-
-            TempData["SuccessMessage"] = isVisible
-                ? "Thông tin công ty của bạn đã được hiển thị công khai."
-                : "Thông tin công ty của bạn đã được ẩn.";
-
-            return RedirectToAction(nameof(Index));
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ChangePassword(SettingsViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return View("Index", model);
-            }
+            // Chỉ đánh giá các trường liên quan đến mật khẩu
+            var passwordValidationContext = new ValidationContext(model, serviceProvider: null, items: null);
+            var passwordValidationResults = new List<ValidationResult>();
+            var passwordProperties = new[] { "CurrentPassword", "NewPassword", "ConfirmPassword" };
 
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
+            if (!Validator.TryValidateProperty(model.CurrentPassword,
+                new ValidationContext(model, null, null) { MemberName = "CurrentPassword" }, passwordValidationResults) ||
+                !Validator.TryValidateProperty(model.NewPassword,
+                new ValidationContext(model, null, null) { MemberName = "NewPassword" }, passwordValidationResults) ||
+                !Validator.TryValidateProperty(model.ConfirmPassword,
+                new ValidationContext(model, null, null) { MemberName = "ConfirmPassword" }, passwordValidationResults))
             {
-                return NotFound();
+                foreach (var validationResult in passwordValidationResults)
+                {
+                    ModelState.AddModelError(validationResult.MemberNames.First(), validationResult.ErrorMessage);
+                }
             }
 
             if (string.IsNullOrEmpty(model.CurrentPassword) ||
@@ -141,78 +193,172 @@ namespace WorkFinder.Web.Areas.Employer.Controllers
                 string.IsNullOrEmpty(model.ConfirmPassword))
             {
                 ModelState.AddModelError(string.Empty, "Vui lòng nhập đầy đủ thông tin mật khẩu");
+                TempData["ActiveTab"] = "password";
+
+                // Fill user data
+                await FillUserData(model);
                 return View("Index", model);
             }
 
             if (model.NewPassword != model.ConfirmPassword)
             {
                 ModelState.AddModelError(string.Empty, "Mật khẩu mới và xác nhận mật khẩu không khớp");
+                TempData["ActiveTab"] = "password";
+
+                // Fill user data
+                await FillUserData(model);
                 return View("Index", model);
             }
 
-            var result = await _userManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
-            if (!result.Succeeded)
+            if (model.NewPassword.Length < 6)
             {
-                foreach (var error in result.Errors)
+                ModelState.AddModelError("NewPassword", "Mật khẩu phải có ít nhất 6 ký tự");
+                TempData["ActiveTab"] = "password";
+
+                // Fill user data
+                await FillUserData(model);
+                return View("Index", model);
+            }
+
+            try
+            {
+                var user = await _userManager.GetUserAsync(User);
+                if (user == null)
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    return NotFound();
                 }
-                return View("Index", model);
-            }
 
-            TempData["SuccessMessage"] = "Mật khẩu đã được thay đổi thành công.";
-            return RedirectToAction(nameof(Index));
-        }
+                var result = await _userManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
+                if (!result.Succeeded)
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                    TempData["ActiveTab"] = "password";
 
-        [HttpGet]
-        public async Task<IActionResult> ExportCandidates()
-        {
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
-            {
-                return NotFound();
-            }
+                    // Fill user data
+                    await FillUserData(model);
+                    return View("Index", model);
+                }
 
-            var company = await _companyRepository.GetByOwnerIdAsync(user.Id);
-            if (company == null)
-            {
-                return NotFound();
-            }
-
-            var (jobs, _) = await _jobRepository.GetAllJobsByCompanyIdAsync(company.Id, 1, 1000);
-            var applications = jobs.SelectMany(j => j.Applications).ToList();
-
-            if (!applications.Any())
-            {
-                TempData["WarningMessage"] = "Không có ứng viên nào để xuất.";
+                TempData["SuccessMessage"] = "Mật khẩu đã được thay đổi thành công.";
                 return RedirectToAction(nameof(Index));
             }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, "Có lỗi xảy ra: " + ex.Message);
+                TempData["ActiveTab"] = "password";
 
-            // TODO: Implement actual CSV/Excel export logic here
-            // For now just return a placeholder text file
-            byte[] fileBytes = System.Text.Encoding.UTF8.GetBytes("Export data placeholder");
-            return File(fileBytes, "text/plain", $"candidates_{DateTime.Now:yyyyMMdd}.txt");
+                // Fill user data
+                await FillUserData(model);
+                return View("Index", model);
+            }
         }
 
-        [HttpGet]
-        public async Task<IActionResult> BackupData()
+        // Helper để điền dữ liệu người dùng
+        private async Task FillUserData(SettingsViewModel model)
         {
             var user = await _userManager.GetUserAsync(User);
-            if (user == null)
+            if (user != null)
             {
-                return NotFound();
-            }
+                var company = await _companyRepository.GetByOwnerIdAsync(user.Id);
+                if (company != null)
+                {
+                    model.CompanyId = company.Id;
+                    model.CompanyName = company.Name;
+                    model.IsCompanyVerified = company.IsVerified;
+                }
 
-            var company = await _companyRepository.GetByOwnerIdAsync(user.Id);
-            if (company == null)
+                // Điền thông tin cơ bản nếu chưa có
+                if (string.IsNullOrEmpty(model.FirstName))
+                    model.FirstName = user.FirstName;
+                if (string.IsNullOrEmpty(model.LastName))
+                    model.LastName = user.LastName;
+                if (string.IsNullOrEmpty(model.Email))
+                    model.Email = user.Email;
+                if (string.IsNullOrEmpty(model.PhoneNumber))
+                    model.PhoneNumber = user.PhoneNumber;
+                if (model.DateOfBirth == null)
+                    model.DateOfBirth = user.DateOfBirth;
+
+                // Đảm bảo giữ nguyên ảnh đại diện
+                model.ProfilePicture = user.ProfilePicture;
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UploadAvatar(string userId, IFormFile avatarFile)
+        {
+            try
             {
-                return NotFound();
-            }
+                if (avatarFile == null || avatarFile.Length == 0)
+                {
+                    TempData["AvatarError"] = "Please select a file to upload.";
+                    return RedirectToAction(nameof(Index));
+                }
 
-            // TODO: Implement actual backup logic
-            // For now just return a placeholder file
-            byte[] fileBytes = System.Text.Encoding.UTF8.GetBytes("Backup data placeholder");
-            return File(fileBytes, "application/octet-stream", $"workfinder_backup_{DateTime.Now:yyyyMMdd}.bak");
+                // Validate file size (max 5MB)
+                if (avatarFile.Length > 5 * 1024 * 1024)
+                {
+                    TempData["AvatarError"] = "File size must be less than 5MB.";
+                    return RedirectToAction(nameof(Index));
+                }
+
+                // Validate file type
+                string fileExtension = Path.GetExtension(avatarFile.FileName).ToLowerInvariant();
+                if (string.IsNullOrEmpty(fileExtension) ||
+                    !(fileExtension == ".jpg" || fileExtension == ".jpeg" || fileExtension == ".png" || fileExtension == ".gif"))
+                {
+                    TempData["AvatarError"] = "Only JPG, PNG, and GIF files are allowed.";
+                    return RedirectToAction(nameof(Index));
+                }
+
+                // Get current user
+                var user = await _userManager.GetUserAsync(User);
+                if (user == null)
+                {
+                    return NotFound();
+                }
+
+                // Create uploads directory if it doesn't exist
+                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "avatars");
+                if (!Directory.Exists(uploadsFolder))
+                {
+                    Directory.CreateDirectory(uploadsFolder);
+                }
+
+                // Generate unique filename
+                var uniqueFileName = Guid.NewGuid().ToString() + fileExtension;
+                var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                // Save file
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await avatarFile.CopyToAsync(fileStream);
+                }
+
+                // Update user profile picture path in database
+                var avatarUrl = $"/uploads/avatars/{uniqueFileName}";
+                user.ProfilePicture = avatarUrl;
+
+                var result = await _userManager.UpdateAsync(user);
+                if (!result.Succeeded)
+                {
+                    TempData["AvatarError"] = "Failed to update profile picture.";
+                    return RedirectToAction(nameof(Index));
+                }
+
+                TempData["SuccessMessage"] = "Profile picture updated successfully.";
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                // _logger.LogError(ex, "Error uploading avatar");
+                TempData["AvatarError"] = "An error occurred while uploading the profile picture.";
+                return RedirectToAction(nameof(Index));
+            }
         }
 
         [HttpGet]

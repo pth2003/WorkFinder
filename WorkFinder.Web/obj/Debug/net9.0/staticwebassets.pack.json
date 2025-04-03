@@ -421,6 +421,10 @@
       "PackagePath": "staticwebassets/site.webmanifest"
     },
     {
+      "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/avatars/96776421-5241-40df-b0ad-aecc62b925b2.jpeg",
+      "PackagePath": "staticwebassets/uploads/avatars/96776421-5241-40df-b0ad-aecc62b925b2.jpeg"
+    },
+    {
       "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/companies/banners/2ec0a971-8b86-42d2-9e9e-227667241dbe_IMG_1795.jpeg",
       "PackagePath": "staticwebassets/uploads/companies/banners/2ec0a971-8b86-42d2-9e9e-227667241dbe_IMG_1795.jpeg"
     },

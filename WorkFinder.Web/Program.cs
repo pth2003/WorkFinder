@@ -51,6 +51,7 @@ builder.Services.Configure<FormOptions>(options =>
 });
 
 // Đăng ký DbContext với PostgreSQL
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<WorkFinderContext>(options =>
     options.UseNpgsql(
         builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -61,6 +62,7 @@ builder.Services.AddScoped<IJobRepository, JobRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IResumeRepository, ResumeRepository>();
 builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
+// builder.Services.AddScoped<IFileService, LocalFileService>();
 // builder.Services.AddScoped<IRepository<Resume>, Repository<Resume>>();
 // builder.Services.AddScoped<IRepository<SavedJob>, Repository<SavedJob>>();
 // Đăng ký Identity
@@ -97,6 +99,7 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.LogoutPath = "/Auth/Logout";
     options.AccessDeniedPath = "/Auth/AccessDenied";
 });
+
 var app = builder.Build();
 
 
