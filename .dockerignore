@@ -1,0 +1,9 @@
+**/bin/
+**/obj/
+**/.vs/
+**/.git/
+**/.idea/
+**/.DS_Store
+**/*.md
+**/node_modules/
+**/.cursor/ 

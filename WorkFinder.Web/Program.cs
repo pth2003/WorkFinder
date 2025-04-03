@@ -102,8 +102,23 @@ builder.Services.ConfigureApplicationCookie(options =>
 
 var app = builder.Build();
 
-
-
+// Tự động áp dụng migrations trong Production
+if (app.Environment.IsProduction())
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var dbContext = scope.ServiceProvider.GetRequiredService<WorkFinderContext>();
+        try
+        {
+            dbContext.Database.Migrate();
+            Console.WriteLine("Database migrations applied successfully.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An error occurred while applying migrations: {ex.Message}");
+        }
+    }
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
