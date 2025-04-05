@@ -418,3 +418,5 @@
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/WorkFinder.Web.pdb
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/WorkFinder.Web.genruntimeconfig.cache
 /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/ref/WorkFinder.Web.dll
+/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/bin/Debug/net9.0/appsettings.Production.json
+/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/Debug/net9.0/compressed/xhv31aekgd-unbyddbm7p.gz

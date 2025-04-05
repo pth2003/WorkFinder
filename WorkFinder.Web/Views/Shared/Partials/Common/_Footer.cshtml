@@ -1,97 +1,181 @@
-<footer>
-   <div class="container footer-top">
-      <div class="row">
-         <div class="col-lg-3 ">
-            <div class="footer-logo">
-               <img src="~/icon/Logo.png" alt="logo-footer">
+<footer class="footer">
+   <div class="container footer-top py-5">
+      <div class="row gy-4">
+         <div class="col-lg-3 col-md-12">
+            <div class="footer-logo d-flex align-items-center mb-3">
+               <img src="/images/myjob-logo.png" alt="MyJob logo" class="img-fluid me-2" style="max-width: 45px;">
+               <span class="logo-text h3 mb-0">MyJob</span>
             </div>
-            <p>Call now : +84 867713501</p>
-            <p>
-               lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            <p class="mb-3">Call now: <a href="tel:+1(319)555-0115" class="footer-contact">(319) 555-0115</a></p>
+            <p class="footer-text mb-3">
+               6391 Elgin St. Celina, Delaware 10299, New York, United States of America
             </p>
          </div>
-         <div class="col-lg-8 offset-lg-1">
-            <div class="row">
-               <div class="col-lg-3">
-                  <h3>Quick Links</h3>
-                  <ul>
-                     <li>Home</li>
-                     <li>About</li>
-                     <li>Contact</li>
-                     <li>Services</li>
+         <div class="col-lg-9">
+            <div class="row gy-4">
+               <div class="col-lg-3 col-md-3 col-6">
+                  <h3 class="footer-heading">Quick Link</h3>
+                  <ul class="footer-links">
+                     <li><a href="/">About</a></li>
+                     <li><a href="/Contact">Contact</a></li>
+                     <li><a href="/Pricing">Pricing</a></li>
+                     <li><a href="/Blog">Blog</a></li>
                   </ul>
                </div>
-               <div class="col-lg-3">
-                  <h3>Candidate</h3>
-                  <ul>
-                     <li>Browse Jobs</li>
-                     <li>Browse Employers</li>
-                     <li>Candidate Dashboard</li>
-                     <li>Saved Jobs</li>
+               <div class="col-lg-3 col-md-3 col-6">
+                  <h3 class="footer-heading">Candidate</h3>
+                  <ul class="footer-links">
+                     <li><a href="/Job">Browse Jobs</a></li>
+                     <li><a href="/Employer">Browse Employers</a></li>
+                     <li><a href="/Dashboard">Candidate Dashboard</a></li>
+                     <li><a href="/Dashboard/Favorites">Saved Jobs</a></li>
                   </ul>
                </div>
-               <div class="col-lg-3">
-                  <h3>Employers</h3>
-                  <ul>
-                     <li>Post a Job</li>
-                     <li>Browse Candidate</li>
-                     <li>Employers Dashboard</li>
-                     <li>Applications</li>
+               <div class="col-lg-3 col-md-3 col-6">
+                  <h3 class="footer-heading">Employers</h3>
+                  <ul class="footer-links">
+                     <li><a href="/Employer/Job/Create">Post a Job</a></li>
+                     <li><a href="/Employer/Candidates">Browse Candidates</a></li>
+                     <li><a href="/Employer/Dashboard">Employers Dashboard</a></li>
+                     <li><a href="/Employer/Applications">Applications</a></li>
                   </ul>
                </div>
-               <div class="col-lg-3">
-                  <h3>Support</h3>
-                  <ul>
-                     <li>FAQ</li>
-                     <li>Privacy Policy</li>
-                     <li>Terms of Use</li>
-                     <li>Contact Us</li>
+               <div class="col-lg-3 col-md-3 col-6">
+                  <h3 class="footer-heading">Support</h3>
+                  <ul class="footer-links">
+                     <li><a href="/FAQ">Faqs</a></li>
+                     <li><a href="/Privacy">Privacy Policy</a></li>
+                     <li><a href="/Terms">Terms & Conditions</a></li>
                   </ul>
                </div>
             </div>
          </div>
       </div>
-
    </div>
-
 </footer>
-<div class="container footer-bottom d-flex justify-content-between ">
-   <span># 2025 WorkFinder - Job Portal. All rights Rserved</span>
-   <span class="footer-social">
-      <a href="#"><i class="fab fa-facebook-f"></i></a>
-      <a href="#"><i class="fab fa-twitter"></i></a>
-      <a href="#"><i class="fab fa-linkedin-in"></i></a>
-      <a href="#"><i class="fab fa-instagram"></i></a>
-   </span>
+<div class="footer-bottom">
+   <div class="container">
+      <div class="row py-3">
+         <div class="col-lg-6 col-md-6 mb-2 mb-md-0">
+            <span class="copyright">© 2025 WorkFinder - Job Portal. All rights Reserved</span>
+         </div>
+         <div class="col-lg-6 col-md-6 text-md-end">
+            <div class="footer-social">
+               <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+               <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+               <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+               <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+         </div>
+      </div>
+   </div>
 </div>
 
 <style>
-   footer {
-      background-color: var(--bs-gray-300);
-      z-index: 1000;
+   .footer {
+      background-color: #f8f9fa;
+      border-top: 1px solid #eaeaea;
    }
 
    .footer-top {
-      padding: 2.4rem 0;
+      padding-bottom: 2rem;
    }
 
-   ul li {
-      list-style: none;
-      font-size: 1.4rem;
-      line-height: 2.4rem;
-      color: var(--bs-gray-600);
+   .footer-heading {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      color: #222;
    }
 
-   ul {
+   .footer-links {
       padding: 0;
+      margin: 0;
    }
 
-   .footer-bottom {
-      padding: 1.2rem 0;
-      font-size: 1.4rem;
+   .footer-links li {
+      list-style: none;
+      margin-bottom: 1rem;
+   }
+
+   .footer-links a {
+      font-size: 1.1rem;
+      color: #555;
+      text-decoration: none;
+      transition: color 0.2s;
+   }
+
+   .footer-links a:hover {
+      color: #1967d2;
+   }
+
+   .footer-text {
+      font-size: 1.1rem;
+      color: #555;
+      line-height: 1.6;
+   }
+
+   .footer-contact {
+      color: #1967d2;
+      font-weight: 600;
+      font-size: 1.15rem;
+      text-decoration: none;
+   }
+
+   .footer-contact:hover {
+      text-decoration: underline;
+   }
+
+   .logo-text {
+      color: #333;
+      font-weight: 700;
+      font-size: 1.75rem;
+   }
+
+   @@media (max-width: 767.98px) {
+      .footer-heading {
+         margin-top: 0.5rem;
+         margin-bottom: 1rem;
+         font-size: 1.2rem;
+      }
+
+      .footer-links li {
+         margin-bottom: 0.8rem;
+      }
+
+      .footer-links a {
+         font-size: 1.05rem;
+      }
+
+      .footer-text {
+         font-size: 1.05rem;
+      }
+
+      .footer {
+         padding-top: 1rem;
+      }
+   }
+
+   .footer-social {
+      display: flex;
+      gap: 1rem;
+      justify-content: flex-end;
    }
 
    .footer-social a {
       color: var(--bs-gray-600);
+      background-color: var(--bs-gray-300);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+   }
+
+   .footer-social a:hover {
+      color: white;
+      background-color: var(--bs-primary);
    }
 </style>

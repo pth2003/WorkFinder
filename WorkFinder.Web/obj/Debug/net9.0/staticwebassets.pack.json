@@ -25,6 +25,10 @@
       "PackagePath": "staticwebassets/css/company.css"
     },
     {
+      "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/dashboard-sidebar.css",
+      "PackagePath": "staticwebassets/css/dashboard-sidebar.css"
+    },
+    {
       "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/css/employer-sidebar.css",
       "PackagePath": "staticwebassets/css/employer-sidebar.css"
     },
@@ -419,6 +423,10 @@
     {
       "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/site.webmanifest",
       "PackagePath": "staticwebassets/site.webmanifest"
+    },
+    {
+      "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/avatars/0edc1121-4e5e-48fd-add1-fbe38525bd2f.jpeg",
+      "PackagePath": "staticwebassets/uploads/avatars/0edc1121-4e5e-48fd-add1-fbe38525bd2f.jpeg"
     },
     {
       "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/avatars/350a06b7-14c9-4738-8bdb-3905be8629fc.jpeg",

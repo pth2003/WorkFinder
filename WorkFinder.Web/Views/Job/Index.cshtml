@@ -61,7 +61,21 @@
                                     <div class="search-input">
                                         <i class="fas fa-search"></i>
                                         <input type="text" id="keyword-input" name="keyword" value="@ViewBag.Keyword"
-                                            placeholder="Job title, Keyword..." class="debounce-input">
+                                            placeholder="Job title, Keyword..." class="debounce-input"
+                                            autocomplete="off" list="job-suggestions">
+                                        <datalist id="job-suggestions">
+                                            <option value="Software Engineer"></option>
+                                            <option value="Web Developer"></option>
+                                            <option value="Data Analyst"></option>
+                                            <option value="Product Manager"></option>
+                                            <option value="UI/UX Designer"></option>
+                                            <option value="Marketing Specialist"></option>
+                                            <option value="Sales Representative"></option>
+                                            <option value="Administrative Assistant"></option>
+                                            <option value="Customer Service"></option>
+                                            <option value="Project Manager"></option>
+                                            <option value="Intern"></option>
+                                        </datalist>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -183,7 +197,6 @@
 
     .search-input {
         position: relative;
-
         font-size: 1.4rem;
         width: 100%;
         height: auto;
@@ -195,6 +208,7 @@
         top: 50%;
         transform: translateY(-50%);
         color: var(--blue-300);
+        z-index: 1;
     }
 
     .search-input input,
@@ -204,6 +218,26 @@
         border: 1px solid #e0e0e0;
         border-radius: 5px;
         font-size: 1.4rem;
+        caret-color: #0d6efd;
+        cursor: text;
+        appearance: none;
+        background-color: white;
+        color: #333;
+    }
+
+    .search-input input:focus,
+    .search-input select:focus {
+        outline: none;
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.2);
+    }
+
+    .search-input input:-webkit-autofill,
+    .search-input input:-webkit-autofill:hover,
+    .search-input input:-webkit-autofill:focus {
+        -webkit-box-shadow: 0 0 0px 1000px white inset;
+        -webkit-text-fill-color: #333;
+        transition: background-color 5000s ease-in-out 0s;
     }
 
     .find-btn {

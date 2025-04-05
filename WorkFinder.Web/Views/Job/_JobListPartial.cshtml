@@ -2,8 +2,8 @@
 
 <!-- Job Cards -->
 <div id="job-results-container">
-    <div class="d-flex justify-content-between mb-4">
-        <div class="results-summary">
+    <div class="d-flex flex-column flex-md-row justify-content-between mb-4">
+        <div class="results-summary mb-3 mb-md-0">
             <p>Showing <strong>@Model.Count</strong> of <strong>@ViewBag.TotalJobs</strong> jobs</p>
         </div>
         <div class="d-flex gap-3">
@@ -12,7 +12,7 @@
                     data-bs-toggle="dropdown">
                     @ViewBag.PageSize per page
                 </button>
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu dropdown-menu-end">
                     <li><a class="dropdown-item page-size-option" data-page-size="12" href="#">12 per page</a></li>
                     <li><a class="dropdown-item page-size-option" data-page-size="24" href="#">24 per page</a></li>
                     <li><a class="dropdown-item page-size-option" data-page-size="48" href="#">48 per page</a></li>
@@ -27,43 +27,73 @@
     </div>
 
     <!-- Grid View Container -->
-    <div id="grid-view-container" class="row g-4">
+    <div id="grid-view-container" class="row g-3">
         @if (Model != null && Model.Any())
         {
             foreach (var job in Model)
             {
-                <div class="col-md-4 mb-4">
-                    <div class="job-card @(job.IsActive ? "highlighted" : "")" style="padding: 20px; margin-bottom: 15px;">
-                        <div class="company-info d-flex align-items-center mb-3">
-                            <div class="company-logo me-3">
-                                @if (!string.IsNullOrEmpty(job.Logo))
-                                {
-                                    <img src="@job.Logo" alt="@job.CompanyName" class="img-fluid">
-                                }
-                                else
-                                {
-                                    <img src="/images/default-company.png" alt="@job.CompanyName" class="img-fluid">
-                                }
-                            </div>
-                            <div>
-                                <h5 class="mb-1">@(string.IsNullOrEmpty(job.CompanyName) ? "Company Name" : job.CompanyName)
-                                </h5>
-                                @if (job.IsActive)
-                                {
-                                    <span class="badge bg-danger">Featured</span>
+                <div class="col-md-6 col-lg-4 mb-3">
+                    <div class="job-card @(job.IsActive ? "highlighted" : "")">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div class="company-info d-flex align-items-center">
+                                <div class="company-logo me-3">
+                                    @if (!string.IsNullOrEmpty(job.Logo))
+                                    {
+                                        <img src="@job.Logo" alt="@job.CompanyName" class="img-fluid">
+                                    }
+                                    else
+                                    {
+                                        <img src="/images/default-company.png" alt="@job.CompanyName" class="img-fluid">
+                                    }
+                                </div>
+                                <div>
+                                    <h5 class="mb-1 company-name">@(string.IsNullOrEmpty(job.CompanyName) ? "Company Name" :
+                                                                        job.CompanyName)</h5>
+                            <div class="job-date small text-muted">
+                                @{
+                                    var daysRemaining = (job.ExpiryDate - DateTime.Now).Days;
+                                    
+                                    if (job.IsExpired || daysRemaining < 0)
+                                    {
+                                        <span class="text-danger">Deadline Expired</span>
+                                    }
+                                    else if (daysRemaining == 0)
+                                    {
+                                        <span class="text-warning">Last day to apply</span>
+                                    }
+                                    else if (daysRemaining <= 3)
+                                    {
+                                        <span class="text-warning">@daysRemaining days left</span>
+                                    }
+                                    else
+                                    {
+                                        <span>@daysRemaining days left</span>
+                                    }
                                 }
                             </div>
                         </div>
-                        <div class="location mb-3">
-                            <i class="fas fa-map-marker-alt me-2"></i> @job.Location
+                    </div>
+                    <button class="bookmark-btn" data-id="@job.Id" aria-label="Save job">
+                        <i class="far fa-bookmark"></i>
+                    </button>
+                </div>
+                <h4 class="job-title mb-3">
+                    <a href="/Job/@job.Id">@job.Title</a>
+                </h4>
+                <div class="job-tags mb-3">
+                    <span class="job-tag">Full-time</span>
+                    @if (!string.IsNullOrEmpty(job.JobType) && job.JobType != "Full-time")
+                            {
+                                <span class="job-tag">@job.JobType</span>
+                            }
+                            <span class="job-tag">Flexible schedule</span>
                         </div>
-                        <h4 class="job-title mb-3">
-                            <a href="/Job/@job.Id">@job.Title</a>
-                        </h4>
-                        <div class="job-meta d-flex justify-content-between">
-                            <span class="me-2 badge bg-light text-dark">@job.JobType</span>
-                            <span
-                                class="badge bg-light text-dark">$@(Math.Floor(job.SalaryMin / 1000))K-@(Math.Floor(job.SalaryMax / 1000))K/month</span>
+                        <div class="job-footer d-flex justify-content-between align-items-center">
+                            <div class="salary-location">
+                                <div class="salary">$@(Math.Floor(job.SalaryMin / 1000))k-@(Math.Floor(job.SalaryMax / 1000))k</div>
+                                <div class="location text-muted small">@job.Location</div>
+                            </div>
+                            <a href="/Job/Apply/@job.Id" class="btn btn-primary apply-btn">Apply now</a>
                         </div>
                     </div>
                 </div>
@@ -86,8 +116,8 @@
                 @foreach (var job in Model)
                 {
                     <div class="list-job-item">
-                        <div class="row align-items-center">
-                            <div class="col-md-2">
+                        <div class="row">
+                            <div class="col-md-auto col-3 pe-0 pe-md-3">
                                 <div class="company-logo-container">
                                     @if (!string.IsNullOrEmpty(job.Logo))
                                     {
@@ -99,18 +129,67 @@
                                     }
                                 </div>
                             </div>
-                            <div class="col-md-7">
-                                <h4 class="job-title"><a href="/Job/@job.Id">@job.Title</a></h4>
-                                <div class="company-name">@job.CompanyName</div>
-                                <div class="job-meta">
-                                    <span class="location"><i class="fas fa-map-marker-alt me-1"></i> @job.Location</span>
-                                    <span class="job-type"><i class="fas fa-briefcase me-1"></i> @job.JobType</span>
-                                    <span class="salary"><i class="fas fa-money-bill-wave me-1"></i>
-                                        $@(Math.Floor(job.SalaryMin / 1000))K-@(Math.Floor(job.SalaryMax / 1000))K/month</span>
+                            <div class="col-md col-9">
+                                <div
+                                    class="d-flex flex-column flex-md-row justify-content-md-between align-items-md-center mb-2">
+                                    <div>
+                                        <h3 class="job-title-list mb-1"><a href="@Url.Action("Details", "Job", new { id = job.Id , area = "" })">@job.Title</a></h3>
+                                        <div class="company-name-list">@job.CompanyName</div>
+                                        <div class="job-info-row d-flex flex-wrap gap-md-4 gap-2 mb-2 mt-2">
+                                            <div class="job-info-item">
+                                                <i class="fas fa-map-marker-alt text-secondary me-2"></i>
+                                                <span>@job.Location</span>
+                                            </div>
+                                            <div class="job-info-item salary-item">
+                                                <i class="fas fa-dollar-sign text-primary me-2"></i>
+                                                <span class="salary-badge-list">$@(Math.Floor(job.SalaryMin / 1000))k-@(Math.Floor(job.SalaryMax / 1000))k/month</span>
+                                            </div>
+                                            <div class="job-info-item deadline-item">
+                                                <i class="far fa-clock text-secondary me-2"></i>
+                                                @{
+                                                    var daysRemaining = (job.ExpiryDate - DateTime.Now).Days;
+                                                    
+                                                    if (job.IsExpired || daysRemaining < 0)
+                                                    {
+                                                        <span class="text-danger fw-semibold">Deadline Expired</span>
+                                                    }
+                                                    else if (daysRemaining == 0)
+                                                    {
+                                                        <span class="text-warning fw-semibold">Last day to apply</span>
+                                                    }
+                                                    else if (daysRemaining <= 3)
+                                                    {
+                                                        <span class="text-warning fw-semibold">@daysRemaining Days Remaining</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span>@daysRemaining Days Remaining</span>
+                                                    }
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="d-flex flex-wrap job-tags-row mb-md-0 mb-3">
+                                            @if (!string.IsNullOrEmpty(job.JobType) && job.JobType != "Full-time")
+                                            {
+                                                <div class="job-tag-list me-2 mb-2">@job.JobType</div>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="d-none d-md-flex align-items-start gap-2 action-buttons ms-3">
+                                        <button class="bookmark-btn-list" data-id="@job.Id" aria-label="Save job">
+                                            <i class="far fa-bookmark"></i>
+                                        </button>
+                                        <a href="/Job/@job.Id" class="btn btn-primary apply-btn-list">Apply Now <i
+                                                class="fas fa-arrow-right ms-2"></i></a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-3 text-end">
-                                <a href="/Job/@job.Id" class="btn btn-outline-primary">View Job</a>
+                                <div class="d-md-none d-flex justify-content-end align-items-center gap-2 mt-2">
+                                    <button class="bookmark-btn-list" data-id="@job.Id" aria-label="Save job">
+                                        <i class="far fa-bookmark"></i>
+                                    </button>
+                                    <a href="/Job/@job.Id" class="btn btn-primary apply-btn-list">Apply Now <i
+                                            class="fas fa-arrow-right ms-2"></i></a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -122,12 +201,12 @@
     <!-- Pagination -->
     @if (ViewBag.TotalPages > 1)
     {
-        <div class="pagination-container mt-5 mb-5">
+        <div class="pagination-container mt-4 mb-4">
             <nav aria-label="Page navigation">
-                <ul class="pagination justify-content-center">
+                <ul class="pagination justify-content-center flex-wrap">
                     @if (ViewBag.CurrentPage > 1)
                     {
-                        <li class="page-item">
+                        <li class="page-item prev-btn">
                             <a class="page-link page-nav" data-page="@(ViewBag.CurrentPage - 1)" href="#" aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
@@ -135,7 +214,7 @@
                     }
                     else
                     {
-                        <li class="page-item disabled">
+                        <li class="page-item disabled prev-btn">
                             <a class="page-link" href="#" aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
@@ -145,7 +224,7 @@
                     @for (int i = 1; i <= ViewBag.TotalPages; i++)
                     {
                         <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
-                            <a class="page-link page-nav" data-page="@i" href="#">
+                            <a class="page-link page-nav page-number" data-page="@i" href="#">
                                 @(i < 10 ? "0" + i : i.ToString())
                             </a>
                         </li>
@@ -153,7 +232,7 @@
 
                     @if (ViewBag.CurrentPage < ViewBag.TotalPages)
                     {
-                        <li class="page-item">
+                        <li class="page-item next-btn">
                             <a class="page-link page-nav" data-page="@(ViewBag.CurrentPage + 1)" href="#" aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
                             </a>
@@ -161,7 +240,7 @@
                     }
                     else
                     {
-                        <li class="page-item disabled">
+                        <li class="page-item disabled next-btn">
                             <a class="page-link" href="#" aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
                             </a>
@@ -177,25 +256,74 @@
     .list-jobs {
         display: flex;
         flex-direction: column;
-        gap: 15px;
+        gap: 20px;
     }
 
     .list-job-item {
         background-color: #fff;
-        border-radius: 8px;
+        border-radius: 16px;
         padding: 20px;
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
         transition: all 0.3s ease;
+        border: 1px solid #eee;
+        margin-bottom: 12px;
     }
 
     .list-job-item:hover {
         transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .job-card {
+        background-color: #fff;
+        border-radius: 12px;
+        padding: 20px;
+        height: 100%;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        border: 1px solid #eee;
+    }
+
+    .job-card:hover {
+        transform: translateY(-3px);
         box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
     }
 
-    .company-logo-container {
-        width: 80px;
-        height: 80px;
+    .job-card.highlighted {
+        border-left: 4px solid #dc3545;
+    }
+
+    .bookmark-btn {
+        background-color: #f0f4ff;
+        border: none;
+        font-size: 1.5rem;
+        color: #0d6efd;
+        transition: all 0.2s;
+        padding: 8px;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .bookmark-btn:hover,
+    .bookmark-btn.saved {
+        background-color: #0d6efd;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(13, 110, 253, 0.2);
+    }
+
+    .company-logo-container,
+    .company-logo {
+        width: 60px;
+        height: 60px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -204,11 +332,602 @@
         overflow: hidden;
     }
 
+    .company-logo img,
+    .company-logo-container img {
+        max-width: 80%;
+        max-height: 80%;
+        object-fit: contain;
+    }
+
+    .job-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        line-height: 1.3;
+    }
+
+    .job-title a {
+        color: #333;
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+
+    .job-title a:hover {
+        color: var(--bs-primary);
+    }
+
+    .company-name {
+        font-size: 1.25rem;
+        font-weight: 500;
+        color: #444;
+    }
+
+    .job-date {
+        font-size: 0.9rem;
+        padding: 3px 6px;
+        border-radius: 4px;
+        display: inline-block;
+    }
+    
+    .job-date .text-danger {
+        background-color: #ffebee;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-weight: 600;
+    }
+    
+    .job-date .text-warning {
+        background-color: #fff8e1;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-weight: 600;
+    }
+
+    .location {
+        font-size: 1.1rem;
+        color: #666;
+    }
+
+    .job-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin: 15px 0;
+    }
+
+    .job-tag {
+        background-color: #f0f4ff;
+        color: #0d6efd;
+        font-weight: 500;
+        font-size: 1rem;
+        padding: 6px 15px;
+        border-radius: 50px;
+        display: inline-block;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .job-footer {
+        margin-top: auto;
+        padding-top: 18px;
+        border-top: 1px solid #eaeaea;
+    }
+
+    .apply-btn {
+        font-size: 1.1rem;
+        padding: 0.5rem 1.2rem;
+        border-radius: 8px;
+        font-weight: 600;
+        box-shadow: 0 4px 10px rgba(13, 110, 253, 0.2);
+        transition: all 0.3s;
+    }
+
+    .apply-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(13, 110, 253, 0.3);
+    }
+
+    .salary {
+        color: #0a3977;
+        font-size: 1.5rem;
+        font-weight: 800;
+        background-color: #f0f8ff;
+        padding: 5px 12px;
+        border-radius: 8px;
+        display: inline-block;
+        margin-bottom: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+        border-left: 3px solid #0d6efd;
+        min-width: 120px;
+        text-align: center;
+    }
+
+    .salary-location {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .salary-location .location {
+        font-size: 1.05rem;
+        margin-top: 5px;
+        margin-left: 5px;
+    }
+
+    .results-summary p {
+        font-size: 1.15rem;
+        font-weight: 500;
+    }
+
+    .dropdown-toggle,
+    .dropdown-item {
+        font-size: 1.05rem;
+    }
+
+    .job-title-list {
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: #333;
+        cursor: pointer;
+    }
+
+    .job-title-list a {
+        color: #333;
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+
+    .job-title-list a:hover {
+        color: var(--bs-primary);
+    }
+
+    .company-name-list {
+        font-size: 1.1rem;
+        color: #555;
+        font-weight: 500;
+    }
+
     .job-meta {
         display: flex;
         flex-wrap: wrap;
         gap: 15px;
-        margin-top: 10px;
-        color: #6c757d;
+        margin-top: 8px;
+    }
+
+    .location-list,
+    .job-type-list {
+        font-size: 1.05rem;
+        color: #666;
+    }
+
+    .salary-list {
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: #0a3977;
+        background-color: #f0f8ff;
+        padding: 3px 10px;
+        border-radius: 6px;
+        display: inline-block;
+        border-left: 3px solid #0d6efd;
+    }
+
+    .view-job-btn {
+        font-size: 1.05rem;
+        padding: 0.5rem 1.2rem;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s;
+    }
+
+    .view-job-btn:hover {
+        background-color: #0d6efd;
+        color: #fff;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(13, 110, 253, 0.2);
+    }
+
+    .job-info-item {
+        font-size: 1.05rem;
+        color: #555;
+        display: flex;
+        align-items: center;
+        min-width: 150px;
+    }
+
+    .job-info-item i {
+        width: 20px;
+        text-align: center;
+        margin-right: 8px;
+    }
+
+    .salary-badge-list {
+        color: #0a3977;
+        font-weight: 700;
+        font-size: 1.2rem;
+        background-color: #f0f8ff;
+        padding: 4px 12px;
+        border-radius: 6px;
+        display: inline-block;
+        border-left: 3px solid #0d6efd;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+        min-width: 120px;
+        text-align: center;
+    }
+
+    .salary-item {
+        margin-right: 5px;
+    }
+
+    .salary-item i {
+        color: #0a3977 !important;
+    }
+
+    .job-tag-list {
+        display: inline-block;
+        padding: 6px 12px;
+        background-color: #f0f4ff;
+        color: #0d6efd;
+        border-radius: 50px;
+        font-size: 0.95rem;
+        font-weight: 500;
+    }
+
+    .job-tag-list:first-child {
+        background-color: #fff4e5;
+        color: #ff9800;
+    }
+
+    .bookmark-btn-list {
+        background-color: #f0f4ff;
+        border: none;
+        font-size: 1.2rem;
+        color: #0d6efd;
+        transition: all 0.2s;
+        padding: 6px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .bookmark-btn-list:hover {
+        background-color: #0d6efd;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(13, 110, 253, 0.2);
+    }
+
+    .apply-btn-list {
+        font-size: 1.05rem;
+        padding: 0.5rem 1.25rem;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s;
+        box-shadow: 0 4px 8px rgba(13, 110, 253, 0.15);
+    }
+
+    .apply-btn-list:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(13, 110, 253, 0.25);
+    }
+
+    @@media (max-width: 767.98px) {
+        .job-card {
+            padding: 16px;
+        }
+
+        .list-job-item {
+            padding: 16px;
+        }
+
+        .company-logo-container,
+        .company-logo {
+            width: 60px;
+            height: 60px;
+        }
+
+        .job-title {
+            font-size: 1.3rem;
+        }
+
+        .company-name {
+            font-size: 1.15rem;
+        }
+
+        .location {
+            font-size: 1.05rem;
+        }
+
+        .salary {
+            font-size: 1.35rem;
+            padding: 4px 10px;
+        }
+
+        .job-tag {
+            font-size: 0.95rem;
+            padding: 5px 12px;
+        }
+
+        .apply-btn {
+            font-size: 1.05rem;
+            padding: 0.4rem 1rem;
+        }
+
+        .pagination .page-link {
+            padding: 0.45rem 0.7rem;
+            font-size: 1rem;
+        }
+
+        .bookmark-btn {
+            width: 38px;
+            height: 38px;
+            font-size: 1.4rem;
+            padding: 6px;
+        }
+
+        .list-job-item {
+            padding: 16px;
+        }
+
+        .job-title-list {
+            font-size: 1.2rem;
+        }
+
+        .company-name-list {
+            font-size: 1rem;
+        }
+
+        .location-list,
+        .job-type-list {
+            font-size: 0.95rem;
+        }
+
+        .salary-list {
+            font-size: 1rem;
+            padding: 2px 8px;
+        }
+
+        .job-meta {
+            gap: 10px;
+        }
+
+        .view-job-btn {
+            font-size: 0.95rem;
+            padding: 0.4rem 1rem;
+        }
+
+        .list-job-item {
+            padding: 16px;
+        }
+
+        .company-logo-container {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+        }
+
+        .job-info-item {
+            font-size: 0.95rem;
+        }
+
+        .job-tag-list {
+            padding: 4px 10px;
+            font-size: 0.85rem;
+        }
+
+        .bookmark-btn-list {
+            font-size: 1.1rem;
+            width: 36px;
+            height: 36px;
+        }
+
+        .apply-btn-list {
+            font-size: 0.95rem;
+            padding: 0.4rem 1rem;
+        }
+
+        .job-info-row {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .job-info-item {
+            min-width: auto;
+            width: 100%;
+        }
+
+        .salary-badge-list {
+            min-width: 100px;
+            font-size: 1.1rem;
+        }
+
+        .salary {
+            min-width: 100px;
+        }
+    }
+
+    .action-buttons {
+        flex-shrink: 0;
+        margin-top: 5px;
+    }
+
+    /* Pagination styles */
+    .pagination {
+        gap: 5px;
+    }
+
+    .pagination .page-item {
+        margin: 0;
+    }
+
+    .pagination .page-link {
+        border: none;
+        color: #555;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    .pagination .page-number {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+    }
+
+    .pagination .page-item.active .page-link {
+        background-color: #1967d2;
+        color: #fff;
+        box-shadow: 0 4px 10px rgba(25, 103, 210, 0.2);
+    }
+
+    .pagination .page-item:not(.active) .page-number:hover {
+        background-color: #f0f4ff;
+        color: #1967d2;
+    }
+
+    .pagination .prev-btn .page-link,
+    .pagination .next-btn .page-link {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        background-color: #f8f9fa;
+    }
+
+    .pagination .page-item.disabled .page-link {
+        background-color: #f8f9fa;
+        color: #ccc;
+        opacity: 0.8;
+    }
+
+    @@media (max-width: 767.98px) {
+
+        .pagination .page-number,
+        .pagination .prev-btn .page-link,
+        .pagination .next-btn .page-link {
+            width: 38px;
+            height: 38px;
+            font-size: 0.9rem;
+        }
+    }
+
+    /* CSS cho deadline-item */
+    .deadline-item span {
+        padding: 3px 8px;
+        border-radius: 4px;
+        display: inline-block;
+    }
+    
+    .deadline-item .text-danger {
+        background-color: #ffebee;
+    }
+    
+    .deadline-item .text-warning {
+        background-color: #fff8e1;
     }
 </style>
+
+<!-- Job List Script -->
+<script>
+    // Đợi cho đến khi DOM hoàn toàn được tải xong
+    document.addEventListener('DOMContentLoaded', function() {
+        // Chạy khi jQuery sẵn sàng
+        $(function() {
+            // Lấy tất cả các nút bookmark (cả grid và list view)
+            const bookmarkButtons = $('.bookmark-btn, .bookmark-btn-list');
+            
+            // Kiểm tra các job đã được lưu chưa (cho người dùng đã đăng nhập)
+            @if (User.Identity.IsAuthenticated)
+            {
+                <text>
+                // Lấy danh sách job đã lưu
+                bookmarkButtons.each(function() {
+                    const button = $(this);
+                    const jobId = button.data('id');
+                    
+                    $.ajax({
+                        url: '/SavedJob/check/' + jobId,
+                        type: 'GET',
+                        success: function (result) {
+                            if (result.isSaved) {
+                                updateSaveButton(button, true);
+                            }
+                        },
+                        error: function(xhr) {
+                            console.error('Error checking job', jobId, xhr);
+                        }
+                    });
+                });
+                </text>
+            }
+            
+            // Xử lý sự kiện click lưu/bỏ lưu job
+            bookmarkButtons.on('click', function(e) {
+                e.preventDefault();
+                const button = $(this);
+                const jobId = button.data('id');
+                
+                // Chuyển hướng nếu chưa đăng nhập
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <text>
+                    window.location.href = '/Auth/Auth/Login?returnUrl=' + window.location.pathname + window.location.search;
+                    return;
+                    </text>
+                }
+                
+                // Gọi API toggle lưu job
+                $.ajax({
+                    url: '/SavedJob/toggle/' + jobId,
+                    type: 'POST',
+                    success: function (result) {
+                        if (result.success) {
+                            // Cập nhật tất cả các nút có cùng jobId (có thể có cả ở grid và list view)
+                            const jobButtons = $(`.bookmark-btn[data-id="${jobId}"], .bookmark-btn-list[data-id="${jobId}"]`);
+                            jobButtons.each(function() {
+                                updateSaveButton($(this), result.isSaved);
+                            });
+                            
+                            // Hiển thị thông báo
+                            const title = result.isSaved ? 'Saved' : 'Removed';
+                            const message = result.isSaved ? 'Job saved to favorites' : 'Job removed from favorites';
+                            window.toast.showToast(title, message, result.isSaved ? 'success' : 'info');
+                        } else {
+                            window.toast.showToast('Error', result.message || 'Error saving job', 'error');
+                        }
+                    },
+                    error: function (xhr) {
+                        window.toast.showToast('Error', 'Failed to save job', 'error');
+                    }
+                });
+            });
+            
+            // Hàm cập nhật trạng thái nút lưu
+            function updateSaveButton(button, isSaved) {
+                if (isSaved) {
+                    button.addClass('active');
+                    button.find('i').removeClass('far fa-bookmark').addClass('fas fa-bookmark');
+                    button.css({
+                        'background-color': '#0d6efd',
+                        'color': 'white'
+                    });
+                } else {
+                    button.removeClass('active');
+                    button.find('i').removeClass('fas fa-bookmark').addClass('far fa-bookmark');
+                    button.css({
+                        'background-color': '#f0f4ff',
+                        'color': '#0d6efd'
+                    });
+                }
+            }
+        });
+    });
+</script>

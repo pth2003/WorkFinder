@@ -125,8 +125,8 @@
                                 <div class="text-muted small">@userEmail</div>
                             </div>
                         </div>
-                        <li><a class="dropdown-item d-flex align-items-center py-2" href="/Account/Profile">
-                                <i class="fas fa-cog me-3"></i> Profile Settings
+                        <li><a class="dropdown-item d-flex align-items-center py-2" href="/Dashboard">
+                                <i class="fas fa-cog me-3"></i> Dashboard
                             </a></li>
                         <li><a class="dropdown-item d-flex align-items-center py-2" href="/Dashboard">
                                 <i class="fas fa-question-circle me-3"></i> Help Center
@@ -195,13 +195,12 @@
                                 </div>
                             </div>
                             <li>
-                                <a class="dropdown-item d-flex align-items-center py-2" asp-area="Employer"
-                                    asp-controller="Account" asp-action="Profile">
+                                <a class="dropdown-item d-flex align-items-center py-2" href="/Account/Profile">
                                     <i class="fas fa-cog me-3"></i> Profile Settings
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item d-flex align-items-center py-2" href="#">
+                                <a class="dropdown-item d-flex align-items-center py-2" href="/Dashboard">
                                     <i class="fas fa-question-circle me-3"></i> Help Center
                                 </a>
                             </li>
@@ -243,7 +242,8 @@
 </header>
 
 <!-- Mobile Menu Offcanvas -->
-<div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
+<div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel"
+    style="height: 100vh;">
     <div class="offcanvas-header">
         <div class="header-logo">
             <a href="/" title="Home">

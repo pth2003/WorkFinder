@@ -1,0 +1,424 @@
+@model List<WorkFinder.Web.Models.ViewModels.FavoriteJobViewModel>
+@{
+    ViewData["Title"] = "Favorite Jobs";
+    Layout = "_DashboardLayout";
+}
+
+<div class="container-fluid p-4">
+    <!-- Header -->
+    <div class="d-flex align-items-center mb-4">
+        <h2 class="mb-0 fw-bold">Favorite Jobs <span class="text-secondary fw-normal">(@ViewBag.TotalItems)</span></h2>
+    </div>
+
+    @if (!Model.Any() && ViewBag.CurrentPage == 1)
+    {
+        <div class="alert alert-info">
+            You don't have any saved jobs yet. Browse jobs and click the save icon to save jobs for later.
+        </div>
+    }
+    else
+    {
+        <div class="job-cards">
+            @foreach (var job in Model)
+            {
+                <div class="job-card mb-3">
+                    <div class="row g-0">
+                        <!-- Company Logo -->
+                        <div class="col-auto d-flex align-items-center">
+                            <div class="company-logo me-3 ">
+                                <img src="@job.CompanyLogo" alt="@job.CompanyName">
+                            </div>
+                        </div>
+
+                        <!-- Job Details -->
+                        <div class="col">
+                            <!-- Job Title -->
+                            <div class="mb-2">
+                                <h5 class="job-title mb-0">@job.JobTitle</h5>
+                            </div>
+
+                            <!-- Job Info -->
+                            <div class="d-flex flex-wrap align-items-center">
+                                <div class="job-location me-4 mb-2 mb-md-0">
+                                    <i class="fas fa-map-marker-alt text-secondary me-1"></i>
+                                    <span class="text-secondary">@job.Location</span>
+                                </div>
+                                <div class="job-salary me-4 mb-2 mb-md-0">
+                                    <i class="fas fa-dollar-sign text-secondary me-1"></i>
+                                    <span class="text-secondary">@job.Salary</span>
+                                </div>
+                                <div class="job-status">
+                                    <i class="far fa-calendar-alt text-secondary me-1"></i>
+                                    <span class="text-secondary">@GetRemainingDays(job) Days Remaining</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Side Elements -->
+                        <div class="col-md-auto ms-auto d-flex align-items-center">
+                            <div class="d-flex align-items-center job-right-section">
+                                <!-- Job Type Badge -->
+                                <div class="job-type-container me-4">
+                                    <span class="badge job-type">@job.JobType</span>
+                                </div>
+
+                                <!-- Bookmark Button -->
+                                <button class="bookmark-btn me-4" data-id="@job.JobId">
+                                    <i class="fas fa-bookmark"></i>
+                                </button>
+
+                                <!-- Action Button -->
+                                <div class="job-action">
+                                    @if (IsJobExpired(job))
+                                    {
+                                        <div class="btn-light">Deadline Expired</div>
+                                    }
+                                    else
+                                    {
+                                        <a href="/Job/Apply/@job.JobId" class="btn-apply">Apply Now <i
+                                                class="fas fa-arrow-right ms-3"></i></a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- Pagination -->
+        @if (ViewBag.TotalPages > 1)
+        {
+            <div class="pagination-container mt-4 d-flex justify-content-center">
+                <div class="modern-pagination">
+                    @if (ViewBag.CurrentPage > 1)
+                    {
+                        <a href="@Url.Action("Favorites", new { page = ViewBag.CurrentPage - 1, area = "" })"
+                            class="arrow-btn prev-btn">
+                            <i class="fas fa-chevron-left"></i>
+                        </a>
+                    }
+                    else
+                    {
+                        <span class="arrow-btn prev-btn disabled">
+                            <i class="fas fa-chevron-left"></i>
+                        </span>
+                    }
+
+                    @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                    {
+                        <a href="@Url.Action("Favorites", new { page = i, area = "" })"
+                            class="page-num @(i == ViewBag.CurrentPage ? "active" : "")">
+                            @(i < 10 ? "0" + i : i.ToString())
+                        </a>
+                    }
+
+                    @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+                    {
+                        <a href="@Url.Action("Favorites", new { page = ViewBag.CurrentPage + 1, area = "" })"
+                            class="arrow-btn next-btn">
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    }
+                    else
+                    {
+                        <span class="arrow-btn next-btn disabled">
+                            <i class="fas fa-chevron-right"></i>
+                        </span>
+                    }
+                </div>
+            </div>
+        }
+    }
+</div>
+
+<style>
+    /* Job Card Styles */
+    .job-card {
+        padding: 1.25rem;
+        border-radius: 8px;
+        background-color: #f8f9fa;
+        transition: all 0.3s ease;
+    }
+
+    .job-card-highlighted {
+        border: 1px solid #dee2e6;
+        background-color: #fff;
+    }
+
+    .company-logo {
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .company-logo img {
+        max-width: 70%;
+        max-height: 70%;
+        object-fit: contain;
+    }
+
+    .company-logo i {
+        font-size: 24px;
+    }
+
+    .job-title {
+        font-weight: 600;
+        color: #212529;
+    }
+
+    .job-type {
+        background-color: #e6f0ff;
+        color: #0d6efd;
+        font-weight: normal;
+        padding: 0.5rem 1rem;
+        border-radius: 50px;
+    }
+
+    .bookmark-btn {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: #212529;
+        cursor: pointer;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+    }
+
+    /* Apply Now Button - Normal State */
+    .btn-apply {
+        padding: 0.75rem 1.5rem;
+        border-radius: 6px;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        background-color: #f0f4ff;
+        color: #0d6efd;
+        border: none;
+        transition: all 0.2s ease;
+        min-width: 160px;
+        justify-content: center;
+    }
+
+    .btn-apply:hover {
+        background-color: #0d6efd;
+        color: white;
+    }
+
+    /* Apply Now Button - Active/Hover State */
+    .btn-apply-active {
+        padding: 0.75rem 1.5rem;
+        border-radius: 6px;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        background-color: #0d6efd;
+        color: white;
+        border: none;
+        transition: all 0.2s ease;
+        min-width: 160px;
+        justify-content: center;
+    }
+
+    .btn-apply-active:hover {
+        background-color: #0b5ed7;
+        color: white;
+    }
+
+    .btn-light {
+        color: #6c757d;
+        background-color: #f8f9fa;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 6px;
+        font-weight: 500;
+        min-width: 160px;
+        text-align: center;
+    }
+
+    .job-right-section {
+        min-width: 300px;
+        justify-content: flex-end;
+    }
+
+    /* Pagination Styles */
+    .modern-pagination {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .page-num {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        color: #666;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    .page-num:hover {
+        background-color: #f0f4ff;
+        color: #0d6efd;
+    }
+
+    .page-num.active {
+        background-color: #0d6efd;
+        color: white;
+    }
+
+    .arrow-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background-color: #f8f9fa;
+        color: #666;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .arrow-btn:hover:not(.disabled) {
+        background-color: #e9ecef;
+        color: #0d6efd;
+    }
+
+    .arrow-btn.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    .prev-btn {
+        margin-right: 5px;
+    }
+
+    .next-btn {
+        margin-left: 5px;
+    }
+
+    /* Responsive Adjustments */
+    @@media (max-width: 991.98px) {
+        .job-right-section {
+            flex-direction: column;
+            align-items: flex-start;
+            min-width: auto;
+            margin-top: 1rem;
+        }
+
+        .job-type-container,
+        .bookmark-btn {
+            margin-bottom: 0.75rem;
+        }
+
+        .job-action {
+            width: 100%;
+        }
+
+        .btn-apply,
+        .btn-apply-active,
+        .btn-light {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+</style>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('.bookmark-btn').on('click', function () {
+                var jobId = $(this).data('id');
+                var card = $(this).closest('.job-card');
+
+                if (confirm('Are you sure you want to remove this job from your favorites?')) {
+                    $.ajax({
+                        url: '/SavedJob/toggle/' + jobId,
+                        type: 'POST',
+                        success: function (result) {
+                            if (result.success) {
+                                // Show toast if available
+                                if (window.toast) {
+                                    window.toast.showToast('Success', 'Job removed from saved jobs', 'success');
+                                }
+
+                                card.fadeOut(300, function () {
+                                    $(this).remove();
+
+                                    // Kiểm tra số job còn lại trên trang
+                                    var jobsRemaining = $('.job-card').length;
+
+                                    // Nếu không còn job nào và đang không ở trang đầu tiên, reload về trang trước đó
+                                    if (jobsRemaining === 0 && @ViewBag.CurrentPage > 1) {
+                                        window.location.href = '@Url.Action("Favorites", new { page = ViewBag.CurrentPage - 1 })';
+                                    }
+                                    // Nếu không còn job nào và đang ở trang đầu tiên, hiển thị thông báo
+                                    else if (jobsRemaining === 0 && @ViewBag.CurrentPage == 1) {
+                                        $('.job-cards').html(`
+                                                                        <div class="alert alert-info">
+                                                                            You don't have any saved jobs yet. Browse jobs and click the save icon to save jobs for later.
+                                                                        </div>
+                                                                    `);
+
+                                        // Ẩn phân trang
+                                        $('.pagination-container').hide();
+
+                                        // Cập nhật số lượng
+                                        $('h2 .text-secondary').text('(0)');
+                                    }
+                                    else {
+                                        // Cập nhật số lượng nếu vẫn còn job
+                                        var newTotal = parseInt('@ViewBag.TotalItems') - 1;
+                                        $('h2 .text-secondary').text('(' + newTotal + ')');
+                                    }
+                                });
+                            } else {
+                                if (window.toast) {
+                                    window.toast.showToast('Error', result.message, 'error');
+                                } else {
+                                    alert('Failed to remove job: ' + result.message);
+                                }
+                            }
+                        },
+                        error: function () {
+                            if (window.toast) {
+                                window.toast.showToast('Error', 'An error occurred while processing your request', 'error');
+                            } else {
+                                alert('An error occurred while processing your request');
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}
+
+@functions {
+    private bool IsJobExpired(WorkFinder.Web.Models.ViewModels.FavoriteJobViewModel job)
+    {
+        // Giả lập logic kiểm tra job hết hạn - bạn cần thay đổi logic này dựa trên dữ liệu thực tế
+        // Ví dụ: Nếu jobId là chẵn thì coi như đã hết hạn
+        return job.JobId % 2 == 0;
+    }
+
+    private string GetRemainingDays(WorkFinder.Web.Models.ViewModels.FavoriteJobViewModel job)
+    {
+        // Giả lập logic tính ngày còn lại - bạn cần thay đổi logic này dựa trên dữ liệu thực tế
+        // Ví dụ: Đối với job còn hạn, random số ngày
+        return (job.JobId % 10 + 1).ToString();
+    }
+}

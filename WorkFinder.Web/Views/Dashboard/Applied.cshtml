@@ -1,0 +1,194 @@
+@model List<WorkFinder.Web.Models.ViewModels.AppliedJobViewModel>
+@{
+    ViewData["Title"] = "Applied Jobs";
+    Layout = "_DashboardLayout";
+}
+
+<style>
+    .job-table {
+        background-color: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    .job-table th {
+        font-weight: 500;
+        color: #6c757d;
+        border-bottom: 1px solid #e9ecef;
+        padding: 15px;
+    }
+
+    .job-table td {
+        padding: 15px;
+        vertical-align: middle;
+    }
+
+    .badge-remote, .badge-fulltime, .badge-temp, .badge-contract {
+        font-size: 12px;
+        padding: 5px 10px;
+        border-radius: 15px;
+        font-weight: normal;
+    }
+
+    .badge-remote {
+        background-color: #e9f0ff;
+        color: #0d6efd;
+    }
+
+    .badge-fulltime {
+        background-color: #e9f5ff;
+        color: #0d9dfd;
+    }
+
+    .badge-temp {
+        background-color: #fff8e7;
+        color: #ffc107;
+    }
+
+    .badge-contract {
+        background-color: #e7f9ef;
+        color: #28a745;
+    }
+
+    .status-active {
+        color: #28a745;
+        font-weight: 500;
+    }
+
+    .view-details {
+        color: #0d6efd;
+        text-decoration: none;
+    }
+
+    .view-details:hover {
+        text-decoration: underline;
+    }
+
+    .search-box {
+        border-radius: 8px;
+        border: 1px solid #e9ecef;
+        padding: 10px 20px;
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .search-box input {
+        flex: 1;
+        border: none;
+        outline: none;
+        background: transparent;
+        padding: 5px 10px;
+    }
+
+    .search-box i {
+        color: #6c757d;
+    }
+
+    .filters {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .filter-btn {
+        border: 1px solid #e9ecef;
+        background: white;
+        padding: 8px 15px;
+        border-radius: 8px;
+        font-size: 14px;
+        color: #6c757d;
+        cursor: pointer;
+    }
+
+    .filter-btn:hover {
+        background-color: #f8f9fa;
+    }
+
+    .filter-btn.active {
+        background-color: #e9f0ff;
+        color: #0d6efd;
+        border-color: #0d6efd;
+    }
+</style>
+
+<div class="mb-4">
+    <h4>Applied Jobs</h4>
+    <p class="text-secondary">View and manage all the jobs you've applied for</p>
+</div>
+
+<div class="search-box">
+    <i class="fas fa-search"></i>
+    <input type="text" placeholder="Search for jobs...">
+</div>
+
+<div class="filters">
+    <button class="filter-btn active">All Jobs</button>
+    <button class="filter-btn">Active</button>
+    <button class="filter-btn">Pending</button>
+    <button class="filter-btn">Rejected</button>
+</div>
+
+<div class="job-table">
+    @if (Model != null && Model.Any())
+    {
+            <table class="table mb-0">
+                <thead>
+                    <tr>
+                        <th>Job</th>
+                        <th>Company</th>
+                        <th>Date Applied</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var job in Model)
+                    {
+                            <tr>
+                                <td>
+                                    <div class="d-flex flex-column">
+                                        <div class="d-flex align-items-center mb-1">
+                                            <span class="fw-bold me-2">@job.JobTitle</span>
+                                            <span class="badge @GetBadgeClass(job.JobType)">@job.JobType</span>
+                                        </div>
+                                        <div class="d-flex text-secondary small">
+                                            <span class="me-3">@job.Location</span>
+                                            <span>@job.Salary</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>@job.CompanyName</td>
+                                <td>@job.DateApplied.ToString("MMM d, yyyy HH:mm")</td>
+                                <td><span class="status-@job.Status.ToLower()">@job.Status</span></td>
+                                <td><a href="/Job/Details/@job.JobId" class="view-details">View Details</a></td>
+                            </tr>
+                    }
+                </tbody>
+            </table>
+    }
+    else
+    {
+            <div class="p-4 text-center">
+                <p>You haven't applied to any jobs yet.</p>
+                <a href="/Job" class="btn btn-primary mt-2">Browse Jobs</a>
+            </div>
+    }
+</div>
+
+@functions {
+    public string GetBadgeClass(string jobType)
+    {
+        return jobType.ToLower() switch
+        {
+            "remote" => "badge-remote",
+            "full time" => "badge-fulltime",
+            "part time" => "badge-fulltime",
+            "temporary" => "badge-temp",
+            "contract" => "badge-contract",
+            "contract base" => "badge-contract",
+            _ => "badge-remote"
+        };
+    }
+}

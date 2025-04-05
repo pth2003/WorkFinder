@@ -1,0 +1,402 @@
+@model WorkFinder.Web.Models.ViewModels.DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "_DashboardLayout";
+}
+
+<style>
+    .dashboard-header {
+        margin-bottom: 30px;
+    }
+
+    .stats-card {
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: white;
+        border: none;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    .stats-card.applied {
+        background-color: #f0f7ff;
+    }
+
+    .stats-card.favorite {
+        background-color: #fff8f0;
+    }
+
+    .stats-card.alerts {
+        background-color: #f0fff4;
+    }
+
+    .stats-number {
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .stats-label {
+        color: #6c757d;
+        font-size: 14px;
+    }
+
+    .profile-alert {
+        background-color: #e05d5d;
+        color: white;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 30px;
+    }
+
+    .profile-img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .edit-btn {
+        background-color: white;
+        color: #e05d5d;
+        border: none;
+        border-radius: 5px;
+        padding: 8px 15px;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    .edit-btn:hover {
+        background-color: #f8f9fa;
+        color: #e05d5d;
+    }
+
+    .job-table {
+        background-color: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    .job-table th {
+        font-weight: 500;
+        color: #6c757d;
+        border-bottom: 1px solid #e9ecef;
+        padding: 15px;
+    }
+
+    .job-table td {
+        padding: 15px;
+        vertical-align: middle;
+    }
+
+    .badge-remote,
+    .badge-fulltime,
+    .badge-temp,
+    .badge-contract {
+        font-size: 12px;
+        padding: 5px 10px;
+        border-radius: 15px;
+        font-weight: normal;
+    }
+
+    .badge-remote {
+        background-color: #e9f0ff;
+        color: #0d6efd;
+    }
+
+    .badge-fulltime {
+        background-color: #e9f5ff;
+        color: #0d9dfd;
+    }
+
+    .badge-temp {
+        background-color: #fff8e7;
+        color: #ffc107;
+    }
+
+    .badge-contract {
+        background-color: #e7f9ef;
+        color: #28a745;
+    }
+
+    .status-active {
+        color: #28a745;
+        font-weight: 500;
+    }
+
+    .view-details {
+        color: #0d6efd;
+        text-decoration: none;
+    }
+
+    .view-details:hover {
+        text-decoration: underline;
+    }
+
+    .icon-circle {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: auto;
+    }
+
+    .icon-circle.applied {
+        background-color: #e9f0ff;
+        color: #0d6efd;
+    }
+
+    .icon-circle.favorite {
+        background-color: #fff8f0;
+        color: #fd7e14;
+    }
+
+    .icon-circle.alerts {
+        background-color: #f0fff4;
+        color: #28a745;
+    }
+
+    .company-logo {
+        width: 30px;
+        height: 30px;
+        border-radius: 5px;
+        background-color: #f8f9fa;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["ErrorMessage"]
+    </div>
+}
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+<div class="dashboard-header">
+    <h4>Hello, @(string.IsNullOrEmpty(Model.UserName) ? "Esther Howard" : Model.UserName)</h4>
+    <p class="text-secondary">Here is your daily activities and job alerts</p>
+</div>
+
+<!-- Stats Cards -->
+<div class="row">
+    <div class="col-md-4">
+        <div class="stats-card applied">
+            <div class="d-flex align-items-center">
+                <div>
+                    <div class="stats-number">@(Model.AppliedJobsCount > 0 ? Model.AppliedJobsCount : 589)</div>
+                    <div class="stats-label">Applied jobs</div>
+                </div>
+                <div class="icon-circle applied">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="stats-card favorite">
+            <div class="d-flex align-items-center">
+                <div>
+                    <div class="stats-number">@(Model.FavoriteJobsCount > 0 ? Model.FavoriteJobsCount : 238)</div>
+                    <div class="stats-label">Favorite jobs</div>
+                </div>
+                <div class="icon-circle favorite">
+                    <i class="far fa-bookmark"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="stats-card alerts">
+            <div class="d-flex align-items-center">
+                <div>
+                    <div class="stats-number">@(Model.JobAlertsCount > 0 ? Model.JobAlertsCount : 574)</div>
+                    <div class="stats-label">Job Alerts</div>
+                </div>
+                <div class="icon-circle alerts">
+                    <i class="far fa-bell"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Profile Alert -->
+<div class="profile-alert">
+    <div class="d-flex align-items-center">
+        @if (!string.IsNullOrEmpty(Model.ProfilePicture))
+        {
+            <img src="@Model.ProfilePicture" alt="Profile" class="profile-img me-3"
+                onerror="this.src='https://randomuser.me/api/portraits/men/32.jpg';">
+        }
+        else
+        {
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile" class="profile-img me-3">
+        }
+        <div class="flex-grow-1">
+            <h5 class="mb-1">Your profile editing is not completed.</h5>
+            <p class="mb-0">Complete your profile editing & build your custom Resume</p>
+        </div>
+        <a href="/Account/Profile" class="edit-btn">
+            Edit Profile <i class="fas fa-arrow-right ms-1"></i>
+        </a>
+    </div>
+</div>
+
+<!-- Recently Applied Jobs -->
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h5 class="mb-0">Recently Applied</h5>
+    <a href="/Dashboard/Applied" class="text-secondary">View all</a>
+</div>
+
+<div class="job-table">
+    @if (Model.RecentlyAppliedJobs != null && Model.RecentlyAppliedJobs.Any())
+    {
+        <table class="table mb-0">
+            <thead>
+                <tr>
+                    <th>Job</th>
+                    <th>Date Applied</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var job in Model.RecentlyAppliedJobs)
+                {
+                    <tr>
+                        <td>
+                            <div class="d-flex flex-column">
+                                <div class="d-flex align-items-center mb-1">
+                                    <span class="fw-bold me-2">@job.JobTitle</span>
+                                    <span class="badge @GetBadgeClass(job.JobType)">@job.JobType</span>
+                                </div>
+                                <div class="d-flex text-secondary small">
+                                    <span class="me-3">@job.Location</span>
+                                    <span>@job.Salary</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>@job.DateApplied.ToString("MMM d, yyyy HH:mm")</td>
+                        <td><span class="status-@job.Status.ToLower()">@job.Status</span></td>
+                        <td><a href="/Job/Details/@job.JobId" class="view-details">View Details</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <table class="table mb-0">
+            <thead>
+                <tr>
+                    <th>Job</th>
+                    <th>Date Applied</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="d-flex flex-column">
+                            <div class="d-flex align-items-center mb-1">
+                                <span class="fw-bold me-2">Networking Engineer</span>
+                                <span class="badge badge-remote">Remote</span>
+                            </div>
+                            <div class="d-flex text-secondary small">
+                                <span class="me-3">Washington</span>
+                                <span>$50k-80k/month</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>Feb 2, 2019 19:28</td>
+                    <td><span class="status-active">Active</span></td>
+                    <td><a href="#" class="view-details">View Details</a></td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="d-flex flex-column">
+                            <div class="d-flex align-items-center mb-1">
+                                <span class="fw-bold me-2">Product Designer</span>
+                                <span class="badge badge-fulltime">Full Time</span>
+                            </div>
+                            <div class="d-flex text-secondary small">
+                                <span class="me-3">Dhaka</span>
+                                <span>$50k-80k/month</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>Dec 7, 2019 23:26</td>
+                    <td><span class="status-active">Active</span></td>
+                    <td><a href="#" class="view-details">View Details</a></td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="d-flex flex-column">
+                            <div class="d-flex align-items-center mb-1">
+                                <span class="fw-bold me-2">Junior Graphic Designer</span>
+                                <span class="badge badge-temp">Temporary</span>
+                            </div>
+                            <div class="d-flex text-secondary small">
+                                <span class="me-3">Brazil</span>
+                                <span>$50k-80k/month</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>Feb 2, 2019 19:28</td>
+                    <td><span class="status-active">Active</span></td>
+                    <td><a href="#" class="view-details">View Details</a></td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="d-flex flex-column">
+                            <div class="d-flex align-items-center mb-1">
+                                <span class="fw-bold me-2">Visual Designer</span>
+                                <span class="badge badge-contract">Contract Base</span>
+                            </div>
+                            <div class="d-flex text-secondary small">
+                                <span class="me-3">Wisconsin</span>
+                                <span>$50k-80k/month</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>Dec 7, 2019 23:26</td>
+                    <td><span class="status-active">Active</span></td>
+                    <td><a href="#" class="view-details">View Details</a></td>
+                </tr>
+            </tbody>
+        </table>
+    }
+</div>
+
+@functions {
+    public string GetBadgeClass(string jobType)
+    {
+        return jobType.ToLower() switch
+        {
+            "remote" => "badge-remote",
+            "full time" => "badge-fulltime",
+            "part time" => "badge-fulltime",
+            "temporary" => "badge-temp",
+            "contract" => "badge-contract",
+            "contract base" => "badge-contract",
+            _ => "badge-remote"
+        };
+    }
+}

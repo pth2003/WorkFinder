@@ -1,0 +1,102 @@
+/* Dashboard Sidebar CSS */
+.sidebar {
+    width: 250px;
+    flex-shrink: 0;
+    font-size: 16px;
+    background-color: #fff;
+    border-right: 1px solid #eee;
+    height: 100%;
+    padding: 1.5rem;
+    position: sticky;
+    top: 0;
+}
+
+.sidebar-header h5 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #777;
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-menu li {
+    margin-bottom: 15px;
+}
+
+.sidebar-menu li a {
+    display: flex;
+    align-items: center;
+    color: #666;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    transition: all 0.3s;
+    font-size: 15px;
+}
+
+.sidebar-menu li a:hover,
+.sidebar-menu li.active a {
+    background-color: rgba(10, 101, 204, 0.1);
+    color: #0A65CC;
+}
+
+.sidebar-menu li.active a {
+    font-weight: 500;
+}
+
+.sidebar-menu li a i {
+    width: 20px;
+    text-align: center;
+    margin-right: 8px;
+}
+
+.notification-badge {
+    background-color: #f8f9fa;
+    color: #6c757d;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
+.sidebar-footer {
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+/* Styling for the logout button */
+#logoutForm .btn-link {
+    display: flex;
+    align-items: center;
+    color: #666;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 10px 15px;
+    border-radius: 6px;
+    transition: all 0.3s;
+    background: transparent;
+    border: none;
+    width: 100%;
+    text-align: left;
+}
+
+#logoutForm .btn-link:hover {
+    color: #dc3545;
+    background-color: rgba(220, 53, 69, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 767.98px) {
+    .sidebar {
+        display: none;
+    }
+} 

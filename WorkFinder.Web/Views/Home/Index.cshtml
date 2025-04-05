@@ -16,30 +16,30 @@
     @await Component.InvokeAsync("Category")
     @await Component.InvokeAsync("FeaturedJob")
     @await Component.InvokeAsync("TopCompany")
-    <section class="testimonial-section">
+    <section class="testimonial-section py-5">
         <div class="container">
-            <h2 class="text-center mb-5">Clients Testimonial</h2>
+            <h2 class="section-title text-center mb-5">Clients Testimonial</h2>
             <div class="row">
                 <div class="col-lg-12">
                     <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <div class="row">
+                                <div class="row g-4">
                                     <div class="col-md-4">
                                         <div class="testimonial-card">
-                                            <div class="rating">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
+                                            <div class="rating mb-3">
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
                                             </div>
                                             <p class="testimonial-text">"Their service was outstanding. They helped me
                                                 find the perfect job that matched my skills and interests."</p>
-                                            <div class="testimonial-author d-flex align-items-center">
+                                            <div class="testimonial-author d-flex align-items-center mt-3">
                                                 <img src="~/img/avatar1.png" alt="User" class="rounded-circle me-3">
                                                 <div>
-                                                    <h5 class="mb-0">Kevin Pham</h5>
+                                                    <h5 class="mb-0 fw-bold">Kevin Pham</h5>
                                                     <p class="mb-0 text-muted">UI/UX Designer</p>
                                                 </div>
                                             </div>
@@ -47,20 +47,20 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="testimonial-card">
-                                            <div class="rating">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
+                                            <div class="rating mb-3">
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
                                             </div>
                                             <p class="testimonial-text">"Very impressed with how quickly they connected
                                                 me with employers. Would recommend to anyone searching for a new
                                                 position."</p>
-                                            <div class="testimonial-author d-flex align-items-center">
+                                            <div class="testimonial-author d-flex align-items-center mt-3">
                                                 <img src="~/img/avatar2.png" alt="User" class="rounded-circle me-3">
                                                 <div>
-                                                    <h5 class="mb-0">Rachel Prichett</h5>
+                                                    <h5 class="mb-0 fw-bold">Rachel Prichett</h5>
                                                     <p class="mb-0 text-muted">Web Developer</p>
                                                 </div>
                                             </div>
@@ -68,20 +68,20 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="testimonial-card">
-                                            <div class="rating">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
+                                            <div class="rating mb-3">
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
                                             </div>
                                             <p class="testimonial-text">"Great platform with a wide variety of job
                                                 listings. The user interface is intuitive and the application process is
                                                 streamlined."</p>
-                                            <div class="testimonial-author d-flex align-items-center">
+                                            <div class="testimonial-author d-flex align-items-center mt-3">
                                                 <img src="~/img/avatar3.png" alt="User" class="rounded-circle me-3">
                                                 <div>
-                                                    <h5 class="mb-0">John Triplett</h5>
+                                                    <h5 class="mb-0 fw-bold">John Triplett</h5>
                                                     <p class="mb-0 text-muted">Product Manager</p>
                                                 </div>
                                             </div>
@@ -90,7 +90,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -121,6 +120,51 @@
             </div>
         </section>
     }
+
+    <style>
+        .testimonial-section {
+            background-color: #f8f9fa;
+        }
+
+        .section-title {
+            font-weight: 700;
+            color: #333;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            height: 100%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonial-text {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 0;
+        }
+
+        .testimonial-author img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+        }
+
+        @@media (max-width: 767.98px) {
+            .testimonial-card {
+                margin-bottom: 20px;
+                padding: 20px;
+            }
+        }
+    </style>
 
 </body>
 

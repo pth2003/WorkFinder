@@ -80,9 +80,8 @@ builder.Services.AddScoped<IJobRepository, JobRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IResumeRepository, ResumeRepository>();
 builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
-// builder.Services.AddScoped<IFileService, LocalFileService>();
-// builder.Services.AddScoped<IRepository<Resume>, Repository<Resume>>();
-// builder.Services.AddScoped<IRepository<SavedJob>, Repository<SavedJob>>();
+builder.Services.AddScoped<ISaveJobRepository, SaveJobRepository>();
+
 // Đăng ký Identity
 // Add authentication services
 builder.Services.AddIdentity<ApplicationUser, IdentityRole<int>>(options =>
@@ -96,6 +95,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole<int>>(options =>
     .AddDefaultTokenProviders();
 
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<ICompanySetupService, CompanySetupService>();
 builder.Services.AddHttpContextAccessor();
 
@@ -116,6 +116,11 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.LoginPath = "/Auth/Login";
     options.LogoutPath = "/Auth/Logout";
     options.AccessDeniedPath = "/Auth/AccessDenied";
+    options.Cookie.Name = ".WorkFinder.Auth";
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+    options.ExpireTimeSpan = TimeSpan.FromDays(30);
+    options.SlidingExpiration = true;
 });
 
 var app = builder.Build();
@@ -185,7 +190,7 @@ app.MapControllerRoute(
     pattern: "Employer/{controller=Home}/{action=Index}/{id?}",
     defaults: new { area = "Employer" });
 
-// Route mặc định cho JobSeeker (không có prefix)
+// Route mặc định cho JobSeeker 
 app.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}")

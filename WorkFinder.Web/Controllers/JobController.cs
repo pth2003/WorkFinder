@@ -54,69 +54,86 @@ namespace WorkFinder.Web.Controllers
                 int page = 1,
                 int pageSize = 12)
         {
+            // Xử lý keyword để tìm kiếm thông minh hơn
+            var searchKeywords = keyword?.Trim().ToLower().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
             // Chuyển đổi string thành enum nếu có giá trị
             JobType? jobTypeEnum = null;
             if (!string.IsNullOrEmpty(jobType) && Enum.TryParse<JobType>(jobType.Replace(" ", ""), out var parsedJobType))
             {
                 jobTypeEnum = parsedJobType;
             }
+            // Nếu từ khóa tìm kiếm có chứa các job type phổ biến, tự động thêm vào bộ lọc
+            else if (searchKeywords != null && !string.IsNullOrEmpty(keyword))
+            {
+                var commonJobTypes = new Dictionary<string, JobType>(StringComparer.OrdinalIgnoreCase) {
+                    { "fulltime", JobType.FullTime },
+                    { "full-time", JobType.FullTime },
+                    { "parttime", JobType.PartTime },
+                    { "part-time", JobType.PartTime },
+                    { "intern", JobType.Internship },
+                    { "internship", JobType.Internship },
+                    { "remote", JobType.Remote },
+                    { "freelance", JobType.Freelance },
+                    { "contract", JobType.Contract }
+                };
+
+                foreach (var kw in searchKeywords)
+                {
+                    if (commonJobTypes.TryGetValue(kw, out var type))
+                    {
+                        jobTypeEnum = type;
+                        // Loại bỏ job type ra khỏi từ khóa tìm kiếm để tránh trùng lặp
+                        keyword = string.Join(" ", searchKeywords.Where(k => !k.Equals(kw, StringComparison.OrdinalIgnoreCase)));
+                        break;
+                    }
+                }
+            }
 
             ExperienceLevel? experienceLevelEnum = null;
-            if (!string.IsNullOrEmpty(experienceLevel))
+            if (!string.IsNullOrEmpty(experienceLevel) && Enum.TryParse<ExperienceLevel>(experienceLevel.Replace(" ", ""), out var parsedExperienceLevel))
             {
-                var firstWord = experienceLevel.Split(' ')[0];
-                if (Enum.TryParse<ExperienceLevel>(firstWord, out var parsedExpLevel))
+                experienceLevelEnum = parsedExperienceLevel;
+            }
+
+            // Tự động phát hiện mức lương từ từ khóa nếu minSalary và maxSalary không được chỉ định
+            if ((!minSalary.HasValue || !maxSalary.HasValue) && searchKeywords != null)
+            {
+                foreach (var kw in searchKeywords)
                 {
-                    experienceLevelEnum = parsedExpLevel;
+                    // Tìm các từ khóa liên quan đến lương
+                    if (decimal.TryParse(kw.Replace("k", "000").Replace("$", ""), out var salary))
+                    {
+                        if (!minSalary.HasValue)
+                            minSalary = salary * 0.8m; // 20% dưới giá trị tìm thấy
+
+                        if (!maxSalary.HasValue)
+                            maxSalary = salary * 1.2m; // 20% trên giá trị tìm thấy
+
+                        // Loại bỏ keyword lương để tránh lặp lại trong tìm kiếm
+                        keyword = string.Join(" ", searchKeywords.Where(k => !k.Equals(kw, StringComparison.OrdinalIgnoreCase)));
+                        break;
+                    }
                 }
             }
-            ExperienceLevel? jobLevelEnum = null;
-            if (!string.IsNullOrEmpty(jobLevel))
-            {
-                var firstWord = jobLevel.Split(' ')[0];
-                if (Enum.TryParse<ExperienceLevel>(firstWord, out var parsedJobLevel))
-                {
-                    jobLevelEnum = parsedJobLevel;
-                }
-            }
 
-            // Sử dụng phương thức phân trang với bộ lọc nâng cao
-            if (postedAfter.HasValue)
-            {
-                // Chuyển đổi thành UTC trước khi truy vấn
-                postedAfter = DateTime.SpecifyKind(postedAfter.Value, DateTimeKind.Utc);
-            }
-
-            // Declare variables to store results
-            IEnumerable<Job> jobs;
-            int totalCount;
-
-            if (companyId.HasValue)
-            {
-                // If companyId is provided, get jobs for that company
-                var companyJobs = await _jobRepository.GetJobsByCompanyAsync(companyId.Value);
-                jobs = companyJobs;
-                totalCount = companyJobs.Count();
-
-                // Set ViewBag data for company filter
-                var company = await _jobRepository.GetCompanyByIdAsync(companyId.Value);
-                if (company != null)
-                {
-                    ViewBag.CompanyName = company.Name;
-                    ViewBag.CompanyLogo = company.Logo;
-                }
-                ViewBag.CompanyId = companyId.Value;
-            }
-            else
-            {
-                // Otherwise use the advanced filter
-                (jobs, totalCount) = await _jobRepository.GetJobsAdvancedPagedAsync(
-                    keyword, location, categoryId, jobTypeEnum, experienceLevelEnum,
-                    minSalary, maxSalary, jobLevelEnum, postedAfter, page, pageSize);
-            }
+            // Thực hiện tìm kiếm nâng cao từ repository
+            var result = await _jobRepository.GetJobsAdvancedPagedAsync(
+                keyword: keyword,
+                location: location,
+                categoryId: categoryId,
+                jobType: jobTypeEnum,
+                experienceLevel: experienceLevelEnum,
+                minSalary: minSalary,
+                maxSalary: maxSalary,
+                jobLevel: experienceLevelEnum,
+                postedAfter: postedAfter,
+                page: page,
+                pageSize: pageSize
+            );
 
             // Chuyển đổi sang DTO
-            var jobDtos = jobs.Select(j => new JobDto
+            var jobDtos = result.Jobs.Select(j => new JobDto
             {
                 Id = j.Id,
                 Title = j.Title,
@@ -140,13 +157,13 @@ namespace WorkFinder.Web.Controllers
             ViewBag.Categories = categories;
 
             // Tính toán thông tin phân trang
-            var totalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
+            var totalPages = (int)Math.Ceiling(result.TotalCount / (double)pageSize);
 
             // Truyền thông tin phân trang và bộ lọc vào ViewBag
             ViewBag.CurrentPage = page;
             ViewBag.PageSize = pageSize;
             ViewBag.TotalPages = totalPages;
-            ViewBag.TotalJobs = totalCount;
+            ViewBag.TotalJobs = result.TotalCount;
             ViewBag.Keyword = keyword;
             ViewBag.Location = location;
             ViewBag.CategoryId = categoryId;
@@ -497,4 +514,5 @@ namespace WorkFinder.Web.Controllers
             return PartialView("_JobListPartial", jobDtos);
         }
     }
+
 }

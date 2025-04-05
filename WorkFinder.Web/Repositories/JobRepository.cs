@@ -7,6 +7,9 @@ using WorkFinder.Web.Data;
 using WorkFinder.Web.Models;
 using WorkFinder.Web.Models.Enums;
 using Microsoft.Extensions.Logging;
+using System.Linq.Expressions;
+using System.Text.RegularExpressions;
+using System.Globalization;
 
 namespace WorkFinder.Web.Repositories
 {
@@ -391,22 +394,42 @@ namespace WorkFinder.Web.Repositories
             // Filter by active jobs
             query = query.Where(j => j.IsActive && j.ExpiryDate > DateTime.UtcNow);
 
-            // Filter by keyword
+            // Filter by keyword with improved search
             if (!string.IsNullOrEmpty(keyword))
             {
-                string pattern = $"{keyword}";
+                string[] keywords = keyword.ToLower().Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
-                query = query.Where(j =>
-                    EF.Functions.Like(j.Title, pattern) ||
-                    EF.Functions.Like(j.Description, pattern) ||
-                    EF.Functions.Like(j.Requirements, pattern) ||
-                    EF.Functions.Like(j.Company.Name, pattern));
+                // Use ToList() to perform the keyword filtering in memory instead of trying to translate to SQL
+                if (keywords.Length > 0)
+                {
+                    // Perform initial database query
+                    var baseQuery = query;
+
+                    // Execute first query and convert to in-memory collection
+                    var jobs = baseQuery.Include(j => j.Company).ToList();
+
+                    // Perform the keyword filtering in memory
+                    var filteredJobs = jobs.Where(j =>
+                        keywords.Any(k =>
+                            j.Title.ToLower().Contains(k) ||
+                            j.Description.ToLower().Contains(k) ||
+                            j.Requirements.ToLower().Contains(k) ||
+                            j.Company.Name.ToLower().Contains(k)
+                        )
+                    ).ToList();
+
+                    // Get the IDs of the filtered jobs
+                    var filteredJobIds = filteredJobs.Select(j => j.Id).ToList();
+
+                    // Update the query to only include these jobs
+                    query = query.Where(j => filteredJobIds.Contains(j.Id));
+                }
             }
 
             // Filter by location
             if (!string.IsNullOrEmpty(location))
             {
-                query = query.Where(j => EF.Functions.Like(j.Location, $"%{location}%"));
+                query = query.Where(j => EF.Functions.Like(j.Location, "%" + location + "%"));
             }
 
             // Filter by category
@@ -420,7 +443,6 @@ namespace WorkFinder.Web.Repositories
             {
                 string jobTypeString = ((int)jobType.Value).ToString();
                 query = query.Where(j => EF.Functions.Like(j.JobType.ToString(), jobTypeString));
-
             }
 
             // Filter by experience level

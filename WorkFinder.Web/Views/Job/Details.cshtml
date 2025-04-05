@@ -90,7 +90,7 @@
                                 else {
 <div class="action-buttons mt-3">
                                     <button class="btn btn-primary apply-btn" data-bs-toggle="modal" data-bs-target="#applyJobModal">Apply Now <i class="fas fa-arrow-right ms-1"></i></button>
-                                    <button class="btn btn-outline-secondary ms-2"><i class="far fa-bookmark"></i> Save</button>
+                                    <button id="saveJobBtn" class="btn btn-outline-secondary ms-2" data-job-id="@Model.Id"><i id="saveJobIcon" class="far fa-bookmark"></i> <span id="saveJobText">Save</span></button>
                                 </div>
                                 }
                             
@@ -593,3 +593,81 @@ document.addEventListener('DOMContentLoaded', function() {
         color: #3763EB;
     }
 </style>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Check if job is already saved
+            const jobId = $('#saveJobBtn').data('job-id');
+            
+            // Only check if user is authenticated
+            @if (User.Identity.IsAuthenticated)
+            {
+                <text>
+                $.ajax({
+                    url: '/SavedJob/check/' + jobId,
+                    type: 'GET',
+                    success: function (result) {
+                        if (result.isSaved) {
+                            updateSaveButton(true);
+                        }
+                    }
+                });
+                </text>
+            }
+            
+            // Save or unsave job
+            $('#saveJobBtn').on('click', function () {
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <text>
+                    window.location.href = '/Auth/Auth/Login?returnUrl=' + window.location.pathname;
+                    return;
+                    </text>
+                }
+                
+                $.ajax({
+                    url: '/SavedJob/toggle/' + jobId,
+                    type: 'POST',
+                    success: function (result) {
+                        if (result.success) {
+                            updateSaveButton(result.isSaved);
+                            
+                            // Show toast or notification
+                            if (window.toast) {
+                                const message = result.isSaved ? 'Job saved successfully' : 'Job removed from saved jobs';
+                                window.toast.showToast('Success', message, 'success');
+                            }
+                        } else {
+                            // Show error message
+                            if (window.toast) {
+                                window.toast.showToast('Error', result.message, 'error');
+                            } else {
+                                alert(result.message);
+                            }
+                        }
+                    },
+                    error: function () {
+                        if (window.toast) {
+                            window.toast.showToast('Error', 'Failed to save job', 'error');
+                        } else {
+                            alert('Failed to save job');
+                        }
+                    }
+                });
+            });
+            
+            function updateSaveButton(isSaved) {
+                if (isSaved) {
+                    $('#saveJobIcon').removeClass('far').addClass('fas');
+                    $('#saveJobText').text('Saved');
+                    $('#saveJobBtn').removeClass('btn-outline-secondary').addClass('btn-outline-success');
+                } else {
+                    $('#saveJobIcon').removeClass('fas').addClass('far');
+                    $('#saveJobText').text('Save');
+                    $('#saveJobBtn').removeClass('btn-outline-success').addClass('btn-outline-secondary');
+                }
+            }
+        });
+    </script>
+}

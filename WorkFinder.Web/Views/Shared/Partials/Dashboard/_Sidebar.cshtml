@@ -1,0 +1,56 @@
+@{
+    var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+    var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
+    var isOverviewActive = currentController == "Dashboard" && currentAction == "Index";
+    var isAppliedActive = currentController == "Dashboard" && currentAction == "Applied";
+    var isFavoritesActive = currentController == "Dashboard" && currentAction == "Favorites";
+    var isAlertsActive = currentController == "Dashboard" && currentAction == "Alerts";
+    var isSettingsActive = currentController == "Account" && currentAction == "Profile";
+}
+
+<div class="sidebar d-none d-md-block">
+    <div class="sidebar-header mb-4">
+        <h5>CANDIDATE DASHBOARD</h5>
+    </div>
+    <ul class="sidebar-menu">
+        <li class="@(isOverviewActive ? "active" : "")">
+            <a href="/Dashboard" class="d-flex align-items-center">
+                <i class="fas fa-layer-group me-2"></i>
+                <span>Overview</span>
+            </a>
+        </li>
+        <li class="@(isAppliedActive ? "active" : "")">
+            <a href="/Dashboard/Applied" class="d-flex align-items-center">
+                <i class="fas fa-briefcase me-2"></i>
+                <span>Applied Jobs</span>
+            </a>
+        </li>
+        <li class="@(isFavoritesActive ? "active" : "")">
+            <a href="/Dashboard/Favorites" class="d-flex align-items-center">
+                <i class="far fa-bookmark me-2"></i>
+                <span>Favorite Jobs</span>
+            </a>
+        </li>
+        <li class="@(isAlertsActive ? "active" : "")">
+            <a href="/Dashboard/Alerts" class="d-flex align-items-center">
+                <i class="far fa-bell me-2"></i>
+                <span>Job Alerts</span>
+                <span class="notification-badge ms-auto">09</span>
+            </a>
+        </li>
+        <li class="@(isSettingsActive ? "active" : "")">
+            <a href="/Account/Profile" class="d-flex align-items-center">
+                <i class="fas fa-cog me-2"></i>
+                <span>Settings</span>
+            </a>
+        </li>
+    </ul>
+    <div class="sidebar-footer mt-4">
+        <form asp-area="Auth" asp-controller="Auth" asp-action="Logout" method="post" id="logoutForm">
+            <button type="submit" class="btn btn-link d-flex align-items-center p-0">
+                <i class="fas fa-sign-out-alt me-2"></i>
+                <span>Log-out</span>
+            </button>
+        </form>
+    </div>
+</div>

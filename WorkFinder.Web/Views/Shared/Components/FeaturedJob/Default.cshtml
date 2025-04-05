@@ -30,30 +30,104 @@
                         </div>
                     </div>
                     <div class="job-action d-flex justify-content-between align-items-center gap-4">
-                        <div class="save-job"><i class="fa-regular fa-bookmark"></i></div>
+                        <button class="save-job btn btn-outline-primary" data-job-id="@job.Id"><i
+                                class="fa-regular fa-bookmark"></i></button>
                         <a href="@Url.Action("Details", "Job", new { id = job.Id })" class="job-apply-btn">Apply Now</a>
                     </div>
                 </div>
             }
-            @* <div class="featured-job-item">
-                <div class="job-logo">
-                    <img src="~/img/company-logo-1.png" alt="Google">
-                </div>
-                <div class="job-content">
-                    <div class="job-title-row">
-                        <h3 class="job-title">Senior UX Designer</h3>
-                        <a href="#" class="job-apply-btn">Apply Now</a>
-                    </div>
-                    <div class="job-company">
-                        <span class="company-name">Google</span>
-                        <span class="location"><i class="fas fa-map-marker-alt"></i> California</span>
-                        <span class="job-type">Full-time</span>
-                    </div>
-                    <div class="job-salary"><i class="fas fa-money-bill-wave"></i> $5000-$8000</div>
-                </div>
-            </div> *@
-
-
         </div>
     </div>
 </section>
+
+
+<script>
+    // Đợi cho đến khi DOM hoàn toàn được tải xong
+    document.addEventListener('DOMContentLoaded', function () {
+        // Chạy khi jQuery sẵn sàng
+        $(function () {
+            // Lấy tất cả các nút lưu job
+            const saveJobButtons = $('.save-job');
+
+            // Kiểm tra các job đã được lưu chưa (cho người dùng đã đăng nhập)
+            @if (User.Identity.IsAuthenticated)
+                {
+                    <text>
+                        saveJobButtons.each(function() {
+                            const button = $(this);
+                        const jobId = button.data('job-id');
+
+                        $.ajax({
+                            url: '/SavedJob/check/' + jobId,
+                        type: 'GET',
+                        success: function (result) {
+                                    if (result.isSaved) {
+                            updateSaveButton(button, true);
+                                    }
+                                },
+                        error: function(xhr) {
+                            console.error('Error checking job', jobId, xhr);
+                                }
+                            });
+                        });
+                    </text>
+            }
+
+                // Xử lý sự kiện click lưu/bỏ lưu job
+                saveJobButtons.on('click', function (e) {
+                    e.preventDefault();
+                    const button = $(this);
+                    const jobId = button.data('job-id');
+
+                    // Chuyển hướng nếu chưa đăng nhập
+                    @if (!User.Identity.IsAuthenticated)
+                        {
+                            <text>
+                                window.location.href = '/Auth/Auth/Login?returnUrl=' + window.location.pathname;
+                                return;
+                            </text>
+                    }
+
+                        // Gọi API toggle lưu job
+                        $.ajax({
+                            url: '/SavedJob/toggle/' + jobId,
+                            type: 'POST',
+                            success: function (result) {
+                                if (result.success) {
+                                    updateSaveButton(button, result.isSaved);
+
+                                    // Hiển thị thông báo
+                                    const title = result.isSaved ? 'Saved' : 'Removed';
+                                    const message = result.isSaved ? 'Job saved to favorites' : 'Job removed from favorites';
+                                    window.toast.showToast(title, message, result.isSaved ? 'success' : 'info');
+                                } else {
+                                    window.toast.showToast('Error', result.message || 'Error saving job', 'error');
+                                }
+                            },
+                            error: function (xhr) {
+                                window.toast.showToast('Error', 'Failed to save job', 'error');
+                            }
+                        });
+                });
+
+            // Hàm cập nhật trạng thái nút lưu
+            function updateSaveButton(button, isSaved) {
+                if (isSaved) {
+                    button.addClass('active');
+                    button.find('i').removeClass('fa-regular fa-bookmark').addClass('fas fa-bookmark');
+                    button.css({
+                        'background-color': '#0d6efd',
+                        'color': 'white'
+                    });
+                } else {
+                    button.removeClass('active');
+                    button.find('i').removeClass('fas fa-bookmark').addClass('fa-regular fa-bookmark');
+                    button.css({
+                        'background-color': '#f0f4ff',
+                        'color': '#0d6efd'
+                    });
+                }
+            }
+        });
+    });
+</script>
