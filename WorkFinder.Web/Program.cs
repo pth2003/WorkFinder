@@ -49,6 +49,8 @@ builder.Services.AddScoped<IJobRepository, JobRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IResumeRepository, ResumeRepository>();
 builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
+builder.Services.AddScoped<ICandidateRepository, CandidateRepository>();
+
 // builder.Services.AddScoped<IRepository<Resume>, Repository<Resume>>();
 // builder.Services.AddScoped<IRepository<SavedJob>, Repository<SavedJob>>();
 // Đăng ký Identity
@@ -85,6 +87,10 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.LogoutPath = "/Auth/Logout";
     options.AccessDeniedPath = "/Auth/AccessDenied";
 });
+
+
+
+WorkFinderContext.CreateDatabase();
 var app = builder.Build();
 
 

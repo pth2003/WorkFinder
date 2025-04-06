@@ -1,25 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/WorkFinder.Web.csproj": {}
+    "C:\\Users\\haila\\Documents\\lap-trinh-web-nang-cao\\WorkFinder\\WorkFinder.Web\\WorkFinder.Web.csproj": {}
   },
   "projects": {
-    "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/WorkFinder.Web.csproj": {
+    "C:\\Users\\haila\\Documents\\lap-trinh-web-nang-cao\\WorkFinder\\WorkFinder.Web\\WorkFinder.Web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/WorkFinder.Web.csproj",
+        "projectUniqueName": "C:\\Users\\haila\\Documents\\lap-trinh-web-nang-cao\\WorkFinder\\WorkFinder.Web\\WorkFinder.Web.csproj",
         "projectName": "WorkFinder.Web",
-        "projectPath": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/WorkFinder.Web.csproj",
-        "packagesPath": "/Users/hieupt/.nuget/packages/",
-        "outputPath": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/obj/",
+        "projectPath": "C:\\Users\\haila\\Documents\\lap-trinh-web-nang-cao\\WorkFinder\\WorkFinder.Web\\WorkFinder.Web.csproj",
+        "packagesPath": "C:\\Users\\haila\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\haila\\Documents\\lap-trinh-web-nang-cao\\WorkFinder\\WorkFinder.Web\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "/Users/hieupt/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\haila\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -38,7 +45,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.200"
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net9.0": {
@@ -58,9 +65,21 @@
               "target": "Package",
               "version": "[9.0.3, )"
             },
+            "Microsoft.EntityFrameworkCore.Proxies": {
+              "target": "Package",
+              "version": "[9.0.3, )"
+            },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.3, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[9.0.3, )"
+            },
+            "Microsoft.Extensions.Logging": {
               "target": "Package",
               "version": "[9.0.3, )"
             },
@@ -92,7 +111,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

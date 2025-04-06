@@ -80,7 +80,7 @@
                                 else {
 <div class="action-buttons mt-3">
                                     <button class="btn btn-primary apply-btn" data-bs-toggle="modal" data-bs-target="#applyJobModal">Apply Now <i class="fas fa-arrow-right ms-1"></i></button>
-                                    <button class="btn btn-outline-secondary ms-2"><i class="far fa-bookmark"></i> Save</button>
+                                    <button id="save-job" class="btn btn-outline-secondary ms-2"><i class="far fa-bookmark"></i> Save</button>
                                 </div>
                                 }
                             
@@ -431,6 +431,78 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
+
+const saveJob = document.getElementById("save-job");
+
+fetch("/Candidate/CheckSavedJob", {
+    method: "POST",
+    body: JSON.stringify("@Model.Id"),
+    headers: {
+        "Content-Type": "application/json",
+    },
+})
+    .then((response) => {
+        return response.json(); // Parse JSON từ phản hồi
+    })
+    .then((data) => {
+        if (data.existsSavedJob == true) {
+            saveJob.innerHTML = "";
+            saveJob.innerHTML = `<i class="fa-solid fa-check"></i> Saved`;
+        } else {
+            saveJob.innerHTML = "";
+            saveJob.innerHTML = `<i class="far fa-bookmark"></i> Save`;
+        }
+    })
+    .catch((error) => {
+        console.error("Error:", error);
+    });
+
+saveJob.onclick = (e) => {
+    if (saveJob.innerText.includes("Saved")) {//da luu job
+        fetch("/Candidate/DeleteSavedJob", {
+            method: "POST",
+            body: JSON.stringify("@Model.Id"),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+            .then((response) => {
+                return response.json(); // Parse JSON từ phản hồi
+            })
+            .then((data) => {
+                if (data.success == true) {
+                    saveJob.innerHTML = "";
+                    saveJob.innerHTML = `<i class="far fa-bookmark"></i> Save`;
+                }
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+            });
+        
+    } else {
+        fetch("/Candidate/SaveJob", {
+            method: "POST",
+            body: JSON.stringify("@Model.Id"),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+            .then((response) => {
+                return response.json(); // Parse JSON từ phản hồi
+            })
+            .then((data) => {
+                if (data.success == true) {
+                    saveJob.innerHTML = "";
+                    saveJob.innerHTML = `<i class="fa-solid fa-check"></i> Saved`;
+                }
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+            });
+    }
+};
+
+
 </script>
 </div>
 

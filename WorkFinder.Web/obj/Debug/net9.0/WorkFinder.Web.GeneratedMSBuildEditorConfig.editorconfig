@@ -17,237 +17,253 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = WorkFinder.Web
 build_property.RootNamespace = WorkFinder.Web
-build_property.ProjectDir = /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/
+build_property.ProjectDir = C:\Users\haila\Documents\lap-trinh-web-nang-cao\WorkFinder\WorkFinder.Web\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 9.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = /Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web
+build_property.MSBuildProjectDirectory = C:\Users\haila\Documents\lap-trinh-web-nang-cao\WorkFinder\WorkFinder.Web
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Admin/Views/Shared/_AdminLayout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXMvQWRtaW4vVmlld3MvU2hhcmVkL19BZG1pbkxheW91dC5jc2h0bWw=
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Areas/Admin/Views/Shared/_AdminLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9BZG1pbkxheW91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Auth/Views/Auth/Login.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXMvQXV0aC9WaWV3cy9BdXRoL0xvZ2luLmNzaHRtbA==
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Areas/Auth/Views/Auth/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQXV0aFxWaWV3c1xBdXRoXExvZ2luLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Auth/Views/Auth/Register.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXMvQXV0aC9WaWV3cy9BdXRoL1JlZ2lzdGVyLmNzaHRtbA==
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Areas/Auth/Views/Auth/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQXV0aFxWaWV3c1xBdXRoXFJlZ2lzdGVyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Auth/Views/Shared/Error.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXMvQXV0aC9WaWV3cy9TaGFyZWQvRXJyb3IuY3NodG1s
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Areas/Auth/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQXV0aFxWaWV3c1xTaGFyZWRcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Auth/Views/Shared/NotFound.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXMvQXV0aC9WaWV3cy9TaGFyZWQvTm90Rm91bmQuY3NodG1s
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Areas/Auth/Views/Shared/NotFound.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQXV0aFxWaWV3c1xTaGFyZWRcTm90Rm91bmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Auth/Views/Shared/_AuthLayout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXMvQXV0aC9WaWV3cy9TaGFyZWQvX0F1dGhMYXlvdXQuY3NodG1s
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Areas/Auth/Views/Shared/_AuthLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQXV0aFxWaWV3c1xTaGFyZWRcX0F1dGhMYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Auth/_ViewImports.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXMvQXV0aC9fVmlld0ltcG9ydHMuY3NodG1s
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Areas/Auth/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQXV0aFxfVmlld0ltcG9ydHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Auth/_ViewStart.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXMvQXV0aC9fVmlld1N0YXJ0LmNzaHRtbA==
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Areas/Auth/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQXV0aFxfVmlld1N0YXJ0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Company/SetupBasic.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXMvRW1wbG95ZXIvVmlld3MvQ29tcGFueS9TZXR1cEJhc2ljLmNzaHRtbA==
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Company/SetupBasic.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRW1wbG95ZXJcVmlld3NcQ29tcGFueVxTZXR1cEJhc2ljLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Company/SetupContact.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXMvRW1wbG95ZXIvVmlld3MvQ29tcGFueS9TZXR1cENvbnRhY3QuY3NodG1s
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Company/SetupContact.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRW1wbG95ZXJcVmlld3NcQ29tcGFueVxTZXR1cENvbnRhY3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Company/SetupOrganization.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXMvRW1wbG95ZXIvVmlld3MvQ29tcGFueS9TZXR1cE9yZ2FuaXphdGlvbi5jc2h0bWw=
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Company/SetupOrganization.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRW1wbG95ZXJcVmlld3NcQ29tcGFueVxTZXR1cE9yZ2FuaXphdGlvbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Company/SetupSocial.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXMvRW1wbG95ZXIvVmlld3MvQ29tcGFueS9TZXR1cFNvY2lhbC5jc2h0bWw=
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Company/SetupSocial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRW1wbG95ZXJcVmlld3NcQ29tcGFueVxTZXR1cFNvY2lhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Home/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXMvRW1wbG95ZXIvVmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRW1wbG95ZXJcVmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Job/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXMvRW1wbG95ZXIvVmlld3MvSm9iL0NyZWF0ZS5jc2h0bWw=
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Job/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRW1wbG95ZXJcVmlld3NcSm9iXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Job/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXMvRW1wbG95ZXIvVmlld3MvSm9iL0luZGV4LmNzaHRtbA==
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Job/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRW1wbG95ZXJcVmlld3NcSm9iXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Shared/Error.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXMvRW1wbG95ZXIvVmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRW1wbG95ZXJcVmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Shared/NotFound.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXMvRW1wbG95ZXIvVmlld3MvU2hhcmVkL05vdEZvdW5kLmNzaHRtbA==
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Shared/NotFound.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRW1wbG95ZXJcVmlld3NcU2hhcmVkXE5vdEZvdW5kLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Shared/_DashboardStats.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXMvRW1wbG95ZXIvVmlld3MvU2hhcmVkL19EYXNoYm9hcmRTdGF0cy5jc2h0bWw=
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Shared/_DashboardStats.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRW1wbG95ZXJcVmlld3NcU2hhcmVkXF9EYXNoYm9hcmRTdGF0cy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Shared/_EmployerLayout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXMvRW1wbG95ZXIvVmlld3MvU2hhcmVkL19FbXBsb3llckxheW91dC5jc2h0bWw=
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Shared/_EmployerLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRW1wbG95ZXJcVmlld3NcU2hhcmVkXF9FbXBsb3llckxheW91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Shared/_LoginPartial.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXMvRW1wbG95ZXIvVmlld3MvU2hhcmVkL19Mb2dpblBhcnRpYWwuY3NodG1s
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Shared/_LoginPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRW1wbG95ZXJcVmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Shared/_RecentApplications.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXMvRW1wbG95ZXIvVmlld3MvU2hhcmVkL19SZWNlbnRBcHBsaWNhdGlvbnMuY3NodG1s
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Shared/_RecentApplications.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRW1wbG95ZXJcVmlld3NcU2hhcmVkXF9SZWNlbnRBcHBsaWNhdGlvbnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Shared/_RecentJobs.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXMvRW1wbG95ZXIvVmlld3MvU2hhcmVkL19SZWNlbnRKb2JzLmNzaHRtbA==
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Shared/_RecentJobs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRW1wbG95ZXJcVmlld3NcU2hhcmVkXF9SZWNlbnRKb2JzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Shared/_SetupLayout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXMvRW1wbG95ZXIvVmlld3MvU2hhcmVkL19TZXR1cExheW91dC5jc2h0bWw=
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Shared/_SetupLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRW1wbG95ZXJcVmlld3NcU2hhcmVkXF9TZXR1cExheW91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Shared/_SetupStepperPartial.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXMvRW1wbG95ZXIvVmlld3MvU2hhcmVkL19TZXR1cFN0ZXBwZXJQYXJ0aWFsLmNzaHRtbA==
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Shared/_SetupStepperPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRW1wbG95ZXJcVmlld3NcU2hhcmVkXF9TZXR1cFN0ZXBwZXJQYXJ0aWFsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Shared/_SetupStylesPartial.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXMvRW1wbG95ZXIvVmlld3MvU2hhcmVkL19TZXR1cFN0eWxlc1BhcnRpYWwuY3NodG1s
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Areas/Employer/Views/Shared/_SetupStylesPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRW1wbG95ZXJcVmlld3NcU2hhcmVkXF9TZXR1cFN0eWxlc1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Employer/Views/_ViewImports.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXMvRW1wbG95ZXIvVmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Areas/Employer/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRW1wbG95ZXJcVmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Employer/Views/_ViewStart.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXMvRW1wbG95ZXIvVmlld3MvX1ZpZXdTdGFydC5jc2h0bWw=
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Areas/Employer/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcRW1wbG95ZXJcVmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Areas/Jobseeker/Views/Shared/_JobseekerLayout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXMvSm9ic2Vla2VyL1ZpZXdzL1NoYXJlZC9fSm9ic2Vla2VyTGF5b3V0LmNzaHRtbA==
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Areas/Jobseeker/Views/Shared/_JobseekerLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSm9ic2Vla2VyXFZpZXdzXFNoYXJlZFxfSm9ic2Vla2VyTGF5b3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Views/Company/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ29tcGFueS9EZXRhaWxzLmNzaHRtbA==
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Views/Candidate/AppliedJobs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FuZGlkYXRlXEFwcGxpZWRKb2JzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Views/Company/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ29tcGFueS9JbmRleC5jc2h0bWw=
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Views/Candidate/Dashboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FuZGlkYXRlXERhc2hib2FyZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Views/Home/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Views/Candidate/FavoriteJobs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FuZGlkYXRlXEZhdm9yaXRlSm9icy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Views/Home/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Views/Candidate/Settings.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FuZGlkYXRlXFNldHRpbmdzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Views/Job/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSm9iL0RldGFpbHMuY3NodG1s
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Views/Company/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGFueVxEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Views/Job/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSm9iL0luZGV4LmNzaHRtbA==
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Views/Company/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGFueVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Views/Job/_JobListPartial.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSm9iL19Kb2JMaXN0UGFydGlhbC5jc2h0bWw=
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Views/Shared/Components/AdvancedFilter/Default.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0NvbXBvbmVudHMvQWR2YW5jZWRGaWx0ZXIvRGVmYXVsdC5jc2h0bWw=
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Views/Shared/Components/Category/Default.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0NvbXBvbmVudHMvQ2F0ZWdvcnkvRGVmYXVsdC5jc2h0bWw=
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Views/Job/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9iXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Views/Shared/Components/FeaturedJob/Default.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0NvbXBvbmVudHMvRmVhdHVyZWRKb2IvRGVmYXVsdC5jc2h0bWw=
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Views/Job/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9iXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Views/Shared/Components/Hero/Default.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0NvbXBvbmVudHMvSGVyby9EZWZhdWx0LmNzaHRtbA==
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Views/Job/_JobListPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9iXF9Kb2JMaXN0UGFydGlhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Views/Shared/Components/ListCard/Default.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0NvbXBvbmVudHMvTGlzdENhcmQvRGVmYXVsdC5jc2h0bWw=
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Views/Shared/Components/AdvancedFilter/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQWR2YW5jZWRGaWx0ZXJcRGVmYXVsdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Views/Shared/Components/Search/Default.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0NvbXBvbmVudHMvU2VhcmNoL0RlZmF1bHQuY3NodG1s
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Views/Shared/Components/Category/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQ2F0ZWdvcnlcRGVmYXVsdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Views/Shared/Components/Step/Default.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0NvbXBvbmVudHMvU3RlcC9EZWZhdWx0LmNzaHRtbA==
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Views/Shared/Components/FeaturedJob/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcRmVhdHVyZWRKb2JcRGVmYXVsdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Views/Shared/Components/TopCompany/Default.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0NvbXBvbmVudHMvVG9wQ29tcGFueS9EZWZhdWx0LmNzaHRtbA==
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Views/Shared/Components/Hero/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcSGVyb1xEZWZhdWx0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Views/Shared/Error.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Views/Shared/Components/ListCard/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcTGlzdENhcmRcRGVmYXVsdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Views/Shared/NotFound.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL05vdEZvdW5kLmNzaHRtbA==
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Views/Shared/Components/Search/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcU2VhcmNoXERlZmF1bHQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Views/Shared/Partials/Common/_CardItem.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL1BhcnRpYWxzL0NvbW1vbi9fQ2FyZEl0ZW0uY3NodG1s
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Views/Shared/Components/Step/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcU3RlcFxEZWZhdWx0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Views/Shared/Partials/Common/_CardItemHeader.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL1BhcnRpYWxzL0NvbW1vbi9fQ2FyZEl0ZW1IZWFkZXIuY3NodG1s
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Views/Shared/Components/TopCompany/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcVG9wQ29tcGFueVxEZWZhdWx0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Views/Shared/Partials/Common/_Footer.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL1BhcnRpYWxzL0NvbW1vbi9fRm9vdGVyLmNzaHRtbA==
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Views/Shared/Partials/Common/_Header.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL1BhcnRpYWxzL0NvbW1vbi9fSGVhZGVyLmNzaHRtbA==
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Views/Shared/NotFound.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXE5vdEZvdW5kLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Views/Shared/Partials/Common/_JobItem.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL1BhcnRpYWxzL0NvbW1vbi9fSm9iSXRlbS5jc2h0bWw=
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Views/Shared/Partials/Common/_CardItem.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXFBhcnRpYWxzXENvbW1vblxfQ2FyZEl0ZW0uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Views/Shared/Partials/Common/_SectionHeader.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL1BhcnRpYWxzL0NvbW1vbi9fU2VjdGlvbkhlYWRlci5jc2h0bWw=
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Views/Shared/Partials/Common/_CardItemHeader.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXFBhcnRpYWxzXENvbW1vblxfQ2FyZEl0ZW1IZWFkZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Views/Shared/Partials/Company/_CompanyList.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL1BhcnRpYWxzL0NvbXBhbnkvX0NvbXBhbnlMaXN0LmNzaHRtbA==
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Views/Shared/Partials/Common/_Footer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXFBhcnRpYWxzXENvbW1vblxfRm9vdGVyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Views/Shared/_ValidationScriptsPartial.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Views/Shared/Partials/Common/_Header.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXFBhcnRpYWxzXENvbW1vblxfSGVhZGVyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Views/_ViewImports.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Views/Shared/Partials/Common/_JobItem.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXFBhcnRpYWxzXENvbW1vblxfSm9iSXRlbS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Views/_ViewStart.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdTdGFydC5jc2h0bWw=
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Views/Shared/Partials/Common/_SectionHeader.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXFBhcnRpYWxzXENvbW1vblxfU2VjdGlvbkhlYWRlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/Views/Shared/_Layout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = b-r3zlugqwcm
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Views/Shared/Partials/Company/_CompanyList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXFBhcnRpYWxzXENvbXBhbnlcX0NvbXBhbnlMaXN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/haila/Documents/lap-trinh-web-nang-cao/WorkFinder/WorkFinder.Web/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-wxgrxemfba
