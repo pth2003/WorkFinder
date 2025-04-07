@@ -139,5 +139,14 @@ namespace WorkFinder.Web.Repositories
 
         // Phương thức mới để lấy job cùng với tất cả applications của nó
         Task<Job> GetJobWithApplicationsAsync(int jobId);
+
+        /// <summary>
+        /// Phương thức mới để lấy tất cả job applications của một user
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="page"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        Task<List<JobApplication>> GetJobApplicationsByUserIdAsync(int userId, int page = 1, int pageSize = 10);
     }
 }

@@ -1,0 +1,285 @@
+@model IEnumerable<WorkFinder.Web.Models.Notification>
+@using WorkFinder.Web.Models.Enums
+@{
+    ViewData["Title"] = "Notifications";
+    Layout = "_DashboardLayout";
+
+    string GetIconForNotificationType(NotificationType type)
+    {
+        return type switch
+        {
+            NotificationType.JobAlert => "fas fa-bell text-primary",
+            NotificationType.ApplicationStatusChanged => "fas fa-file-alt text-info",
+            NotificationType.NewApplicant => "fas fa-user text-success",
+            NotificationType.ExpiringJob => "fas fa-exclamation-circle text-warning",
+            NotificationType.SystemNotification => "fas fa-cog text-secondary",
+            _ => "fas fa-bell text-secondary"
+        };
+    }
+
+    string GetTypeDisplayName(NotificationType type)
+    {
+        return type switch
+        {
+            NotificationType.JobAlert => "Job Alert",
+            NotificationType.ApplicationStatusChanged => "Application Update",
+            NotificationType.NewApplicant => "New Applicant",
+            NotificationType.ExpiringJob => "Expiring Job",
+            NotificationType.SystemNotification => "System Notification",
+            _ => "Notification"
+        };
+    }
+}
+
+<style>
+    .notification-list {
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .notification-card {
+        background-color: white;
+        border-bottom: 1px solid #eee;
+        transition: all 0.2s ease;
+        position: relative;
+        cursor: pointer;
+    }
+
+    .notification-card:hover {
+        background-color: #f8f9fa;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .notification-card.unread {
+        background-color: #f0f7ff;
+    }
+
+    .notification-card.unread:hover {
+        background-color: #e6f0ff;
+    }
+
+    .notification-content {
+        padding: 20px;
+    }
+
+    .notification-icon {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background-color: #f0f7ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+    }
+
+    .notification-title {
+        font-weight: 600;
+        margin-bottom: 6px;
+    }
+
+    .notification-message {
+        color: #6c757d;
+        margin-bottom: 8px;
+        line-height: 1.4;
+    }
+
+    .notification-meta {
+        display: flex;
+        align-items: center;
+        font-size: 12px;
+        color: #adb5bd;
+    }
+
+    .notification-meta .badge {
+        font-size: 12px;
+        padding: 4px 8px;
+        margin-right: 12px;
+    }
+
+    .notification-actions {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        display: flex;
+        gap: 10px;
+    }
+
+    .notification-actions .btn {
+        padding: 4px 8px;
+        font-size: 14px;
+    }
+
+    .notification-date {
+        font-size: 12px;
+        color: #6c757d;
+    }
+
+    .no-notifications {
+        padding: 60px 20px;
+        text-align: center;
+        background-color: white;
+        border-radius: 8px;
+    }
+
+    .no-notifications i {
+        font-size: 48px;
+        color: #dee2e6;
+        margin-bottom: 20px;
+    }
+
+    .no-notifications p {
+        color: #6c757d;
+        margin-bottom: 5px;
+    }
+
+    .action-bar {
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .filter-dropdown .dropdown-toggle {
+        background-color: white;
+        border: 1px solid #dee2e6;
+        padding: 8px 15px;
+        border-radius: 6px;
+    }
+
+    .filter-dropdown .dropdown-toggle::after {
+        margin-left: 10px;
+    }
+</style>
+
+<div class="mb-4">
+    <h4>Notifications</h4>
+    <p class="text-secondary">Stay updated with job alerts, application status changes, and more</p>
+</div>
+
+<div class="action-bar">
+    <div class="filter-dropdown dropdown">
+        <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-filter me-2"></i> Filter Notifications
+        </button>
+        <ul class="dropdown-menu shadow-sm">
+            <li><a class="dropdown-item active" href="#">All Notifications</a></li>
+            <li><a class="dropdown-item" href="#">Unread</a></li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="#">Job Alerts</a></li>
+            <li><a class="dropdown-item" href="#">Application Updates</a></li>
+            <li><a class="dropdown-item" href="#">System Notifications</a></li>
+        </ul>
+    </div>
+
+    @if (Model != null && Model.Any(n => !n.IsRead))
+    {
+        <form action="/Notifications/MarkAllAsRead" method="post" class="d-inline">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-sm btn-outline-primary">
+                <i class="fas fa-check-double me-2"></i> Mark all as read
+            </button>
+        </form>
+    }
+</div>
+
+@if (Model != null && Model.Any())
+{
+    <div class="notification-list">
+        @foreach (var notification in Model)
+        {
+            <div class="notification-card @(notification.IsRead ? "" : "unread")">
+                <a href="/Notifications/MarkAsRead/@notification.Id" class="text-decoration-none text-dark">
+                    <div class="notification-content d-flex">
+                        <div class="notification-icon me-3">
+                            <i class="@GetIconForNotificationType(notification.Type)"></i>
+                        </div>
+                        <div class="flex-grow-1">
+                            <h5 class="notification-title">@notification.Title</h5>
+                            <p class="notification-message">@notification.Message</p>
+                            <div class="notification-meta">
+                                <span class="badge bg-light text-dark">@GetTypeDisplayName(notification.Type)</span>
+                                <span class="notification-date">
+                                    @{
+                                        var timeDiff = DateTime.UtcNow - notification.CreatedAt;
+                                        string timeText;
+
+                                        if (timeDiff.TotalMinutes < 1)
+                                            timeText = "Just now";
+                                        else if (timeDiff.TotalMinutes < 60)
+                                            timeText = $"{(int)timeDiff.TotalMinutes} min ago";
+                                        else if (timeDiff.TotalHours < 24)
+                                            timeText = $"{(int)timeDiff.TotalHours} hours ago";
+                                        else if (timeDiff.TotalDays < 7)
+                                            timeText = $"{(int)timeDiff.TotalDays} days ago";
+                                        else
+                                            timeText = notification.CreatedAt.ToString("MMM dd, yyyy");
+                                    }
+                                    @timeText
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <div class="notification-actions">
+                    @if (!notification.IsRead)
+                    {
+                        <form action="/Notifications/MarkAsRead/@notification.Id" method="post" class="d-inline">
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="btn btn-sm btn-light" data-bs-toggle="tooltip"
+                                data-bs-title="Mark as read">
+                                <i class="fas fa-check"></i>
+                            </button>
+                        </form>
+                    }
+
+                    <form action="/Notifications/Delete/@notification.Id" method="post" class="d-inline"
+                        onsubmit="return confirm('Are you sure you want to delete this notification?');">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-sm btn-light" data-bs-toggle="tooltip" data-bs-title="Delete">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <div class="no-notifications">
+        <i class="fas fa-bell-slash d-block mb-3"></i>
+        <p class="fw-bold mb-1">No notifications yet</p>
+        <p class="text-muted">You don't have any notifications at the moment</p>
+    </div>
+}
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Initialize tooltips
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            })
+
+            // Display toast messages if TempData exists
+            @if (TempData["SuccessMessage"] != null)
+                {
+                    <text>
+                        window.toast.showToast('Success', '@TempData["SuccessMessage"]', 'success');
+                    </text>
+            }
+
+                @if (TempData["ErrorMessage"] != null)
+                {
+                    <text>
+                        window.toast.showToast('Error', '@TempData["ErrorMessage"]', 'error');
+                    </text>
+            }
+            });
+    </script>
+}

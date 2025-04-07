@@ -170,19 +170,6 @@
     }
 </style>
 
-@if (TempData["ErrorMessage"] != null)
-{
-    <div class="alert alert-danger" role="alert">
-        @TempData["ErrorMessage"]
-    </div>
-}
-@if (TempData["SuccessMessage"] != null)
-{
-    <div class="alert alert-success" role="alert">
-        @TempData["SuccessMessage"]
-    </div>
-}
-
 <div class="dashboard-header">
     <h4>Hello, @(string.IsNullOrEmpty(Model.UserName) ? "Esther Howard" : Model.UserName)</h4>
     <p class="text-secondary">Here is your daily activities and job alerts</p>
@@ -234,26 +221,32 @@
 </div>
 
 <!-- Profile Alert -->
-<div class="profile-alert">
-    <div class="d-flex align-items-center">
-        @if (!string.IsNullOrEmpty(Model.ProfilePicture))
-        {
-            <img src="@Model.ProfilePicture" alt="Profile" class="profile-img me-3"
-                onerror="this.src='https://randomuser.me/api/portraits/men/32.jpg';">
-        }
-        else
-        {
-            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile" class="profile-img me-3">
-        }
-        <div class="flex-grow-1">
-            <h5 class="mb-1">Your profile editing is not completed.</h5>
-            <p class="mb-0">Complete your profile editing & build your custom Resume</p>
+@if (string.IsNullOrEmpty(Model.ProfilePicture) ||
+string.IsNullOrEmpty(Model.Resume?.FileUrl) ||
+string.IsNullOrEmpty(Model.Resume?.Summary) ||
+string.IsNullOrEmpty(Model.Resume?.Skills))
+{
+    <div class="profile-alert">
+        <div class="d-flex align-items-center">
+            @if (!string.IsNullOrEmpty(Model.ProfilePicture))
+            {
+                <img src="@Model.ProfilePicture" alt="Profile" class="profile-img me-3"
+                    onerror="this.src='https://randomuser.me/api/portraits/men/32.jpg';">
+            }
+            else
+            {
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile" class="profile-img me-3">
+            }
+            <div class="flex-grow-1">
+                <h5 class="mb-1">Your profile editing is not completed.</h5>
+                <p class="mb-0">Complete your profile editing & build your custom Resume</p>
+            </div>
+            <a href="@Url.Action("Settings", "Account")" class="edit-btn">
+                Edit Profile <i class="fas fa-arrow-right ms-1"></i>
+            </a>
         </div>
-        <a href="/Account/Profile" class="edit-btn">
-            Edit Profile <i class="fas fa-arrow-right ms-1"></i>
-        </a>
     </div>
-</div>
+}
 
 <!-- Recently Applied Jobs -->
 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -399,4 +392,25 @@
             _ => "badge-remote"
         };
     }
+}
+
+@section Scripts {
+    <script>
+        // Display toast messages if TempData exists
+        document.addEventListener('DOMContentLoaded', function () {
+            @if (TempData["SuccessMessage"] != null)
+                {
+                    <text>
+                        window.toast.showToast('Success', '@TempData["SuccessMessage"]', 'success');
+                    </text>
+            }
+
+                @if (TempData["ErrorMessage"] != null)
+                {
+                    <text>
+                        window.toast.showToast('Error', '@TempData["ErrorMessage"]', 'error');
+                    </text>
+            }
+                    });
+    </script>
 }

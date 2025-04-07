@@ -545,5 +545,30 @@ namespace WorkFinder.Web.Repositories
             }
         }
 
+        public async Task<List<JobApplication>> GetJobApplicationsByUserIdAsync(int userId, int page = 1, int pageSize = 10)
+        {
+            try
+            {
+                var query = _context.JobApplications
+                    .Where(a => a.ApplicantId == userId)
+                    .Include(a => a.Job)
+                        .ThenInclude(j => j.Company)
+                    .OrderByDescending(a => a.AppliedDate);
+
+                var totalCount = await query.CountAsync();
+
+                var applications = await query
+                    .Skip((page - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToListAsync();
+
+                return applications;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error retrieving job applications for user ID {userId}");
+                throw;
+            }
+        }
     }
 }

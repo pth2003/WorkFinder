@@ -1,6 +1,9 @@
 @using Microsoft.AspNetCore.Identity
 @using Microsoft.AspNetCore.Mvc.TagHelpers
+@using WorkFinder.Web.Models
+@using WorkFinder.Web.Repositories
 @inject UserManager<ApplicationUser> UserManager;
+@inject INotificationRepository NotificationRepository;
 @{
     var user = await UserManager.GetUserAsync(User);
     var userName = user?.LastName ?? User?.Identity?.Name ?? "Guest";
@@ -9,6 +12,21 @@
     var controller = ViewContext.RouteData.Values["controller"]?.ToString();
     var action = ViewContext.RouteData.Values["action"]?.ToString();
     var firstLetter = string.IsNullOrEmpty(userName) ? "U" : userName[0].ToString().ToUpper();
+
+    // Get unread notifications count
+    int unreadNotificationsCount = 0;
+    if (user != null)
+    {
+        try
+        {
+            unreadNotificationsCount = await NotificationRepository.GetUnreadNotificationCountByUserIdAsync(user.Id.ToString());
+        }
+        catch (Exception ex)
+        {
+            // Log the error in a real app
+            Console.WriteLine($"Error getting unread notification count: {ex.Message}");
+        }
+    }
 }
 <div id="header-top-bar" class="header-top-bar">
     <nav class="navbar navbar-expand-lg">
@@ -81,6 +99,42 @@
             </button>
             @if (User?.Identity?.IsAuthenticated == true && User.IsInRole(UserRoles.JobSeeker))
             {
+                <!-- Notifications Dropdown -->
+                <div class="notifications-dropdown me-3 d-none d-lg-block">
+                    <div class="dropdown">
+                        <button class="btn btn-link btn-notification position-relative" type="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-bell fs-5"></i>
+                            @if (unreadNotificationsCount > 0)
+                            {
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                    @(unreadNotificationsCount > 9 ? "9+" : unreadNotificationsCount.ToString())
+                                </span>
+                            }
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end notification-dropdown-menu shadow-sm p-0"
+                            style="width: 350px;">
+                            <div
+                                class="notification-header p-3 border-bottom d-flex justify-content-between align-items-center">
+                                <h6 class="mb-0">Notifications</h6>
+                                @if (unreadNotificationsCount > 0)
+                                {
+                                    <form action="/Notifications/MarkAllAsRead" method="post" class="d-inline">
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="btn btn-sm btn-link">Mark all as read</button>
+                                    </form>
+                                }
+                            </div>
+                            <div class="notification-body" style="max-height: 350px; overflow-y: auto;">
+                                @await Html.PartialAsync("~/Views/Shared/Partials/Common/_NotificationsPartial.cshtml")
+                            </div>
+                            <div class="notification-footer p-2 text-center border-top">
+                                <a href="/Notifications" class="text-decoration-none">View all notifications</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="user-profile dropdown">
                     <div class="d-flex align-items-center d-none d-lg-flex dropdown-toggle" id="userDropdown"
                         data-bs-toggle="dropdown" aria-expanded="false">

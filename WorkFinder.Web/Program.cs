@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Routing.Patterns;
+using Microsoft.Extensions.FileProviders;
 using WorkFinder.Web.Areas.Auth.Services;
 using WorkFinder.Web.Areas.Employer.Services;
 using WorkFinder.Web.Data;
@@ -11,6 +13,8 @@ using Microsoft.AspNetCore.Http.Features;
 using WorkFinder.Web.Areas.Employer.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection;
+using WorkFinder.Web.BackgroundServices;
+using WorkFinder.Web.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -122,6 +126,16 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.ExpireTimeSpan = TimeSpan.FromDays(30);
     options.SlidingExpiration = true;
 });
+
+// Register repositories
+builder.Services.AddScoped<IJobAlertRepository, JobAlertRepository>();
+builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
+
+// Register services
+builder.Services.AddScoped<JobAlertService>();
+
+// Register background services
+builder.Services.AddHostedService<JobAlertBackgroundService>();
 
 var app = builder.Build();
 

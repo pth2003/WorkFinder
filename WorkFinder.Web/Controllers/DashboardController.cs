@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using WorkFinder.Web.Areas.Auth.Services;
 using WorkFinder.Web.Models;
+using WorkFinder.Web.Models.Enums;
 using WorkFinder.Web.Models.ViewModels;
 using WorkFinder.Web.Repositories;
 
@@ -22,19 +23,31 @@ namespace WorkFinder.Web.Controllers
         private readonly IJobRepository _jobRepository;
         private readonly ISaveJobRepository _saveJobRepository;
         private readonly IAuthService _authService;
+        private readonly IJobAlertRepository _jobAlertRepository;
+        private readonly ICategoryRepository _categoryRepository;
+        private readonly INotificationRepository _notificationRepository;
+        private readonly IResumeRepository _resumeRepository;
 
         public DashboardController(
             ILogger<DashboardController> logger,
             IAccountService accountService,
             IJobRepository jobRepository,
             ISaveJobRepository saveJobRepository,
-            IAuthService authService)
+            IAuthService authService,
+            IJobAlertRepository jobAlertRepository,
+            ICategoryRepository categoryRepository,
+            INotificationRepository notificationRepository,
+            IResumeRepository resumeRepository)
         {
             _logger = logger;
             _accountService = accountService;
             _jobRepository = jobRepository;
             _saveJobRepository = saveJobRepository;
             _authService = authService;
+            _jobAlertRepository = jobAlertRepository;
+            _categoryRepository = categoryRepository;
+            _notificationRepository = notificationRepository;
+            _resumeRepository = resumeRepository;
         }
 
         public async Task<IActionResult> Index()
@@ -48,19 +61,39 @@ namespace WorkFinder.Web.Controllers
                 var savedJobs = await _saveJobRepository.GetSavedJobsByUserIdAsync(user.Id);
                 var savedJobsCount = savedJobs.Count();
 
+                // Get actual applied jobs count
+                var appliedJobsCount = (await _jobRepository.GetJobApplicationsByUserIdAsync(user.Id, 1, 1000)).Count;
+
+                // Get user's resume
+                var resume = await _resumeRepository.GetResumeByUserIdAsync(user.Id);
+
                 var dashboardViewModel = new DashboardViewModel
                 {
                     UserName = $"{profile.FirstName} {profile.LastName}",
                     ProfilePicture = profile.CurrentProfilePicture,
-                    AppliedJobsCount = 5, // Sample count
+                    AppliedJobsCount = appliedJobsCount,
                     FavoriteJobsCount = savedJobsCount,
                     JobAlertsCount = 2, // Sample count based on the job alerts
+                    Resume = resume,
                     RecentlyAppliedJobs = new List<AppliedJobViewModel>() // Will be populated below
                 };
 
-                // Add recently applied jobs (first 4 from the Applied method)
-                var allAppliedJobs = GetAppliedJobs();
-                dashboardViewModel.RecentlyAppliedJobs = allAppliedJobs.Take(4).ToList();
+                // Add recently applied jobs from the database
+                var recentApplications = await _jobRepository.GetJobApplicationsByUserIdAsync(user.Id, 1, 4);
+                var appliedJobs = recentApplications.Select(app => new AppliedJobViewModel
+                {
+                    JobId = app.JobId,
+                    JobTitle = app.Job.Title,
+                    JobType = app.Job.JobType.ToString(),
+                    Location = app.Job.Location,
+                    Salary = GetFormattedSalary(app.Job.SalaryMin, app.Job.SalaryMax),
+                    CompanyName = app.Job.Company?.Name ?? "Unknown Company",
+                    CompanyLogo = app.Job.Company?.Logo ?? "/images/default-company.png",
+                    DateApplied = app.AppliedDate,
+                    Status = app.Status.ToString()
+                }).ToList();
+
+                dashboardViewModel.RecentlyAppliedJobs = appliedJobs;
 
                 return View(dashboardViewModel);
             }
@@ -72,9 +105,48 @@ namespace WorkFinder.Web.Controllers
             }
         }
 
-        public IActionResult Applied()
+        public async Task<IActionResult> Applied(int page = 1)
         {
-            return View(GetAppliedJobs());
+            try
+            {
+                var user = await _authService.GetCurrentUserAsync();
+                if (user == null)
+                {
+                    return RedirectToAction("Login", "Auth", new { area = "Auth" });
+                }
+
+                int pageSize = 10;
+                var applications = await _jobRepository.GetJobApplicationsByUserIdAsync(user.Id, page, pageSize);
+
+                var appliedJobs = applications.Select(app => new AppliedJobViewModel
+                {
+                    JobId = app.JobId,
+                    JobTitle = app.Job.Title,
+                    JobType = app.Job.JobType.ToString(),
+                    Location = app.Job.Location,
+                    Salary = GetFormattedSalary(app.Job.SalaryMin, app.Job.SalaryMax),
+                    CompanyName = app.Job.Company?.Name ?? "Unknown Company",
+                    CompanyLogo = app.Job.Company?.Logo ?? "/images/default-company.png",
+                    DateApplied = app.AppliedDate,
+                    Status = app.Status.ToString()
+                }).ToList();
+
+                // Get total applications count for pagination
+                var totalApplications = (await _jobRepository.GetJobApplicationsByUserIdAsync(user.Id, 1, 1000)).Count;
+                int totalPages = (int)Math.Ceiling(totalApplications / (double)pageSize);
+
+                ViewBag.CurrentPage = page;
+                ViewBag.TotalPages = totalPages;
+                ViewBag.TotalItems = totalApplications;
+
+                return View(appliedJobs);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error in Dashboard Applied");
+                TempData["ErrorMessage"] = "Không thể tải danh sách công việc đã ứng tuyển.";
+                return View(new List<AppliedJobViewModel>());
+            }
         }
 
         public async Task<IActionResult> Favorites(int page = 1)
@@ -163,41 +235,14 @@ namespace WorkFinder.Web.Controllers
             return "Salary not specified";
         }
 
-        public IActionResult Alerts()
+        [HttpGet("jobAlerts")]
+        [Authorize(Roles = "JobSeeker")]
+        public async Task<IActionResult> Alerts()
         {
-            // Sample data for job alerts
-            var jobAlerts = new List<JobAlertViewModel>
-            {
-                new JobAlertViewModel
-                {
-                    Id = 1,
-                    Name = "Web Developer Jobs",
-                    JobTitle = "Web Developer",
-                    Location = "Remote",
-                    SalaryRange = "$60,000 - $80,000",
-                    JobType = "Full Time",
-                    IsActive = true,
-                    Frequency = "Daily",
-                    LastUpdated = DateTime.Now.AddDays(-2)
-                },
-                new JobAlertViewModel
-                {
-                    Id = 2,
-                    Name = "UI/UX Design Jobs",
-                    JobTitle = "UI/UX Designer",
-                    Location = "New York",
-                    SalaryRange = "$70,000 - $90,000",
-                    JobType = "Remote",
-                    IsActive = false,
-                    Frequency = "Weekly",
-                    LastUpdated = DateTime.Now.AddDays(-7)
-                }
-            };
-
-            return View(jobAlerts);
+            return RedirectToAction("Index", "JobAlert");
         }
 
-        // Helper method to get sample applied jobs
+        // Helper method to get sample applied jobs (can be removed later)
         private List<AppliedJobViewModel> GetAppliedJobs()
         {
             return new List<AppliedJobViewModel>
@@ -258,6 +303,28 @@ namespace WorkFinder.Web.Controllers
                     Status = "Active"
                 }
             };
+        }
+
+        public async Task<IActionResult> Notifications()
+        {
+            try
+            {
+                var user = await _authService.GetCurrentUserAsync();
+                if (user == null)
+                {
+                    return RedirectToAction("Login", "Auth", new { area = "Auth" });
+                }
+
+                // Get notifications for the current user
+                var notifications = await _notificationRepository.GetNotificationsByUserIdAsync(user.Id.ToString(), 50);
+                return View(notifications);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error loading notifications");
+                TempData["ErrorMessage"] = "Could not load notifications.";
+                return View(new List<Notification>());
+            }
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -426,6 +426,66 @@ namespace WorkFinder.Web.Migrations
                     b.ToTable("jobs", "public");
                 });
 
+            modelBuilder.Entity("WorkFinder.Web.Models.JobAlert", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("CategoryId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("ExperienceLevel")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsDaily")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("JobType")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Keywords")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<DateTime>("LastSentAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<decimal?>("MaxSalary")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("MinSalary")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("job_alerts", "public");
+                });
+
             modelBuilder.Entity("WorkFinder.Web.Models.JobApplication", b =>
                 {
                     b.Property<int>("Id")
@@ -488,6 +548,61 @@ namespace WorkFinder.Web.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("job_categories", "public");
+                });
+
+            modelBuilder.Entity("WorkFinder.Web.Models.Notification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("boolean");
+
+                    b.Property<int?>("JobApplicationId")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("JobId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Link")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("JobApplicationId");
+
+                    b.HasIndex("JobId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("notifications", "public");
                 });
 
             modelBuilder.Entity("WorkFinder.Web.Models.Resume", b =>
@@ -689,6 +804,23 @@ namespace WorkFinder.Web.Migrations
                     b.Navigation("Company");
                 });
 
+            modelBuilder.Entity("WorkFinder.Web.Models.JobAlert", b =>
+                {
+                    b.HasOne("WorkFinder.Web.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId");
+
+                    b.HasOne("WorkFinder.Web.Models.ApplicationUser", "User")
+                        .WithMany("JobAlerts")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("WorkFinder.Web.Models.JobApplication", b =>
                 {
                     b.HasOne("WorkFinder.Web.Models.ApplicationUser", "Applicant")
@@ -725,6 +857,29 @@ namespace WorkFinder.Web.Migrations
                     b.Navigation("Category");
 
                     b.Navigation("Job");
+                });
+
+            modelBuilder.Entity("WorkFinder.Web.Models.Notification", b =>
+                {
+                    b.HasOne("WorkFinder.Web.Models.JobApplication", "JobApplication")
+                        .WithMany()
+                        .HasForeignKey("JobApplicationId");
+
+                    b.HasOne("WorkFinder.Web.Models.Job", "Job")
+                        .WithMany()
+                        .HasForeignKey("JobId");
+
+                    b.HasOne("WorkFinder.Web.Models.ApplicationUser", "User")
+                        .WithMany("Notifications")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Job");
+
+                    b.Navigation("JobApplication");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("WorkFinder.Web.Models.Resume", b =>
@@ -772,7 +927,11 @@ namespace WorkFinder.Web.Migrations
                 {
                     b.Navigation("Company");
 
+                    b.Navigation("JobAlerts");
+
                     b.Navigation("JobApplications");
+
+                    b.Navigation("Notifications");
 
                     b.Navigation("Resume");
 

@@ -1,0 +1,128 @@
+@model IEnumerable<WorkFinder.Web.Models.JobAlert>
+@{
+    ViewData["Title"] = "My Job Alerts";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="container my-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0">My Job Alerts</h2>
+        <a asp-action="Create" class="btn btn-primary">
+            <i class="fas fa-plus-circle me-1"></i> Create New Alert
+        </a>
+    </div>
+
+    @if (!Model.Any())
+    {
+            <div class="card shadow-sm">
+                <div class="card-body text-center py-5">
+                    <i class="fas fa-bell fa-4x text-muted mb-3"></i>
+                    <h3>No job alerts found</h3>
+                    <p class="text-muted">You haven't created any job alerts yet. Create an alert to be notified when new matching jobs are posted.</p>
+                    <a asp-action="Create" class="btn btn-primary mt-2">Create Your First Alert</a>
+                </div>
+            </div>
+    }
+    else
+    {
+            <div class="row">
+                @foreach (var alert in Model)
+                {
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card shadow-sm h-100">
+                                <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                                    <h5 class="card-title mb-0 text-truncate" title="@alert.Keywords">@alert.Keywords</h5>
+                                    <div class="form-check form-switch">
+                                        <form asp-action="ToggleStatus" asp-route-id="@alert.Id" method="post" id="toggle-form-@alert.Id">
+                                            <input class="form-check-input status-toggle" type="checkbox" id="status-@alert.Id" 
+                                                   @(alert.IsActive ? "checked" : "") data-alert-id="@alert.Id">
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <i class="fas fa-map-marker-alt text-secondary me-2"></i> @(string.IsNullOrEmpty(alert.Location) ? "Any Location" : alert.Location)
+                                    </div>
+                            
+                                    <div class="row mb-3">
+                                        @if (alert.JobType.HasValue)
+                                        {
+                                                <div class="col-6">
+                                                    <i class="fas fa-briefcase text-secondary me-2"></i> @alert.JobType.Value.ToString()
+                                                </div>
+                                        }
+                                
+                                        @if (alert.ExperienceLevel.HasValue)
+                                        {
+                                                <div class="col-6">
+                                                    <i class="fas fa-chart-line text-secondary me-2"></i> @alert.ExperienceLevel.Value.ToString()
+                                                </div>
+                                        }
+                                    </div>
+                            
+                                    @if (alert.MinSalary.HasValue || alert.MaxSalary.HasValue)
+                                    {
+                                            <div class="mb-3">
+                                                <i class="fas fa-dollar-sign text-secondary me-2"></i>
+                                                @if (alert.MinSalary.HasValue && alert.MaxSalary.HasValue)
+                                                {
+                                                        <span>@alert.MinSalary.Value.ToString("N0") - @alert.MaxSalary.Value.ToString("N0")</span>
+                                                }
+                                                else if (alert.MinSalary.HasValue)
+                                                {
+                                                        <span>Min: @alert.MinSalary.Value.ToString("N0")</span>
+                                                }
+                                                else
+                                                {
+                                                        <span>Max: @alert.MaxSalary.Value.ToString("N0")</span>
+                                                }
+                                            </div>
+                                    }
+                            
+                                    <div class="mb-3">
+                                        <i class="fas fa-clock text-secondary me-2"></i> @(alert.IsDaily ? "Daily alerts" : "Weekly alerts")
+                                    </div>
+                            
+                                    <p class="card-text text-muted">
+                                        <small>Created: @alert.CreatedAt.ToString("MMM dd, yyyy")</small>
+                                    </p>
+                                </div>
+                                <div class="card-footer d-flex justify-content-between">
+                                    <a asp-action="Edit" asp-route-id="@alert.Id" class="btn btn-sm btn-outline-primary">Edit</a>
+                                    <form asp-action="Delete" asp-route-id="@alert.Id" method="post" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this alert?');">
+                                        <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                }
+            </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        $(function () {
+            // Handle status toggle
+            $('.status-toggle').change(function () {
+                var alertId = $(this).data('alert-id');
+                $('#toggle-form-' + alertId).submit();
+            });
+            
+            // Display toast messages if TempData exists
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <text>
+                window.toast.showToast('Success', '@TempData["SuccessMessage"]', 'success');
+                </text>
+            }
+            
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <text>
+                window.toast.showToast('Error', '@TempData["ErrorMessage"]', 'error');
+                </text>
+            }
+        });
+    </script>
+}

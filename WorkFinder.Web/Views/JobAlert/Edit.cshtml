@@ -1,0 +1,133 @@
+@model WorkFinder.Web.Models.JobAlert
+@{
+    ViewData["Title"] = "Edit Job Alert";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="container my-4">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card shadow-sm">
+                <div class="card-header bg-light">
+                    <h3 class="mb-0">Edit Job Alert</h3>
+                    <p class="text-muted mb-0">Update your job alert preferences</p>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Edit" method="post">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+                        <input type="hidden" asp-for="Id" />
+
+                        <div class="mb-3">
+                            <label asp-for="Keywords" class="form-label">Keywords</label>
+                            <input asp-for="Keywords" class="form-control"
+                                placeholder="Enter job title, skills, or keywords" />
+                            <span asp-validation-for="Keywords" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Location" class="form-label">Location</label>
+                            <input asp-for="Location" class="form-control" placeholder="City, state, or remote" />
+                            <span asp-validation-for="Location" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="CategoryId" class="form-label">Category</label>
+                            <select asp-for="CategoryId" class="form-select">
+                                <option value="">-- Select Category --</option>
+                                @foreach (var category in ViewBag.Categories)
+                                {
+                                    <option value="@category.Id">@category.Name</option>
+                                }
+                            </select>
+                            <span asp-validation-for="CategoryId" class="text-danger"></span>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Job Type</label>
+                                @{
+                                    var jobType = Model.JobType;
+                                    
+                                    // Create select element manually
+                                    var jobTypeSelect = "<select id=\"jobTypeSelect\" class=\"form-select\" name=\"JobTypeValue\">";
+                                    jobTypeSelect += "<option value=\"\">-- Any Job Type --</option>";
+                                    
+                                    jobTypeSelect += "<option value=\"FullTime\"" + (jobType == WorkFinder.Web.Models.Enums.JobType.FullTime ? " selected" : "") + ">Full Time</option>";
+                                    jobTypeSelect += "<option value=\"PartTime\"" + (jobType == WorkFinder.Web.Models.Enums.JobType.PartTime ? " selected" : "") + ">Part Time</option>";
+                                    jobTypeSelect += "<option value=\"Contract\"" + (jobType == WorkFinder.Web.Models.Enums.JobType.Contract ? " selected" : "") + ">Contract</option>";
+                                    jobTypeSelect += "<option value=\"Freelance\"" + (jobType == WorkFinder.Web.Models.Enums.JobType.Freelance ? " selected" : "") + ">Freelance</option>";
+                                    jobTypeSelect += "<option value=\"Internship\"" + (jobType == WorkFinder.Web.Models.Enums.JobType.Internship ? " selected" : "") + ">Internship</option>";
+                                    jobTypeSelect += "<option value=\"Remote\"" + (jobType == WorkFinder.Web.Models.Enums.JobType.Remote ? " selected" : "") + ">Remote</option>";
+                                    
+                                    jobTypeSelect += "</select>";
+                                }
+                                @Html.Raw(jobTypeSelect)
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Experience Level</label>
+                                @{
+                                    var expLevel = Model.ExperienceLevel;
+                                    
+                                    // Create select element manually
+                                    var expLevelSelect = "<select id=\"experienceLevelSelect\" class=\"form-select\" name=\"ExperienceLevelValue\">";
+                                    expLevelSelect += "<option value=\"\">-- Any Experience --</option>";
+                                    
+                                    expLevelSelect += "<option value=\"Entry\"" + (expLevel == WorkFinder.Web.Models.Enums.ExperienceLevel.Entry ? " selected" : "") + ">Entry Level</option>";
+                                    expLevelSelect += "<option value=\"Intermediate\"" + (expLevel == WorkFinder.Web.Models.Enums.ExperienceLevel.Intermediate ? " selected" : "") + ">Intermediate</option>";
+                                    expLevelSelect += "<option value=\"Senior\"" + (expLevel == WorkFinder.Web.Models.Enums.ExperienceLevel.Senior ? " selected" : "") + ">Senior Level</option>";
+                                    expLevelSelect += "<option value=\"Executive\"" + (expLevel == WorkFinder.Web.Models.Enums.ExperienceLevel.Executive ? " selected" : "") + ">Executive</option>";
+                                    
+                                    expLevelSelect += "</select>";
+                                }
+                                @Html.Raw(expLevelSelect)
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="MinSalary" class="form-label">Minimum Salary</label>
+                                <input asp-for="MinSalary" type="number" class="form-control"
+                                    placeholder="Minimum salary" />
+                                <span asp-validation-for="MinSalary" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="MaxSalary" class="form-label">Maximum Salary</label>
+                                <input asp-for="MaxSalary" type="number" class="form-control"
+                                    placeholder="Maximum salary" />
+                                <span asp-validation-for="MaxSalary" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input asp-for="IsDaily" class="form-check-input" />
+                                <label asp-for="IsDaily" class="form-check-label">Receive daily alerts</label>
+                                <small class="form-text text-muted d-block">If unchecked, you'll receive weekly
+                                    alerts</small>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input asp-for="IsActive" class="form-check-input" />
+                                <label asp-for="IsActive" class="form-check-label">Active</label>
+                                <small class="form-text text-muted d-block">You can pause alerts at any time</small>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-4">
+                            <a asp-action="Index" class="btn btn-outline-secondary">Back to List</a>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

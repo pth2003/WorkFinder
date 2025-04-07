@@ -449,12 +449,56 @@
       "PackagePath": "staticwebassets/uploads/companies/logos/663f0bff-cee2-4664-97de-ce62f9eda5ba_fpt-software-6073b38a10cb4.webp"
     },
     {
-      "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/resumes/814b68f7-299d-4ba5-828f-7aaae032c4af_CV hieu Phan Trung  - React Developer Resume-TopCV.vn.pdf",
-      "PackagePath": "staticwebassets/uploads/resumes/814b68f7-299d-4ba5-828f-7aaae032c4af_CV hieu Phan Trung  - React Developer Resume-TopCV.vn.pdf"
+      "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/profile-pictures/17ec0e99-ac67-42fa-a5c8-a49f6cb60562_IMG_0300.jpeg",
+      "PackagePath": "staticwebassets/uploads/profile-pictures/17ec0e99-ac67-42fa-a5c8-a49f6cb60562_IMG_0300.jpeg"
+    },
+    {
+      "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/profile-pictures/2174f944-c1e4-40e0-b72b-5fe90c860996_IMG_0300.jpeg",
+      "PackagePath": "staticwebassets/uploads/profile-pictures/2174f944-c1e4-40e0-b72b-5fe90c860996_IMG_0300.jpeg"
+    },
+    {
+      "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/profile-pictures/27cc3e66-5c8b-4e85-8755-3501c87b56f0_IMG_0300.jpeg",
+      "PackagePath": "staticwebassets/uploads/profile-pictures/27cc3e66-5c8b-4e85-8755-3501c87b56f0_IMG_0300.jpeg"
+    },
+    {
+      "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/profile-pictures/27d1dbfc-9475-4e9d-b3c1-c60ebfa46fd1_IMG_0300.jpeg",
+      "PackagePath": "staticwebassets/uploads/profile-pictures/27d1dbfc-9475-4e9d-b3c1-c60ebfa46fd1_IMG_0300.jpeg"
+    },
+    {
+      "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/profile-pictures/819cb21b-640c-42d5-8de0-4f219fe38c6e_IMG_0300.jpeg",
+      "PackagePath": "staticwebassets/uploads/profile-pictures/819cb21b-640c-42d5-8de0-4f219fe38c6e_IMG_0300.jpeg"
+    },
+    {
+      "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/profile-pictures/84f2462d-f447-4dac-aa51-c23594b46c66_IMG_0300.jpeg",
+      "PackagePath": "staticwebassets/uploads/profile-pictures/84f2462d-f447-4dac-aa51-c23594b46c66_IMG_0300.jpeg"
+    },
+    {
+      "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/profile-pictures/9cd2b945-fb20-443e-ab4f-e6dc3d31fbd4_IMG_0300.jpeg",
+      "PackagePath": "staticwebassets/uploads/profile-pictures/9cd2b945-fb20-443e-ab4f-e6dc3d31fbd4_IMG_0300.jpeg"
+    },
+    {
+      "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/profile-pictures/a9fc1004-365d-4dee-aba1-5e245bd944bc_IMG_0300.jpeg",
+      "PackagePath": "staticwebassets/uploads/profile-pictures/a9fc1004-365d-4dee-aba1-5e245bd944bc_IMG_0300.jpeg"
+    },
+    {
+      "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/profile-pictures/b22cf2c8-b4d7-4128-99db-e142f93fc775_IMG_0300.jpeg",
+      "PackagePath": "staticwebassets/uploads/profile-pictures/b22cf2c8-b4d7-4128-99db-e142f93fc775_IMG_0300.jpeg"
+    },
+    {
+      "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/profile-pictures/d08707f5-b1f5-4051-b545-92a3b6fa3ac9_IMG_0300.jpeg",
+      "PackagePath": "staticwebassets/uploads/profile-pictures/d08707f5-b1f5-4051-b545-92a3b6fa3ac9_IMG_0300.jpeg"
+    },
+    {
+      "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/resumes/705e81a2-71d8-4716-bea3-89ca60ecf006_Hieu-Phan-Trung.pdf",
+      "PackagePath": "staticwebassets/uploads/resumes/705e81a2-71d8-4716-bea3-89ca60ecf006_Hieu-Phan-Trung.pdf"
     },
     {
       "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/resumes/a2f4bfd6-c85c-4a9c-b35e-c1aeb19b174d_Hieu-Phan-Trung.pdf",
       "PackagePath": "staticwebassets/uploads/resumes/a2f4bfd6-c85c-4a9c-b35e-c1aeb19b174d_Hieu-Phan-Trung.pdf"
+    },
+    {
+      "Id": "/Users/hieupt/Documents/HOU/WEB/WorkFinder/WorkFinder.Web/wwwroot/uploads/resumes/a6bdff67-3d9b-4326-a2a7-9b50fc0706b0_Hieu-Phan-Trung-tv.pdf",
+      "PackagePath": "staticwebassets/uploads/resumes/a6bdff67-3d9b-4326-a2a7-9b50fc0706b0_Hieu-Phan-Trung-tv.pdf"
     },
     {
       "Id": "obj/Debug/net9.0/staticwebassets/msbuild.WorkFinder.Web.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",

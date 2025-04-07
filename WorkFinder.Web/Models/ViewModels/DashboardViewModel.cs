@@ -10,6 +10,7 @@ namespace WorkFinder.Web.Models.ViewModels
         public int AppliedJobsCount { get; set; }
         public int FavoriteJobsCount { get; set; }
         public int JobAlertsCount { get; set; }
+        public Resume? Resume { get; set; }
         public List<AppliedJobViewModel> RecentlyAppliedJobs { get; set; } = new();
     }
 

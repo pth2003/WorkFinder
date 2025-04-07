@@ -94,7 +94,26 @@ public class AccountService : IAccountService
         user.FirstName = model.FirstName;
         user.LastName = model.LastName;
         user.PhoneNumber = model.PhoneNumber;
-        user.DateOfBirth = model.DateOfBirth;
+
+        // Convert DateTime to UTC if it has a value
+        if (model.DateOfBirth.HasValue)
+        {
+            // Create a new UTC DateTime explicitly
+            // First get just the date part without time component
+            var dateOnly = model.DateOfBirth.Value.Date;
+
+            // Then create a new DateTime with explicit UTC kind
+            user.DateOfBirth = new DateTime(
+                dateOnly.Year,
+                dateOnly.Month,
+                dateOnly.Day,
+                0, 0, 0,
+                DateTimeKind.Utc);
+        }
+        else
+        {
+            user.DateOfBirth = null;
+        }
 
         // Xử lý ảnh đại diện nếu có
         if (model.ProfilePicture != null)

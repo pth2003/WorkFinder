@@ -1,55 +1,57 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Http;
+using System.ComponentModel;
 
 namespace WorkFinder.Web.Models.ViewModels;
 
 public class ProfileViewModel
 {
-    [Required(ErrorMessage = "Tên là bắt buộc")]
-    [StringLength(50, ErrorMessage = "Tên không được vượt quá 50 ký tự")]
-    [Display(Name = "Tên")]
+    [Required(ErrorMessage = "First name is required")]
+    [StringLength(50, ErrorMessage = "First name cannot exceed 50 characters")]
+    [Display(Name = "First Name")]
     public string FirstName { get; set; } = string.Empty;
 
-    [Required(ErrorMessage = "Họ là bắt buộc")]
-    [StringLength(50, ErrorMessage = "Họ không được vượt quá 50 ký tự")]
-    [Display(Name = "Họ")]
+    [Required(ErrorMessage = "Last name is required")]
+    [StringLength(50, ErrorMessage = "Last name cannot exceed 50 characters")]
+    [Display(Name = "Last Name")]
     public string LastName { get; set; } = string.Empty;
 
-    [Required(ErrorMessage = "Email là bắt buộc")]
-    [EmailAddress(ErrorMessage = "Email không hợp lệ")]
+    [Required(ErrorMessage = "Email is required")]
+    [EmailAddress(ErrorMessage = "Invalid email address")]
     [Display(Name = "Email")]
+    [ReadOnly(true)]
     public string Email { get; set; } = string.Empty;
 
-    [Phone(ErrorMessage = "Số điện thoại không hợp lệ")]
-    [Display(Name = "Số điện thoại")]
+    [Phone(ErrorMessage = "Invalid phone number")]
+    [Display(Name = "Phone Number")]
     public string PhoneNumber { get; set; } = string.Empty;
 
-    [Display(Name = "Ngày sinh")]
+    [Display(Name = "Date of Birth")]
     [DataType(DataType.Date)]
     public DateTime? DateOfBirth { get; set; }
 
-    [Display(Name = "Ảnh đại diện hiện tại")]
+    [Display(Name = "Current Profile Picture")]
     public string? CurrentProfilePicture { get; set; }
 
-    [Display(Name = "Tải lên ảnh đại diện mới")]
+    [Display(Name = "Upload New Profile Picture")]
     public IFormFile? ProfilePicture { get; set; }
 }
 
 public class ChangePasswordViewModel
 {
-    [Required(ErrorMessage = "Mật khẩu hiện tại là bắt buộc")]
+    [Required(ErrorMessage = "Current password is required")]
     [DataType(DataType.Password)]
-    [Display(Name = "Mật khẩu hiện tại")]
+    [Display(Name = "Current Password")]
     public string CurrentPassword { get; set; } = string.Empty;
 
-    [Required(ErrorMessage = "Mật khẩu mới là bắt buộc")]
-    [StringLength(100, ErrorMessage = "Mật khẩu phải có ít nhất {2} ký tự.", MinimumLength = 8)]
+    [Required(ErrorMessage = "New password is required")]
+    [StringLength(100, ErrorMessage = "Password must be at least {2} characters long", MinimumLength = 8)]
     [DataType(DataType.Password)]
-    [Display(Name = "Mật khẩu mới")]
+    [Display(Name = "New Password")]
     public string NewPassword { get; set; } = string.Empty;
 
     [DataType(DataType.Password)]
-    [Display(Name = "Xác nhận mật khẩu mới")]
-    [Compare("NewPassword", ErrorMessage = "Mật khẩu xác nhận không khớp.")]
+    [Display(Name = "Confirm New Password")]
+    [Compare("NewPassword", ErrorMessage = "New password and confirmation password do not match")]
     public string ConfirmPassword { get; set; } = string.Empty;
 }

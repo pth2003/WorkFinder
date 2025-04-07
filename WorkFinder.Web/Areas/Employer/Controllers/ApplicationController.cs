@@ -5,11 +5,13 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using WorkFinder.Web.Models;
+using WorkFinder.Web.Models.Enums;
 using WorkFinder.Web.Repositories;
 using WorkFinder.Web.Areas.Employer.Models;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Text.Json;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace WorkFinder.Web.Areas.Employer.Controllers
 {
@@ -22,6 +24,7 @@ namespace WorkFinder.Web.Areas.Employer.Controllers
         private readonly IJobRepository _jobRepository;
         private readonly IResumeRepository _resumeRepository;
         private readonly ILogger<ApplicationController> _logger;
+        private readonly IServiceProvider _serviceProvider;
 
         // Chỉ có một constructor duy nhất
         public ApplicationController(
@@ -29,13 +32,15 @@ namespace WorkFinder.Web.Areas.Employer.Controllers
             ICompanyRepository companyRepository,
             IJobRepository jobRepository,
             IResumeRepository resumeRepository,
-            ILogger<ApplicationController> logger)
+            ILogger<ApplicationController> logger,
+            IServiceProvider serviceProvider)
         {
             _userManager = userManager;
             _companyRepository = companyRepository;
             _jobRepository = jobRepository;
             _resumeRepository = resumeRepository;
             _logger = logger;
+            _serviceProvider = serviceProvider;
         }
 
         [HttpGet]
@@ -131,25 +136,69 @@ namespace WorkFinder.Web.Areas.Employer.Controllers
                     return NotFound("Application not found");
                 }
 
-                try
+                var oldStatus = application.Status;
+                var newStatusEnum = (ApplicationStatus)newStatus;
+
+                if (oldStatus == newStatusEnum)
                 {
-                    // Try to update the status via a separate method
-                    await _jobRepository.UpdateApplicationStatusAsync(applicationId, newStatus);
-                    await _jobRepository.SaveChangesAsync();
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogWarning(ex, $"Could not update status for application {applicationId} but will continue");
-                    // Continue execution despite the error
+                    return RedirectToAction("Index", new { jobId = job.Id });
                 }
 
-                return RedirectToAction(nameof(Index), new { jobId = job.Id, toastMessage = "Application status updated successfully!" });
+                // Update the status
+                application.Status = newStatusEnum;
+
+                // Sửa phương thức gọi
+                await _jobRepository.UpdateApplicationStatusAsync(application.Id, (int)newStatusEnum);
+                await _jobRepository.SaveChangesAsync();
+
+                // Send notification to the applicant about status change
+                try
+                {
+                    var notificationRepo = _serviceProvider.GetService<INotificationRepository>();
+                    if (notificationRepo != null)
+                    {
+                        // Tạo thông báo cho ứng viên
+                        string message = GetStatusChangeMessage(application.JobId, newStatusEnum);
+                        await notificationRepo.AddNotificationAsync(new Notification
+                        {
+                            UserId = application.ApplicantId,
+                            Title = "Application Status Updated",
+                            Message = message,
+                            Type = NotificationType.ApplicationStatusChanged,
+                            JobApplicationId = application.Id,
+                            JobId = application.JobId,
+                            Link = $"/Dashboard/Applied"
+                        });
+                    }
+                }
+                catch (Exception notifEx)
+                {
+                    // Ghi log lỗi nhưng không dừng luồng chính
+                    _logger.LogError(notifEx, "Error sending notification for application status change");
+                }
+
+                TempData["SuccessMessage"] = $"Application status updated to {newStatusEnum}";
+                return RedirectToAction("Index", new { jobId = job.Id });
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error updating application status");
-                return RedirectToAction(nameof(Index), new { toastMessage = "Failed to update application status." });
+                TempData["ErrorMessage"] = "An error occurred while updating the application status.";
+                return RedirectToAction("Index", "Job", new { area = "Employer" });
             }
+        }
+
+        // Phương thức hỗ trợ để tạo thông báo về thay đổi trạng thái
+        private string GetStatusChangeMessage(int jobId, ApplicationStatus status)
+        {
+            return status switch
+            {
+                ApplicationStatus.Reviewing => "Your application is now being reviewed by the employer.",
+                ApplicationStatus.Interview => "Congratulations! You've been selected for an interview.",
+                ApplicationStatus.Accepted => "Congratulations! Your application has been accepted.",
+                ApplicationStatus.Rejected => "We're sorry, your application has not been selected at this time.",
+                _ => $"Your application status has been updated to {status}."
+            };
         }
 
         [HttpPost]

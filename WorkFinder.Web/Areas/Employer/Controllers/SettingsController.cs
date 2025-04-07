@@ -71,14 +71,14 @@ namespace WorkFinder.Web.Areas.Employer.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UpdateProfile(SettingsViewModel model)
         {
-            // Bỏ qua validation cho các trường password khi cập nhật profile
+            // Skip validation for password fields when updating profile
             ModelState.Remove("CurrentPassword");
             ModelState.Remove("NewPassword");
             ModelState.Remove("ConfirmPassword");
 
             if (!ModelState.IsValid)
             {
-                // Lấy thông tin từ database để điền lại form trong trường hợp có lỗi
+                // Retrieve information from database to refill the form in case of errors
                 var currentUser = await _userManager.GetUserAsync(User);
                 if (currentUser != null)
                 {
@@ -89,7 +89,7 @@ namespace WorkFinder.Web.Areas.Employer.Controllers
                         model.CompanyName = company.Name;
                         model.IsCompanyVerified = company.IsVerified;
                     }
-                    model.ProfilePicture = currentUser.ProfilePicture; // Đảm bảo giữ nguyên ảnh đại diện
+                    model.ProfilePicture = currentUser.ProfilePicture; // Preserve profile picture
                 }
                 return View("Index", model);
             }
@@ -102,31 +102,31 @@ namespace WorkFinder.Web.Areas.Employer.Controllers
                     return NotFound();
                 }
 
-                // Lưu ProfilePicture hiện tại trước khi cập nhật
+                // Save current ProfilePicture before update
                 string currentProfilePicture = user.ProfilePicture;
 
+                // Update only the basic user properties from ApplicationUser
                 user.FirstName = model.FirstName;
                 user.LastName = model.LastName;
                 user.PhoneNumber = model.PhoneNumber;
 
-                // Chuyển đổi DateTime sang UTC nếu có giá trị
+                // Convert DateTime to UTC if it has a value
                 if (model.DateOfBirth.HasValue)
                 {
-                    // Nếu Kind=Unspecified, giả định đây là giờ địa phương và chuyển đổi sang UTC
+                    // If Kind=Unspecified, assume it's local time and convert to UTC
                     if (model.DateOfBirth.Value.Kind == DateTimeKind.Unspecified)
                     {
-                        // Giả định đây là giờ địa phương và chuyển nó sang UTC
                         DateTime localTime = DateTime.SpecifyKind(model.DateOfBirth.Value, DateTimeKind.Local);
                         user.DateOfBirth = localTime.ToUniversalTime();
                     }
                     else if (model.DateOfBirth.Value.Kind == DateTimeKind.Local)
                     {
-                        // Chuyển từ giờ địa phương sang UTC
+                        // Convert from local time to UTC
                         user.DateOfBirth = model.DateOfBirth.Value.ToUniversalTime();
                     }
                     else
                     {
-                        // Đã là UTC
+                        // Already UTC
                         user.DateOfBirth = model.DateOfBirth;
                     }
                 }
@@ -135,7 +135,7 @@ namespace WorkFinder.Web.Areas.Employer.Controllers
                     user.DateOfBirth = null;
                 }
 
-                // Đảm bảo không ghi đè ProfilePicture với giá trị rỗng
+                // Make sure not to overwrite ProfilePicture with an empty value
                 if (string.IsNullOrEmpty(model.ProfilePicture))
                 {
                     user.ProfilePicture = currentProfilePicture;
@@ -156,12 +156,12 @@ namespace WorkFinder.Web.Areas.Employer.Controllers
                     return View("Index", model);
                 }
 
-                TempData["SuccessMessage"] = "Thông tin cá nhân đã được cập nhật thành công.";
+                TempData["SuccessMessage"] = "Your profile has been updated successfully.";
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError(string.Empty, "Có lỗi xảy ra: " + ex.Message);
+                ModelState.AddModelError(string.Empty, "An error occurred: " + ex.Message);
                 return View("Index", model);
             }
         }

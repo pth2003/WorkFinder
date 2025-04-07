@@ -1,0 +1,832 @@
+@model WorkFinder.Web.Models.ViewModels.AccountSettingsViewModel
+@using System.IO
+
+@{
+    ViewData["Title"] = "Account Settings";
+    Layout = "_DashboardLayout";
+}
+
+<div class="container">
+    <h1 class="mb-2">Setting</h1>
+
+    <div class="card border-0 shadow-sm">
+        <div class="card-header bg-white py-2">
+            <ul class="nav nav-tabs card-header-tabs" id="settingsTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active" id="personal-tab" data-bs-toggle="tab" href="#personal" role="tab"
+                        aria-controls="personal" aria-selected="true">
+                        <i class="fas fa-user me-2"></i>Personal
+                    </a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab"
+                        aria-controls="profile" aria-selected="false">
+                        <i class="fas fa-id-card me-2"></i>Resume
+                    </a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="account-tab" data-bs-toggle="tab" href="#account" role="tab"
+                        aria-controls="account" aria-selected="false">
+                        <i class="fas fa-cog me-2"></i>Account Setting
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="card-body">
+            <div class="tab-content" id="settingsTabsContent">
+                <!-- Personal Information -->
+                <div class="tab-pane fade show active" id="personal" role="tabpanel" aria-labelledby="personal-tab">
+                    <h3 class="mb-3">Basic Information</h3>
+
+                    <div class="row mb-4">
+                        <div class="col-md-3">
+                            <div class="profile-picture-container">
+                                <label class="form-label fw-bold mb-3 fs-5">Profile Picture</label>
+                                <div class="position-relative profile-picture-wrapper">
+                                    @if (!string.IsNullOrEmpty(Model.Profile.CurrentProfilePicture))
+                                    {
+                                        <img src="@Model.Profile.CurrentProfilePicture" alt="Profile Picture"
+                                            class="img-fluid rounded-circle border border-3 border-primary"
+                                            style="width: 180px; height: 180px; object-fit: cover;">
+                                    }
+                                    else
+                                    {
+                                        <div class="d-flex justify-content-center align-items-center bg-light rounded-circle border border-3 border-primary"
+                                            style="width: 180px; height: 180px;">
+                                            <i class="fas fa-user fa-4x text-secondary"></i>
+                                        </div>
+                                    }
+                                    <form asp-action="UpdateProfilePicture" asp-controller="Account" asp-area=""
+                                        method="post" enctype="multipart/form-data" class="mt-4">
+                                        @Html.AntiForgeryToken()
+                                        <div>
+                                            <label for="profilePicture" class="btn btn-outline-primary w-100 fs-6 py-2">
+                                                <i class="fas fa-camera me-2"></i> Change Photo
+                                            </label>
+                                            <input name="profilePicture" class="form-control d-none" type="file"
+                                                accept="image/*" id="profilePicture"
+                                                onchange="document.getElementById('uploadPhotoBtn').style.display = 'block';" />
+                                            <small class="form-text text-muted d-block mt-2 fs-6">
+                                                <i class="fas fa-info-circle me-1"></i> Image > 400px and < 5MB </small>
+                                                    <button id="uploadPhotoBtn" type="submit"
+                                                        class="btn btn-primary w-100 mt-2" style="display: none;">
+                                                        <i class="fas fa-upload me-2"></i> Upload Photo
+                                                    </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-9">
+                            <form asp-action="UpdateBasicInfo" asp-controller="Account" asp-area="" method="post">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                                <div class="row">
+                                    <div class="col-md-12 mb-4">
+                                        <label class="form-label fw-bold fs-5">Full name</label>
+                                        <input type="text" class="form-control form-control-lg bg-light fs-5"
+                                            value="@(Model.Profile.FirstName + " " + Model.Profile.LastName)"
+                                            readonly />
+                                    </div>
+
+                                    <div class="col-md-6 mb-4">
+                                        <label class="form-label fw-bold fs-5">First Name</label>
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-text bg-light fs-5">
+                                                <i class="fas fa-user"></i>
+                                            </span>
+                                            <input name="FirstName" class="form-control fs-5"
+                                                value="@Model.Profile.FirstName" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-4">
+                                        <label class="form-label fw-bold fs-5">Last Name</label>
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-text bg-light fs-5">
+                                                <i class="fas fa-user"></i>
+                                            </span>
+                                            <input name="LastName" class="form-control fs-5"
+                                                value="@Model.Profile.LastName" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-4">
+                                        <label class="form-label fw-bold fs-5">Email</label>
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-text bg-light fs-5">
+                                                <i class="fas fa-envelope"></i>
+                                            </span>
+                                            <input value="@Model.Profile.Email" class="form-control bg-light fs-5"
+                                                readonly />
+                                        </div>
+                                        <div class="alert alert-warning mt-2 mb-0 py-2 fs-6 d-flex align-items-center">
+                                            <i class="fas fa-exclamation-triangle me-2 fs-5"></i>
+                                            <span>Email address cannot be changed for security reasons</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-4">
+                                        <label class="form-label fw-bold fs-5">Phone Number</label>
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-text bg-light fs-5">
+                                                <i class="fas fa-phone"></i>
+                                            </span>
+                                            <input name="PhoneNumber" class="form-control fs-5"
+                                                value="@Model.Profile.PhoneNumber" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-4">
+                                        <label class="form-label fw-bold fs-5">Date of Birth</label>
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-text bg-light fs-5">
+                                                <i class="fas fa-calendar"></i>
+                                            </span>
+                                            <input name="DateOfBirth" class="form-control fs-5" type="date"
+                                                value="@(Model.Profile.DateOfBirth?.ToString("yyyy-MM-dd"))" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="text-end">
+                                    <button type="submit" class="btn btn-primary px-4 py-2 fs-5">
+                                        <i class="fas fa-save me-2"></i>Save Changes
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resume Section -->
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    <h3 class="mb-3">Your Resume</h3>
+
+                    <style>
+                        /* Force cache refresh - Updated at: @DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") */
+                        :root {
+                            --primary: #4361ee;
+                            --primary-light: #4895ef;
+                            --primary-dark: #3f37c9;
+                            --secondary: #4cc9f0;
+                            --text-dark: #333;
+                            --text-light: #6c757d;
+                            --light-bg: #f8f9fa;
+                            --border: #dee2e6;
+                            --success: #2ecc71;
+                        }
+
+                        .resume-card {
+                            border-radius: 12px;
+                            padding: 24px;
+                            margin-bottom: 24px;
+                            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+                            border: 1px solid var(--border);
+                            transition: all 0.3s ease;
+                        }
+
+                        .resume-card:hover {
+                            box-shadow: 0 15px 40px rgba(67, 97, 238, 0.1);
+                            transform: translateY(-5px);
+                        }
+
+                        .resume-section-header {
+                            display: flex;
+                            align-items: center;
+                            margin-bottom: 24px;
+                            padding-bottom: 16px;
+                            border-bottom: 2px solid var(--light-bg);
+                        }
+
+                        .resume-section-header-icon {
+                            width: 48px;
+                            height: 48px;
+                            border-radius: 12px;
+                            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            margin-right: 16px;
+                        }
+
+                        .resume-section-header-icon i {
+                            color: white;
+                            font-size: 24px;
+                        }
+
+                        .resume-section-header-text h3 {
+                            font-size: 20px;
+                            font-weight: 600;
+                            color: var(--text-dark);
+                            margin-bottom: 4px;
+                        }
+
+                        .resume-section-header-text p {
+                            font-size: 14px;
+                            color: var(--text-light);
+                            margin-bottom: 0;
+                        }
+
+                        .form-group {
+                            margin-bottom: 20px;
+                        }
+
+                        .form-label {
+                            display: block;
+                            font-size: 14px;
+                            font-weight: 500;
+                            color: var(--text-dark);
+                            margin-bottom: 8px;
+                        }
+
+                        textarea.form-control {
+                            min-height: 120px;
+                            resize: vertical;
+                            padding: 12px;
+                            font-size: 14px;
+                            border: 2px solid var(--border);
+                            border-radius: 12px;
+                            transition: all 0.2s ease-in-out;
+                        }
+
+                        textarea.form-control:focus {
+                            border-color: var(--primary);
+                            box-shadow: 0 0 0 0.25rem rgba(67, 97, 238, 0.2);
+                        }
+
+                        .upload-area {
+                            position: relative;
+                            padding: 48px 24px;
+                            border: 2px dashed var(--primary);
+                            border-radius: 16px;
+                            background-color: rgba(67, 97, 238, 0.03);
+                            text-align: center;
+                            cursor: pointer;
+                            transition: all 0.3s ease;
+                        }
+
+                        .upload-area:hover {
+                            background-color: rgba(67, 97, 238, 0.05);
+                            border-color: var(--primary-dark);
+                        }
+
+                        .upload-icon {
+                            width: 80px;
+                            height: 80px;
+                            margin: 0 auto 24px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            border-radius: 50%;
+                            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+                        }
+
+                        .upload-icon i {
+                            font-size: 36px;
+                            color: white;
+                        }
+
+                        .upload-title {
+                            font-size: 18px;
+                            font-weight: 600;
+                            color: var(--text-dark);
+                            margin-bottom: 10px;
+                        }
+
+                        .upload-subtitle {
+                            font-size: 14px;
+                            color: var(--text-light);
+                            margin-bottom: 20px;
+                        }
+
+                        .btn-upload {
+                            padding: 10px 20px;
+                            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+                            color: white;
+                            border: none;
+                            border-radius: 10px;
+                            font-size: 14px;
+                            font-weight: 500;
+                            cursor: pointer;
+                            transition: all 0.3s ease;
+                        }
+
+                        .btn-upload:hover {
+                            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+                            transform: translateY(-2px);
+                            box-shadow: 0 8px 15px rgba(67, 97, 238, 0.2);
+                        }
+
+                        .file-preview {
+                            display: flex;
+                            align-items: center;
+                            padding: 20px;
+                            background-color: var(--light-bg);
+                            border-radius: 12px;
+                            margin-bottom: 32px;
+                        }
+
+                        .file-preview-icon {
+                            width: 56px;
+                            height: 56px;
+                            border-radius: 12px;
+                            background: linear-gradient(135deg, #ff7e5f, #feb47b);
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            margin-right: 20px;
+                            flex-shrink: 0;
+                        }
+
+                        .file-preview-icon i {
+                            font-size: 28px;
+                            color: white;
+                        }
+
+                        .file-preview-info {
+                            flex-grow: 1;
+                        }
+
+                        .file-preview-name {
+                            font-size: 16px;
+                            font-weight: 500;
+                            color: var(--text-dark);
+                            margin-bottom: 4px;
+                        }
+
+                        .file-preview-meta {
+                            font-size: 12px;
+                            color: var(--text-light);
+                        }
+
+                        .file-preview-actions {
+                            display: flex;
+                            gap: 12px;
+                        }
+
+                        .file-preview-action {
+                            display: flex;
+                            align-items: center;
+                            padding: 6px 12px;
+                            background-color: white;
+                            border: 1px solid var(--border);
+                            border-radius: 8px;
+                            color: var(--text-dark);
+                            text-decoration: none;
+                            font-size: 12px;
+                            font-weight: 500;
+                            transition: all 0.2s ease;
+                        }
+
+                        .file-preview-action i {
+                            margin-right: 8px;
+                            font-size: 16px;
+                        }
+
+                        .file-preview-action:hover {
+                            background-color: var(--primary);
+                            color: white;
+                            border-color: var(--primary);
+                        }
+
+                        .btn-save {
+                            padding: 12px 30px;
+                            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+                            color: white;
+                            border: none;
+                            border-radius: 10px;
+                            font-size: 16px;
+                            font-weight: 600;
+                            cursor: pointer;
+                            transition: all 0.3s ease;
+                            box-shadow: 0 8px 15px rgba(67, 97, 238, 0.2);
+                            margin-top: 20px;
+                        }
+
+                        .btn-save:hover {
+                            transform: translateY(-3px);
+                            box-shadow: 0 15px 30px rgba(67, 97, 238, 0.3);
+                        }
+
+                        @@media (max-width: 768px) {
+                            .resume-card {
+                                padding: 24px;
+                            }
+
+                            .resume-section-header-icon {
+                                width: 40px;
+                                height: 40px;
+                            }
+
+                            .resume-section-header-text h3 {
+                                font-size: 20px;
+                            }
+                        }
+                    </style>
+
+                    <form asp-action="Resume" asp-controller="Account" method="post" enctype="multipart/form-data">
+                        <!-- Resume File Upload Section -->
+                        <div class="resume-card">
+                            <div class="resume-section-header">
+                                <div class="resume-section-header-icon">
+                                    <i class="fas fa-file-alt"></i>
+                                </div>
+                                <div class="resume-section-header-text">
+                                    <h3>Resume Document</h3>
+                                    <p>Upload a PDF or Word document of your resume</p>
+                                </div>
+                            </div>
+
+                            @if (!string.IsNullOrEmpty(Model.Resume?.FileUrl))
+                            {
+                                <div class="file-preview">
+                                    <div class="file-preview-icon">
+                                        <i class="far fa-file-pdf"></i>
+                                    </div>
+                                    <div class="file-preview-info">
+                                        <div class="file-preview-name">@System.IO.Path.GetFileName(Model.Resume.FileUrl)</div>
+                                        <div class="file-preview-meta">PDF Document</div>
+                                    </div>
+                                    <div class="file-preview-actions">
+                                        <a href="@Model.Resume.FileUrl" target="_blank" class="file-preview-action">
+                                            <i class="fas fa-eye"></i> View
+                                        </a>
+                                        <a href="#" onclick="document.getElementById('resumeFile').click(); return false;"
+                                            class="file-preview-action">
+                                            <i class="fas fa-sync-alt"></i> Update
+                                        </a>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="upload-area" onclick="document.getElementById('resumeFile').click(); return false;">
+                                    <div class="upload-icon">
+                                        <i class="fas fa-cloud-upload-alt"></i>
+                                    </div>
+                                    <h4 class="upload-title">Upload Your Resume</h4>
+                                    <p class="upload-subtitle">Supported formats: PDF, DOC, DOCX (Max 5MB)</p>
+                                    <button type="button" class="btn-upload">Select File</button>
+                                </div>
+                            }
+
+                            <input type="file" id="resumeFile" name="ResumeFile" class="d-none" accept=".pdf,.doc,.docx">
+                        </div>
+
+                        <!-- Professional Summary Section -->
+                        <div class="resume-card">
+                            <div class="resume-section-header">
+                                <div class="resume-section-header-icon">
+                                    <i class="fas fa-user-tie"></i>
+                                </div>
+                                <div class="resume-section-header-text">
+                                    <h3>Professional Summary</h3>
+                                    <p>Briefly describe your background and career goals</p>
+                                    </div>
+                                </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Write a compelling summary that highlights your expertise</label>
+                                <textarea class="form-control" name="Summary" rows="4">@Model.Resume?.Summary</textarea>
+                            </div>
+                        </div>
+
+                        <!-- Skills Section -->
+                        <div class="resume-card">
+                            <div class="resume-section-header">
+                                <div class="resume-section-header-icon">
+                                    <i class="fas fa-tools"></i>
+                                </div>
+                                <div class="resume-section-header-text">
+                                    <h3>Skills & Expertise</h3>
+                                    <p>List your professional skills and competencies</p>
+                                </div>
+                                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Add your key skills, separated by commas (e.g., Project Management,
+                                    JavaScript, Leadership)</label>
+                                <textarea class="form-control" name="Skills" rows="3">@Model.Resume?.Skills</textarea>
+                            </div>
+                                            </div>
+
+                        <!-- Work Experience Section -->
+                        <div class="resume-card">
+                            <div class="resume-section-header">
+                                <div class="resume-section-header-icon">
+                                    <i class="fas fa-briefcase"></i>
+                                </div>
+                                <div class="resume-section-header-text">
+                                    <h3>Work Experience</h3>
+                                    <p>Highlight your professional experience and achievements</p>
+                                </div>
+                                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Describe your work history, including company names, positions, dates, and
+                                    key responsibilities</label>
+                                <textarea class="form-control" name="Experience" rows="6">@Model.Resume?.Experience</textarea>
+                            </div>
+                                            </div>
+
+                        <!-- Education Section -->
+                        <div class="resume-card">
+                            <div class="resume-section-header">
+                                <div class="resume-section-header-icon">
+                                    <i class="fas fa-graduation-cap"></i>
+                                </div>
+                                <div class="resume-section-header-text">
+                                    <h3>Education</h3>
+                                    <p>Share your academic background and qualifications</p>
+                                </div>
+                                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">List your degrees, institutions, graduation dates, and relevant
+                                    achievements</label>
+                                <textarea class="form-control" name="Education" rows="4">@Model.Resume?.Education</textarea>
+                                            </div>
+                                        </div>
+
+                        <!-- Certifications Section -->
+                        <div class="resume-card">
+                            <div class="resume-section-header">
+                                <div class="resume-section-header-icon">
+                                    <i class="fas fa-certificate"></i>
+                                        </div>
+                                <div class="resume-section-header-text">
+                                    <h3>Certifications</h3>
+                                    <p>Add professional certifications and licenses</p>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Include certification names, issuing organizations, and dates
+                                    obtained</label>
+                                <textarea class="form-control" name="Certifications"
+                                    rows="3">@Model.Resume?.Certifications</textarea>
+                            </div>
+                        </div>
+
+                        <!-- Languages Section -->
+                        <div class="resume-card">
+                            <div class="resume-section-header">
+                                <div class="resume-section-header-icon">
+                                    <i class="fas fa-language"></i>
+                                </div>
+                                <div class="resume-section-header-text">
+                                    <h3>Languages</h3>
+                                    <p>List languages you speak and your proficiency levels</p>
+                                        </div>
+                                    </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Specify languages and proficiency (e.g., English - Native, Spanish -
+                                    Intermediate)</label>
+                                <textarea class="form-control" name="Languages" rows="2">@Model.Resume?.Languages</textarea>
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn-save">Save Your Resume</button>
+                        </div>
+                    </form>
+
+                    <script>
+                        // Update file name when file is selected
+                        document.addEventListener('DOMContentLoaded', function () {
+                            document.getElementById('resumeFile')?.addEventListener('change', function () {
+                                if (this.files.length > 0) {
+                                    const fileName = this.files[0].name;
+                                    // If there's an existing file preview, update it
+                                    const filePreview = document.querySelector('.file-preview');
+
+                                    if (filePreview) {
+                                        filePreview.querySelector('.file-preview-name').textContent = fileName;
+                                    } else {
+                                        // Create new file preview if it doesn't exist
+                                        const uploadArea = document.querySelector('.upload-area');
+                                        if (uploadArea) {
+                                            const newFilePreview = document.createElement('div');
+                                            newFilePreview.className = 'file-preview';
+                                            newFilePreview.innerHTML = `
+                                                <div class="file-preview-icon">
+                                                    <i class="far fa-file-pdf"></i>
+                                                </div>
+                                                <div class="file-preview-info">
+                                                    <div class="file-preview-name">${fileName}</div>
+                                                    <div class="file-preview-meta">File ready to upload</div>
+                                                </div>
+                                                <div class="file-preview-actions">
+                                                    <a href="#" onclick="document.getElementById('resumeFile').click(); return false;" class="file-preview-action">
+                                                        <i class="fas fa-sync-alt"></i> Change
+                                                    </a>
+                                                </div>
+                                            `;
+                                            uploadArea.parentNode.replaceChild(newFilePreview, uploadArea);
+                                        }
+                                    }
+                                }
+                            });
+                        });
+                    </script>
+                </div>
+
+                <!-- Account Settings -->
+                <div class="tab-pane fade" id="account" role="tabpanel" aria-labelledby="account-tab">
+                    <h3 class="mb-3">Account Settings</h3>
+                    <div class="mb-3">
+                        <h5>Change Password</h5>
+                        <a href="@Url.Action("ChangePassword", "Account", new { area = "" })"
+                            class="btn btn-outline-primary btn-sm">
+                            <i class="fas fa-key me-1"></i> Change Password
+                        </a>
+                    </div>
+                    <div class="mb-3">
+                        <h5>Notifications</h5>
+                        <div class="form-check form-switch mb-2">
+                            <input class="form-check-input" type="checkbox" id="emailNotification" checked>
+                            <label class="form-check-label" for="emailNotification">Receive email notifications</label>
+                        </div>
+                        <div class="form-check form-switch mb-2">
+                            <input class="form-check-input" type="checkbox" id="jobAlert" checked>
+                            <label class="form-check-label" for="jobAlert">Receive job alerts</label>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <h5>Privacy</h5>
+                        <div class="form-check form-switch mb-2">
+                            <input class="form-check-input" type="checkbox" id="profilePublic" checked>
+                            <label class="form-check-label" for="profilePublic">Public profile</label>
+                        </div>
+                        <div class="form-check form-switch mb-2">
+                            <input class="form-check-input" type="checkbox" id="shareData">
+                            <label class="form-check-label" for="shareData">Share my data with partners</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.getElementById('resumeFile')?.addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            if (file) {
+                document.getElementById('selectedFile').textContent = file.name;
+                document.getElementById('submitResume').style.display = 'inline-block';
+            } else {
+                document.getElementById('selectedFile').textContent = '';
+                document.getElementById('submitResume').style.display = 'none';
+            }
+        });
+
+        document.getElementById('profilePicture')?.addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const parent = document.querySelector('.profile-picture-wrapper');
+                    const img = parent.querySelector('img');
+
+                    if (img) {
+                        img.src = e.target.result;
+                    } else {
+                        const placeholder = parent.querySelector('.d-flex.justify-content-center');
+                        if (placeholder) {
+                            placeholder.remove();
+                            const newImg = document.createElement('img');
+                            newImg.src = e.target.result;
+                            newImg.alt = "Profile Picture";
+                            newImg.className = "img-fluid rounded-circle border border-3 border-primary";
+                            newImg.style = "width: 180px; height: 180px; object-fit: cover;";
+                            parent.insertBefore(newImg, parent.firstChild);
+                        }
+                    }
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Save and restore tab and scroll position
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get active tab from URL hash or default to first tab
+            const activateTabFromHash = () => {
+                const hash = window.location.hash;
+                if (hash && hash.match(/(personal|profile|account)/)) {
+                    // If there's a hash that matches a tab name, activate that tab
+                    const tabEl = document.querySelector(`a[href="${hash}"]`);
+                    if (tabEl) {
+                        const tab = new bootstrap.Tab(tabEl);
+                        tab.show();
+                    }
+                }
+            };
+
+            // Activate tab based on URL hash
+            activateTabFromHash();
+
+            // Update URL hash when tab changes
+            const tabLinks = document.querySelectorAll('a[data-bs-toggle="tab"]');
+            tabLinks.forEach(function (tabLink) {
+                tabLink.addEventListener('shown.bs.tab', function (e) {
+                    const hash = e.target.getAttribute('href');
+                    if (history.pushState) {
+                        history.pushState(null, null, hash);
+                    } else {
+                        window.location.hash = hash;
+                    }
+                });
+            });
+
+            // Handle browser back/forward navigation
+            window.addEventListener('popstate', activateTabFromHash);
+
+            // Display toast messages if TempData exists
+            @if (TempData["SuccessMessage"] != null)
+                {
+                    <text>
+                        window.toast.showToast('Success', '@TempData["SuccessMessage"]', 'success');
+                    </text>
+            }
+
+                @if (TempData["ErrorMessage"] != null)
+                {
+                    <text>
+                        window.toast.showToast('Error', '@TempData["ErrorMessage"]', 'error');
+                    </text>
+            }
+        });
+    </script>
+}
+
+@section Styles {
+    <style>
+        .border-dashed {
+            border-style: dashed !important;
+        }
+
+        .profile-picture-container {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .profile-picture-wrapper {
+            text-align: center;
+        }
+
+        .form-control:focus {
+            border-color: #0d6efd;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        }
+
+        .input-group-text {
+            border-right: none;
+            padding: 0.75rem 1rem;
+        }
+
+        .input-group .form-control {
+            border-left: none;
+            padding: 0.75rem 1rem;
+        }
+
+        .input-group .form-control:focus {
+            border-left: 1px solid #0d6efd;
+        }
+
+        .form-label {
+            color: #495057;
+            margin-bottom: 0.75rem;
+        }
+
+        .form-control,
+        .input-group-text {
+            border-radius: 0.5rem;
+        }
+
+        .form-control:read-only {
+            background-color: #f8f9fa;
+        }
+
+        .btn-primary {
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .input-group-lg>.form-control,
+        .input-group-lg>.input-group-text {
+            padding: 1rem 1.25rem;
+        }
+
+        .form-control-lg {
+            padding: 1rem 1.25rem;
+        }
+    </style>
+}
