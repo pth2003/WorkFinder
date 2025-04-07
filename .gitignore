@@ -230,6 +230,5 @@ ASALocalRun/
 # User uploads
 WorkFinder.Web/wwwroot/uploads/*
 !WorkFinder.Web/wwwroot/uploads/.gitkeep
-!WorkFinder.Web/wwwroot/uploads/profile-pictures/.gitkeep
-!WorkFinder.Web/wwwroot/uploads/resumes/.gitkeep
-!WorkFinder.Web/wwwroot/uploads/company-logos/.gitkeep
+!WorkFinder.Web/wwwroot/uploads/*/
+!WorkFinder.Web/wwwroot/uploads/*/.gitkeep
