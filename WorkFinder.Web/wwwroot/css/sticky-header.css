@@ -42,9 +42,9 @@
 }
 
 .main-header.sticky .btn {
-    padding: 0.6rem 1.5rem;
-    line-height: 1.8rem;
-    font-size: 0.95rem;
+    padding: 0.8rem 2rem;
+    line-height: 2rem;
+    font-size: 1.1rem;
     transition: all 0.3s ease;
 }
 
@@ -113,8 +113,8 @@
 /* Responsive adjustments */
 @media (max-width: 992px) {
     .main-header.sticky .btn {
-        padding: 0.5rem 1rem;
-        font-size: 0.9rem;
+        padding: 0.7rem 1.5rem;
+        font-size: 1rem;
     }
     
     .main-header.sticky .search-wrapper {
@@ -136,13 +136,13 @@
     }
     
     .main-header.sticky .btn {
-        padding: 0.4rem 0.8rem;
-        font-size: 0.85rem;
+        padding: 0.6rem 1.2rem;
+        font-size: 0.95rem;
     }
     
     .main-header.sticky .btn-sm {
-        padding: 0.3rem 0.6rem;
-        font-size: 0.8rem;
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
     }
 }
 

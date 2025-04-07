@@ -58,7 +58,8 @@
                         <li class="nav-item"><a
                                 class="nav-link @(controller == "Company" && action == "Index" ? "active" : "")"
                                 href="/Company">Companies</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Employers</a></li>
+                        <li class="nav-item"><a class="nav-link @(controller == "Dashboard" ? "active" : "")"
+                                href="/Dashboard">Dashboard</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">Customer Support</a></li>
                     </ul>
                 }
@@ -93,12 +94,12 @@
             </div>
         </div>
         <div class="header-login d-flex align-items-center">
-            <button class="navbar-toggler d-lg-none d-inline-block me-2" type="button" data-bs-toggle="offcanvas"
-                data-bs-target="#mobileMenu" aria-controls="mobileMenu">
-                <span class="navbar-toggler-icon"></span>
-            </button>
             @if (User?.Identity?.IsAuthenticated == true && User.IsInRole(UserRoles.JobSeeker))
             {
+                <button class="navbar-toggler d-lg-none d-inline-block me-2" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#mobileMenu" aria-controls="mobileMenu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
                 <!-- Notifications Dropdown -->
                 <div class="notifications-dropdown me-3 d-none d-lg-block">
                     <div class="dropdown">
@@ -203,6 +204,10 @@
             }
             else if (User?.Identity?.IsAuthenticated == true && User.IsInRole(UserRoles.Employer))
             {
+                <button class="navbar-toggler d-lg-none d-inline-block me-2" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#mobileMenu" aria-controls="mobileMenu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
                 <ul class="list-unstyled d-flex gap-3">
                     <li class="nav-item dropdown">
                         <div class="nav-link dropdown-toggle text-dark d-none d-lg-flex gap-3 align-items-center justify-content-between"
@@ -282,8 +287,8 @@
             else
             {
                 <div class="d-none d-lg-flex">
-                    <btn class="btn btn-outline-primary me-2"><a class="nav-link" href="/Auth/Login">Sign In</a></btn>
-                    <btn class="btn btn-primary">Post A Jobs</btn>
+                    <a href="/Auth/Login" class="btn btn-outline-primary me-2">Sign In</a>
+                    <a href="/Auth/Register" class="btn btn-primary">Post A Job</a>
                 </div>
                 <div class="d-lg-none">
                     <a href="/Auth/Login" class="btn btn-sm btn-outline-primary me-2">Sign In</a>
@@ -296,63 +301,110 @@
 </header>
 
 <!-- Mobile Menu Offcanvas -->
-<div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel"
-    style="height: 100vh;">
-    <div class="offcanvas-header">
-        <div class="header-logo">
-            <a href="/" title="Home">
-                <img src="~/icon/Logo.png" alt="WorkFinder Logo" class="logo-img">
-            </a>
+@if (User?.Identity?.IsAuthenticated == true)
+{
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel"
+        style="height: 100vh;">
+        <div class="offcanvas-header">
+            <div class="header-logo">
+                <a href="/" title="Home">
+                    <img src="~/icon/Logo.png" alt="WorkFinder Logo" class="logo-img">
+                </a>
+            </div>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-        <div class="mobile-menu">
-            @if (User.IsInRole(UserRoles.Employer))
-            {
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link @(controller == "Home" && action == "Index" ? "active" : "")"
-                            href="/Employer">Dashboard</a></li>
-                    <li class="nav-item"><a class="nav-link @(controller == "Job" ? "active" : "")" href="/Employer/Job">My
-                            Jobs</a></li>
-                    <li class="nav-item"><a
-                            class="nav-link @(controller == "Company" && action == "Profile" ? "active" : "")"
-                            href="/Employer/Company/Profile">Company Profile</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/Employer/Job/Create">Post A Job</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Customer Support</a></li>
-                </ul>
-            }
-            else
-            {
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link @(controller == "Home" && action == "Index" ? "active" : "")"
-                            href="/">Home</a></li>
-                    <li class="nav-item"><a class="nav-link @(controller == "Job" && action == "Index" ? "active" : "")"
-                            href="/Job">Find Job</a></li>
-                    <li class="nav-item"><a class="nav-link @(controller == "Company" && action == "Index" ? "active" : "")"
-                            href="/Company">Companies</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Employers</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Customer Support</a></li>
-                </ul>
-            }
-            @if (User?.Identity?.IsAuthenticated == true)
-            {
+        <div class="offcanvas-body">
+            <div class="mobile-menu">
+                @if (User.IsInRole(UserRoles.Employer))
+                {
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link @(controller == "Home" && action == "Index" ? "active" : "")"
+                                href="/Employer">Dashboard</a></li>
+                        <li class="nav-item"><a class="nav-link @(controller == "Job" ? "active" : "")" href="/Employer/Job">My
+                                Jobs</a></li>
+                        <li class="nav-item"><a
+                                class="nav-link @(controller == "Company" && action == "Profile" ? "active" : "")"
+                                href="/Employer/Company/Profile">Company Profile</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/Employer/Job/Create">Post A Job</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Customer Support</a></li>
+                    </ul>
+                }
+                else if (controller == "Dashboard" || (controller == "Account" && (action == "Profile" || action ==
+                "Settings")) || controller == "JobAlert" || controller == "Notifications")
+                {
+                    <!-- Dashboard Sidebar for Mobile -->
+                    <div class="sidebar-header mb-4">
+                        <h5>CANDIDATE DASHBOARD</h5>
+                    </div>
+                    <ul class="sidebar-menu">
+                        <li class="@(controller == "Dashboard" && action == "Index" ? "active" : "")">
+                            <a href="/Dashboard" class="d-flex align-items-center">
+                                <i class="fas fa-layer-group me-2"></i>
+                                <span>Overview</span>
+                            </a>
+                        </li>
+                        <li class="@(controller == "Dashboard" && action == "Applied" ? "active" : "")">
+                            <a href="/Dashboard/Applied" class="d-flex align-items-center">
+                                <i class="fas fa-briefcase me-2"></i>
+                                <span>Applied Jobs</span>
+                            </a>
+                        </li>
+                        <li class="@(controller == "Dashboard" && action == "Favorites" ? "active" : "")">
+                            <a href="/Dashboard/Favorites" class="d-flex align-items-center">
+                                <i class="far fa-bookmark me-2"></i>
+                                <span>Favorite Jobs</span>
+                            </a>
+                        </li>
+                        <li
+                            class="@(controller == "Dashboard" && action == "JobAlerts" || controller == "JobAlert" ? "active" : "")">
+                            <a href="/Dashboard/JobAlerts" class="d-flex align-items-center">
+                                <i class="far fa-bell me-2"></i>
+                                <span>Job Alerts</span>
+                            </a>
+                        </li>
+                        <li
+                            class="@(controller == "Dashboard" && action == "Notifications" || controller == "Notifications" ? "active" : "")">
+                            <a href="/Dashboard/Notifications" class="d-flex align-items-center">
+                                <i class="fas fa-bell me-2"></i>
+                                <span>Notifications</span>
+                                @if (unreadNotificationsCount > 0)
+                                {
+                                    <span class="notification-badge ms-auto">@(unreadNotificationsCount > 99 ? "99+" :
+                                                                    unreadNotificationsCount.ToString())</span>
+                                                }
+                            </a>
+                        </li>
+                        <li class="@(controller == "Account" && action == "Settings" ? "active" : "")">
+                            <a href="@Url.Action("Settings", "Account", new { area = "" })" class="d-flex align-items-center">
+                                <i class="fas fa-cog me-2"></i>
+                                <span>Settings</span>
+                            </a>
+                        </li>
+                    </ul>
+                }
+                else
+                {
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link @(controller == "Home" && action == "Index" ? "active" : "")"
+                                href="/">Home</a></li>
+                        <li class="nav-item"><a class="nav-link @(controller == "Job" && action == "Index" ? "active" : "")"
+                                href="/Job">Find Job</a></li>
+                        <li class="nav-item"><a class="nav-link @(controller == "Company" && action == "Index" ? "active" : "")"
+                                href="/Company">Companies</a></li>
+                        <li class="nav-item"><a class="nav-link @(controller == "Dashboard" ? "active" : "")"
+                                href="/Dashboard">Dashboard</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Customer Support</a></li>
+                    </ul>
+                }
                 <div class="mt-4 pt-3 border-top">
                     <form asp-area="Auth" asp-controller="Auth" asp-action="Logout" method="post">
                         <button type="submit" class="btn btn-outline-danger w-100">Đăng xuất</button>
                     </form>
                 </div>
-            }
-            else
-            {
-                <div class="mt-4 pt-3 border-top">
-                    <a href="/Auth/Login" class="btn btn-primary w-100 mb-2">Đăng nhập</a>
-                    <a href="/Auth/Register" class="btn btn-outline-primary w-100">Đăng ký</a>
-                </div>
-            }
+            </div>
         </div>
     </div>
-</div>
+}
 
 <style>
     .navbar {
@@ -518,7 +570,7 @@
         color: #0A65CC;
     }
 
-    @@media(max - width: 992px) {
+    @@media(max-width: 992px) {
         .main-header .container {
             padding-top: 0.8rem;
             padding-bottom: 0.8rem;
@@ -534,63 +586,151 @@
         }
     }
 
-    @@media(max - width: 576px) {
+    @@media(max-width: 576px) {
         .btn-sm {
             padding: 0.6rem 1.2rem;
             line-height: 1.8rem;
             font-size: 1.4rem;
         }
     }
+
+    /* Header Buttons */
+    .header-login .btn {
+        padding: 1.4rem 2.8rem;
+        line-height: 2.6rem;
+        font-size: 1.2rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    /* Sticky Header Buttons */
+    .main-header.sticky .header-login .btn {
+        padding: 1.2rem 2.4rem;
+        line-height: 2.4rem;
+        font-size: 1.1rem;
+        font-weight: 500;
+    }
+
+    @@media(max-width: 992px) {
+        .header-login .btn {
+            padding: 1.2rem 2.4rem;
+            font-size: 1.1rem;
+        }
+
+        .main-header.sticky .header-login .btn {
+            padding: 1rem 2rem;
+            line-height: 2rem;
+            font-size: 1rem;
+        }
+    }
+
+    @@media(max-width: 576px) {
+        .header-login .btn {
+            padding: 0.8rem 1.6rem;
+            font-size: 1rem;
+            line-height: 1.8rem;
+        }
+
+        .main-header.sticky .header-login .btn {
+            padding: 0.7rem 1.4rem;
+            line-height: 1.6rem;
+            font-size: 0.95rem;
+        }
+    }
+
+    /* Ẩn offcanvas backdrop (lớp phủ màu đen) */
+    .offcanvas-backdrop {
+        display: none !important;
+        opacity: 0 !important;
+    }
+
+    /* Điều chỉnh offcanvas không cần backdrop */
+    .offcanvas.show {
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Dashboard Sidebar Style trong Mobile Menu */
+    .mobile-menu .sidebar-header h5 {
+        font-size: 1.6rem;
+        font-weight: 600;
+        color: var(--gray-700);
+        margin-bottom: 2rem;
+        padding-left: 1rem;
+    }
+
+    .mobile-menu .sidebar-menu {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .mobile-menu .sidebar-menu li {
+        margin-bottom: 0.8rem;
+    }
+
+    .mobile-menu .sidebar-menu li a {
+        display: flex;
+        align-items: center;
+        padding: 1rem 1.5rem;
+        color: var(--gray-600);
+        text-decoration: none;
+        border-radius: 0.5rem;
+        transition: all 0.2s;
+        font-size: 1.4rem;
+    }
+
+    .mobile-menu .sidebar-menu li a i {
+        font-size: 1.6rem;
+        width: 2.4rem;
+    }
+
+    .mobile-menu .sidebar-menu li.active a {
+        background-color: #e8f1ff;
+        color: #0A65CC;
+        font-weight: 500;
+    }
+
+    .mobile-menu .sidebar-menu li a:hover {
+        background-color: #f5f5f5;
+    }
+
+    .mobile-menu .notification-badge {
+        background-color: #ff4d4f;
+        color: white;
+        border-radius: 50%;
+        padding: 0.2rem 0.6rem;
+        font-size: 1.2rem;
+        min-width: 2.2rem;
+        text-align: center;
+    }
 </style>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        console.log(user)
         // Get the offcanvas element
         const offcanvasElement = document.getElementById('mobileMenu');
-        const togglerButton = document.querySelector('[data-bs-target="#mobileMenu"]');
 
-        // Add click event listener to document
-        document.addEventListener('click', function (event) {
-            // Only proceed if offcanvas is visible
-            if (offcanvasElement && offcanvasElement.classList.contains('show')) {
-                // Check if click target is outside the offcanvas and not the toggler button
-                if (!offcanvasElement.contains(event.target) &&
-                    event.target !== togglerButton &&
-                    !togglerButton.contains(event.target)) {
+        // Only proceed if offcanvas element exists
+        if (offcanvasElement) {
+            const togglerButton = document.querySelector('[data-bs-target="#mobileMenu"]');
 
-                    // Hide the offcanvas using Bootstrap's API
-                    const bsOffcanvas = bootstrap.Offcanvas.getInstance(offcanvasElement);
-                    if (bsOffcanvas) {
-                        bsOffcanvas.hide();
+            // Add click event listener to document
+            document.addEventListener('click', function (event) {
+                // Only proceed if offcanvas is visible
+                if (offcanvasElement.classList.contains('show')) {
+                    // Check if click target is outside the offcanvas and not the toggler button
+                    if (!offcanvasElement.contains(event.target) &&
+                        event.target !== togglerButton &&
+                        !togglerButton.contains(event.target)) {
+
+                        // Hide the offcanvas using Bootstrap's API
+                        const bsOffcanvas = bootstrap.Offcanvas.getInstance(offcanvasElement);
+                        if (bsOffcanvas) {
+                            bsOffcanvas.hide();
+                        }
                     }
                 }
-            }
-        });
-
-        // Add an overlay element that closes the menu when clicked
-        const overlay = document.createElement('div');
-        overlay.className = 'offcanvas-backdrop';
-        overlay.style.display = 'none';
-        document.body.appendChild(overlay);
-
-        // Show overlay when offcanvas is shown
-        offcanvasElement.addEventListener('shown.bs.offcanvas', function () {
-            overlay.style.display = 'block';
-            overlay.style.opacity = '0.5';
-        });
-
-        // Hide overlay when offcanvas is hidden
-        offcanvasElement.addEventListener('hidden.bs.offcanvas', function () {
-            overlay.style.display = 'none';
-        });
-
-        // Close offcanvas when overlay is clicked
-        overlay.addEventListener('click', function () {
-            const bsOffcanvas = bootstrap.Offcanvas.getInstance(offcanvasElement);
-            if (bsOffcanvas) {
-                bsOffcanvas.hide();
-            }
-        });
+            });
+        }
     });
 </script>
