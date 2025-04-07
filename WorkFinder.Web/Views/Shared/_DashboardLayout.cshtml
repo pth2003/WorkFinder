@@ -13,7 +13,6 @@
         html,
         body {
             height: 100%;
-            overflow: hidden;
         }
 
         body {
@@ -37,17 +36,17 @@
 
         .content-wrapper {
             flex: 1;
-            margin-top: 90px;
+            margin-top: 100px;
             margin-bottom: 65px;
-            overflow: hidden;
             display: flex;
             flex-direction: column;
+            padding-top: 20px;
         }
 
         .dashboard-row {
             display: flex;
             flex: 1;
-            height: calc(100vh - 155px);
+            min-height: calc(100vh - 175px);
         }
 
         .main-content {
@@ -56,12 +55,6 @@
             background-color: white;
             font-size: 16px;
             overflow-y: auto;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-        }
-
-        .main-content::-webkit-scrollbar {
-            display: none;
         }
 
         .footer {
@@ -85,29 +78,32 @@
         }
 
         .sidebar {
-            width: 250px;
+            width: 280px;
             flex-shrink: 0;
             overflow-y: auto;
             height: 100%;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
+            padding-top: 10px;
+            border-right: 1px solid #eee;
+            margin-right: 20px;
         }
 
-        .sidebar::-webkit-scrollbar {
-            display: none;
+        .sidebar-header {
+            padding-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        .sidebar-header h5 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #555;
+            padding-left: 10px;
         }
 
         @@media (max-width: 767.98px) {
             .dashboard-row {
                 flex-direction: column;
-                height: calc(100vh - 155px);
+                min-height: calc(100vh - 175px);
                 overflow-y: auto;
-                scrollbar-width: none;
-                -ms-overflow-style: none;
-            }
-
-            .dashboard-row::-webkit-scrollbar {
-                display: none;
             }
 
             .sidebar {
@@ -115,12 +111,20 @@
                 margin-bottom: 15px;
                 height: auto;
                 max-height: 300px;
+                margin-right: 0;
+                border-right: none;
+                border-bottom: 1px solid #eee;
+                padding-bottom: 15px;
             }
 
             .main-content {
                 width: 100%;
                 height: auto;
                 flex: 1;
+            }
+
+            .content-wrapper {
+                margin-top: 80px;
             }
         }
     </style>
@@ -150,8 +154,12 @@
         </div>
     </footer>
 
+    <!-- Toast Container -->
+    <div id="toast-container" class="position-fixed top-0 end-0 p-3" style="z-index: 1080;"></div>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/toast.js" asp-append-version="true"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
