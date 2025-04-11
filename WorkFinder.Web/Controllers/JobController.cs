@@ -184,6 +184,14 @@ namespace WorkFinder.Web.Controllers
             var job = await _jobRepository.GetJobWithDetailsAsync(id);
             if (job == null)
                 return NotFound();
+                
+            // Nếu job có slug, chuyển hướng đến URL thân thiện với SEO
+            if (!string.IsNullOrEmpty(job.Slug))
+            {
+                return RedirectToActionPermanent(nameof(DetailsBySlug), new { slug = job.Slug });
+            }
+
+            // Nếu không có slug, hiển thị chi tiết như bình thường
             var relatedJobs = await _jobRepository.GetRelatedJobsAsync(job.CompanyId);
             var relatedJobDtos = relatedJobs.Where(j => j.Id != id).Take(3).Select(j => new JobDto
             {
@@ -204,14 +212,33 @@ namespace WorkFinder.Web.Controllers
                 Logo = j.Company?.Logo
             }).ToList();
 
-            // Lấy thông tin resume của user hiện tại nếu đã đăng nhập
+            // Lấy thông tin resume và kiểm tra nếu đã apply
             Resume? userResume = null;
+            bool hasApplied = false;
+            DateTime? previouslyAppliedDate = null;
+            
             if (User.Identity.IsAuthenticated)
             {
                 var user = await _authService.GetCurrentUserAsync();
                 if (user != null)
                 {
                     userResume = await _resumeRepository.GetResumeByUserIdAsync(user.Id);
+                    hasApplied = await _jobRepository.HasUserAppliedToJobAsync(id, user.Id);
+                    
+                    // Nếu đã apply, lấy thời gian apply gần nhất
+                    if (hasApplied)
+                    {
+                        var application = await _jobRepository.GetUserLatestApplicationAsync(id, user.Id);
+                        if (application != null)
+                        {
+                            previouslyAppliedDate = application.AppliedDate;
+                            
+                            // Kiểm tra xem đã qua 1 ngày chưa
+                            var daysSinceLastApply = (DateTime.UtcNow - application.AppliedDate).TotalDays;
+                            ViewBag.DaysSinceLastApply = daysSinceLastApply;
+                            ViewBag.CanReapply = daysSinceLastApply >= 1;
+                        }
+                    }
                 }
             }
 
@@ -221,6 +248,7 @@ namespace WorkFinder.Web.Controllers
                 // Thông tin công việc
                 Id = job.Id,
                 Title = job.Title,
+                Slug = job.Slug,
                 Description = job.Description,
                 Requirements = job.Requirements,
                 Benefits = job.Benefits,
@@ -254,9 +282,120 @@ namespace WorkFinder.Web.Controllers
                 RelatedJobs = relatedJobDtos,
 
                 // Resume hiện có
-                UserResume = userResume
+                UserResume = userResume,
+                
+                // Thông tin apply
+                HasApplied = hasApplied,
+                PreviouslyAppliedDate = previouslyAppliedDate
             };
             return View(viewModel);
+        }
+
+        // get job details by slug
+        [HttpGet("details/{slug}")]
+        public async Task<IActionResult> DetailsBySlug(string slug)
+        {
+            var job = await _jobRepository.GetJobBySlugAsync(slug);
+            if (job == null)
+                return NotFound();
+
+            var relatedJobs = await _jobRepository.GetRelatedJobsAsync(job.CompanyId);
+            var relatedJobDtos = relatedJobs.Where(j => j.Id != job.Id).Take(3).Select(j => new JobDto
+            {
+                Id = j.Id,
+                Title = j.Title,
+                Description = j.Description,
+                Requirements = j.Requirements,
+                Benefits = j.Benefits,
+                Location = j.Location,
+                SalaryMin = j.SalaryMin,
+                SalaryMax = j.SalaryMax,
+                JobType = j.JobType.ToString(),
+                ExperienceLevelName = j.ExperienceLevel.ToString(),
+                ExpiryDate = j.ExpiryDate,
+                IsActive = j.IsActive,
+                CompanyId = j.CompanyId,
+                CompanyName = j.Company?.Name,
+                Logo = j.Company?.Logo
+            }).ToList();
+
+            // Lấy thông tin resume và kiểm tra nếu đã apply
+            Resume? userResume = null;
+            bool hasApplied = false;
+            DateTime? previouslyAppliedDate = null;
+            
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = await _authService.GetCurrentUserAsync();
+                if (user != null)
+                {
+                    userResume = await _resumeRepository.GetResumeByUserIdAsync(user.Id);
+                    hasApplied = await _jobRepository.HasUserAppliedToJobAsync(job.Id, user.Id);
+                    
+                    // Nếu đã apply, lấy thời gian apply gần nhất
+                    if (hasApplied)
+                    {
+                        var application = await _jobRepository.GetUserLatestApplicationAsync(job.Id, user.Id);
+                        if (application != null)
+                        {
+                            previouslyAppliedDate = application.AppliedDate;
+                            
+                            // Kiểm tra xem đã qua 1 ngày chưa
+                            var daysSinceLastApply = (DateTime.UtcNow - application.AppliedDate).TotalDays;
+                            ViewBag.DaysSinceLastApply = daysSinceLastApply;
+                            ViewBag.CanReapply = daysSinceLastApply >= 1;
+                        }
+                    }
+                }
+            }
+
+            // Tạo ViewModel
+            var viewModel = new JobDetailViewModel
+            {
+                // Thông tin công việc
+                Id = job.Id,
+                Title = job.Title,
+                Slug = job.Slug,
+                Description = job.Description,
+                Requirements = job.Requirements,
+                Benefits = job.Benefits,
+                Location = job.Location,
+                SalaryMin = job.SalaryMin,
+                SalaryMax = job.SalaryMax,
+                JobType = job.JobType.ToString(),
+                ExperienceLevelName = job.ExperienceLevel.ToString(),
+                ExpiryDate = job.ExpiryDate,
+                IsActive = job.IsActive,
+                CreatedAt = job.CreatedAt,
+                PostedDate = job.CreatedAt,
+
+                // Thông tin danh mục
+                Categories = job.Categories.Select(c => c.Category.Name).ToList(),
+
+                // Thông tin công ty
+                CompanyId = job.CompanyId,
+                CompanyName = job.Company.Name,
+                CompanyLogo = job.Company.Logo,
+                CompanyDescription = job.Company.Description,
+                CompanyWebsite = job.Company.Website,
+                CompanyLocation = job.Company.Location,
+                CompanyEmployeeCount = job.Company.EmployeeCount,
+                CompanyIndustry = job.Company.Industry,
+                CompanyIsVerified = job.Company.IsVerified,
+                Email = "career@" + job.Company.Website.Replace("https://", "").Replace("http://", ""),
+                Phone = "(406) 555-0120", // Giả định hoặc lấy từ thông tin công ty
+
+                // Job liên quan
+                RelatedJobs = relatedJobDtos,
+
+                // Resume hiện có
+                UserResume = userResume,
+                
+                // Thông tin apply
+                HasApplied = hasApplied,
+                PreviouslyAppliedDate = previouslyAppliedDate
+            };
+            return View("Details", viewModel);
         }
 
         [HttpPost]
@@ -283,10 +422,43 @@ namespace WorkFinder.Web.Controllers
 
             // Kiểm tra xem user đã apply job này chưa bằng repository
             bool hasApplied = await _jobRepository.HasUserAppliedToJobAsync(id, applicantId);
+            
             if (hasApplied)
             {
-                TempData["ErrorMessage"] = "You have already applied to this job.";
-                return RedirectToAction(nameof(Details), new { id });
+                // Kiểm tra thời gian apply gần nhất
+                var previousApplication = await _jobRepository.GetUserLatestApplicationAsync(id, applicantId);
+                if (previousApplication != null)
+                {
+                    var daysSinceLastApply = (DateTime.UtcNow - previousApplication.AppliedDate).TotalDays;
+                    
+                    // Nếu chưa đủ 1 ngày, không cho apply lại
+                    if (daysSinceLastApply < 1)
+                    {
+                        var hoursRemaining = (24 - (DateTime.UtcNow - previousApplication.AppliedDate).TotalHours);
+                        TempData["ErrorMessage"] = $"You can apply again after 24 hours. Please wait {hoursRemaining:F1} more hour(s).";
+                        return RedirectToAction(nameof(Details), new { id });
+                    }
+                    
+                    // Nếu đủ 1 ngày, cập nhật application cũ
+                    previousApplication.CoverLetter = model.CoverLetter;
+                    previousApplication.UpdatedAt = DateTime.UtcNow;
+                    previousApplication.AppliedDate = DateTime.UtcNow;
+                    previousApplication.Status = ApplicationStatus.Applied; // Reset status to Applied
+                    
+                    await _jobRepository.UpdateJobApplicationAsync(previousApplication);
+                    
+                    TempData["SuccessMessage"] = "Your application has been updated successfully!";
+                    
+                    // Lấy job để kiểm tra xem có slug không
+                    var jobFound = await _jobRepository.GetJobWithDetailsAsync(id);
+                    if (jobFound != null && !string.IsNullOrEmpty(jobFound.Slug))
+                    {
+                        // Nếu có slug, chuyển hướng đến URL thân thiện với SEO
+                        return RedirectToAction(nameof(DetailsBySlug), new { slug = jobFound.Slug });
+                    }
+                    
+                    return RedirectToAction(nameof(Details), new { id });
+                }
             }
 
             // Xác định đường dẫn đến resume
@@ -364,14 +536,16 @@ namespace WorkFinder.Web.Controllers
                 }
             }
 
-            // Tạo job application
+            // Tạo job application mới
             var jobApplication = new JobApplication
             {
                 JobId = id,
                 ApplicantId = applicantId,
                 CoverLetter = model.CoverLetter,
                 Status = ApplicationStatus.Applied,
-                AppliedDate = DateTime.UtcNow
+                AppliedDate = DateTime.UtcNow,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
             };
 
             // Lưu job application vào database
@@ -379,9 +553,174 @@ namespace WorkFinder.Web.Controllers
 
             // Success message and redirect
             TempData["SuccessMessage"] = "Your application has been submitted successfully!";
+            
+            // Lấy job để kiểm tra xem có slug không
+            var jobFound = await _jobRepository.GetJobWithDetailsAsync(id);
+            if (jobFound != null && !string.IsNullOrEmpty(jobFound.Slug))
+            {
+                // Nếu có slug, chuyển hướng đến URL thân thiện với SEO
+                return RedirectToAction(nameof(DetailsBySlug), new { slug = jobFound.Slug });
+            }
+            
             return RedirectToAction(nameof(Details), new { id });
         }
 
+        [HttpPost]
+        [Authorize] // Yêu cầu đăng nhập để gửi application
+        [Route("Apply/s/{slug}")]
+        public async Task<IActionResult> ApplyBySlug(string slug, JobApplicationDto model)
+        {
+            if (!ModelState.IsValid)
+            {
+                // Return to the job details page with validation errors
+                TempData["ErrorMessage"] = "Please fill all required fields correctly.";
+                return RedirectToAction(nameof(DetailsBySlug), new { slug });
+            }
+
+            // Lấy thông tin user hiện tại
+            var user = await _authService.GetCurrentUserAsync();
+            if (user == null)
+            {
+                TempData["ErrorMessage"] = "Unable to identify user. Please try again.";
+                return RedirectToAction(nameof(DetailsBySlug), new { slug });
+            }
+
+            // Lấy job từ slug
+            var jobInfo = await _jobRepository.GetJobBySlugAsync(slug);
+            if (jobInfo == null)
+            {
+                TempData["ErrorMessage"] = "Job not found.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            int applicantId = user.Id;
+            int jobId = jobInfo.Id;
+
+            // Kiểm tra xem user đã apply job này chưa bằng repository
+            bool hasApplied = await _jobRepository.HasUserAppliedToJobAsync(jobId, applicantId);
+            
+            if (hasApplied)
+            {
+                // Kiểm tra thời gian apply gần nhất
+                var previousApplication = await _jobRepository.GetUserLatestApplicationAsync(jobId, applicantId);
+                if (previousApplication != null)
+                {
+                    var daysSinceLastApply = (DateTime.UtcNow - previousApplication.AppliedDate).TotalDays;
+                    
+                    // Nếu chưa đủ 1 ngày, không cho apply lại
+                    if (daysSinceLastApply < 1)
+                    {
+                        var hoursRemaining = (24 - (DateTime.UtcNow - previousApplication.AppliedDate).TotalHours);
+                        TempData["ErrorMessage"] = $"You can apply again after 24 hours. Please wait {hoursRemaining:F1} more hour(s).";
+                        return RedirectToAction(nameof(DetailsBySlug), new { slug });
+                    }
+                    
+                    // Nếu đủ 1 ngày, cập nhật application cũ
+                    previousApplication.CoverLetter = model.CoverLetter;
+                    previousApplication.UpdatedAt = DateTime.UtcNow;
+                    previousApplication.AppliedDate = DateTime.UtcNow;
+                    previousApplication.Status = ApplicationStatus.Applied; // Reset status to Applied
+                    
+                    await _jobRepository.UpdateJobApplicationAsync(previousApplication);
+                    
+                    TempData["SuccessMessage"] = "Your application has been updated successfully!";
+                    return RedirectToAction(nameof(DetailsBySlug), new { slug });
+                }
+            }
+
+            // Xác định đường dẫn đến resume
+            string resumeFileUrl;
+
+            if (model.UseExistingResume)
+            {
+                // Sử dụng resume đã có
+                var existingResume = await _resumeRepository.GetResumeByUserIdAsync(applicantId);
+                if (existingResume == null || string.IsNullOrEmpty(existingResume.FileUrl))
+                {
+                    TempData["ErrorMessage"] = "No resume found. Please upload a resume.";
+                    return RedirectToAction(nameof(DetailsBySlug), new { slug });
+                }
+
+                resumeFileUrl = existingResume.FileUrl;
+            }
+            else
+            {
+                // Upload resume mới
+                if (model.ResumeFile == null || model.ResumeFile.Length == 0)
+                {
+                    TempData["ErrorMessage"] = "Resume file is required.";
+                    return RedirectToAction(nameof(DetailsBySlug), new { slug });
+                }
+
+                // Tạo tên file duy nhất bằng cách kết hợp GUID với tên file gốc
+                var fileName = $"{Guid.NewGuid()}_{Path.GetFileName(model.ResumeFile.FileName)}";
+                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "resumes");
+
+                // Ensure directory exists
+                if (!Directory.Exists(uploadsFolder))
+                    Directory.CreateDirectory(uploadsFolder);
+
+                var filePath = Path.Combine(uploadsFolder, fileName);
+
+                // Save file
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await model.ResumeFile.CopyToAsync(fileStream);
+                }
+
+                resumeFileUrl = $"/uploads/resumes/{fileName}";
+
+                // Kiểm tra xem user đã có resume chưa, nếu chưa thì tạo mới
+                if (!await _resumeRepository.UserHasResumeAsync(applicantId))
+                {
+                    var resume = new Resume
+                    {
+                        UserId = applicantId,
+                        FileUrl = resumeFileUrl,
+                        Summary = "", // Default empty values
+                        Skills = "",
+                        Education = "",
+                        Experience = "",
+                        Certifications = "",
+                        Languages = ""
+                    };
+
+                    await _resumeRepository.AddResumeAsync(resume);
+                }
+                else
+                {
+                    // Cập nhật FileUrl cho resume hiện có
+                    var existingResume = await _resumeRepository.GetResumeByUserIdAsync(applicantId);
+                    if (existingResume != null)
+                    {
+                        existingResume.FileUrl = resumeFileUrl;
+                        await _resumeRepository.UpdateAsync(existingResume);
+                        await _resumeRepository.SaveChangesAsync();
+                    }
+                }
+            }
+
+            // Tạo job application
+            var jobApplication = new JobApplication
+            {
+                JobId = jobId,
+                ApplicantId = applicantId,
+                CoverLetter = model.CoverLetter,
+                Status = ApplicationStatus.Applied,
+                AppliedDate = DateTime.UtcNow,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
+            };
+
+            // Lưu job application vào database
+            await _jobRepository.AddJobApplicationAsync(jobApplication);
+
+            // Success message and redirect
+            TempData["SuccessMessage"] = "Your application has been submitted successfully!";
+            
+            // Không cần phải check lại slug, vì đã có slug sẵn trong tham số
+            return RedirectToAction(nameof(DetailsBySlug), new { slug });
+        }
 
         // get job by company id
         [HttpGet("company/{id}")]
@@ -514,5 +853,4 @@ namespace WorkFinder.Web.Controllers
             return PartialView("_JobListPartial", jobDtos);
         }
     }
-
 }

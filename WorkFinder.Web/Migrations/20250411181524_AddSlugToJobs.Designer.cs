@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using WorkFinder.Web.Data;
@@ -11,9 +12,11 @@ using WorkFinder.Web.Data;
 namespace WorkFinder.Web.Migrations
 {
     [DbContext(typeof(WorkFinderContext))]
-    partial class WorkFinderContextModelSnapshot : ModelSnapshot
+    [Migration("20250411181524_AddSlugToJobs")]
+    partial class AddSlugToJobs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

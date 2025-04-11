@@ -9,6 +9,7 @@ using WorkFinder.Web.Models;
 using WorkFinder.Web.Models.Enums;
 using WorkFinder.Web.Repositories;
 using Microsoft.Extensions.Logging;
+using WorkFinder.Web.Extensions;
 
 namespace WorkFinder.Web.Areas.Employer.Controllers
 {
@@ -246,6 +247,7 @@ namespace WorkFinder.Web.Areas.Employer.Controllers
             return new Job
             {
                 Title = model.Title,
+                Slug = model.Title.ToSlug(),
                 Description = model.Description,
                 Requirements = model.Responsibilities,
                 JobType = jobType,

@@ -12,5 +12,6 @@ namespace WorkFinder.Web.Models.ViewModels
         public string CompanyName { get; set; }
         public DateTime DateAdded { get; set; }
         public string? CompanyLogo { get; internal set; }
+        public DateTime ExpiryDate { get; set; }
     }
 }

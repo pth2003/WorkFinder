@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Reflection;
 using WorkFinder.Web.BackgroundServices;
 using WorkFinder.Web.Services;
+using WorkFinder.Web.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -232,4 +233,36 @@ using (var scope = app.Services.CreateScope())
         logger.LogError(ex, "An error occurred while seeding roles");
     }
 }
+
+// Cập nhật slug cho các job hiện có
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        var dbContext = services.GetRequiredService<WorkFinderContext>();
+        
+        var jobsWithoutSlug = await dbContext.Jobs.Where(j => string.IsNullOrEmpty(j.Slug)).ToListAsync();
+        if (jobsWithoutSlug.Any())
+        {
+            logger.LogInformation($"Found {jobsWithoutSlug.Count} jobs without slug. Updating...");
+            
+            foreach (var job in jobsWithoutSlug)
+            {
+                job.Slug = job.Title.ToSlug();
+                dbContext.Update(job);
+            }
+            
+            await dbContext.SaveChangesAsync();
+            logger.LogInformation("Slug update completed.");
+        }
+    }
+    catch (Exception ex)
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred while updating job slugs");
+    }
+}
+
 app.Run();

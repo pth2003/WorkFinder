@@ -89,9 +89,39 @@
                                 }
                                 else {
 <div class="action-buttons mt-3">
-                                    <button class="btn btn-primary apply-btn" data-bs-toggle="modal" data-bs-target="#applyJobModal">Apply Now <i class="fas fa-arrow-right ms-1"></i></button>
-                                    <button id="saveJobBtn" class="btn btn-outline-secondary ms-2" data-job-id="@Model.Id"><i id="saveJobIcon" class="far fa-bookmark"></i> <span id="saveJobText">Save</span></button>
-                                </div>
+    <div class="d-flex align-items-center">
+        @if (Model.HasApplied)
+        {
+            @if (ViewBag.CanReapply == true)
+            {
+                <button class="btn btn-primary apply-btn me-2" data-bs-toggle="modal" data-bs-target="#applyJobModal">
+                    Apply Again <i class="fa-solid fa-rotate-left ms-1"></i>
+                </button>
+            }
+            else
+            {
+                <button class="btn btn-secondary me-2" disabled title="You can apply again after 24 hours">
+                    Apply Again <i class="fa-solid fa-clock ms-1"></i>
+                </button>
+            }
+        }
+        else
+        {
+            <button class="btn btn-primary apply-btn me-2" data-bs-toggle="modal" data-bs-target="#applyJobModal">
+                Apply Now <i class="fas fa-arrow-right ms-1"></i>
+            </button>
+        }
+        <button id="saveJobBtn" class="btn btn-outline-secondary" data-job-id="@Model.Id">
+            <i id="saveJobIcon" class="far fa-bookmark"></i> <span id="saveJobText">Save</span>
+        </button>
+    </div>
+    @if (Model.HasApplied)
+    {
+        <div class="previously-applied mt-2 text-muted">
+            <small><i class="fas fa-info-circle me-1"></i> You previously applied on @Model.FormattedPreviouslyAppliedDate</small>
+        </div>
+    }
+</div>
                                 }
                             
                             </div>
@@ -354,11 +384,36 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="applyJobModalLabel">Apply for @Model.Title</h5>
+        @if (Model.HasApplied)
+        {
+          <h5 class="modal-title" id="applyJobModalLabel">Apply Again for @Model.Title</h5>
+        }
+        else
+        {
+          <h5 class="modal-title" id="applyJobModalLabel">Apply for @Model.Title</h5>
+        }
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form id="applyJobForm" method="post" action="/Job/Apply/@Model.Id" enctype="multipart/form-data">
+        @if (Model.HasApplied)
+        {
+          <div class="alert alert-info mb-3">
+            <i class="fas fa-info-circle me-2"></i>
+            @if (ViewBag.CanReapply == true)
+            {
+              <span>You previously applied for this job on @Model.FormattedPreviouslyAppliedDate. Applying again will <strong>replace</strong> your previous application with this new one.</span>
+            }
+            else
+            {
+              <span>You recently applied for this job on @Model.FormattedPreviouslyAppliedDate. You can apply again after 24 hours. 
+              @{
+                var hoursRemaining = Math.Round((24 - ViewBag.DaysSinceLastApply * 24), 1);
+              }
+              Please wait <strong>@hoursRemaining hour(s)</strong> before applying again.</span>
+            }
+          </div>
+        }
+        <form id="applyJobForm" method="post" action="@(string.IsNullOrEmpty(Model.Slug) ? $"/Job/Apply/{Model.Id}" : $"/Job/Apply/s/{Model.Slug}")" enctype="multipart/form-data">
           <div class="mb-3">
             <label for="coverLetter" class="form-label">Cover Letter</label>
             <textarea class="form-control" id="coverLetter" name="coverLetter" rows="5" required>I am excited to apply for this position and believe my skills in [your key skills] make me a strong candidate. I am particularly interested in...</textarea>
@@ -410,7 +465,14 @@
           </div>
           
           <div class="d-grid">
-            <button type="submit" class="btn btn-primary">Submit Application</button>
+            @if (Model.HasApplied && ViewBag.CanReapply == false)
+            {
+              <button type="button" class="btn btn-secondary" disabled>Please wait before applying again</button>
+            }
+            else
+            {
+              <button type="submit" class="btn btn-primary">Submit Application</button>
+            }
           </div>
         </form>
       </div>

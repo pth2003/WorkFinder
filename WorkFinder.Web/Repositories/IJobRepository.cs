@@ -45,6 +45,12 @@ namespace WorkFinder.Web.Repositories
         /// <returns></returns>
         Task<Job> GetJobWithDetailsAsync(int id);
         /// <summary>
+        /// Phương thức mới để lấy công việc theo slug
+        /// </summary>
+        /// <param name="slug">Slug URL của công việc</param>
+        /// <returns>Job với các thông tin chi tiết</returns>
+        Task<Job> GetJobBySlugAsync(string slug);
+        /// <summary>
         /// Phương thức mới để lấy công việc phân trang cơ bản
         /// </summary>
         /// <param name="keyword"></param>
@@ -148,5 +154,20 @@ namespace WorkFinder.Web.Repositories
         /// <param name="pageSize"></param>
         /// <returns></returns>
         Task<List<JobApplication>> GetJobApplicationsByUserIdAsync(int userId, int page = 1, int pageSize = 10);
+
+        /// <summary>
+        /// Lấy thông tin lần apply gần nhất của user cho một job cụ thể
+        /// </summary>
+        /// <param name="jobId">ID của công việc</param>
+        /// <param name="userId">ID của người dùng</param>
+        /// <returns>Thông tin lần apply gần nhất hoặc null nếu chưa từng apply</returns>
+        Task<JobApplication?> GetUserLatestApplicationAsync(int jobId, int userId);
+
+        /// <summary>
+        /// Cập nhật thông tin JobApplication
+        /// </summary>
+        /// <param name="application">JobApplication cần cập nhật</param>
+        /// <returns>Task</returns>
+        Task UpdateJobApplicationAsync(JobApplication application);
     }
 }

@@ -15,6 +15,7 @@ public class Job : BaseEntity
     public ExperienceLevel ExperienceLevel { get; set; }
     public DateTime ExpiryDate { get; set; }
     public bool IsActive { get; set; }
+    public string Slug { get; set; }
 
     // Thêm trường metadata để lưu trữ dữ liệu bổ sung có thể được serialize/deserialize
     public string Metadata { get; set; } = "{}";

@@ -98,6 +98,22 @@ namespace WorkFinder.Web.Repositories
                     .ThenInclude(jc => jc.Category)
                 .FirstOrDefaultAsync();
         }
+
+        /// <summary>
+        /// Phương thức để lấy công việc theo slug
+        /// </summary>
+        /// <param name="slug">Slug URL của công việc</param>
+        /// <returns>Job với các thông tin chi tiết</returns>
+        public async Task<Job> GetJobBySlugAsync(string slug)
+        {
+            return await _context.Jobs
+                .Where(j => j.Slug == slug)
+                .Include(j => j.Company)
+                .Include(j => j.Categories)
+                    .ThenInclude(jc => jc.Category)
+                .FirstOrDefaultAsync();
+        }
+
         /// <summary>
         /// Phương thức mới để lấy công việc phân trang cơ bản
         /// </summary>
@@ -567,6 +583,47 @@ namespace WorkFinder.Web.Repositories
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"Error retrieving job applications for user ID {userId}");
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Lấy thông tin lần apply gần nhất của user cho một job cụ thể
+        /// </summary>
+        /// <param name="jobId">ID của công việc</param>
+        /// <param name="userId">ID của người dùng</param>
+        /// <returns>Thông tin lần apply gần nhất hoặc null nếu chưa từng apply</returns>
+        public async Task<JobApplication?> GetUserLatestApplicationAsync(int jobId, int userId)
+        {
+            try
+            {
+                return await _context.JobApplications
+                    .Where(a => a.JobId == jobId && a.ApplicantId == userId)
+                    .OrderByDescending(a => a.AppliedDate)
+                    .FirstOrDefaultAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error retrieving latest job application for user ID {userId} and job ID {jobId}");
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Cập nhật thông tin JobApplication
+        /// </summary>
+        /// <param name="application">JobApplication cần cập nhật</param>
+        /// <returns>Task</returns>
+        public async Task UpdateJobApplicationAsync(JobApplication application)
+        {
+            try
+            {
+                _context.JobApplications.Update(application);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error updating job application: {application.Id}");
                 throw;
             }
         }

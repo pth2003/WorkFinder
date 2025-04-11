@@ -183,7 +183,8 @@ namespace WorkFinder.Web.Controllers
                             Salary = GetFormattedSalary(job.SalaryMin, job.SalaryMax),
                             CompanyName = job.Company?.Name ?? "Unknown Company",
                             CompanyLogo = companyLogo,
-                            DateAdded = savedJob.SavedDate
+                            DateAdded = savedJob.SavedDate,
+                            ExpiryDate = job.ExpiryDate
                         });
                     }
                 }

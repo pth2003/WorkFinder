@@ -23,6 +23,8 @@ namespace WorkFinder.Web.Models.ViewModels
         public bool IsActive { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime PostedDate { get; set; }
+        public string Slug { get; set; }
+        
         // Thông tin nâng cao
         public string SalaryRange => $"{SalaryMin:C0}-{SalaryMax:C0}/month";
         public int DaysRemaining => Math.Max(0, (ExpiryDate - DateTime.Now).Days);
@@ -46,5 +48,14 @@ namespace WorkFinder.Web.Models.ViewModels
 
         // Resume hiện có của user
         public Resume? UserResume { get; set; }
+        
+        // Thông tin về trạng thái đã apply
+        public bool HasApplied { get; set; }
+        public DateTime? PreviouslyAppliedDate { get; set; }
+        
+        // Format ngày apply
+        public string FormattedPreviouslyAppliedDate => PreviouslyAppliedDate.HasValue 
+            ? PreviouslyAppliedDate.Value.ToString("dd MMM yyyy 'at' HH:mm") 
+            : string.Empty;
     }
 }
