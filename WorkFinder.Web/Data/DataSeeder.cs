@@ -9,6 +9,9 @@ public static class DataSeeder
 {
     public static async Task SeedData(WorkFinderContext context, UserManager<ApplicationUser> userManager, bool resetData = false)
     {
+        // Luôn đảm bảo có một tài khoản Admin, bất kể database đã có dữ liệu hay chưa
+        await EnsureAdminUserCreated(userManager);
+
         // Nếu yêu cầu reset dữ liệu, xóa toàn bộ dữ liệu hiện có trước
         if (resetData)
         {
@@ -54,6 +57,87 @@ public static class DataSeeder
         else
         {
             Console.WriteLine("Database already contains data, skipping initialization.");
+        }
+    }
+
+    // Phương thức đảm bảo tài khoản Admin luôn tồn tại trong database
+    private static async Task EnsureAdminUserCreated(UserManager<ApplicationUser> userManager)
+    {
+        try
+        {
+            // Thông tin tài khoản admin
+            string adminEmail = "admin@workfinder.com";
+            string adminPassword = "Admin@123456";
+
+            Console.WriteLine("Ensuring admin user exists...");
+
+            // Kiểm tra xem tài khoản admin đã tồn tại chưa
+            var adminUser = await userManager.FindByEmailAsync(adminEmail);
+
+            if (adminUser == null)
+            {
+                // Tạo tài khoản admin mới nếu chưa tồn tại
+                adminUser = new ApplicationUser
+                {
+                    UserName = adminEmail,
+                    Email = adminEmail,
+                    EmailConfirmed = true,
+                    FirstName = "System",
+                    LastName = "Administrator"
+                };
+
+                var result = await userManager.CreateAsync(adminUser, adminPassword);
+
+                if (result.Succeeded)
+                {
+                    Console.WriteLine($"Admin user ({adminEmail}) created successfully.");
+
+                    // Kiểm tra xem role Admin đã tồn tại chưa
+                    if (!await userManager.IsInRoleAsync(adminUser, "Admin"))
+                    {
+                        // Thêm role Admin cho tài khoản admin
+                        result = await userManager.AddToRoleAsync(adminUser, "Admin");
+
+                        if (result.Succeeded)
+                        {
+                            Console.WriteLine("Admin role assigned successfully.");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Failed to assign Admin role: {string.Join(", ", result.Errors.Select(e => e.Description))}");
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"Failed to create admin user: {string.Join(", ", result.Errors.Select(e => e.Description))}");
+                }
+            }
+            else
+            {
+                // Kiểm tra xem admin đã có role Admin chưa
+                if (!await userManager.IsInRoleAsync(adminUser, "Admin"))
+                {
+                    var result = await userManager.AddToRoleAsync(adminUser, "Admin");
+
+                    if (result.Succeeded)
+                    {
+                        Console.WriteLine("Admin role assigned to existing user.");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Failed to assign Admin role: {string.Join(", ", result.Errors.Select(e => e.Description))}");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Admin user already exists with Admin role.");
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error ensuring admin user exists: {ex.Message}");
         }
     }
 

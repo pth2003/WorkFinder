@@ -271,7 +271,22 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-// Seed Data
+// Initialize Roles
+using (var scope = app.Services.CreateScope())
+{
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    await RoleInitializer.InitializeAsync(roleManager);
+}
+
+// Ensure Admin user exists
+using (var scope = app.Services.CreateScope())
+{
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+    var dbContext = scope.ServiceProvider.GetRequiredService<WorkFinderContext>();
+    await DataSeeder.SeedData(dbContext, userManager, false);
+}
+
+// Seed Data nếu được chỉ định
 if (args.Length > 0 && args[0].ToLower() == "seeddata")
 {
     bool resetData = args.Length > 1 && args[1].ToLower() == "reset";
