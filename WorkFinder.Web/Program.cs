@@ -153,7 +153,8 @@ if (app.Environment.IsProduction())
 
             // Seed data
             var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-            await WorkFinder.Web.Data.DataSeeder.SeedData(dbContext, userManager);
+            var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole<int>>>();
+            await WorkFinder.Web.Data.DataSeeder.SeedData(dbContext, userManager, roleManager);
             Console.WriteLine("Database seeded successfully.");
         }
         catch (Exception ex)
@@ -274,7 +275,7 @@ using (var scope = app.Services.CreateScope())
 // Initialize Roles
 using (var scope = app.Services.CreateScope())
 {
-    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole<int>>>();
     await RoleInitializer.InitializeAsync(roleManager);
 }
 
@@ -282,8 +283,9 @@ using (var scope = app.Services.CreateScope())
 using (var scope = app.Services.CreateScope())
 {
     var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole<int>>>();
     var dbContext = scope.ServiceProvider.GetRequiredService<WorkFinderContext>();
-    await DataSeeder.SeedData(dbContext, userManager, false);
+    await DataSeeder.SeedData(dbContext, userManager, roleManager, false);
 }
 
 // Seed Data nếu được chỉ định
@@ -298,7 +300,8 @@ if (args.Length > 0 && args[0].ToLower() == "seeddata")
     {
         var dbContext = scope.ServiceProvider.GetRequiredService<WorkFinderContext>();
         var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-        await DataSeeder.SeedData(dbContext, userManager, resetData);
+        var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole<int>>>();
+        await DataSeeder.SeedData(dbContext, userManager, roleManager, resetData);
     }
 }
 

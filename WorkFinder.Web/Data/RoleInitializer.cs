@@ -4,7 +4,7 @@ namespace WorkFinder.Web.Data;
 
 public static class RoleInitializer
 {
-    public static async Task InitializeAsync(RoleManager<IdentityRole> roleManager)
+    public static async Task InitializeAsync(RoleManager<IdentityRole<int>> roleManager)
     {
         // Danh sách các role cần khởi tạo
         string[] roleNames = { "Admin", "Employer", "Candidate" };
@@ -16,7 +16,7 @@ public static class RoleInitializer
             if (!roleExists)
             {
                 // Tạo role mới
-                var role = new IdentityRole(roleName);
+                var role = new IdentityRole<int>(roleName);
                 var result = await roleManager.CreateAsync(role);
 
                 if (result.Succeeded)

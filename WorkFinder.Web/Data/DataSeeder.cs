@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using WorkFinder.Web.Models;
 using WorkFinder.Web.Models.Enums;
 
@@ -7,10 +8,10 @@ namespace WorkFinder.Web.Data;
 // Data/DataSeeder.cs
 public static class DataSeeder
 {
-    public static async Task SeedData(WorkFinderContext context, UserManager<ApplicationUser> userManager, bool resetData = false)
+    public static async Task SeedData(WorkFinderContext context, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole<int>> roleManager = null, bool resetData = false)
     {
         // Luôn đảm bảo có một tài khoản Admin, bất kể database đã có dữ liệu hay chưa
-        await EnsureAdminUserCreated(userManager);
+        await EnsureAdminUserCreated(userManager, roleManager);
 
         // Nếu yêu cầu reset dữ liệu, xóa toàn bộ dữ liệu hiện có trước
         if (resetData)
@@ -61,7 +62,7 @@ public static class DataSeeder
     }
 
     // Phương thức đảm bảo tài khoản Admin luôn tồn tại trong database
-    private static async Task EnsureAdminUserCreated(UserManager<ApplicationUser> userManager)
+    private static async Task EnsureAdminUserCreated(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole<int>> roleManager)
     {
         try
         {
@@ -92,6 +93,9 @@ public static class DataSeeder
                 {
                     Console.WriteLine($"Admin user ({adminEmail}) created successfully.");
 
+                    // Kiểm tra và chắc chắn role Admin tồn tại trong database
+                    await EnsureRoleExists(roleManager, "Admin");
+
                     // Kiểm tra xem role Admin đã tồn tại chưa
                     if (!await userManager.IsInRoleAsync(adminUser, "Admin"))
                     {
@@ -115,6 +119,9 @@ public static class DataSeeder
             }
             else
             {
+                // Kiểm tra và chắc chắn role Admin tồn tại trong database
+                await EnsureRoleExists(roleManager, "Admin");
+
                 // Kiểm tra xem admin đã có role Admin chưa
                 if (!await userManager.IsInRoleAsync(adminUser, "Admin"))
                 {
@@ -138,6 +145,45 @@ public static class DataSeeder
         catch (Exception ex)
         {
             Console.WriteLine($"Error ensuring admin user exists: {ex.Message}");
+        }
+    }
+
+    // Phương thức kiểm tra và tạo role nếu chưa tồn tại
+    private static async Task EnsureRoleExists(RoleManager<IdentityRole<int>> roleManager, string roleName)
+    {
+        if (roleManager == null)
+        {
+            Console.WriteLine("RoleManager is not available. Cannot check or create roles.");
+            return;
+        }
+
+        try
+        {
+            // Kiểm tra xem role đã tồn tại chưa
+            var roleExists = await roleManager.RoleExistsAsync(roleName);
+            if (!roleExists)
+            {
+                // Tạo role mới
+                var role = new IdentityRole<int>(roleName);
+                var result = await roleManager.CreateAsync(role);
+
+                if (result.Succeeded)
+                {
+                    Console.WriteLine($"Role '{roleName}' created successfully.");
+                }
+                else
+                {
+                    Console.WriteLine($"Failed to create role '{roleName}': {string.Join(", ", result.Errors.Select(e => e.Description))}");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"Role '{roleName}' already exists.");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error ensuring role exists: {ex.Message}");
         }
     }
 
