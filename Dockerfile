@@ -1,23 +1,19 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
-# Copy và restore packages
-COPY *.sln .
-COPY WorkFinder.Web/*.csproj ./WorkFinder.Web/
-RUN dotnet restore
+# Copy csproj và restore dependencies
+COPY ["WorkFinder.Web/WorkFinder.Web.csproj", "WorkFinder.Web/"]
+RUN dotnet restore "WorkFinder.Web/WorkFinder.Web.csproj"
 
-# Copy và build app
+# Copy everything else and build
 COPY . .
-RUN dotnet publish -c Release -o out
+RUN dotnet build "WorkFinder.Web/WorkFinder.Web.csproj" -c Release
+RUN dotnet publish "WorkFinder.Web/WorkFinder.Web.csproj" -c Release -o /app/publish
 
 # Build runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
-COPY --from=build /app/out .
-
-# Hiển thị các biến môi trường khi container khởi chạy
-ENV ASPNETCORE_URLS=http://+:${PORT:-8080}
-ENV ASPNETCORE_ENVIRONMENT=Production
+COPY --from=build /app/publish .
 
 # Set biến db connection
 ENV PGHOST=dpg-cvnbinpr0fns73eqerg0-a
@@ -26,7 +22,11 @@ ENV PGDATABASE=workfinder
 ENV PGUSER=workfinder_user
 ENV PGPASSWORD=e0bZbW1EBBAoGGoUFJDJPByrzUURyKHJ
 
-# Expose port (for documentation, Render ignores this)
+# Hiển thị các biến môi trường khi container khởi chạy
+ENV ASPNETCORE_URLS=http://+:${PORT:-8080}
+ENV ASPNETCORE_ENVIRONMENT=Production
+
+# Expose port
 EXPOSE ${PORT:-8080}
 
 # Start command
