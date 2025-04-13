@@ -7,6 +7,8 @@ RUN dotnet restore "WorkFinder.Web/WorkFinder.Web.csproj"
 
 # Copy everything else and build
 COPY . .
+# Copy SQL file to the root directory for seeding
+COPY WorkFinder.sql ./WorkFinder.sql
 RUN dotnet build "WorkFinder.Web/WorkFinder.Web.csproj" -c Release
 RUN dotnet publish "WorkFinder.Web/WorkFinder.Web.csproj" -c Release -o /app/publish
 
