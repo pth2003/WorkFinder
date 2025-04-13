@@ -245,10 +245,8 @@ namespace WorkFinder.Web.Controllers
             // Tạo ViewModel
             var viewModel = new JobDetailViewModel
             {
-                // Thông tin công việc
                 Id = job.Id,
                 Title = job.Title,
-                Slug = job.Slug,
                 Description = job.Description,
                 Requirements = job.Requirements,
                 Benefits = job.Benefits,
@@ -261,12 +259,10 @@ namespace WorkFinder.Web.Controllers
                 IsActive = job.IsActive,
                 CreatedAt = job.CreatedAt,
                 PostedDate = job.CreatedAt,
-
-                // Thông tin danh mục
-                Categories = job.Categories.Select(c => c.Category.Name).ToList(),
+                Slug = job.Slug,
 
                 // Thông tin công ty
-                CompanyId = job.CompanyId,
+                CompanyId = job.Company.Id,
                 CompanyName = job.Company.Name,
                 CompanyLogo = job.Company.Logo,
                 CompanyDescription = job.Company.Description,
@@ -275,19 +271,30 @@ namespace WorkFinder.Web.Controllers
                 CompanyEmployeeCount = job.Company.EmployeeCount,
                 CompanyIndustry = job.Company.Industry,
                 CompanyIsVerified = job.Company.IsVerified,
-                Email = "career@" + job.Company.Website.Replace("https://", "").Replace("http://", ""),
-                Phone = "(406) 555-0120", // Giả định hoặc lấy từ thông tin công ty
+                Phone = job.Company.Phone,
+                Email = job.Company.Email,
 
-                // Job liên quan
+                // Danh mục
+                Categories = job.Categories.Select(c => c.Category.Name).ToList(),
+
+                // Related jobs
                 RelatedJobs = relatedJobDtos,
 
-                // Resume hiện có
+                // Resume của user (nếu có)
                 UserResume = userResume,
 
-                // Thông tin apply
+                // Thông tin đã apply
                 HasApplied = hasApplied,
                 PreviouslyAppliedDate = previouslyAppliedDate
             };
+
+            // Đảm bảo ViewBag.DaysSinceLastApply và ViewBag.CanReapply có giá trị mặc định
+            if (!hasApplied || ViewBag.DaysSinceLastApply == null)
+            {
+                ViewBag.DaysSinceLastApply = 0;
+                ViewBag.CanReapply = false;
+            }
+
             return View(viewModel);
         }
 
@@ -352,10 +359,8 @@ namespace WorkFinder.Web.Controllers
             // Tạo ViewModel
             var viewModel = new JobDetailViewModel
             {
-                // Thông tin công việc
                 Id = job.Id,
                 Title = job.Title,
-                Slug = job.Slug,
                 Description = job.Description,
                 Requirements = job.Requirements,
                 Benefits = job.Benefits,
@@ -368,12 +373,10 @@ namespace WorkFinder.Web.Controllers
                 IsActive = job.IsActive,
                 CreatedAt = job.CreatedAt,
                 PostedDate = job.CreatedAt,
-
-                // Thông tin danh mục
-                Categories = job.Categories.Select(c => c.Category.Name).ToList(),
+                Slug = job.Slug,
 
                 // Thông tin công ty
-                CompanyId = job.CompanyId,
+                CompanyId = job.Company.Id,
                 CompanyName = job.Company.Name,
                 CompanyLogo = job.Company.Logo,
                 CompanyDescription = job.Company.Description,
@@ -382,19 +385,30 @@ namespace WorkFinder.Web.Controllers
                 CompanyEmployeeCount = job.Company.EmployeeCount,
                 CompanyIndustry = job.Company.Industry,
                 CompanyIsVerified = job.Company.IsVerified,
-                Email = "career@" + job.Company.Website.Replace("https://", "").Replace("http://", ""),
-                Phone = "(406) 555-0120", // Giả định hoặc lấy từ thông tin công ty
+                Phone = job.Company.Phone,
+                Email = job.Company.Email,
 
-                // Job liên quan
+                // Danh mục
+                Categories = job.Categories.Select(c => c.Category.Name).ToList(),
+
+                // Related jobs
                 RelatedJobs = relatedJobDtos,
 
-                // Resume hiện có
+                // Resume của user (nếu có)
                 UserResume = userResume,
 
-                // Thông tin apply
+                // Thông tin đã apply
                 HasApplied = hasApplied,
                 PreviouslyAppliedDate = previouslyAppliedDate
             };
+
+            // Đảm bảo ViewBag.DaysSinceLastApply và ViewBag.CanReapply có giá trị mặc định
+            if (!hasApplied || ViewBag.DaysSinceLastApply == null)
+            {
+                ViewBag.DaysSinceLastApply = 0;
+                ViewBag.CanReapply = false;
+            }
+
             return View("Details", viewModel);
         }
 

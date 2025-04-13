@@ -54,22 +54,22 @@
                 {
                     <text>
                         saveJobButtons.each(function() {
-                                const button = $(this);
+                                    const button = $(this);
                         const jobId = button.data('job-id');
 
                         $.ajax({
                             url: '/SavedJob/check/' + jobId,
                         type: 'GET',
                         success: function (result) {
-                                        if (result.isSaved) {
+                                            if (result.isSaved) {
                             updateSaveButton(button, true);
-                                        }
-                                    },
+                                            }
+                                        },
                         error: function(xhr) {
                             console.error('Error checking job', jobId, xhr);
-                                    }
+                                        }
+                                    });
                                 });
-                            });
                     </text>
             }
 
