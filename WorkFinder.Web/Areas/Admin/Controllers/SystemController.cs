@@ -13,17 +13,20 @@ namespace WorkFinder.Web.Areas.Admin.Controllers
     {
         private readonly WorkFinderContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<IdentityRole<int>> _roleManager;
         private readonly IWebHostEnvironment _environment;
         private readonly ILogger<SystemController> _logger;
 
         public SystemController(
             WorkFinderContext context,
             UserManager<ApplicationUser> userManager,
+            RoleManager<IdentityRole<int>> roleManager,
             IWebHostEnvironment environment,
             ILogger<SystemController> logger)
         {
             _context = context;
             _userManager = userManager;
+            _roleManager = roleManager;
             _environment = environment;
             _logger = logger;
         }
@@ -62,7 +65,7 @@ namespace WorkFinder.Web.Areas.Admin.Controllers
             {
                 _logger.LogWarning("Database reset initiated by admin user: {User}", User.Identity.Name);
 
-                await DataSeeder.SeedData(_context, _userManager, true);
+                await DataSeeder.SeedData(_context, _userManager, _roleManager, true);
 
                 TempData["SuccessMessage"] = "Database đã được reset và seed lại thành công.";
             }
@@ -82,7 +85,7 @@ namespace WorkFinder.Web.Areas.Admin.Controllers
             {
                 _logger.LogInformation("Fresh data seeding initiated by admin user: {User}", User.Identity.Name);
 
-                await DataSeeder.SeedData(_context, _userManager, false);
+                await DataSeeder.SeedData(_context, _userManager, _roleManager, false);
 
                 TempData["SuccessMessage"] = "Dữ liệu mới đã được thêm vào database thành công.";
             }
