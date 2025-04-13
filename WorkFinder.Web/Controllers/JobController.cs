@@ -184,7 +184,7 @@ namespace WorkFinder.Web.Controllers
             var job = await _jobRepository.GetJobWithDetailsAsync(id);
             if (job == null)
                 return NotFound();
-                
+
             // Nếu job có slug, chuyển hướng đến URL thân thiện với SEO
             if (!string.IsNullOrEmpty(job.Slug))
             {
@@ -216,7 +216,7 @@ namespace WorkFinder.Web.Controllers
             Resume? userResume = null;
             bool hasApplied = false;
             DateTime? previouslyAppliedDate = null;
-            
+
             if (User.Identity.IsAuthenticated)
             {
                 var user = await _authService.GetCurrentUserAsync();
@@ -224,7 +224,7 @@ namespace WorkFinder.Web.Controllers
                 {
                     userResume = await _resumeRepository.GetResumeByUserIdAsync(user.Id);
                     hasApplied = await _jobRepository.HasUserAppliedToJobAsync(id, user.Id);
-                    
+
                     // Nếu đã apply, lấy thời gian apply gần nhất
                     if (hasApplied)
                     {
@@ -232,7 +232,7 @@ namespace WorkFinder.Web.Controllers
                         if (application != null)
                         {
                             previouslyAppliedDate = application.AppliedDate;
-                            
+
                             // Kiểm tra xem đã qua 1 ngày chưa
                             var daysSinceLastApply = (DateTime.UtcNow - application.AppliedDate).TotalDays;
                             ViewBag.DaysSinceLastApply = daysSinceLastApply;
@@ -283,7 +283,7 @@ namespace WorkFinder.Web.Controllers
 
                 // Resume hiện có
                 UserResume = userResume,
-                
+
                 // Thông tin apply
                 HasApplied = hasApplied,
                 PreviouslyAppliedDate = previouslyAppliedDate
@@ -292,7 +292,7 @@ namespace WorkFinder.Web.Controllers
         }
 
         // get job details by slug
-        [HttpGet("details/{slug}")]
+        [HttpGet("Details/{slug}")]
         public async Task<IActionResult> DetailsBySlug(string slug)
         {
             var job = await _jobRepository.GetJobBySlugAsync(slug);
@@ -323,7 +323,7 @@ namespace WorkFinder.Web.Controllers
             Resume? userResume = null;
             bool hasApplied = false;
             DateTime? previouslyAppliedDate = null;
-            
+
             if (User.Identity.IsAuthenticated)
             {
                 var user = await _authService.GetCurrentUserAsync();
@@ -331,7 +331,7 @@ namespace WorkFinder.Web.Controllers
                 {
                     userResume = await _resumeRepository.GetResumeByUserIdAsync(user.Id);
                     hasApplied = await _jobRepository.HasUserAppliedToJobAsync(job.Id, user.Id);
-                    
+
                     // Nếu đã apply, lấy thời gian apply gần nhất
                     if (hasApplied)
                     {
@@ -339,7 +339,7 @@ namespace WorkFinder.Web.Controllers
                         if (application != null)
                         {
                             previouslyAppliedDate = application.AppliedDate;
-                            
+
                             // Kiểm tra xem đã qua 1 ngày chưa
                             var daysSinceLastApply = (DateTime.UtcNow - application.AppliedDate).TotalDays;
                             ViewBag.DaysSinceLastApply = daysSinceLastApply;
@@ -390,7 +390,7 @@ namespace WorkFinder.Web.Controllers
 
                 // Resume hiện có
                 UserResume = userResume,
-                
+
                 // Thông tin apply
                 HasApplied = hasApplied,
                 PreviouslyAppliedDate = previouslyAppliedDate
@@ -422,7 +422,7 @@ namespace WorkFinder.Web.Controllers
 
             // Kiểm tra xem user đã apply job này chưa bằng repository
             bool hasApplied = await _jobRepository.HasUserAppliedToJobAsync(id, applicantId);
-            
+
             if (hasApplied)
             {
                 // Kiểm tra thời gian apply gần nhất
@@ -430,7 +430,7 @@ namespace WorkFinder.Web.Controllers
                 if (previousApplication != null)
                 {
                     var daysSinceLastApply = (DateTime.UtcNow - previousApplication.AppliedDate).TotalDays;
-                    
+
                     // Nếu chưa đủ 1 ngày, không cho apply lại
                     if (daysSinceLastApply < 1)
                     {
@@ -438,25 +438,23 @@ namespace WorkFinder.Web.Controllers
                         TempData["ErrorMessage"] = $"You can apply again after 24 hours. Please wait {hoursRemaining:F1} more hour(s).";
                         return RedirectToAction(nameof(Details), new { id });
                     }
-                    
+
                     // Nếu đủ 1 ngày, cập nhật application cũ
                     previousApplication.CoverLetter = model.CoverLetter;
                     previousApplication.UpdatedAt = DateTime.UtcNow;
                     previousApplication.AppliedDate = DateTime.UtcNow;
                     previousApplication.Status = ApplicationStatus.Applied; // Reset status to Applied
-                    
+
                     await _jobRepository.UpdateJobApplicationAsync(previousApplication);
-                    
+
                     TempData["SuccessMessage"] = "Your application has been updated successfully!";
-                    
-                    // Lấy job để kiểm tra xem có slug không
-                    var jobFound = await _jobRepository.GetJobWithDetailsAsync(id);
-                    if (jobFound != null && !string.IsNullOrEmpty(jobFound.Slug))
+
+                    // Kiểm tra và chuyển hướng
+                    Job jobTemp = await _jobRepository.GetJobWithDetailsAsync(id);
+                    if (jobTemp != null && !string.IsNullOrEmpty(jobTemp.Slug))
                     {
-                        // Nếu có slug, chuyển hướng đến URL thân thiện với SEO
-                        return RedirectToAction(nameof(DetailsBySlug), new { slug = jobFound.Slug });
+                        return RedirectToAction(nameof(DetailsBySlug), new { slug = jobTemp.Slug });
                     }
-                    
                     return RedirectToAction(nameof(Details), new { id });
                 }
             }
@@ -553,15 +551,13 @@ namespace WorkFinder.Web.Controllers
 
             // Success message and redirect
             TempData["SuccessMessage"] = "Your application has been submitted successfully!";
-            
-            // Lấy job để kiểm tra xem có slug không
-            var jobFound = await _jobRepository.GetJobWithDetailsAsync(id);
-            if (jobFound != null && !string.IsNullOrEmpty(jobFound.Slug))
+
+            // Kiểm tra và chuyển hướng
+            Job jobTemp = await _jobRepository.GetJobWithDetailsAsync(id);
+            if (jobTemp != null && !string.IsNullOrEmpty(jobTemp.Slug))
             {
-                // Nếu có slug, chuyển hướng đến URL thân thiện với SEO
-                return RedirectToAction(nameof(DetailsBySlug), new { slug = jobFound.Slug });
+                return RedirectToAction(nameof(DetailsBySlug), new { slug = jobTemp.Slug });
             }
-            
             return RedirectToAction(nameof(Details), new { id });
         }
 
@@ -598,7 +594,7 @@ namespace WorkFinder.Web.Controllers
 
             // Kiểm tra xem user đã apply job này chưa bằng repository
             bool hasApplied = await _jobRepository.HasUserAppliedToJobAsync(jobId, applicantId);
-            
+
             if (hasApplied)
             {
                 // Kiểm tra thời gian apply gần nhất
@@ -606,7 +602,7 @@ namespace WorkFinder.Web.Controllers
                 if (previousApplication != null)
                 {
                     var daysSinceLastApply = (DateTime.UtcNow - previousApplication.AppliedDate).TotalDays;
-                    
+
                     // Nếu chưa đủ 1 ngày, không cho apply lại
                     if (daysSinceLastApply < 1)
                     {
@@ -614,15 +610,15 @@ namespace WorkFinder.Web.Controllers
                         TempData["ErrorMessage"] = $"You can apply again after 24 hours. Please wait {hoursRemaining:F1} more hour(s).";
                         return RedirectToAction(nameof(DetailsBySlug), new { slug });
                     }
-                    
+
                     // Nếu đủ 1 ngày, cập nhật application cũ
                     previousApplication.CoverLetter = model.CoverLetter;
                     previousApplication.UpdatedAt = DateTime.UtcNow;
                     previousApplication.AppliedDate = DateTime.UtcNow;
                     previousApplication.Status = ApplicationStatus.Applied; // Reset status to Applied
-                    
+
                     await _jobRepository.UpdateJobApplicationAsync(previousApplication);
-                    
+
                     TempData["SuccessMessage"] = "Your application has been updated successfully!";
                     return RedirectToAction(nameof(DetailsBySlug), new { slug });
                 }
@@ -717,7 +713,7 @@ namespace WorkFinder.Web.Controllers
 
             // Success message and redirect
             TempData["SuccessMessage"] = "Your application has been submitted successfully!";
-            
+
             // Không cần phải check lại slug, vì đã có slug sẵn trong tham số
             return RedirectToAction(nameof(DetailsBySlug), new { slug });
         }
