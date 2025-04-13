@@ -150,6 +150,11 @@ if (app.Environment.IsProduction())
         {
             dbContext.Database.Migrate();
             Console.WriteLine("Database migrations applied successfully.");
+
+            // Seed data
+            var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            await Data.DataSeeder.SeedData(dbContext, userManager);
+            Console.WriteLine("Database seeded successfully.");
         }
         catch (Exception ex)
         {
