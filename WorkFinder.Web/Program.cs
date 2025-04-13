@@ -153,7 +153,7 @@ if (app.Environment.IsProduction())
 
             // Seed data
             var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-            await Data.DataSeeder.SeedData(dbContext, userManager);
+            await WorkFinder.Web.Data.DataSeeder.SeedData(dbContext, userManager);
             Console.WriteLine("Database seeded successfully.");
         }
         catch (Exception ex)
