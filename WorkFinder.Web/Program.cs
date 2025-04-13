@@ -192,7 +192,6 @@ app.UseRoleAuthorization();
 // Thêm middleware kiểm tra và chuyển hướng Employer
 app.UseEmployerSetup();
 
-app.MapStaticAssets();
 // Thêm route riêng cho Auth area
 app.MapControllerRoute(
     name: "auth",
@@ -208,8 +207,8 @@ app.MapControllerRoute(
 // Route mặc định cho JobSeeker 
 app.MapControllerRoute(
         name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}")
-    .WithStaticAssets();
+        pattern: "{controller=Home}/{action=Index}/{id?}"
+);
 // Khởi tạo roles
 using (var scope = app.Services.CreateScope())
 {
@@ -242,18 +241,18 @@ using (var scope = app.Services.CreateScope())
     {
         var logger = services.GetRequiredService<ILogger<Program>>();
         var dbContext = services.GetRequiredService<WorkFinderContext>();
-        
+
         var jobsWithoutSlug = await dbContext.Jobs.Where(j => string.IsNullOrEmpty(j.Slug)).ToListAsync();
         if (jobsWithoutSlug.Any())
         {
             logger.LogInformation($"Found {jobsWithoutSlug.Count} jobs without slug. Updating...");
-            
+
             foreach (var job in jobsWithoutSlug)
             {
                 job.Slug = job.Title.ToSlug();
                 dbContext.Update(job);
             }
-            
+
             await dbContext.SaveChangesAsync();
             logger.LogInformation("Slug update completed.");
         }
