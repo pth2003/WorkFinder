@@ -1,0 +1,160 @@
+@model WorkFinder.Web.Areas.Admin.Controllers.DatabaseManagementViewModel
+@{
+    ViewData["Title"] = "Quản lý Database";
+    Layout = "_AdminLayout";
+}
+
+<div class="container-fluid">
+    <h1 class="h3 mb-4 text-gray-800">Quản lý Database</h1>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="fas fa-check-circle mr-2"></i> @TempData["SuccessMessage"]
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="fas fa-exclamation-circle mr-2"></i> @TempData["ErrorMessage"]
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+    }
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Thống kê dữ liệu</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <span class="text-primary font-weight-bold">Số lượng người dùng:</span>
+                                <span class="badge badge-info">@Model.UserCount</span>
+                            </div>
+                            <div class="mb-3">
+                                <span class="text-primary font-weight-bold">Số lượng công ty:</span>
+                                <span class="badge badge-info">@Model.CompanyCount</span>
+                            </div>
+                            <div class="mb-3">
+                                <span class="text-primary font-weight-bold">Số lượng danh mục:</span>
+                                <span class="badge badge-info">@Model.CategoriesCount</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <span class="text-primary font-weight-bold">Số lượng việc làm:</span>
+                                <span class="badge badge-info">@Model.JobCount</span>
+                            </div>
+                            <div class="mb-3">
+                                <span class="text-primary font-weight-bold">Số lượng ứng tuyển:</span>
+                                <span class="badge badge-info">@Model.ApplicationCount</span>
+                            </div>
+                            <div class="mb-3">
+                                <span class="text-primary font-weight-bold">File SQL:</span>
+                                @if (Model.SqlFileExists)
+                                {
+                                        <span class="badge badge-success">Đã tìm thấy</span>
+                                }
+                                else
+                                {
+                                        <span class="badge badge-danger">Không tìm thấy</span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Thao tác database</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card mb-3">
+                                <div class="card-header bg-success text-white">
+                                    <i class="fas fa-database mr-1"></i> Thêm dữ liệu mới
+                                </div>
+                                <div class="card-body">
+                                    <p>Thêm dữ liệu mới từ file SQL mà không xóa dữ liệu hiện có.</p>
+                                    <form asp-action="SeedFreshData" method="post">
+                                        <button type="submit" class="btn btn-success btn-sm">
+                                            <i class="fas fa-plus-circle mr-1"></i> Thêm dữ liệu
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mb-3">
+                                <div class="card-header bg-danger text-white">
+                                    <i class="fas fa-exclamation-triangle mr-1"></i> Reset Database
+                                </div>
+                                <div class="card-body">
+                                    <p class="text-danger font-weight-bold">CẢNH BÁO: Thao tác này sẽ xóa toàn bộ dữ liệu hiện có!</p>
+                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#resetConfirmModal">
+                                        <i class="fas fa-trash mr-1"></i> Reset Database
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Reset Confirmation Modal -->
+<div class="modal fade" id="resetConfirmModal" tabindex="-1" role="dialog" aria-labelledby="resetConfirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="resetConfirmModalLabel">Xác nhận Reset Database</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger">
+                    <i class="fas fa-exclamation-triangle mr-2"></i> <strong>CẢNH BÁO:</strong> Thao tác này sẽ xóa <u>toàn bộ dữ liệu</u> trong hệ thống và thực hiện seed lại từ đầu. Hành động này <strong>không thể hoàn tác</strong>!
+                </div>
+                <p>Để xác nhận, hãy nhập "CONFIRM_RESET" vào ô bên dưới:</p>
+                <form id="resetForm" asp-action="ResetDatabase" method="post">
+                    <div class="form-group">
+                        <input type="text" id="confirmReset" name="confirmReset" class="form-control" placeholder="Nhập CONFIRM_RESET để xác nhận" required />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy bỏ</button>
+                <button type="button" class="btn btn-danger" onclick="document.getElementById('resetForm').submit();">
+                    <i class="fas fa-trash mr-1"></i> Reset Database
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+        <script>
+            $(function () {
+                // Ẩn thông báo sau 5 giây
+                setTimeout(function () {
+                    $('.alert').alert('close');
+                }, 5000);
+            });
+        </script>
+}

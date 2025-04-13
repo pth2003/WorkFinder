@@ -7,10 +7,17 @@ namespace WorkFinder.Web.Data;
 // Data/DataSeeder.cs
 public static class DataSeeder
 {
-    public static async Task SeedData(WorkFinderContext context, UserManager<ApplicationUser> userManager)
+    public static async Task SeedData(WorkFinderContext context, UserManager<ApplicationUser> userManager, bool resetData = false)
     {
+        // Nếu yêu cầu reset dữ liệu, xóa toàn bộ dữ liệu hiện có trước
+        if (resetData)
+        {
+            await ResetDatabase(context);
+            Console.WriteLine("Database has been reset. Now seeding fresh data...");
+        }
+
         // Kiểm tra xem database có dữ liệu không
-        if (!context.Users.Any() && !context.Companies.Any() && !context.Jobs.Any())
+        if (resetData || (!context.Users.Any() && !context.Companies.Any() && !context.Jobs.Any()))
         {
             try
             {
@@ -47,6 +54,87 @@ public static class DataSeeder
         else
         {
             Console.WriteLine("Database already contains data, skipping initialization.");
+        }
+    }
+
+    // Phương thức để reset toàn bộ dữ liệu trong database
+    private static async Task ResetDatabase(WorkFinderContext context)
+    {
+        try
+        {
+            Console.WriteLine("Starting database reset...");
+
+            // Tạo và thực thi các lệnh SQL để xóa dữ liệu từ các bảng
+            // Lưu ý: Thứ tự xóa quan trọng để tránh lỗi khóa ngoại
+            string[] deleteCommands = new string[]
+            {
+                "DELETE FROM \"job_applications\"",
+                "DELETE FROM \"saved_jobs\"",
+                "DELETE FROM \"job_categories\"",
+                "DELETE FROM \"jobs\"",
+                "DELETE FROM \"resumes\"",
+                "DELETE FROM \"companies\"",
+                "DELETE FROM \"categories\"",
+                "DELETE FROM \"AspNetUserRoles\"",
+                "DELETE FROM \"AspNetUserLogins\"",
+                "DELETE FROM \"AspNetUserClaims\"",
+                "DELETE FROM \"AspNetUserTokens\"",
+                "DELETE FROM \"AspNetRoleClaims\"",
+                "DELETE FROM \"AspNetRoles\"",
+                "DELETE FROM \"users\"" // Đổi tên bảng nếu cần thiết
+            };
+
+            // Vô hiệu hóa ràng buộc khóa ngoại tạm thời
+            await context.Database.ExecuteSqlRawAsync("SET CONSTRAINTS ALL DEFERRED;");
+
+            foreach (var command in deleteCommands)
+            {
+                try
+                {
+                    await context.Database.ExecuteSqlRawAsync(command);
+                    Console.WriteLine($"Executed: {command}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error executing '{command}': {ex.Message}");
+                }
+            }
+
+            // Khôi phục các ràng buộc khóa ngoại
+            await context.Database.ExecuteSqlRawAsync("SET CONSTRAINTS ALL IMMEDIATE;");
+
+            // Reset các sequence (chỉ dành cho PostgreSQL)
+            string[] resetSequenceCommands = new string[]
+            {
+                "SELECT setval('\"users_Id_seq\"', 1, false)",
+                "SELECT setval('\"companies_Id_seq\"', 1, false)",
+                "SELECT setval('\"jobs_Id_seq\"', 1, false)",
+                "SELECT setval('\"categories_Id_seq\"', 1, false)",
+                "SELECT setval('\"job_categories_Id_seq\"', 1, false)",
+                "SELECT setval('\"job_applications_Id_seq\"', 1, false)",
+                "SELECT setval('\"saved_jobs_Id_seq\"', 1, false)",
+                "SELECT setval('\"resumes_Id_seq\"', 1, false)"
+            };
+
+            foreach (var command in resetSequenceCommands)
+            {
+                try
+                {
+                    await context.Database.ExecuteSqlRawAsync(command);
+                    Console.WriteLine($"Executed: {command}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error resetting sequence: {ex.Message}");
+                }
+            }
+
+            Console.WriteLine("Database reset completed.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Failed to reset database: {ex.Message}");
+            throw;
         }
     }
 

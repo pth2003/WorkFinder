@@ -1,0 +1,122 @@
+@{
+    ViewData["Title"] = "Quản lý hệ thống";
+    Layout = "_AdminLayout";
+}
+
+<div class="container-fluid">
+    <h1 class="h3 mb-4 text-gray-800">Quản lý hệ thống</h1>
+
+    <div class="row">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Database Management
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">Quản lý Database</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-database fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+                <a href="@Url.Action("DatabaseManagement", "System", new { area = "Admin" })" class="stretched-link"></a>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                System Settings
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">Cài đặt hệ thống</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-cogs fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="stretched-link"></a>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                Backup & Restore
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">Sao lưu & Phục hồi</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-save fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="stretched-link"></a>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                Logs & Monitoring
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">Nhật ký & Giám sát</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-chart-line fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="stretched-link"></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Thông tin hệ thống</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <strong>ASP.NET Core Version:</strong> @Environment.Version
+                            </div>
+                            <div class="mb-3">
+                                <strong>Operating System:</strong> @Environment.OSVersion
+                            </div>
+                            <div class="mb-3">
+                                <strong>Machine Name:</strong> @Environment.MachineName
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <strong>Server Time:</strong> @DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+                            </div>
+                            <div class="mb-3">
+                                <strong>Server UTC Time:</strong> @DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss")
+                            </div>
+                            <div class="mb-3">
+                                <strong>Application Path:</strong> @AppDomain.CurrentDomain.BaseDirectory
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

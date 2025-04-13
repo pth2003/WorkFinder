@@ -271,4 +271,20 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
+// Seed Data
+if (args.Length > 0 && args[0].ToLower() == "seeddata")
+{
+    bool resetData = args.Length > 1 && args[1].ToLower() == "reset";
+    Console.WriteLine("Seeding data...");
+    Console.WriteLine(resetData ? "Reset mode enabled. Database will be cleared first." : "Standard seeding mode.");
+
+    var scopeFactory = app.Services.GetRequiredService<IServiceScopeFactory>();
+    using (var scope = scopeFactory.CreateScope())
+    {
+        var dbContext = scope.ServiceProvider.GetRequiredService<WorkFinderContext>();
+        var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+        await DataSeeder.SeedData(dbContext, userManager, resetData);
+    }
+}
+
 app.Run();
