@@ -9,22 +9,22 @@
 
     @if (TempData["SuccessMessage"] != null)
     {
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <i class="fas fa-check-circle mr-2"></i> @TempData["SuccessMessage"]
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle mr-2"></i> @TempData["SuccessMessage"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
     }
 
     @if (TempData["ErrorMessage"] != null)
     {
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <i class="fas fa-exclamation-circle mr-2"></i> @TempData["ErrorMessage"]
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-circle mr-2"></i> @TempData["ErrorMessage"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
     }
 
     <div class="row">
@@ -62,11 +62,11 @@
                                 <span class="text-primary font-weight-bold">File SQL:</span>
                                 @if (Model.SqlFileExists)
                                 {
-                                        <span class="badge badge-success">Đã tìm thấy</span>
+                                    <span class="badge badge-success">Đã tìm thấy</span>
                                 }
                                 else
                                 {
-                                        <span class="badge badge-danger">Không tìm thấy</span>
+                                    <span class="badge badge-danger">Không tìm thấy</span>
                                 }
                             </div>
                         </div>
@@ -103,10 +103,31 @@
                                     <i class="fas fa-exclamation-triangle mr-1"></i> Reset Database
                                 </div>
                                 <div class="card-body">
-                                    <p class="text-danger font-weight-bold">CẢNH BÁO: Thao tác này sẽ xóa toàn bộ dữ liệu hiện có!</p>
-                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#resetConfirmModal">
+                                    <p class="text-danger font-weight-bold">CẢNH BÁO: Thao tác này sẽ xóa toàn bộ dữ
+                                        liệu hiện có!</p>
+                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
+                                        data-target="#resetConfirmModal">
                                         <i class="fas fa-trash mr-1"></i> Reset Database
                                     </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <div class="card mb-3">
+                                <div class="card-header bg-primary text-white">
+                                    <i class="fas fa-user-shield mr-1"></i> Tài khoản Admin
+                                </div>
+                                <div class="card-body">
+                                    <p>Đặt lại tài khoản admin với quyền đầy đủ và mật khẩu mặc định.</p>
+                                    <form asp-action="ResetAdminAccount" method="post">
+                                        <button type="submit" class="btn btn-primary btn-sm">
+                                            <i class="fas fa-sync mr-1"></i> Reset Admin Account
+                                        </button>
+                                    </form>
+                                    <p class="small mt-2 mb-0 text-muted">Email: admin@pth.com / Password: Admin@123456
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -118,7 +139,8 @@
 </div>
 
 <!-- Reset Confirmation Modal -->
-<div class="modal fade" id="resetConfirmModal" tabindex="-1" role="dialog" aria-labelledby="resetConfirmModalLabel" aria-hidden="true">
+<div class="modal fade" id="resetConfirmModal" tabindex="-1" role="dialog" aria-labelledby="resetConfirmModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header bg-danger text-white">
@@ -129,12 +151,15 @@
             </div>
             <div class="modal-body">
                 <div class="alert alert-danger">
-                    <i class="fas fa-exclamation-triangle mr-2"></i> <strong>CẢNH BÁO:</strong> Thao tác này sẽ xóa <u>toàn bộ dữ liệu</u> trong hệ thống và thực hiện seed lại từ đầu. Hành động này <strong>không thể hoàn tác</strong>!
+                    <i class="fas fa-exclamation-triangle mr-2"></i> <strong>CẢNH BÁO:</strong> Thao tác này sẽ xóa
+                    <u>toàn bộ dữ liệu</u> trong hệ thống và thực hiện seed lại từ đầu. Hành động này <strong>không thể
+                        hoàn tác</strong>!
                 </div>
                 <p>Để xác nhận, hãy nhập "CONFIRM_RESET" vào ô bên dưới:</p>
                 <form id="resetForm" asp-action="ResetDatabase" method="post">
                     <div class="form-group">
-                        <input type="text" id="confirmReset" name="confirmReset" class="form-control" placeholder="Nhập CONFIRM_RESET để xác nhận" required />
+                        <input type="text" id="confirmReset" name="confirmReset" class="form-control"
+                            placeholder="Nhập CONFIRM_RESET để xác nhận" required />
                     </div>
                 </form>
             </div>
@@ -149,12 +174,12 @@
 </div>
 
 @section Scripts {
-        <script>
-            $(function () {
-                // Ẩn thông báo sau 5 giây
-                setTimeout(function () {
-                    $('.alert').alert('close');
-                }, 5000);
-            });
-        </script>
+    <script>
+        $(function () {
+            // Ẩn thông báo sau 5 giây
+            setTimeout(function () {
+                $('.alert').alert('close');
+            }, 5000);
+        });
+    </script>
 }

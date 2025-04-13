@@ -786,4 +786,33 @@ public class AccountController : Controller
             }
         }
     }
+
+    [Authorize]
+    [HttpGet("account/check-role")]
+    public async Task<IActionResult> CheckUserRole()
+    {
+        var user = await _userManager.GetUserAsync(User);
+        if (user == null)
+        {
+            return NotFound("Người dùng không tồn tại");
+        }
+
+        var userRoles = await _userManager.GetRolesAsync(user);
+
+        var viewModel = new
+        {
+            UserId = user.Id,
+            Email = user.Email,
+            UserName = user.UserName,
+            FirstName = user.FirstName,
+            LastName = user.LastName,
+            Roles = userRoles,
+            IsAdmin = userRoles.Contains("Admin"),
+            IsEmployer = userRoles.Contains("Employer"),
+            IsCandidate = userRoles.Contains("Candidate"),
+            AllClaims = User.Claims.Select(c => new { c.Type, c.Value })
+        };
+
+        return Json(viewModel);
+    }
 }

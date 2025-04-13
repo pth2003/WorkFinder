@@ -97,6 +97,84 @@ namespace WorkFinder.Web.Areas.Admin.Controllers
 
             return RedirectToAction(nameof(DatabaseManagement));
         }
+
+        [HttpPost]
+        public async Task<IActionResult> ResetAdminAccount()
+        {
+            try
+            {
+                string adminEmail = "admin@pth.com";
+                string newPassword = "Admin@123456";
+
+                _logger.LogWarning("Admin account reset initiated by user: {User}", User.Identity.Name);
+
+                // Tìm tài khoản admin
+                var adminUser = await _userManager.FindByEmailAsync(adminEmail);
+                if (adminUser == null)
+                {
+                    // Tạo mới nếu không tồn tại
+                    adminUser = new ApplicationUser
+                    {
+                        UserName = adminEmail,
+                        Email = adminEmail,
+                        EmailConfirmed = true,
+                        FirstName = "System",
+                        LastName = "Administrator"
+                    };
+
+                    var createResult = await _userManager.CreateAsync(adminUser, newPassword);
+                    if (!createResult.Succeeded)
+                    {
+                        TempData["ErrorMessage"] = $"Không thể tạo tài khoản admin: {string.Join(", ", createResult.Errors.Select(e => e.Description))}";
+                        return RedirectToAction(nameof(DatabaseManagement));
+                    }
+                }
+                else
+                {
+                    // Reset mật khẩu nếu tài khoản đã tồn tại
+                    var token = await _userManager.GeneratePasswordResetTokenAsync(adminUser);
+                    var resetResult = await _userManager.ResetPasswordAsync(adminUser, token, newPassword);
+                    if (!resetResult.Succeeded)
+                    {
+                        TempData["ErrorMessage"] = $"Không thể đặt lại mật khẩu admin: {string.Join(", ", resetResult.Errors.Select(e => e.Description))}";
+                        return RedirectToAction(nameof(DatabaseManagement));
+                    }
+                }
+
+                // Đảm bảo role Admin tồn tại
+                var adminRole = await _roleManager.FindByNameAsync("Admin");
+                if (adminRole == null)
+                {
+                    var role = new IdentityRole<int>("Admin");
+                    var roleResult = await _roleManager.CreateAsync(role);
+                    if (!roleResult.Succeeded)
+                    {
+                        TempData["ErrorMessage"] = $"Không thể tạo role Admin: {string.Join(", ", roleResult.Errors.Select(e => e.Description))}";
+                        return RedirectToAction(nameof(DatabaseManagement));
+                    }
+                }
+
+                // Gán role Admin cho tài khoản admin
+                if (!await _userManager.IsInRoleAsync(adminUser, "Admin"))
+                {
+                    var addToRoleResult = await _userManager.AddToRoleAsync(adminUser, "Admin");
+                    if (!addToRoleResult.Succeeded)
+                    {
+                        TempData["ErrorMessage"] = $"Không thể gán quyền Admin: {string.Join(", ", addToRoleResult.Errors.Select(e => e.Description))}";
+                        return RedirectToAction(nameof(DatabaseManagement));
+                    }
+                }
+
+                TempData["SuccessMessage"] = $"Tài khoản admin ({adminEmail}) đã được reset thành công với mật khẩu: {newPassword}";
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error resetting admin account");
+                TempData["ErrorMessage"] = $"Lỗi khi reset tài khoản admin: {ex.Message}";
+            }
+
+            return RedirectToAction(nameof(DatabaseManagement));
+        }
     }
 
     public class DatabaseManagementViewModel
