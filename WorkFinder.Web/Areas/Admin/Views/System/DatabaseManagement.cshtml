@@ -132,6 +132,29 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <div class="card mb-3">
+                                <div class="card-header bg-danger text-white">
+                                    <i class="fas fa-exclamation-triangle mr-1"></i> Reset Database Trực tiếp
+                                </div>
+                                <div class="card-body">
+                                    <p class="text-danger"><strong>CẢNH BÁO:</strong> Thao tác này sẽ xóa toàn bộ dữ
+                                        liệu hiện có!</p>
+                                    <form asp-action="ResetDatabase" asp-controller="System" asp-area="Admin"
+                                        method="post">
+                                        <div class="form-group">
+                                            <input type="text" name="confirmReset" class="form-control mb-2"
+                                                placeholder="Nhập CONFIRM_RESET để xác nhận" required />
+                                        </div>
+                                        <button type="submit" class="btn btn-danger btn-sm">
+                                            <i class="fas fa-trash mr-1"></i> Reset Database Ngay
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -156,7 +179,7 @@
                         hoàn tác</strong>!
                 </div>
                 <p>Để xác nhận, hãy nhập "CONFIRM_RESET" vào ô bên dưới:</p>
-                <form id="resetForm" asp-action="ResetDatabase" method="post">
+                <form id="resetForm" asp-action="ResetDatabase" asp-controller="System" asp-area="Admin" method="post">
                     <div class="form-group">
                         <input type="text" id="confirmReset" name="confirmReset" class="form-control"
                             placeholder="Nhập CONFIRM_RESET để xác nhận" required />
@@ -165,7 +188,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy bỏ</button>
-                <button type="button" class="btn btn-danger" onclick="document.getElementById('resetForm').submit();">
+                <button type="submit" form="resetForm" class="btn btn-danger">
                     <i class="fas fa-trash mr-1"></i> Reset Database
                 </button>
             </div>

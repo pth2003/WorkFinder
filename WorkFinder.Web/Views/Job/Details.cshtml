@@ -407,7 +407,8 @@
             {
               <span>You recently applied for this job on @Model.FormattedPreviouslyAppliedDate. You can apply again after 24 hours. 
               @{
-                var hoursRemaining = Math.Max(0, 24 - ViewBag.DaysSinceLastApply * 24);
+                var daysSinceLastApply = ViewBag.DaysSinceLastApply ?? 0;
+                var hoursRemaining = Math.Max(0, 24 - daysSinceLastApply * 24);
               }
               Please wait <strong>@hoursRemaining.ToString("F1") hour(s)</strong> before applying again.</span>
             }

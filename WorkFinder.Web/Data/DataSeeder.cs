@@ -67,7 +67,7 @@ public static class DataSeeder
         try
         {
             // Thông tin tài khoản admin
-            string adminEmail = "admin@workfinder.com";
+            string adminEmail = "admin@pth.com";
             string adminPassword = "Admin@123456";
 
             Console.WriteLine("Ensuring admin user exists...");
