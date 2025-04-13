@@ -879,7 +879,7 @@
                 @if (!User.Identity.IsAuthenticated)
                 {
                     <text>
-                    window.location.href = '/Auth/Auth/Login?returnUrl=' + window.location.pathname + window.location.search;
+                    window.location.href = '/Auth/Login?returnUrl=' + window.location.pathname + window.location.search;
                     return;
                     </text>
                 }

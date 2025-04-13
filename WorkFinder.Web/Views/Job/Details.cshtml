@@ -83,8 +83,8 @@
                                 @if(!User.Identity.IsAuthenticated) {
                                     <div class="alert alert-info mt-3">
         <i class="fas fa-info-circle me-2"></i>
-        You need to <a href="/Auth/Auth/Login?returnUrl=@Context.Request.Path">login</a> or 
-        <a href="/Auth/Auth/Register?returnUrl=@Context.Request.Path">register</a> to apply for this job.
+        You need to <a href="/Auth/Login?returnUrl=@Context.Request.Path">login</a> or 
+        <a href="/Auth/Register?returnUrl=@Context.Request.Path">register</a> to apply for this job.
     </div>
                                 }
                                 else {
@@ -683,7 +683,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 @if (!User.Identity.IsAuthenticated)
                 {
                     <text>
-                    window.location.href = '/Auth/Auth/Login?returnUrl=' + window.location.pathname;
+                    window.location.href = '/Auth/Login?returnUrl=' + window.location.pathname;
                     return;
                     </text>
                 }
