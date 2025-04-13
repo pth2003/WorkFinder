@@ -192,6 +192,7 @@ app.UseRoleAuthorization();
 // Thêm middleware kiểm tra và chuyển hướng Employer
 app.UseEmployerSetup();
 
+app.MapStaticAssets();
 // Thêm route riêng cho Auth area
 app.MapControllerRoute(
     name: "auth",
@@ -207,8 +208,9 @@ app.MapControllerRoute(
 // Route mặc định cho JobSeeker 
 app.MapControllerRoute(
         name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}"
-);
+        pattern: "{controller=Home}/{action=Index}/{id?}")
+    .WithStaticAssets();
+
 // Khởi tạo roles
 using (var scope = app.Services.CreateScope())
 {
