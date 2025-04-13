@@ -449,11 +449,11 @@ namespace WorkFinder.Web.Controllers
 
                     TempData["SuccessMessage"] = "Your application has been updated successfully!";
 
-                    // Kiểm tra và chuyển hướng
-                    Job jobTemp = await _jobRepository.GetJobWithDetailsAsync(id);
-                    if (jobTemp != null && !string.IsNullOrEmpty(jobTemp.Slug))
+                    // Xác định redirect URL dựa trên slug của job
+                    var jobToRedirect = await _jobRepository.GetJobWithDetailsAsync(id);
+                    if (jobToRedirect != null && !string.IsNullOrEmpty(jobToRedirect.Slug))
                     {
-                        return RedirectToAction(nameof(DetailsBySlug), new { slug = jobTemp.Slug });
+                        return RedirectToAction(nameof(DetailsBySlug), new { slug = jobToRedirect.Slug });
                     }
                     return RedirectToAction(nameof(Details), new { id });
                 }
@@ -552,11 +552,11 @@ namespace WorkFinder.Web.Controllers
             // Success message and redirect
             TempData["SuccessMessage"] = "Your application has been submitted successfully!";
 
-            // Kiểm tra và chuyển hướng
-            Job jobTemp = await _jobRepository.GetJobWithDetailsAsync(id);
-            if (jobTemp != null && !string.IsNullOrEmpty(jobTemp.Slug))
+            // Xác định redirect URL dựa trên slug của job
+            var jobRedirect = await _jobRepository.GetJobWithDetailsAsync(id);
+            if (jobRedirect != null && !string.IsNullOrEmpty(jobRedirect.Slug))
             {
-                return RedirectToAction(nameof(DetailsBySlug), new { slug = jobTemp.Slug });
+                return RedirectToAction(nameof(DetailsBySlug), new { slug = jobRedirect.Slug });
             }
             return RedirectToAction(nameof(Details), new { id });
         }
@@ -714,8 +714,13 @@ namespace WorkFinder.Web.Controllers
             // Success message and redirect
             TempData["SuccessMessage"] = "Your application has been submitted successfully!";
 
-            // Không cần phải check lại slug, vì đã có slug sẵn trong tham số
-            return RedirectToAction(nameof(DetailsBySlug), new { slug });
+            // Xác định redirect URL dựa trên slug của job
+            var jobRedirect = await _jobRepository.GetJobWithDetailsAsync(jobId);
+            if (jobRedirect != null && !string.IsNullOrEmpty(jobRedirect.Slug))
+            {
+                return RedirectToAction(nameof(DetailsBySlug), new { slug = jobRedirect.Slug });
+            }
+            return RedirectToAction(nameof(Details), new { id = jobId });
         }
 
         // get job by company id
