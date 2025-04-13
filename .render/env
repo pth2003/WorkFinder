@@ -1,0 +1,5 @@
+PGHOST=dpg-cvnbinpr0fns73eqerg0-a
+PGPORT=5432
+PGDATABASE=workfinder
+PGUSER=workfinder_user
+PGPASSWORD=e0bZbW1EBBAoGGoUFJDJPByrzUURyKHJ 

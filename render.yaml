@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: workfinder
+    env: docker
+    plan: free
+    rootDir: .
+    buildCommand: ./.render/build.sh
+    startCommand: ./.render/run.sh
+    envVars:
+      - key: PGHOST
+        value: dpg-cvnbinpr0fns73eqerg0-a
+      - key: PGPORT
+        value: 5432
+      - key: PGDATABASE
+        value: workfinder
+      - key: PGUSER
+        value: workfinder_user
+      - key: PGPASSWORD
+        value: e0bZbW1EBBAoGGoUFJDJPByrzUURyKHJ
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: PORT
+        value: 10000
+    healthCheckPath: /health
