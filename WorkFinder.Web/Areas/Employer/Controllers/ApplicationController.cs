@@ -26,7 +26,6 @@ namespace WorkFinder.Web.Areas.Employer.Controllers
         private readonly ILogger<ApplicationController> _logger;
         private readonly IServiceProvider _serviceProvider;
 
-        // Chỉ có một constructor duy nhất
         public ApplicationController(
             UserManager<ApplicationUser> userManager,
             ICompanyRepository companyRepository,
@@ -147,7 +146,6 @@ namespace WorkFinder.Web.Areas.Employer.Controllers
                 // Update the status
                 application.Status = newStatusEnum;
 
-                // Sửa phương thức gọi
                 await _jobRepository.UpdateApplicationStatusAsync(application.Id, (int)newStatusEnum);
                 await _jobRepository.SaveChangesAsync();
 
@@ -201,50 +199,6 @@ namespace WorkFinder.Web.Areas.Employer.Controllers
             };
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(int applicationId)
-        {
-            try
-            {
-                var user = await _userManager.GetUserAsync(User);
-                if (user == null)
-                {
-                    return NotFound();
-                }
-
-                var company = await _companyRepository.GetByOwnerIdAsync(user.Id);
-                if (company == null)
-                {
-                    return NotFound();
-                }
-
-                // Find the application
-                var job = await _jobRepository.GetJobByApplicationIdAsync(applicationId);
-
-                if (job == null)
-                {
-                    return NotFound("Job not found");
-                }
-
-                if (job.CompanyId != company.Id)
-                {
-                    _logger.LogWarning($"Unauthorized delete: User {user.Id} attempting to delete application {applicationId} for job {job.Id} which belongs to company {job.CompanyId}");
-                    return Forbid("You don't have permission to delete this application");
-                }
-
-                // Delete the application
-                await _jobRepository.DeleteApplicationAsync(applicationId);
-                await _jobRepository.SaveChangesAsync();
-
-                return RedirectToAction(nameof(Index), new { jobId = job.Id, toastMessage = "Application deleted successfully!" });
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error deleting application");
-                return RedirectToAction(nameof(Index), new { toastMessage = "Failed to delete application." });
-            }
-        }
         [HttpGet]
         public async Task<IActionResult> GetCandidateDetailPartial(int applicationId)
         {

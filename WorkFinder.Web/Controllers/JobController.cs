@@ -424,6 +424,21 @@ namespace WorkFinder.Web.Controllers
                 return RedirectToAction(nameof(Details), new { id });
             }
 
+            // Lấy thông tin job và kiểm tra trạng thái
+            var job = await _jobRepository.GetByIdAsync(id);
+            if (job == null)
+            {
+                TempData["ErrorMessage"] = "Job not found.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            // Kiểm tra job có còn active và chưa hết hạn không
+            if (!job.IsActive || job.ExpiryDate <= DateTime.UtcNow)
+            {
+                TempData["ErrorMessage"] = "This job posting has expired or is no longer active.";
+                return RedirectToAction(nameof(Details), new { id });
+            }
+
             // Lấy thông tin user hiện tại
             var user = await _authService.GetCurrentUserAsync();
             if (user == null)
@@ -601,6 +616,13 @@ namespace WorkFinder.Web.Controllers
             {
                 TempData["ErrorMessage"] = "Job not found.";
                 return RedirectToAction(nameof(Index));
+            }
+
+            // Kiểm tra job có còn active và chưa hết hạn không
+            if (!jobInfo.IsActive || jobInfo.ExpiryDate <= DateTime.UtcNow)
+            {
+                TempData["ErrorMessage"] = "This job posting has expired or is no longer active.";
+                return RedirectToAction(nameof(DetailsBySlug), new { slug });
             }
 
             int applicantId = user.Id;

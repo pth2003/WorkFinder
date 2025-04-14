@@ -1,0 +1,648 @@
+@model WorkFinder.Web.Areas.Employer.Models.EmployerJobDetailViewModel
+@{
+    ViewData["Title"] = $"Job Details - {Model.Title}";
+    Layout = "_EmployerLayout";
+}
+
+<div class="container">
+    <div class="employers-dashboard mt-4">
+       
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header & Actions -->
+            <div class="job-detail-header">
+                <div class="d-flex justify-content-between align-items-center flex-wrap mb-2">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0">
+                            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home", new { area = "Employer" })">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Job", new { area = "Employer" })">Jobs</a></li>
+                            <li class="breadcrumb-item active">@Model.Title</li>
+                        </ol>
+                    </nav>
+                    
+                    <div class="job-status-indicator">
+                        @if (Model.IsActive)
+                        {
+                            <div class="active-status">
+                                <i class="fas fa-circle text-success me-1"></i> 
+                                <span>Active</span>
+                                <span class="expiry-info ms-2 text-muted">(@Model.DaysRemaining days remaining)</span>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="inactive-status">
+                                <i class="fas fa-circle text-warning me-1"></i> 
+                                <span>Inactive</span>
+                            </div>
+                        }
+                    </div>
+                </div>
+                
+                <div class="d-flex justify-content-between align-items-center flex-wrap mb-4">
+                    <h1 class="job-detail-title">@Model.Title</h1>
+                    <div class="action-buttons d-flex">
+                        <a href="@Url.Action("Index", "Application", new { jobId = Model.Id, area = "Employer" })" class="btn btn-primary me-2">
+                            <i class="fas fa-users me-1"></i> Applications <span class="badge rounded-pill bg-light text-primary">@Model.TotalApplications</span>
+                        </a>
+                        <div class="dropdown">
+                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-cog me-1"></i> Actions
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                    <a class="dropdown-item" href="@Url.Action("Edit", "Job", new { id = Model.Id, area = "Employer" })">
+                                        <i class="fas fa-edit me-2"></i> Edit Job
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-clone me-2"></i> Duplicate Job
+                                    </a>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                @if (Model.IsActive)
+                                {
+                                    <li>
+                                        <a class="dropdown-item text-warning" href="javascript: void(0)" 
+                                           data-bs-toggle="modal" data-bs-target="#expireModal" 
+                                           data-job-id="@Model.Id" data-job-title="@Model.Title">
+                                            <i class="fas fa-pause-circle me-2"></i> Expire Job
+                                        </a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <a class="dropdown-item text-success" href="#">
+                                            <i class="fas fa-play-circle me-2"></i> Activate Job
+                                        </a>
+                                    </li>
+                                }
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <a class="dropdown-item text-danger" href="javascript: void(0)" 
+                                       data-bs-toggle="modal" data-bs-target="#deleteModal" 
+                                       data-job-id="@Model.Id" data-job-title="@Model.Title">
+                                        <i class="fas fa-trash me-2"></i> Delete Job
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summary Card -->
+            <div class="card job-summary-card mb-4">
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-3 col-sm-6">
+                            <div class="detail-item">
+                                <div class="detail-icon"><i class="fas fa-map-marker-alt"></i></div>
+                                <div class="detail-content">
+                                    <div class="detail-label">Location</div>
+                                    <div class="detail-value">@Model.Location</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="detail-item">
+                                <div class="detail-icon"><i class="fas fa-briefcase"></i></div>
+                                <div class="detail-content">
+                                    <div class="detail-label">Job Type</div>
+                                    <div class="detail-value">@Model.JobTypeName</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="detail-item">
+                                <div class="detail-icon"><i class="fas fa-dollar-sign"></i></div>
+                                <div class="detail-content">
+                                    <div class="detail-label">Salary</div>
+                                    <div class="detail-value">@Model.SalaryRange</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="detail-item">
+                                <div class="detail-icon"><i class="fas fa-medal"></i></div>
+                                <div class="detail-content">
+                                    <div class="detail-label">Experience</div>
+                                    <div class="detail-value">@Model.ExperienceLevelName</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="detail-item">
+                                <div class="detail-icon"><i class="fas fa-user-tie"></i></div>
+                                <div class="detail-content">
+                                    <div class="detail-label">Role</div>
+                                    <div class="detail-value">@Model.JobRole</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="detail-item">
+                                <div class="detail-icon"><i class="fas fa-layer-group"></i></div>
+                                <div class="detail-content">
+                                    <div class="detail-label">Level</div>
+                                    <div class="detail-value">@Model.JobLevel</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="detail-item">
+                                <div class="detail-icon"><i class="fas fa-calendar-alt"></i></div>
+                                <div class="detail-content">
+                                    <div class="detail-label">Posted</div>
+                                    <div class="detail-value">@Model.CreatedAt.ToString("MMM dd, yyyy")</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="detail-item">
+                                <div class="detail-icon"><i class="fas fa-hourglass-end"></i></div>
+                                <div class="detail-content">
+                                    <div class="detail-label">Expires</div>
+                                    <div class="detail-value">@Model.ExpiryDate.ToString("MMM dd, yyyy")</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Application Statistics -->
+            <div class="card mb-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">Application Statistics</h5>
+                    <a href="@Url.Action("Index", "Application", new { jobId = Model.Id, area = "Employer" })" class="btn btn-sm btn-outline-primary">
+                        View All
+                    </a>
+                </div>
+                <div class="card-body">
+                    <div class="application-stats">
+                        <div class="stats-item stats-total">
+                            <div class="stats-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stats-content">
+                                <div class="stats-value">@Model.TotalApplications</div>
+                                <div class="stats-label">Total</div>
+                            </div>
+                        </div>
+                        
+                        <div class="stats-item stats-new">
+                            <div class="stats-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <div class="stats-content">
+                                <div class="stats-value">@Model.NewApplications</div>
+                                <div class="stats-label">New</div>
+                            </div>
+                        </div>
+                        
+                        <div class="stats-item stats-reviewing">
+                            <div class="stats-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <div class="stats-content">
+                                <div class="stats-value">@Model.ReviewingApplications</div>
+                                <div class="stats-label">Reviewing</div>
+                            </div>
+                        </div>
+                        
+                        <div class="stats-item stats-interview">
+                            <div class="stats-icon">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <div class="stats-content">
+                                <div class="stats-value">@Model.InterviewApplications</div>
+                                <div class="stats-label">Interview</div>
+                            </div>
+                        </div>
+                        
+                        <div class="stats-item stats-accepted">
+                            <div class="stats-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="stats-content">
+                                <div class="stats-value">@Model.AcceptedApplications</div>
+                                <div class="stats-label">Accepted</div>
+                            </div>
+                        </div>
+                        
+                        <div class="stats-item stats-rejected">
+                            <div class="stats-icon">
+                                <i class="fas fa-times-circle"></i>
+                            </div>
+                            <div class="stats-content">
+                                <div class="stats-value">@Model.RejectedApplications</div>
+                                <div class="stats-label">Rejected</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Job Content Tabs -->
+            <div class="card mb-4">
+                <div class="card-body p-0">
+                    <ul class="nav nav-tabs job-detail-tabs" id="jobDetailTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab" aria-controls="description" aria-selected="true">Description</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="requirements-tab" data-bs-toggle="tab" data-bs-target="#requirements" type="button" role="tab" aria-controls="requirements" aria-selected="false">Requirements</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="benefits-tab" data-bs-toggle="tab" data-bs-target="#benefits" type="button" role="tab" aria-controls="benefits" aria-selected="false">Benefits</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="details-tab" data-bs-toggle="tab" data-bs-target="#details" type="button" role="tab" aria-controls="details" aria-selected="false">Additional Details</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content p-4" id="jobDetailTabsContent">
+                        <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+                            <div class="formatted-content">
+                                @Html.Raw(Model.Description)
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="requirements" role="tabpanel" aria-labelledby="requirements-tab">
+                            <div class="formatted-content">
+                                @Html.Raw(Model.Requirements)
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="benefits" role="tabpanel" aria-labelledby="benefits-tab">
+                            <div class="formatted-content">
+                                @Html.Raw(Model.Benefits)
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="details" role="tabpanel" aria-labelledby="details-tab">
+                            <table class="table table-bordered additional-details-table">
+                                <tbody>
+                                    <tr>
+                                        <th width="30%">Vacancies</th>
+                                        <td>@Model.Vacancies</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Salary Type</th>
+                                        <td>@Model.SalaryType</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Apply Method</th>
+                                        <td>@Model.ApplyMethod</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Last Updated</th>
+                                        <td>@(Model.UpdatedAt?.ToString("MMMM dd, yyyy") ?? "Not updated")</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Job Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm Delete</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete the job "<span id="jobTitleToDelete"></span>"?</p>
+                <p class="text-danger">This action cannot be undone.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <form id="deleteJobForm" asp-action="Delete" asp-controller="Job" asp-area="Employer" method="post">
+                    <input type="hidden" id="jobIdToDelete" name="id" />
+                    <button type="submit" class="btn btn-danger">Delete Job</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Expire Job Modal -->
+<div class="modal fade" id="expireModal" tabindex="-1" aria-labelledby="expireModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm Expire Job</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to expire the job "<span id="jobTitleToExpire"></span>"?</p>
+                <p class="text-warning">This will immediately set the job status to expired and it will no longer be visible to job seekers.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <form id="expireJobForm" asp-action="ExpireJob" asp-controller="Job" asp-area="Employer" method="post">
+                    <input type="hidden" id="jobIdToExpire" name="id" />
+                    <button type="submit" class="btn btn-warning">Expire Job</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Job Detail Header */
+    .job-detail-header {
+        margin-bottom: 16px;
+    }
+    
+    .job-detail-title {
+        font-size: 24px;
+        font-weight: 600;
+        margin: 0;
+    }
+    
+    .job-status-indicator {
+        font-size: 14px;
+        font-weight: 500;
+    }
+    
+    .expiry-info {
+        font-size: 13px;
+    }
+    
+    /* Adjust spacings */
+    .breadcrumb {
+        padding: 0;
+        margin-bottom: 0;
+    }
+    
+    .d-flex.justify-content-between.align-items-center.flex-wrap.mb-2 {
+        margin-bottom: 8px !important;
+    }
+    
+    .d-flex.justify-content-between.align-items-center.flex-wrap.mb-4 {
+        margin-bottom: 12px !important;
+    }
+    
+    /* Job Summary Card */
+    .job-summary-card {
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+    }
+    
+    .detail-item {
+        display: flex;
+        align-items: flex-start;
+    }
+    
+    .detail-icon {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        border-radius: 8px;
+        background-color: rgba(13, 110, 253, 0.1);
+        color: #0d6efd;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 12px;
+        font-size: 18px;
+    }
+    
+    .detail-content {
+        flex: 1;
+    }
+    
+    .detail-label {
+        font-size: 13px;
+        color: #6c757d;
+
+    }
+    
+    .detail-value {
+        font-size: 15px;
+        font-weight: 500;
+        color: #343a40;
+        word-break: break-word;
+    }
+    
+    /* Application Stats */
+    .application-stats {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+    
+    .stats-item {
+        flex: 1;
+        min-width: 140px;
+        display: flex;
+        align-items: center;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+    
+    .stats-icon {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 12px;
+        font-size: 20px;
+        color: white;
+    }
+    
+    .stats-content {
+        flex: 1;
+    }
+    
+    .stats-value {
+        font-size: 24px;
+        font-weight: 600;
+    }
+    
+    .stats-label {
+        font-size: 14px;
+        color: #6c757d;
+    }
+    
+    .stats-total {
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+    }
+    
+    .stats-total .stats-icon {
+        background-color: #6c757d;
+    }
+    
+    .stats-new {
+        background-color: rgba(13, 110, 253, 0.04);
+        border: 1px solid rgba(13, 110, 253, 0.1);
+    }
+    
+    .stats-new .stats-icon {
+        background-color: #0d6efd;
+    }
+    
+    .stats-reviewing {
+        background-color: rgba(13, 202, 240, 0.04);
+        border: 1px solid rgba(13, 202, 240, 0.1);
+    }
+    
+    .stats-reviewing .stats-icon {
+        background-color: #0dcaf0;
+    }
+    
+    .stats-interview {
+        background-color: rgba(255, 193, 7, 0.04);
+        border: 1px solid rgba(255, 193, 7, 0.1);
+    }
+    
+    .stats-interview .stats-icon {
+        background-color: #ffc107;
+        color: #000;
+    }
+    
+    .stats-accepted {
+        background-color: rgba(25, 135, 84, 0.04);
+        border: 1px solid rgba(25, 135, 84, 0.1);
+    }
+    
+    .stats-accepted .stats-icon {
+        background-color: #198754;
+    }
+    
+    .stats-rejected {
+        background-color: rgba(220, 53, 69, 0.04);
+        border: 1px solid rgba(220, 53, 69, 0.1);
+    }
+    
+    .stats-rejected .stats-icon {
+        background-color: #dc3545;
+    }
+    
+    /* Content Tabs */
+    .job-detail-tabs {
+        padding: 0 15px;
+        border-bottom: 1px solid #dee2e6;
+    }
+    
+    .job-detail-tabs .nav-link {
+        font-weight: 500;
+        color: #495057;
+        border: none;
+        padding: 15px;
+        position: relative;
+    }
+    
+    .job-detail-tabs .nav-link.active {
+        color: #0d6efd;
+        background-color: transparent;
+        border: none;
+    }
+    
+    .job-detail-tabs .nav-link.active::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background-color: #0d6efd;
+    }
+    
+    .formatted-content {
+        line-height: 1.7;
+    }
+    
+    .formatted-content ul {
+        padding-left: 20px;
+    }
+    
+    /* Additional Details Table */
+    .additional-details-table th {
+        background-color: #f8f9fa;
+    }
+    
+    /* Responsive Styles */
+    @@media (max-width: 768px) {
+        .action-buttons {
+            margin-top: 15px;
+            width: 100%;
+            justify-content: flex-start;
+        }
+        
+        .application-stats {
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .stats-item {
+            min-width: 100%;
+        }
+        
+        .job-detail-tabs .nav-link {
+            padding: 10px;
+        }
+    }
+</style>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Setup delete modal
+            const deleteModal = document.getElementById('deleteModal');
+            if (deleteModal) {
+                deleteModal.addEventListener('show.bs.modal', function (event) {
+                    const button = event.relatedTarget;
+                    const jobId = button.getAttribute('data-job-id');
+                    const jobTitle = button.getAttribute('data-job-title');
+                    
+                    document.getElementById('jobIdToDelete').value = jobId;
+                    document.getElementById('jobTitleToDelete').textContent = jobTitle;
+                });
+            }
+            
+            // Setup expire modal
+            const expireModal = document.getElementById('expireModal');
+            if (expireModal) {
+                expireModal.addEventListener('show.bs.modal', function (event) {
+                    const button = event.relatedTarget;
+                    const jobId = button.getAttribute('data-job-id');
+                    const jobTitle = button.getAttribute('data-job-title');
+                    
+                    document.getElementById('jobIdToExpire').value = jobId;
+                    document.getElementById('jobTitleToExpire').textContent = jobTitle;
+                });
+            }
+            
+            // Check for TempData messages
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <text>
+                if (window.toast) {
+                    window.toast.showToast('Success', '@TempData["SuccessMessage"]', 'success');
+                }
+                </text>
+            }
+            
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <text>
+                if (window.toast) {
+                    window.toast.showToast('Error', '@TempData["ErrorMessage"]', 'error');
+                }
+                </text>
+            }
+        });
+    </script>
+}

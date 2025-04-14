@@ -229,14 +229,28 @@
                                                 {
                                                     <span class="badge bg-warning">Featured</span>
                                                 }
-                                                @if (job.ExpiryDate < DateTime.Now.AddDays(7))
+                                                @if (job.ExpiryDate < DateTime.Now.AddDays(7) && job.ExpiryDate >= DateTime.Now)
                                                 {
                                                     <span class="badge bg-danger">Urgent</span>
+                                                }
+                                                @if (job.ExpiryDate < DateTime.Now)
+                                                {
+                                                    <span class="badge bg-secondary">Expired</span>
                                                 }
                                             </div>
                                         </div>
                                         <div class="job-action">
-                                            <a href="/Job/@job.Id" class="btn btn-outline-primary">Apply Now</a>
+                                            @if (job.ExpiryDate < DateTime.Now)
+                                            {
+                                                <button class="btn btn-outline-secondary" disabled data-bs-toggle="tooltip" 
+                                                        data-bs-title="This job has expired">
+                                                    Expired
+                                                </button>
+                                            }
+                                            else
+                                            {
+                                                <a href="/Job/@job.Id" class="btn btn-outline-primary">Apply Now</a>
+                                            }
                                         </div>
                                     </div>
                                 </div>
@@ -302,4 +316,11 @@
 
 @section Scripts {
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Initialize tooltips
+            const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+            const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+        });
+    </script>
 }

@@ -1,6 +1,7 @@
 @model WorkFinder.Web.Areas.Employer.Models.JobPostViewModel
 @{
-    ViewData["Title"] = "Post a Job";
+    var isEditMode = ViewData["EditMode"] != null && (bool)ViewData["EditMode"];
+    ViewData["Title"] = isEditMode ? "Edit Job" : "Post a Job";
     Layout = "_EmployerLayout";
 }
 
@@ -11,9 +12,13 @@
 
         <div class="main-content">
             <div class="post-job-container bg-white p-5 rounded shadow">
-                <h2 class="mb-5 fs-1 fw-bold">Post a Job</h2>
+                <h2 class="mb-5 fs-1 fw-bold">@(isEditMode ? "Edit Job" : "Post a Job")</h2>
 
-                <form asp-action="Create" method="post">
+                <form asp-action="@(isEditMode ? "Update" : "Create")" method="post">
+                    @if (isEditMode)
+                    {
+                        <input type="hidden" name="jobId" value="@ViewData["JobId"]" />
+                    }
                     <div asp-validation-summary="ModelOnly" class="text-danger mb-4"></div>
 
                     <div class="mb-5">
@@ -199,21 +204,21 @@
 
                     <div class="mb-5">
                         <label asp-for="Benefits" class="form-label fw-medium fs-4">Benefits</label>
-                        <textarea asp-for="Benefits" class="form-control" rows="5"
-                            placeholder="Add job benefits like health insurance, PTO, etc..."></textarea>
+                        <textarea asp-for="Benefits" class="form-control" rows="7"
+                            placeholder="Add job benefits..."></textarea>
                         <span asp-validation-for="Benefits" class="text-danger fs-5 mt-2"></span>
                     </div>
 
                     <div class="mb-5">
                         <label asp-for="Responsibilities" class="form-label fw-medium fs-4">Responsibilities</label>
                         <textarea asp-for="Responsibilities" class="form-control" rows="7"
-                            placeholder="Add your job responsibilities..."></textarea>
+                            placeholder="Add job responsibilities..."></textarea>
                         <span asp-validation-for="Responsibilities" class="text-danger fs-5 mt-2"></span>
                     </div>
 
                     <div class="mt-5 text-center">
                         <button type="submit" class="btn btn-primary btn-lg px-5 py-3 fs-4">
-                            Post Job <i class="fas fa-arrow-right ms-2"></i>
+                            @(isEditMode ? "Update Job" : "Post Job")
                         </button>
                     </div>
                 </form>
@@ -350,158 +355,229 @@
 
     /* Responsive */
     @@media(max - width: 992px) {
-        .employers-dashboard {
-            flex-direction: column;
+            .employers-dashboard {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                margin-bottom: 30px;
+            }
         }
 
-        .sidebar {
-            width: 100%;
-            margin-bottom: 30px;
-        }
-    }
-
-    /* Tăng kích thước cho form controls */
-    .form-control,
-    .form-select {
-        font-size: 1.2rem !important;
-        padding: 0.75rem 1.2rem !important;
-    }
-
-    .form-control::placeholder {
-        font-size: 1.1rem !important;
-    }
-
-    /* Cải thiện hiển thị cho textarea */
-    textarea.form-control {
-        min-height: 150px !important;
-    }
-
-    /* Style cho các thẻ label */
-    .form-label {
-        margin-bottom: 0.75rem !important;
-        color: #333;
-        font-size: 1.25rem !important;
-    }
-
-    /* Style cho tiêu đề */
-    h2 {
-        color: #333;
-        font-weight: 700 !important;
-        font-size: 2.5rem !important;
-    }
-
-    h4 {
-        color: #333;
-        font-weight: 600 !important;
-        font-size: 1.8rem !important;
-    }
-
-    /* Style cho section apply job */
-    .apply-job-section {
-        background-color: #f8f9fa;
-        border-radius: 10px;
-        border: 1px solid #e9ecef;
-        padding: 2rem !important;
-    }
-
-    /* Style cho button submit */
-    .btn-primary {
-        padding: 1rem 2.5rem !important;
-        font-weight: 600 !important;
-        font-size: 1.25rem !important;
-    }
-
-    /* Cải thiện form check */
-    .form-check-label strong {
-        font-size: 1.3rem !important;
-        display: block;
-        margin-bottom: 0.4rem !important;
-    }
-
-    .form-check-label p {
-        font-size: 1.1rem !important;
-    }
-
-    /* Tăng kích thước cho các form controls */
-    .input-group-text {
-        font-size: 1.2rem !important;
-        padding: 0.75rem 1.2rem !important;
-    }
-
-    /* Tăng kích thước checkbox/radio */
-    .form-check-input {
-        width: 1.3em !important;
-        height: 1.3em !important;
-        margin-top: 0.25em !important;
-    }
-
-    /* Thêm các style mới */
-    .container-fluid {
-        max-width: 1600px;
-    }
-
-    /* Thêm một số hiệu ứng hover */
-    .form-control:hover,
-    .form-select:hover {
-        border-color: #0d6efd;
-    }
-
-    /* Cải thiện khoảng cách giữa các phần */
-    .row {
-        margin-bottom: 2rem;
-    }
-
-    /* Responsive styling */
-    @@media (max-width: 768px) {
-        .post-job-container {
-            padding: 1.5rem !important;
+        /* Tăng kích thước cho form controls */
+        .form-control,
+        .form-select {
+            font-size: 1.2rem !important;
+            padding: 0.75rem 1.2rem !important;
         }
 
+        .form-control::placeholder {
+            font-size: 1.1rem !important;
+        }
+
+        /* Cải thiện hiển thị cho textarea */
+        textarea.form-control {
+            min-height: 150px !important;
+        }
+
+        /* Style cho các thẻ label */
+        .form-label {
+            margin-bottom: 0.75rem !important;
+            color: #333;
+            font-size: 1.25rem !important;
+        }
+
+        /* Style cho tiêu đề */
         h2 {
-            font-size: 1.8rem !important;
+            color: #333;
+            font-weight: 700 !important;
+            font-size: 2.5rem !important;
         }
 
         h4 {
-            font-size: 1.4rem !important;
+            color: #333;
+            font-weight: 600 !important;
+            font-size: 1.8rem !important;
         }
 
-        .form-label {
-            font-size: 1rem !important;
+        /* Style cho section apply job */
+        .apply-job-section {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            border: 1px solid #e9ecef;
+            padding: 2rem !important;
         }
-    }
-</style>
 
-@section Scripts {
-    <script src="~/js/employer-dashboard.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Thêm loading indicator nếu chưa có
-            if (!document.getElementById('loading-indicator')) {
-                const loadingIndicator = document.createElement('div');
-                loadingIndicator.id = 'loading-indicator';
-                loadingIndicator.className = 'text-center py-3';
-                loadingIndicator.style.display = 'none';
-                loadingIndicator.innerHTML = `
-                                                                            <div class="spinner-border text-primary" role="status">
-                                                                                <span class="visually-hidden">Loading...</span>
-                                                                            </div>
-                                                                        `;
-                document.querySelector('main').appendChild(loadingIndicator);
-            }
+        /* Style cho button submit */
+        .btn-primary {
+            padding: 1rem 2.5rem !important;
+            font-weight: 600 !important;
+            font-size: 1.25rem !important;
+        }
 
-            // Thêm toast container nếu chưa có
-            if (!document.getElementById('toast-container')) {
-                const toastContainer = document.createElement('div');
-                toastContainer.id = 'toast-container';
-                toastContainer.className = 'toast-container position-fixed bottom-0 end-0 p-3';
-                document.body.appendChild(toastContainer);
-            }
+        /* Cải thiện form check */
+        .form-check-label strong {
+            font-size: 1.3rem !important;
+            display: block;
+            margin-bottom: 0.4rem !important;
+        }
 
-            // Thêm id cho form nếu chưa có
-            const form = document.querySelector('form');
-            if (form && !form.id) {
-                form.id = 'job-form';
+        .form-check-label p {
+            font-size: 1.1rem !important;
+        }
+
+        /* Tăng kích thước cho các form controls */
+        .input-group-text {
+            font-size: 1.2rem !important;
+            padding: 0.75rem 1.2rem !important;
+        }
+
+        /* Tăng kích thước checkbox/radio */
+        .form-check-input {
+            width: 1.3em !important;
+            height: 1.3em !important;
+            margin-top: 0.25em !important;
+        }
+
+        /* Thêm các style mới */
+        .container-fluid {
+            max-width: 1600px;
+        }
+
+        /* Thêm một số hiệu ứng hover */
+        .form-control:hover,
+        .form-select:hover {
+            border-color: #0d6efd;
+        }
+
+        /* Cải thiện khoảng cách giữa các phần */
+        .row {
+            margin-bottom: 2rem;
+        }
+
+        /* Responsive styling */
+        @@media(max - width: 768px) {
+                .post-job-container {
+                    padding: 1.5rem !important;
+                }
+
+                h2 {
+                    font-size: 1.8rem !important;
+                }
+
+                h4 {
+                    font-size: 1.4rem !important;
+                }
+
+                .form-label {
+                    font-size: 1rem !important;
+                }
             }
-        });
-    </script>
-}
+            }
+        </style>
+
+        @section Scripts {
+            <script src="~/js/employer-dashboard.js"></script>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    // Thêm loading indicator nếu chưa có
+                    if (!document.getElementById('loading-indicator')) {
+                        const loadingIndicator = document.createElement('div');
+                        loadingIndicator.id = 'loading-indicator';
+                        loadingIndicator.className = 'text-center py-3';
+                        loadingIndicator.style.display = 'none';
+                        loadingIndicator.innerHTML = `
+                                                                                                                                        <div class="spinner-border text-primary" role="status">
+                                                                                                                                            <span class="visually-hidden">Loading...</span>
+                                                                                                                                        </div>
+                                                                                                                                    `;
+                        document.querySelector('main').appendChild(loadingIndicator);
+                    }
+
+                    // Thêm toast container nếu chưa có
+                    if (!document.getElementById('toast-container')) {
+                        const toastContainer = document.createElement('div');
+                        toastContainer.id = 'toast-container';
+                        toastContainer.className = 'toast-container position-fixed bottom-0 end-0 p-3';
+                        document.body.appendChild(toastContainer);
+                    }
+
+                    // Thêm id cho form nếu chưa có
+                    const form = document.querySelector('form');
+                    if (form && !form.id) {
+                        form.id = 'job-form';
+                    }
+                });
+            </script>
+            <script>
+                // Check for stored form data to populate fields
+                $(document).ready(function () {
+                    // Lắng nghe sự kiện submit form
+                    $('form').on('submit', function (e) {
+                        e.preventDefault();
+
+                        // Hiển thị loading overlay
+                        if (window.loadingHandler) {
+                            window.loadingHandler.showPageLoading();
+                        }
+
+                        // Lấy dữ liệu form
+                        var formData = $(this).serialize();
+
+                        // Gửi AJAX request
+                        $.ajax({
+                            type: 'POST',
+                            url: $(this).attr('action'),
+                            data: formData,
+                            success: function (response) {
+                                if (response.success) {
+                                    // Hiển thị thông báo thành công
+                                    if (window.toast) {
+                                        window.toast.showToast('Success', response.message, 'success');
+                                    }
+
+                                    // Redirect sau khi tạo job thành công
+                                    setTimeout(function () {
+                                        window.location.href = response.redirectUrl;
+                                    }, 1000);
+                                } else {
+                                    // Hiển thị thông báo lỗi
+                                    if (window.toast) {
+                                        window.toast.showToast('Error', response.message, 'error');
+                                    }
+
+                                    // Ẩn loading overlay
+                                    if (window.loadingHandler) {
+                                        window.loadingHandler.hidePageLoading();
+                                    }
+
+                                    // Xử lý lỗi validation nếu có
+                                    if (response.errors) {
+                                        for (var field in response.errors) {
+                                            var messages = response.errors[field];
+                                            var errorSpan = $('[data-valmsg-for="' + field + '"]');
+                                            errorSpan.text(messages.join(' '));
+                                        }
+                                    }
+                                }
+                            },
+                            error: function (xhr, status, error) {
+                                // Hiển thị thông báo lỗi
+                                if (window.toast) {
+                                    window.toast.showToast('Error', 'An unexpected error occurred. Please try again.', 'error');
+                                }
+
+                                // Ẩn loading overlay
+                                if (window.loadingHandler) {
+                                    window.loadingHandler.hidePageLoading();
+                                }
+                            }
+                        });
+                    });
+                });
+            </script>
+            @{
+                await Html.RenderPartialAsync("_ValidationScriptsPartial");
+            }
+        }

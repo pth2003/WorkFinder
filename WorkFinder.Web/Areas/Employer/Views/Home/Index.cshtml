@@ -10,7 +10,7 @@
         @await Html.PartialAsync("~/Areas/Employer/Views/Shared/_SidebarPartial.cshtml")
 
         <div class="main-content">
-            <div class="row mb-4">
+            <div class="row ">
                 <div class="col">
                     <h2 class="page-title mb-0">@ViewData["Title"]</h2>
                     <p class="text-muted">Welcome to your employer dashboard</p>
@@ -326,81 +326,81 @@
     }
 
     /* Responsive styles */
-    @@media(max-width: 1199px) {
-        .stats-content h2 {
-            font-size: 24px;
-        }
-    }
-
-    @@media(max-width: 991px) {
-        .sidebar {
-            font-size: 1.2rem;
+    @@media(max - width: 1199px) {
+            .stats-content h2 {
+                font-size: 24px;
+            }
         }
 
-        .stats-card {
-            padding: 15px;
-        }
+        @@media(max - width: 991px) {
+                .sidebar {
+                    font-size: 1.2rem;
+                }
 
-        .stats-icon {
-            width: 45px;
-            height: 45px;
-        }
+                .stats-card {
+                    padding: 15px;
+                }
 
-        .stats-icon i {
-            font-size: 18px;
-        }
-    }
+                .stats-icon {
+                    width: 45px;
+                    height: 45px;
+                }
 
-    @@media(max-width: 767px) {
-        .employers-dashboard {
-            flex-direction: column;
-            overflow-x: hidden;
-        }
+                .stats-icon i {
+                    font-size: 18px;
+                }
+            }
 
-        .sidebar {
-            width: 100%;
-            margin-bottom: 20px;
-            overflow-x: hidden;
-        }
+            @@media(max - width: 767px) {
+                    .employers-dashboard {
+                        flex-direction: column;
+                        overflow-x: hidden;
+                    }
 
-        .stats-card {
-            margin-bottom: 15px;
-        }
+                    .sidebar {
+                        width: 100%;
+                        margin-bottom: 20px;
+                        overflow-x: hidden;
+                    }
 
-        .jobs-table th,
-        .jobs-table td {
-            padding: 10px 15px;
-        }
-    }
+                    .stats-card {
+                        margin-bottom: 15px;
+                    }
 
-    @@media(max-width: 575px) {
-        .page-title {
-            font-size: 24px;
-        }
+                    .jobs-table th,
+                    .jobs-table td {
+                        padding: 10px 15px;
+                    }
+                }
 
-        .stats-content h2 {
-            font-size: 20px;
-        }
+                @@media(max - width: 575px) {
+                        .page-title {
+                            font-size: 24px;
+                        }
 
-        .stats-content p {
-            font-size: 12px;
-        }
+                        .stats-content h2 {
+                            font-size: 20px;
+                        }
 
-        .stats-icon {
-            width: 40px;
-            height: 40px;
-        }
+                        .stats-content p {
+                            font-size: 12px;
+                        }
 
-        .stats-icon i {
-            font-size: 16px;
-        }
+                        .stats-icon {
+                            width: 40px;
+                            height: 40px;
+                        }
 
-        .card-header {
-            padding: 12px 15px;
-        }
+                        .stats-icon i {
+                            font-size: 16px;
+                        }
 
-        .card-body {
-            padding: 15px;
-        }
-    }
-</style>
+                        .card-header {
+                            padding: 12px 15px;
+                        }
+
+                        .card-body {
+                            padding: 15px;
+                        }
+                    }
+                </style>

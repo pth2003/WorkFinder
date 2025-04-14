@@ -1,0 +1,317 @@
+@model WorkFinder.Web.Areas.Employer.Models.EmployerJobDetailViewModel
+@{
+    ViewData["Title"] = $"Job Details - {Model.Title}";
+    Layout = "_EmployerLayout";
+}
+
+<div class="container">
+    <div class="employers-dashboard mt-4">
+        <!-- Sidebar -->
+        @await Html.PartialAsync("~/Areas/Employer/Views/Shared/_SidebarPartial.cshtml")
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Breadcrumb -->
+            <nav aria-label="breadcrumb" class="mb-4">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home", new { area = "Employer" })">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Job", new { area = "Employer" })">Jobs</a></li>
+                    <li class="breadcrumb-item active">@Model.Title</li>
+                </ol>
+            </nav>
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="h3">Job Details</h1>
+                <div class="actions">
+                    <a href="@Url.Action("Index", "Application", new { jobId = Model.Id, area = "Employer" })" class="btn btn-primary me-2">
+                        <i class="fas fa-users me-1"></i> View Applications (@Model.TotalApplications)
+                    </a>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-cog"></i> Actions
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-edit me-2"></i> Edit Job
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-clone me-2"></i> Duplicate Job
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            @if (Model.IsActive)
+                            {
+                                        <li>
+                                            <a class="dropdown-item text-warning" href="#">
+                                                <i class="fas fa-pause-circle me-2"></i> Pause Job
+                                            </a>
+                                        </li>
+                            }
+                            else
+                            {
+                                        <li>
+                                            <a class="dropdown-item text-success" href="#">
+                                                <i class="fas fa-play-circle me-2"></i> Activate Job
+                                            </a>
+                                        </li>
+                            }
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item text-danger" href="javascript: void(0)" 
+                                   data-bs-toggle="modal" data-bs-target="#deleteModal" 
+                                   data-job-id="@Model.Id" data-job-title="@Model.Title">
+                                    <i class="fas fa-trash me-2"></i> Delete Job
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Application Statistics -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Application Statistics</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="statistic-card bg-light">
+                                <div class="statistic-number">@Model.TotalApplications</div>
+                                <div class="statistic-label">Total</div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="statistic-card bg-primary text-white">
+                                <div class="statistic-number">@Model.NewApplications</div>
+                                <div class="statistic-label">New</div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="statistic-card bg-info text-white">
+                                <div class="statistic-number">@Model.ReviewingApplications</div>
+                                <div class="statistic-label">Reviewing</div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="statistic-card bg-warning">
+                                <div class="statistic-number">@Model.InterviewApplications</div>
+                                <div class="statistic-label">Interview</div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="statistic-card bg-success text-white">
+                                <div class="statistic-number">@Model.AcceptedApplications</div>
+                                <div class="statistic-label">Accepted</div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="statistic-card bg-danger text-white">
+                                <div class="statistic-number">@Model.RejectedApplications</div>
+                                <div class="statistic-label">Rejected</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Job Details -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Job Information</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <strong class="text-muted">Job Title:</strong>
+                            <p class="mb-3">@Model.Title</p>
+                            
+                            <strong class="text-muted">Location:</strong>
+                            <p class="mb-3">@Model.Location</p>
+                            
+                            <strong class="text-muted">Job Type:</strong>
+                            <p class="mb-3">@Model.JobTypeName</p>
+                            
+                            <strong class="text-muted">Experience Level:</strong>
+                            <p class="mb-3">@Model.ExperienceLevelName</p>
+                        </div>
+                        <div class="col-md-6">
+                            <strong class="text-muted">Salary Range:</strong>
+                            <p class="mb-3">@Model.SalaryRange</p>
+                            
+                            <strong class="text-muted">Posted On:</strong>
+                            <p class="mb-3">@Model.CreatedAt.ToString("MMMM dd, yyyy")</p>
+                            
+                            <strong class="text-muted">Expires On:</strong>
+                            <p class="mb-3">@Model.ExpiryDate.ToString("MMMM dd, yyyy") (@Model.DaysRemaining days remaining)</p>
+                            
+                            <strong class="text-muted">Status:</strong>
+                            <p class="mb-3">
+                                @if (Model.IsActive)
+                                {
+                                            <span class="badge bg-success">Active</span>
+                                }
+                                else
+                                {
+                                            <span class="badge bg-warning">Inactive</span>
+                                }
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-12">
+                            <strong class="text-muted">Job Description:</strong>
+                            <div class="mt-2 formatted-content">
+                                @Html.Raw(Model.Description)
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-12">
+                            <strong class="text-muted">Requirements:</strong>
+                            <div class="mt-2 formatted-content">
+                                @Html.Raw(Model.Requirements)
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <strong class="text-muted">Benefits:</strong>
+                            <div class="mt-2 formatted-content">
+                                @Html.Raw(Model.Benefits)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Information -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Additional Information</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <strong class="text-muted">Job Role:</strong>
+                            <p>@Model.JobRole</p>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <strong class="text-muted">Job Level:</strong>
+                            <p>@Model.JobLevel</p>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <strong class="text-muted">Vacancies:</strong>
+                            <p>@Model.Vacancies</p>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <strong class="text-muted">Salary Type:</strong>
+                            <p>@Model.SalaryType</p>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <strong class="text-muted">Apply Method:</strong>
+                            <p>@Model.ApplyMethod</p>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <strong class="text-muted">Last Updated:</strong>
+                            <p>@(Model.UpdatedAt?.ToString("MMMM dd, yyyy") ?? "Not updated")</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Job Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm Delete</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete the job "<span id="jobTitleToDelete"></span>"?</p>
+                <p class="text-danger">This action cannot be undone.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <form id="deleteJobForm" asp-action="Delete" asp-controller="Job" asp-area="Employer" method="post">
+                    <input type="hidden" id="jobIdToDelete" name="id" />
+                    <button type="submit" class="btn btn-danger">Delete Job</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .statistic-card {
+        padding: 15px;
+        border-radius: 8px;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    
+    .statistic-number {
+        font-size: 24px;
+        font-weight: 600;
+    }
+    
+    .statistic-label {
+        font-size: 14px;
+    }
+    
+    .formatted-content {
+        line-height: 1.6;
+    }
+    
+    .formatted-content ul {
+        padding-left: 20px;
+    }
+</style>
+
+@section Scripts {
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    // Setup delete modal
+                    const deleteModal = document.getElementById('deleteModal');
+                    if (deleteModal) {
+                        deleteModal.addEventListener('show.bs.modal', function (event) {
+                            const button = event.relatedTarget;
+                            const jobId = button.getAttribute('data-job-id');
+                            const jobTitle = button.getAttribute('data-job-title');
+                    
+                            document.getElementById('jobIdToDelete').value = jobId;
+                            document.getElementById('jobTitleToDelete').textContent = jobTitle;
+                        });
+                    }
+            
+                    // Check for TempData messages
+                    @if (TempData["SuccessMessage"] != null)
+                    {
+                                <text>
+                                if (window.toast) {
+                                    window.toast.showToast('Success', '@TempData["SuccessMessage"]', 'success');
+                                }
+                                </text>
+                    }
+            
+                    @if (TempData["ErrorMessage"] != null)
+                    {
+                                <text>
+                                if (window.toast) {
+                                    window.toast.showToast('Error', '@TempData["ErrorMessage"]', 'error');
+                                }
+                                </text>
+                    }
+                });
+            </script>
+}

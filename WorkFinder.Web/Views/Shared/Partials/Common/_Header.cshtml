@@ -27,6 +27,14 @@
             Console.WriteLine($"Error getting unread notification count: {ex.Message}");
         }
     }
+
+    // Check if user is in employer role and set body class accordingly
+    if (User.IsInRole(UserRoles.Employer)) 
+    {
+        <script>
+            document.body.classList.add('employer-role');
+        </script>
+    }
 }
 <div id="header-top-bar" class="header-top-bar">
     <nav class="navbar navbar-expand-lg">
@@ -208,11 +216,27 @@
                     data-bs-target="#mobileMenu" aria-controls="mobileMenu">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <ul class="list-unstyled d-flex gap-3">
-                    <li class="nav-item dropdown">
-                        <div class="nav-link dropdown-toggle text-dark d-none d-lg-flex gap-3 align-items-center justify-content-between"
+                <ul class="list-unstyled d-flex gap-3 mb-0">
+                    <li class="nav-item dropdown d-flex align-items-center gap-3">
+                        <!-- Post A Job button as standalone link -->
+                        <a href="/Employer/Job/Create" class="btn btn-outline-primary">Post A Job</a>
+                        
+                        <!-- Notification Icon -->
+                        <div class="position-relative mx-2">
+                            <a href="/Notifications" class="text-decoration-none">
+                                <i class="fas fa-bell fs-5 text-muted"></i>
+                                @if (unreadNotificationsCount > 0)
+                                {
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        @(unreadNotificationsCount > 9 ? "9+" : unreadNotificationsCount.ToString())
+                                    </span>
+                                }
+                            </a>
+                        </div>
+                        
+                        <!-- User dropdown separate from buttons -->
+                        <div class="nav-link dropdown-toggle text-dark d-flex align-items-center"
                             href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <button class="btn btn-outline-primary">Post A Job</button>
                             @if (!string.IsNullOrEmpty(profilePicture))
                             {
                                 <img src="@profilePicture" alt="User Avatar" class="rounded-circle" width="40" height="40"
@@ -228,7 +252,7 @@
                                     @firstLetter</div>
                             }
                         </div>
-
+                        
                         <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="navbarDropdown"
                             style="min-width: 250px; padding: 1rem;">
                             <div class="px-3 py-2 d-flex align-items-center border-bottom pb-3 mb-2">
@@ -432,8 +456,12 @@
     }
 
     .main-header {
-        padding: 1rem 0;
         transition: padding 0.3s ease;
+    }
+    
+    /* Only apply padding for jobseeker role */
+    body:not(.employer-role) .main-header {
+        padding: 1.5rem 0;
     }
 
     .btn {
@@ -570,10 +598,26 @@
         color: #0A65CC;
     }
 
+    /* Notification dropdown styles */
+    .notification-dropdown-menu {
+        padding: 0 !important;
+        overflow: hidden !important;
+    }
+    
+    .notification-body {
+        max-height: 350px; 
+        overflow-y: auto;
+        scrollbar-width: none;
+    }
+    
+    .notification-body::-webkit-scrollbar {
+        display: none;
+    }
+
     @@media(max-width: 992px) {
         .main-header .container {
-            padding-top: 0.8rem;
-            padding-bottom: 0.8rem;
+            padding-top: 1.2rem;
+            padding-bottom: 1.2rem;
         }
 
         .btn {
@@ -702,6 +746,40 @@
         font-size: 1.2rem;
         min-width: 2.2rem;
         text-align: center;
+    }
+
+    /* Notification icon styles */
+    .position-relative.mx-2 a {
+        display: block;
+        position: relative;
+        padding: 5px;
+    }
+    
+    .position-relative.mx-2 i {
+        font-size: 1.6rem;
+        color: var(--gray-600);
+        transition: color 0.2s ease;
+    }
+    
+    .position-relative.mx-2 a:hover i {
+        color: var(--blue-600);
+    }
+    
+    .position-relative.mx-2 .badge {
+        font-size: 0.7rem;
+        padding: 0.25em 0.45em;
+        min-width: 18px;
+        height: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* Ensure mobile view works properly */
+    @@media(max-width: 992px) {
+        .nav-item.dropdown.d-flex {
+            display: none !important;
+        }
     }
 </style>
 

@@ -148,149 +148,250 @@
     }
 
     /* Responsive */
-    @@media(max-width: 992px) {
-        .employers-dashboard {
-            flex-direction: column;
-        }
-
-        .sidebar {
-            width: 100%;
-            margin-bottom: 30px;
-        }
-
-        .sidebar-menu {
-            flex-grow: 1;
-        }
-
-        .sidebar-footer {
-            margin-top: auto;
-        }
-    }
-</style>
-
-@section Scripts {
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Hiển thị toast message khi có tham số toastMessage từ controller
-            const urlParams = new URLSearchParams(window.location.search);
-            const toastMessage = urlParams.get('toastMessage');
-            if (toastMessage && window.toast) {
-                window.toast.showToast('Success', toastMessage, 'success');
-
-                // Xóa tham số toastMessage khỏi URL để tránh hiển thị lại khi refresh
-                const cleanUrl = window.location.pathname +
-                    (urlParams.toString() ? '?' + urlParams.toString().replace(/toastMessage=[^&]*(&|$)/, '') : '');
-                window.history.replaceState({}, document.title, cleanUrl.replace(/\?$/, ''));
+    @@media(max - width: 992px) {
+            .employers-dashboard {
+                flex-direction: column;
             }
 
-            // Load jobs data via AJAX for dynamic updating
-            async function loadJobsData(page = 1, pageSize = 10) {
-                try {
-                    // Show loading overlay
-                    if (window.PageLoader) {
-                        window.PageLoader.show();
-                    }
+            .sidebar {
+                width: 100%;
+                margin-bottom: 30px;
+            }
 
-                    const response = await fetch(`/Employer/Job/GetJobs?page=${page}&pageSize=${pageSize}`, {
-                        headers: {
-                            'X-Requested-With': 'XMLHttpRequest',
-                            'Accept': 'application/json'
+            .sidebar-menu {
+                flex-grow: 1;
+            }
+
+            .sidebar-footer {
+                margin-top: auto;
+            }
+        }
+    </style>
+
+    @section Scripts {
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Check for TempData messages
+                @if (TempData["SuccessMessage"] != null)
+                    {
+                        <text>
+                            if (window.toast) {
+                                window.toast.showToast('Success', '@TempData["SuccessMessage"]', 'success');
+                                        }
+                        </text>
+                }
+
+                    @if (TempData["ErrorMessage"] != null)
+                    {
+                        <text>
+                            if (window.toast) {
+                                window.toast.showToast('Error', '@TempData["ErrorMessage"]', 'error');
+                                        }
+                        </text>
+                }
+
+                            // Hiển thị toast message khi có tham số toastMessage từ controller (legacy support)
+                            const urlParams = new URLSearchParams(window.location.search);
+                const toastMessage = urlParams.get('toastMessage');
+                if (toastMessage && window.toast) {
+                    window.toast.showToast('Success', toastMessage, 'success');
+
+                    // Xóa tham số toastMessage khỏi URL để tránh hiển thị lại khi refresh
+                    const cleanUrl = window.location.pathname +
+                        (urlParams.toString() ? '?' + urlParams.toString().replace(/toastMessage=[^&]*(&|$)/, '') : '');
+                    window.history.replaceState({}, document.title, cleanUrl.replace(/\?$/, ''));
+                }
+
+                // Enhanced delete form to use AJAX
+                const deleteJobForm = document.getElementById('deleteJobForm');
+                if (deleteJobForm) {
+                    deleteJobForm.addEventListener('submit', function (e) {
+                        e.preventDefault();
+
+                        // Show loading if available
+                        if (window.PageLoader) {
+                            window.PageLoader.show();
                         }
+
+                        const formData = new FormData(this);
+
+                        fetch(this.action, {
+                            method: 'POST',
+                            body: formData,
+                            headers: {
+                                'X-Requested-With': 'XMLHttpRequest'
+                            }
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                // Hide modal
+                                const modal = bootstrap.Modal.getInstance(document.getElementById('deleteModal'));
+                                if (modal) {
+                                    modal.hide();
+                                }
+
+                                if (data.success) {
+                                    // Show success toast
+                                    if (window.toast) {
+                                        window.toast.showToast('Success', data.message, 'success');
+                                    }
+
+                                    // Reload jobs list without refreshing the page
+                                    setTimeout(() => {
+                                        loadJobsData(getCurrentPage());
+                                    }, 500);
+                                } else {
+                                    // Show error toast
+                                    if (window.toast) {
+                                        window.toast.showToast('Error', data.message, 'error');
+                                    }
+
+                                    if (window.PageLoader) {
+                                        window.PageLoader.hide();
+                                    }
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                                if (window.toast) {
+                                    window.toast.showToast('Error', 'An error occurred while deleting the job', 'error');
+                                }
+
+                                if (window.PageLoader) {
+                                    window.PageLoader.hide();
+                                }
+                            });
                     });
+                }
 
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
+                // Get current page from URL or default to 1
+                function getCurrentPage() {
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const page = parseInt(urlParams.get('page'));
+                    return isNaN(page) ? 1 : page;
+                }
 
-                    const contentType = response.headers.get("content-type");
-                    if (!contentType || !contentType.includes("application/json")) {
-                        throw new TypeError("Response was not JSON");
-                    }
+                // Load jobs data via AJAX for dynamic updating
+                async function loadJobsData(page = 1, pageSize = 10) {
+                    try {
+                        // Show loading overlay
+                        if (window.PageLoader) {
+                            window.PageLoader.show();
+                        }
 
-                    const result = await response.json();
+                        const response = await fetch(`/Employer/Job/GetJobs?page=${page}&pageSize=${pageSize}`, {
+                            headers: {
+                                'X-Requested-With': 'XMLHttpRequest',
+                                'Accept': 'application/json'
+                            }
+                        });
 
-                    if (result && result.success) {
-                        // Reload the page to apply the changes
-                        window.location.href = window.location.pathname + '?page=' + page;
-                    } else {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+
+                        const contentType = response.headers.get("content-type");
+                        if (!contentType || !contentType.includes("application/json")) {
+                            throw new TypeError("Response was not JSON");
+                        }
+
+                        const result = await response.json();
+
+                        if (result && result.success) {
+                            // Reload the page to apply the changes
+                            window.location.href = window.location.pathname + '?page=' + page;
+                        } else {
+                            // Hide loading overlay
+                            if (window.PageLoader) {
+                                window.PageLoader.hide();
+                            }
+
+                            if (window.toast) {
+                                window.toast.showToast('Error', result?.message || 'Failed to load jobs', 'error');
+                            } else {
+                                alert(result?.message || 'Failed to load jobs');
+                            }
+                        }
+                    } catch (error) {
+                        console.error('Failed to load jobs data:', error);
+
                         // Hide loading overlay
                         if (window.PageLoader) {
                             window.PageLoader.hide();
                         }
 
                         if (window.toast) {
-                            window.toast.showToast('Error', result?.message || 'Failed to load jobs', 'error');
+                            window.toast.showToast('Error', 'Failed to load jobs data. Please try again.', 'error');
                         } else {
-                            alert(result?.message || 'Failed to load jobs');
+                            alert('Failed to load jobs data. Please try again.');
                         }
-                    }
-                } catch (error) {
-                    console.error('Failed to load jobs data:', error);
-
-                    // Hide loading overlay
-                    if (window.PageLoader) {
-                        window.PageLoader.hide();
-                    }
-
-                    if (window.toast) {
-                        window.toast.showToast('Error', 'Failed to load jobs data. Please try again.', 'error');
-                    } else {
-                        alert('Failed to load jobs data. Please try again.');
                     }
                 }
-            }
 
-            // Add click handlers to pagination links
-            const paginationLinks = document.querySelectorAll('#jobs-pagination .page-link');
-            paginationLinks.forEach(link => {
-                link.addEventListener('click', function (e) {
-                    if (!this.getAttribute('href').startsWith('javascript:')) {
-                        e.preventDefault();
-                        const page = parseInt(this.getAttribute('data-page'));
-                        if (!isNaN(page)) {
-                            loadJobsData(page);
+                // Setup delete modal
+                const deleteModal = document.getElementById('deleteModal');
+                if (deleteModal) {
+                    deleteModal.addEventListener('show.bs.modal', function (event) {
+                        const button = event.relatedTarget;
+                        const jobId = button.getAttribute('data-job-id');
+                        const jobTitle = button.getAttribute('data-job-title');
+
+                        document.getElementById('jobIdToDelete').value = jobId;
+                        document.getElementById('jobTitleToDelete').textContent = jobTitle;
+                    });
+                }
+
+                // Add click handlers to pagination links
+                const paginationLinks = document.querySelectorAll('#jobs-pagination .page-link');
+                paginationLinks.forEach(link => {
+                    link.addEventListener('click', function (e) {
+                        if (!this.getAttribute('href').startsWith('javascript:')) {
+                            e.preventDefault();
+                            const page = parseInt(this.getAttribute('data-page'));
+                            if (!isNaN(page)) {
+                                loadJobsData(page);
+                            }
                         }
+                    });
+                });
+
+                // Add page loader to all action buttons
+                document.querySelectorAll('.dropdown-item:not([data-bs-toggle])').forEach(item => {
+                    if (!item.classList.contains('dropdown-toggle')) {
+                        item.classList.add('page-loader');
                     }
+                });
+
+                // Add page loader to view applications buttons
+                document.querySelectorAll('.view-applications-btn').forEach(btn => {
+                    btn.classList.add('page-loader');
                 });
             });
 
-            // Add page loader to all action buttons
-            document.querySelectorAll('.dropdown-item:not([data-bs-toggle])').forEach(item => {
-                if (!item.classList.contains('dropdown-toggle')) {
-                    item.classList.add('page-loader');
-                }
+            $(document).ready(function () {
+                // Handle Job Delete Modal
+                $('#deleteModal').on('show.bs.modal', function (event) {
+                    var button = $(event.relatedTarget);
+                    var jobId = button.data('job-id');
+                    var jobTitle = button.data('job-title');
+
+                    var modal = $(this);
+                    modal.find('.modal-title').text('Delete Job: ' + jobTitle);
+                    modal.find('#jobIdToDelete').val(jobId);
+                    modal.find('#jobTitleToDelete').text(jobTitle);
+                });
+
+                // Handle Job Expire Modal
+                $('#expireModal').on('show.bs.modal', function (event) {
+                    var button = $(event.relatedTarget);
+                    var jobId = button.data('job-id');
+                    var jobTitle = button.data('job-title');
+
+                    var modal = $(this);
+                    modal.find('.modal-title').text('Expire Job: ' + jobTitle);
+                    modal.find('#jobIdToExpire').val(jobId);
+                    modal.find('#jobTitleToExpire').text(jobTitle);
+                });
             });
-
-            // Add page loader to view applications buttons
-            document.querySelectorAll('.view-applications-btn').forEach(btn => {
-                btn.classList.add('page-loader');
-            });
-        });
-
-        $(document).ready(function () {
-            // Handle Job Delete Modal
-            $('#deleteModal').on('show.bs.modal', function (event) {
-                var button = $(event.relatedTarget);
-                var jobId = button.data('job-id');
-                var jobTitle = button.data('job-title');
-
-                var modal = $(this);
-                modal.find('.modal-title').text('Delete Job: ' + jobTitle);
-                modal.find('#jobIdToDelete').val(jobId);
-                modal.find('#jobTitleToDelete').text(jobTitle);
-            });
-
-            // Handle Job Expire Modal
-            $('#expireModal').on('show.bs.modal', function (event) {
-                var button = $(event.relatedTarget);
-                var jobId = button.data('job-id');
-                var jobTitle = button.data('job-title');
-
-                var modal = $(this);
-                modal.find('.modal-title').text('Expire Job: ' + jobTitle);
-                modal.find('#jobIdToExpire').val(jobId);
-                modal.find('#jobTitleToExpire').text(jobTitle);
-            });
-        });
-    </script>
-}
+        </script>
+    }

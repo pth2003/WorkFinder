@@ -42,7 +42,7 @@
                 <div class="job-item" data-job-id="@job.Id">
                     <div class="job-cell job-info">
                         <h5 class="job-title">
-                            <a href="@Url.Action("Details", "Job", new { id = job.Id, area = "Employer" })">@job.Title</a>
+                            <a href="/Employer/Job/JobDetail/@job.Id">@job.Title</a>
                         </h5>
                         <div class="job-meta">
                             <span class="job-type">@job.JobType.ToString()</span>
@@ -79,7 +79,7 @@
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li>
-                                    <a class="dropdown-item" href="@Url.Action("Details", "Job", new { id = job.Id, area = "Employer" })">
+                                    <a class="dropdown-item" href="/Employer/Job/JobDetail/@job.Id">
                                         <i class="fas fa-eye me-2"></i> View Detail
                                     </a>
                                 </li>
@@ -91,16 +91,16 @@
                                 @if (!isExpired)
                                 {
                                     <li>
-                                        <a class="dropdown-item" href="#" 
+                                        <a class="dropdown-item text-warning" href="javascript: void(0)" 
                                             data-bs-toggle="modal" data-bs-target="#expireModal" 
                                             data-job-id="@job.Id" data-job-title="@job.Title">
-                                            <i class="fas fa-times-circle me-2"></i> Make it Expire
+                                            <i class="fas fa-times-circle me-2"></i> Expire Job
                                         </a>
                                     </li>
                                 }
                                 <li><hr class="dropdown-divider"></li>
                                 <li>
-                                    <a class="dropdown-item text-danger" href="#" 
+                                    <a class="dropdown-item text-danger" href="javascript: void(0)" 
                                         data-bs-toggle="modal" data-bs-target="#deleteModal" 
                                         data-job-id="@job.Id" data-job-title="@job.Title">
                                         <i class="fas fa-trash me-2"></i> Delete Job
@@ -535,18 +535,18 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Confirm Mark as Expired</h5>
+                <h5 class="modal-title">Confirm Expire Job</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>Are you sure you want to mark the job "<span id="jobTitleToExpire"></span>" as expired?</p>
-                <p class="text-warning">This will prevent new applicants from applying to this job.</p>
+                <p>Are you sure you want to expire the job "<span id="jobTitleToExpire"></span>"?</p>
+                <p class="text-warning">This will immediately set the job status to expired and it will no longer be visible to job seekers.</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <form id="expireJobForm" asp-action="MarkAsExpired" asp-controller="Job" asp-area="Employer" method="post">
+                <form id="expireJobForm" asp-action="ExpireJob" asp-controller="Job" asp-area="Employer" method="post">
                     <input type="hidden" id="jobIdToExpire" name="id" />
-                    <button type="submit" class="btn btn-warning">Mark as Expired</button>
+                    <button type="submit" class="btn btn-warning">Expire Job</button>
                 </form>
             </div>
         </div>

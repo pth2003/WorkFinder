@@ -91,12 +91,20 @@ namespace WorkFinder.Web.Repositories
         /// <returns></returns>
         public async Task<Job> GetJobWithDetailsAsync(int id)
         {
-            return await _context.Jobs
-                .Where(j => j.Id == id)
-                .Include(j => j.Company)
-                .Include(j => j.Categories)
-                    .ThenInclude(jc => jc.Category)
-                .FirstOrDefaultAsync();
+            try
+            {
+                return await _context.Jobs
+                    .Include(j => j.Company)
+                    .Include(j => j.Applications)
+                    .FirstOrDefaultAsync(j => j.Id == id);
+                // Lưu ý: Không lọc job hết hạn ở đây để vẫn có thể xem chi tiết job đã hết hạn
+                // Việc kiểm tra và hiển thị cảnh báo sẽ được thực hiện ở tầng Controller và View
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error retrieving job details for ID {id}");
+                return null;
+            }
         }
 
         /// <summary>
@@ -106,12 +114,20 @@ namespace WorkFinder.Web.Repositories
         /// <returns>Job với các thông tin chi tiết</returns>
         public async Task<Job> GetJobBySlugAsync(string slug)
         {
-            return await _context.Jobs
-                .Where(j => j.Slug == slug)
-                .Include(j => j.Company)
-                .Include(j => j.Categories)
-                    .ThenInclude(jc => jc.Category)
-                .FirstOrDefaultAsync();
+            try
+            {
+                return await _context.Jobs
+                    .Include(j => j.Company)
+                    .Include(j => j.Applications)
+                    .FirstOrDefaultAsync(j => j.Slug == slug);
+                // Lưu ý: Không lọc job hết hạn ở đây để vẫn có thể xem chi tiết job đã hết hạn
+                // Việc kiểm tra và hiển thị cảnh báo sẽ được thực hiện ở tầng Controller và View
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error retrieving job details for slug {slug}");
+                return null;
+            }
         }
 
         /// <summary>

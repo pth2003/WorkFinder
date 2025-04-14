@@ -5,6 +5,20 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - WorkFinder</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="~/favicon.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="~/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/favicon-16x16.png">
+    <link rel="manifest" href="~/site.webmanifest">
+    <link rel="mask-icon" href="~/safari-pinned-tab.svg" color="#1E60C6">
+    <meta name="msapplication-TileColor" content="#1E60C6">
+    <meta name="theme-color" content="#1E60C6">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/dashboard-sidebar.css" />
@@ -13,6 +27,7 @@
         html,
         body {
             height: 100%;
+            font-family: "Inter", sans-serif;
         }
 
         body {
@@ -99,69 +114,69 @@
             padding-left: 10px;
         }
 
-        @@media (max-width: 767.98px) {
-            .dashboard-row {
-                flex-direction: column;
-                min-height: calc(100vh - 175px);
-                overflow-y: auto;
+        @@media(max - width: 767.98px) {
+                .dashboard-row {
+                    flex-direction: column;
+                    min-height: calc(100vh - 175px);
+                    overflow-y: auto;
+                }
+
+                .sidebar {
+                    width: 100%;
+                    margin-bottom: 15px;
+                    height: auto;
+                    max-height: 300px;
+                    margin-right: 0;
+                    border-right: none;
+                    border-bottom: 1px solid #eee;
+                    padding-bottom: 15px;
+                }
+
+                .main-content {
+                    width: 100%;
+                    height: auto;
+                    flex: 1;
+                }
+
+                .content-wrapper {
+                    margin-top: 80px;
+                }
             }
+        </style>
+        @await RenderSectionAsync("Styles", required: false)
+    </head>
 
-            .sidebar {
-                width: 100%;
-                margin-bottom: 15px;
-                height: auto;
-                max-height: 300px;
-                margin-right: 0;
-                border-right: none;
-                border-bottom: 1px solid #eee;
-                padding-bottom: 15px;
-            }
+    <body>
+        <header class="header">
+            <partial name="~/Views/Shared/Partials/Common/_Header.cshtml" />
+        </header>
 
-            .main-content {
-                width: 100%;
-                height: auto;
-                flex: 1;
-            }
+        <div class="content-wrapper">
+            <div class="container">
+                <div class="dashboard-row">
+                    <partial name="Partials/Dashboard/_Sidebar" />
 
-            .content-wrapper {
-                margin-top: 80px;
-            }
-        }
-    </style>
-    @await RenderSectionAsync("Styles", required: false)
-</head>
-
-<body>
-    <header class="header">
-        <partial name="~/Views/Shared/Partials/Common/_Header.cshtml" />
-    </header>
-
-    <div class="content-wrapper">
-        <div class="container">
-            <div class="dashboard-row">
-                <partial name="Partials/Dashboard/_Sidebar" />
-
-                <main class="main-content">
-                    @RenderBody()
-                </main>
+                    <main class="main-content">
+                        @RenderBody()
+                    </main>
+                </div>
             </div>
         </div>
-    </div>
 
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; @DateTime.Now.Year - WorkFinder - All rights reserved</p>
-        </div>
-    </footer>
+        <footer class="footer">
+            <div class="container">
+                <p>&copy; @DateTime.Now.Year - WorkFinder - All rights reserved</p>
+            </div>
+        </footer>
 
-    <!-- Toast Container -->
-    <div id="toast-container" class="position-fixed top-0 end-0 p-3" style="z-index: 1080;"></div>
+        <!-- Toast Container -->
+        <div id="toast-container" class="position-fixed top-0 end-0 p-3" style="z-index: 1080;"></div>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/toast.js" asp-append-version="true"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
-</body>
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/toast.js" asp-append-version="true"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        @await RenderSectionAsync("Scripts", required: false)
+    </body>
 
-</html>
+    </html>
